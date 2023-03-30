@@ -2,10 +2,11 @@ html {
     background: #1e1e1e;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     color: #b7b7b7;
+    text-align: center;
 }
 
 .container {
-    width: 280px;
+    width: 300px;
     margin: none;
     padding: none;
     display: flex;
@@ -58,5 +59,65 @@ html {
 #autoclick-status {
     font-weight: 50rem;
     font-size: x-small;
-    text-align: center;
+}
+
+.question {
+    outline: none;
+    border: none;
+    resize: vertical;
+    width: 200px;
+}
+
+.options {
+    margin-top: 10px;
+    display: grid;
+    grid-template-columns: 145px 145px;
+    grid-template-rows: 100px 100px;
+    grid-gap: 5px;
+}
+
+.triangle {
+    background-color: #ff3355;
+}
+
+.rhombus {
+    background-color: #45a3e5;
+}
+
+.circle {
+    background-color: #eb670f;
+}
+
+.square {
+    background-color: #66bf39;
+}
+
+.answer {
+    width: 100%;
+    height: 100%;
+    background-color: transparent;
+    outline: none;
+    border: none;
+    resize: none;
+    color: white;
+    font-weight: bold;
+    padding: 5px;
+    transition: 200ms;
+}
+
+.answer::-webkit-scrollbar {
+    width: 5px;
+    background: #f1f1f1;
+}
+
+.answer::-webkit-scrollbar-thumb {
+    background-color: #a9a9a9;
+}
+
+.answer::placeholder {
+    color: whitesmoke;
+}
+
+.answer:active {
+    border: 5px white;
 }
