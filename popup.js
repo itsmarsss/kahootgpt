@@ -71,10 +71,10 @@ async function callKahootGPT(tab) {
             injection.style.opacity -= 0.1;
         } else {
             clearInterval(fadeEffect);
+            injection.style.display = "none";
         }
     }, 25);
 
-    injection.style.display = "none";
 }
 
 async function getCurrentTab() {
@@ -96,10 +96,10 @@ getCurrentTab().then((tab) => {
                     injection.style.opacity -= 0.1;
                 } else {
                     clearInterval(fadeEffect);
+                    injection.style.display = "none";
                 }
             }, 25);
 
-            injection.style.display = "none";
         } else {
             console.log("Not injected; preparing injection");
             callKahootGPT(tab);
