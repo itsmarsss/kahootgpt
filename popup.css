@@ -1,0 +1,49 @@
+html {
+    background: #1e1e1e;
+}
+
+.container {
+    width: 280px;
+    margin: none;
+    padding: none;
+    display: flex;
+    justify-content: center;
+}
+
+.title {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-weight: bold;
+    font-size: medium;
+    margin-bottom: 10px;
+}
+
+.toggle {
+    display: grid;
+    align-items: center;
+    background-color: #525252;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    transition: 300ms;
+}
+
+.checkbox {
+    display: grid;
+    align-items: center;
+    border: none;
+    margin: auto;
+    padding: none;
+    background-color: #525252;
+    box-shadow: 0 4px 4px -2px #000;
+    width: 90;
+    height: 90%;
+    border-radius: 50%;
+}
+
+.power-icon {
+    width: 19px;
+    height: 19px;
+    align-items: center;
+    margin: auto;
+    fill: #b7b7b7;
+}
