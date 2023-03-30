@@ -5,6 +5,11 @@ html {
     text-align: center;
 }
 
+h3 {
+    margin-top: 5px;
+    margin-bottom: 15px;
+}
+
 .container {
     width: 300px;
     margin: none;
@@ -103,7 +108,7 @@ html {
     grid-template-columns: 145px 145px;
     grid-template-rows: 100px 100px;
     grid-gap: 10px;
-    margin-bottom: 25px;
+    margin-bottom: 15px;
 }
 
 .option {
@@ -158,4 +163,36 @@ html {
 
 .answer:active {
     border: 5px white;
+}
+
+.footer {
+    height: 45px;
+    width: 100%;
+    background: #525252;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: 200ms;
+}
+
+.socials {
+    background: #525252;
+    box-shadow: 0 4px 4px -2px #000;
+    display: flex;
+    align-items: center;
+  justify-content: space-around;
+    gap: 5px;
+    border-radius: 20px;
+    height: 35px;
+    width: 290px;
+    transition: 200ms;
+}
+
+.socials:hover {
+    box-shadow: none;
+}
+
+.social {
+    cursor: pointer;
 }

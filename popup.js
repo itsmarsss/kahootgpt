@@ -3,6 +3,17 @@ const toggle = document.getElementById("toggle");
 const powericon = document.getElementById("power-icon");
 const tapstatus = document.getElementById("autoclick-status");
 
+const footer = document.getElementById("footer");
+const socials = document.getElementById("socials");
+
+socials.addEventListener("mouseover", function () {
+    footer.style.background = "#9d86c3";
+});
+
+socials.addEventListener("mouseout", function () {
+    footer.style.background = "#525252";
+});
+
 let toggled = false;
 
 checkbox.addEventListener("click", function () {
