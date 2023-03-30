@@ -1,5 +1,7 @@
 html {
     background: #1e1e1e;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    color: #b7b7b7;
 }
 
 .container {
@@ -11,11 +13,14 @@ html {
 }
 
 .title {
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
     font-weight: bold;
-    font-size: medium;
+    font-size: large;
     margin-bottom: 10px;
-    color: #b7b7b7;
+}
+
+.autoclick {
+    width: 100px;
+    margin: auto;
 }
 
 .toggle {
@@ -48,4 +53,10 @@ html {
     margin: auto;
     fill: #b7b7b7;
     transition: 300ms;
+}
+
+#autoclick-status {
+    font-weight: 50rem;
+    font-size: x-small;
+    text-align: center;
 }
