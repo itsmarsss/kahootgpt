@@ -1,3 +1,5 @@
+const injection = document.getElementById("injection");
+
 const checkbox = document.getElementById("checkbox");
 const toggle = document.getElementById("toggle");
 const powericon = document.getElementById("power-icon");
@@ -60,6 +62,19 @@ async function callKahootGPT(tab) {
             console.log("Connected to injected script");
         }
     });
+
+    var fadeEffect = setInterval(function () {
+        if (!injection.style.opacity) {
+            injection.style.opacity = 1;
+        }
+        if (injection.style.opacity > 0) {
+            injection.style.opacity -= 0.1;
+        } else {
+            clearInterval(fadeEffect);
+        }
+    }, 25);
+
+    injection.style.display = "none";
 }
 
 async function getCurrentTab() {
@@ -73,6 +88,18 @@ getCurrentTab().then((tab) => {
     chrome.tabs.sendMessage(id, { type: "ping" }, function (response) {
         if (!chrome.runtime.lastError) {
             console.log("Already injected");
+            var fadeEffect = setInterval(function () {
+                if (!injection.style.opacity) {
+                    injection.style.opacity = 1;
+                }
+                if (injection.style.opacity > 0) {
+                    injection.style.opacity -= 0.1;
+                } else {
+                    clearInterval(fadeEffect);
+                }
+            }, 25);
+
+            injection.style.display = "none";
         } else {
             console.log("Not injected; preparing injection");
             callKahootGPT(tab);
