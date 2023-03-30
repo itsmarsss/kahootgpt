@@ -1,13 +1,14 @@
-(() => {
-    chrome.runtime.onMessage.addListener((obj, sender, response) => {
-        const { type, question, triangle, rhombus, circle, square } = obj;
+chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
+    var type = request.type || {};
 
-        if (type === "ANS") {
-            promptGPTANS();
-        }
-
-        if (type === "BST") {
-            promptGPTBST();
-        }
-    });
-})
+    switch (type) {
+        case "initialize":
+            console.log("Connected to popup script");
+            sendResponse({ data: "initialized", success: true });
+            break;
+        case "ping":
+            console.log("Got pinged");
+            sendResponse({ data: "pong", success: true });
+            break;
+    }
+});

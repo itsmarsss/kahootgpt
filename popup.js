@@ -16,6 +16,8 @@ socials.addEventListener("mouseout", function () {
 
 let toggled = false;
 
+let kahootId;
+
 checkbox.addEventListener("click", function () {
     if (toggled) {
         checkbox.style.boxShadow = "0 4px 4px -2px #000";
@@ -31,4 +33,54 @@ checkbox.addEventListener("click", function () {
         tapstatus.style.color = "#864cbf";
     }
     toggled = !toggled;
+    console.log("Toggled: " + toggled);
+
+    chrome.tabs.sendMessage(id, { type: "autotap", value: toggled }, function (response) {
+        console.log("Auto-tap toggled");
+    });
 });
+
+async function callKahootGPT(tab) {
+    const { id, url } = tab;
+    if (url.indexOf("https://kahoot.it/") > -1) {
+        chrome.scripting.executeScript(
+            {
+                target: { tabId: id, allFrames: true },
+                files: ['contentScript.js']
+            });
+        console.log(`Loading: ${url}`);
+    }
+
+    await sleep(5000)
+
+    kahootId = id;
+
+    chrome.tabs.sendMessage(id, { type: "initialize" }, function (response) {
+        if (response.data === "initialized") {
+            console.log("Connected to injected script");
+        }
+    });
+}
+
+async function getCurrentTab() {
+    let queryOptions = { active: true, lastFocusedWindow: true };
+    let [tab] = await chrome.tabs.query(queryOptions);
+    return tab;
+}
+
+getCurrentTab().then((tab) => {
+    const { id, url } = tab;
+    chrome.tabs.sendMessage(id, { type: "ping" }, function (response) {
+        if (!chrome.runtime.lastError) {
+            console.log("Already injected");
+        } else {
+            console.log("Not injected; preparing injection");
+            callKahootGPT(tab);
+        }
+    });
+});
+
+
+const sleep = (milliseconds) => {
+    return new Promise(resolve => setTimeout(resolve, milliseconds))
+}
