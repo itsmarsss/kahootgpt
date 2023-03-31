@@ -16,9 +16,9 @@ socials.addEventListener("mouseout", function () {
     footer.style.background = "#525252";
 });
 
-let toggled = false;
+var toggled = false;
 
-let kahootId;
+var kahootId;
 
 checkbox.addEventListener("click", function () {
     if (toggled) {
@@ -37,7 +37,7 @@ checkbox.addEventListener("click", function () {
     toggled = !toggled;
     console.log("Toggled: " + toggled);
 
-    chrome.tabs.sendMessage(id, { type: "autotap", value: toggled }, function (response) {
+    chrome.tabs.sendMessage(kahootId, { type: "autotap", value: toggled.toString() }, function (response) {
         console.log("Auto-tap toggled");
     });
 });
@@ -99,6 +99,7 @@ getCurrentTab().then((tab) => {
                 }
             }, 25);
 
+            kahootId = id;
         } else {
             console.log("Not injected; preparing injection");
             callKahootGPT(tab);
