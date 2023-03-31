@@ -51,30 +51,29 @@ async function callKahootGPT(tab) {
                 files: ['contentScript.js']
             });
         console.log(`Loading: ${url}`);
+
+        await sleep(4000)
+
+        kahootId = id;
+
+        chrome.tabs.sendMessage(id, { type: "initialize" }, function (response) {
+            if (response.data === "initialized") {
+                console.log("Connected to injected script");
+            }
+        });
+
+        var fadeEffect = setInterval(function () {
+            if (!injection.style.opacity) {
+                injection.style.opacity = 1;
+            }
+            if (injection.style.opacity > 0) {
+                injection.style.opacity -= 0.1;
+            } else {
+                clearInterval(fadeEffect);
+                injection.style.display = "none";
+            }
+        }, 25);
     }
-
-    await sleep(5000)
-
-    kahootId = id;
-
-    chrome.tabs.sendMessage(id, { type: "initialize" }, function (response) {
-        if (response.data === "initialized") {
-            console.log("Connected to injected script");
-        }
-    });
-
-    var fadeEffect = setInterval(function () {
-        if (!injection.style.opacity) {
-            injection.style.opacity = 1;
-        }
-        if (injection.style.opacity > 0) {
-            injection.style.opacity -= 0.1;
-        } else {
-            clearInterval(fadeEffect);
-            injection.style.display = "none";
-        }
-    }, 25);
-
 }
 
 async function getCurrentTab() {
@@ -107,6 +106,14 @@ getCurrentTab().then((tab) => {
     });
 });
 
+
+function getAnswerOnly(question) {
+
+}
+
+function getAnswerWithAnswer(question, circle, rhombus, triangle, square) {
+
+}
 
 const sleep = (milliseconds) => {
     return new Promise(resolve => setTimeout(resolve, milliseconds))
