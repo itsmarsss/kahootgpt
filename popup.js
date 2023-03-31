@@ -8,6 +8,9 @@ const tapstatus = document.getElementById("autoclick-status");
 const footer = document.getElementById("footer");
 const socials = document.getElementById("socials");
 
+const question = document.getElementById("question");
+const search = document.getElementById("search-icon");
+
 const triangle = document.getElementById("answer-triangle");
 const rhombus = document.getElementById("answer-rhombus");
 const circle = document.getElementById("answer-circle");
@@ -27,7 +30,7 @@ var toggled = false;
 
 var kahootId;
 
-var openAIKey = "ohnononono";
+var openAIKey = "ohnonononno";
 
 checkbox.addEventListener("click", function () {
     toggleAutoTap();
@@ -55,7 +58,41 @@ function toggleAutoTap() {
     console.log("Toggled: " + toggled);
 }
 
-clear.addEventListener("click", clearAll());
+question.addEventListener('keypress', function (e) {
+    if (e.key === 'Enter') {
+        queryGPT();
+    }
+});
+
+search.addEventListener("click", function () {
+    queryGPT();
+});
+
+function queryGPT() {
+    if (question.value === "") {
+        return;
+    }
+
+    if (triangle.value === "" &&
+        rhombus.value === "" &&
+        circle.value === "" &&
+        square.value === "") {
+        getAnswerOnly(question.value);
+    } else {
+        getAnswerWithAnswer(
+            question.value,
+            triangle.value,
+            rhombus.value,
+            circle.value,
+            square.value
+        );
+    }
+}
+
+
+clear.addEventListener("click", function () {
+    clearAll();
+});
 function clearAll() {
     question.value = "";
     triangle.value = "";
@@ -105,7 +142,7 @@ async function getCurrentTab() {
 }
 
 
-async function getAnswerOnly(question) {
+async function getAnswerOnly(query) {
     console.log("Calling GPT3")
     var url = "https://api.openai.com/v1/completions";
     var bearer = 'Bearer ' + openAIKey;
@@ -117,7 +154,7 @@ async function getAnswerOnly(question) {
         },
         body: JSON.stringify({
             "model": "text-davinci-003",
-            "prompt": `Act as a professional; only respond with 4 concise answers (if there is a definite answer, only reply with one) in json format with "one", "two", "three", "four" or "one" as the key if only one answer to the following question: ` + question,
+            "prompt": `Act as a professional; only respond with 4 concise answers (if there is a definite answer, only reply with one) in json format with "one", "two", "three", "four" or "one" as the key if only one answer to the following question: ` + query,
             "temperature": 0.7,
             "max_tokens": 256,
             "top_p": 1,
@@ -127,12 +164,17 @@ async function getAnswerOnly(question) {
     }).then(response => response.json())
         .then(data => {
             console.log(data.choices[0].text);
-            var GPTReply = JSON.parse(data.choices[0].text);
 
-            var one = GPTReply.one || {};
-            var two = GPTReply.two || {};
-            var three = GPTReply.three || {};
-            var four = GPTReply.four || {};
+            var lines = (data.choices[0].text).split('\n');
+            lines.splice(0, 2);
+            var replyLines = lines.join('\n');
+
+            var GPTReply = JSON.parse(replyLines);
+
+            var one = GPTReply.one || GPTReply.answer || "";
+            var two = GPTReply.two || "";
+            var three = GPTReply.three || "";
+            var four = GPTReply.four || "";
 
             triangle.value = one;
             rhombus.value = two;
@@ -146,7 +188,7 @@ async function getAnswerOnly(question) {
 
 }
 
-async function getAnswerWithAnswer(question, circle, rhombus, triangle, square) {
+async function getAnswerWithAnswer(query, circle, rhombus, triangle, square) {
 
 }
 
