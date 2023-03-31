@@ -48,8 +48,23 @@ h3 {
 
 .header {
     position: fixed;
+    left: 0px;
+    top: 10px;
     cursor: pointer;
     z-index: 2;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.info {
+    margin-left: 10px;
+}
+
+.settings {
+    margin-right: 10px;
+    fill: white;
 }
 
 .container {
