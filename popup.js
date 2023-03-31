@@ -1,6 +1,7 @@
 const injection = document.getElementById("injection");
 
 const settings = document.getElementById("settings");
+const config = document.getElementById("config");
 
 const checkbox = document.getElementById("checkbox");
 const toggle = document.getElementById("toggle");
@@ -26,6 +27,10 @@ socials.addEventListener("mouseover", function () {
 
 socials.addEventListener("mouseout", function () {
     footer.style.background = "#525252";
+});
+
+settings.addEventListener("click", function () {
+    config.style.display = "block";
 });
 
 var toggled = false;

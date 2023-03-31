@@ -25,7 +25,117 @@ h3 {
 }
 
 .config {
+    position: absolute;
     display: none;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 2;
+    background: #0000007e;
+    backdrop-filter: blur(5px);
+    align-items: center;
+    justify-content: center;
+}
+
+.top {
+    background-color: #754bb8ad;
+    width: 100%;
+    height: 50px;
+    top: 0px;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+    box-shadow: 0 5px 10px 0px #542a97ad;
+}
+
+.top > h1 {
+    margin: 0;
+    color: white;
+    text-align: left;
+    padding-left: 10px;
+    padding-top: 7px;
+}
+
+.openai {
+    margin-top: 20px;
+    margin-left: 20px;
+    float: left;
+}
+
+.openai > h3 {
+    text-align: left;
+    margin: 0;
+    margin-bottom: 5px;
+}
+
+.openaikeyinput {
+    max-width: 190px;
+    background-color: #f5f5f5;
+    color: #242424;
+    min-height: 35px;
+    border-radius: 5px;
+    outline: none;
+    border: none;
+    box-shadow: 0px 10px 20px -18px;
+    transition: 200ms;
+}
+
+.openaikeyinput:focus {
+    border-bottom: 2px solid #9d86c3;
+}
+
+.openaikeyinput:hover {
+    outline: 1px solid lightgrey;
+}
+
+.cache {
+    margin-top: 20px;
+    margin-left: 20px;
+    float: left;
+}
+
+.cache > h3 {
+    text-align: left;
+    margin: 0;
+    margin-bottom: 5px;
+}
+
+.store {
+    margin-top: 7px;
+    display: block;
+    cursor: pointer;
+    width: 15px;
+    height: 15px;
+    border: 3px solid white;
+    border-radius: 5px;
+    overflow: hidden;
+    box-shadow: 0px 0px 0px 2px #fff;
+}
+
+.store div {
+    width: 60px;
+    height: 60px;
+    background-color: #fff;
+    top: -52px;
+    left: -52px;
+    position: relative;
+    transform: rotateZ(45deg);
+    z-index: 100;
+}
+
+.store input[type=checkbox]:checked + div {
+    left: -10px;
+    top: -10px;
+}
+
+.store input[type=checkbox] {
+    position: absolute;
+    left: 50px;
+    visibility: hidden;
+}
+
+.transition {
+    transition: 300ms ease;
 }
 
 .text > * {
