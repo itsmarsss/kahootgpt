@@ -8,6 +8,13 @@ const tapstatus = document.getElementById("autoclick-status");
 const footer = document.getElementById("footer");
 const socials = document.getElementById("socials");
 
+const triangle = document.getElementById("answer-triangle");
+const rhombus = document.getElementById("answer-rhombus");
+const circle = document.getElementById("answer-circle");
+const square = document.getElementById("answer-square");
+
+const clear = document.getElementById("clear");
+
 socials.addEventListener("mouseover", function () {
     footer.style.background = "#9d86c3";
 });
@@ -43,6 +50,15 @@ checkbox.addEventListener("click", function () {
         console.log("Auto-tap toggled");
     });
 });
+
+clear.addEventListener("click", clearAll());
+function clearAll() {
+    question.value = "";
+    triangle.value = "";
+    rhombus.value = "";
+    circle.value = "";
+    square.value = "";
+}
 
 async function callKahootGPT(tab) {
     const { id, url } = tab;
@@ -105,10 +121,15 @@ async function getAnswerOnly(question) {
             "presence_penalty": 0
         })
     }).then(response => response.json())
-        .then(data => console.log(data.choices[0].text))
+        .then(data => {
+            console.log(data.choices[0].text);
+            var GPTReply = JSON.parse(data.choices[0].text);
+
+
+        })
         .catch(error => {
             console.log("KahootGPT error: " + error);
-            alert("KahootGPT error: " + error);
+            // Add error popup
         });
 
 }

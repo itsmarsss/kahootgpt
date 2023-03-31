@@ -149,7 +149,6 @@ h3 {
     grid-template-columns: 145px 145px;
     grid-template-rows: 100px 100px;
     grid-gap: 10px;
-    margin-bottom: 15px;
 }
 
 .option {
@@ -204,6 +203,30 @@ h3 {
 
 .answer:active {
     border: 5px white;
+}
+
+.clear {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-weight: bold;
+    cursor: pointer;
+    font-size: medium;
+    background: #9d86c3;
+    color: white;
+    border-radius: 5px;
+    border: none;
+    outline: none;
+    width: 150px;
+    margin: 15px;
+    box-shadow: 0 2px 10px -2px #9d86c3;
+    transition: 150ms;
+}
+
+.clear:hover {
+    box-shadow: none;
+}
+
+.clear:active {
+    background: #846ea7;
 }
 
 .footer {

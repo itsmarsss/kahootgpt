@@ -1,3 +1,5 @@
+let toggled = false;
+
 chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
     var type = request.type || {};
     var value = request.value || {};
@@ -13,7 +15,7 @@ chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
             break;
         case "ping":
             console.log("Got pinged");
-            sendResponse({ data: "pong", success: true });
-            break;
+            sendResponse({ { data: "pong", value: "" }, success: true });
+break;
     }
 });
