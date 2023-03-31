@@ -13,8 +13,9 @@
                     </path>
                 </svg>
             </a>
-            <svg class="settings" id="settings" width="20" height="20" viewBox="0 0 20 20">
-                <path d="M 15.8216 10.5654 c 0.0326 -0.2606 0.057 -0.5252 0.057 -0.7939 s -0.0244 -0.5334 -0.057 -0.7939
+            <div title="Settings">
+                <svg class="settings" id="settings" width="20" height="20" viewBox="0 0 20 20">
+                    <path d="M 15.8216 10.5654 c 0.0326 -0.2606 0.057 -0.5252 0.057 -0.7939 s -0.0244 -0.5334 -0.057 -0.7939
                     l 1.7222 -1.3476 c 0.1547 -0.1221 0.1995 -0.342 0.0977 -0.5211 l -1.6286 -2.8215 c -0.1018 -0.1751
                     -0.3135 -0.2484 -0.4967 -0.1751 l -2.0276 0.8184 c -0.4194 -0.3216 -0.8794 -0.5944 -1.3761 -0.8021 l
                     -0.3054 -2.1579 c -0.0366 -0.1914 -0.2036 -0.342 -0.4071 -0.342 h -3.2571 c -0.2036 0 -0.3705 0.1506
@@ -28,8 +29,9 @@
                     0.4967 -0.1751 l 1.6286 -2.8215 c 0.1018 -0.1751 0.057 -0.3949 -0.0977 -0.5211 l -1.7181 -1.3476 z m
                     -6.0501 2.0561 c -1.5756 0 -2.85 -1.2744 -2.85 -2.85 s 1.2744 -2.85 2.85 -2.85 s 2.85 1.2744 2.85
                     2.85 s -1.2744 2.85 -2.85 2.85 z">
-                </path>
-            </svg>
+                    </path>
+                </svg>
+            </div>
         </div>
 
         <div class="injection" id="injection">
@@ -46,11 +48,19 @@
             </div>
         </div>
 
-        <div class="title">KahootGPT</div>
+        <div class="config" id="config">
+            <div class="top" id="top">
+                <h1>Settings</h1>
+            </div>
+        </div>
+
+        <div class="title"><a id="KahootGPT" target="_blank" title="KahootGPT"
+                href="https://github.com/itsmarsss/KahootGPT">KahootGPT</a>
+        </div>
 
         <div class="autoclick">
             <div class="toggle" id="toggle">
-                <button class="checkbox" id="checkbox">
+                <button class="checkbox" id="checkbox" title="Toggle Auto-tap">
                     <svg class="power-icon" id="power-icon">
                         <path d="M 16.8886 5.1769 c -0.7324 -1.1361 -1.7323 -2.1051 -2.8909 -2.8023 c -0.2167 -0.1304
                             -0.4868 -0.1341 -0.7071 -0.0096 c -0.2201 0.1245 -0.3564 0.3579 -0.3564 0.6108 v 1.4516 c 0
@@ -75,14 +85,16 @@
         <div class="kahootinfo">
             <div class="question-cont">
                 <input class="question" id="question" type="text" placeholder="Type question here...">
-                <svg class="search-icon" id="search-icon" x="0px" y="0px" width="30" height="30" viewBox="0 0 30 30">
-                    <path d="M 13 3 C 7.4889971 3 3 7.4889971 3 13 C 3 18.511003 7.4889971 23 13 23 C 15.396508 23
+                <search title="Search">
+                    <svg class="search-icon" id="search-icon" width="30" height="30" viewBox="0 0 30 30">
+                        <path d="M 13 3 C 7.4889971 3 3 7.4889971 3 13 C 3 18.511003 7.4889971 23 13 23 C 15.396508 23
                         17.597385 22.148986 19.322266 20.736328 L 25.292969 26.707031 A 1.0001 1.0001 0 1 0 26.707031
                         25.292969 L 20.736328 19.322266 C 22.148986 17.597385 23 15.396508 23 13 C 23 7.4889971
                         18.511003 3 13 3 z M 13 5 C 17.430123 5 21 8.5698774 21 13 C 21 17.430123 17.430123 21 13 21 C
                         8.5698774 21 5 17.430123 5 13 C 5 8.5698774 8.5698774 5 13 5 z">
-                    </path>
-                </svg>
+                        </path>
+                    </svg>
+                </search>
             </div>
             <div class="options">
                 <div class="option triangle">
@@ -107,7 +119,7 @@
 
         <div class="footer" id="footer">
             <div class="socials" id="socials">
-                <a target="_blank" title="@itsmarsss" href="https://github.com/itsmarsss/KahootGPT">
+                <a target="_blank" title="@itsmarsss" href="https://github.com/itsmarsss/">
                     <svg class="social" width="24" height="24" viewBox="0 0 24 24">
                         <path d=" M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207
                         11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729

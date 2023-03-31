@@ -21,11 +21,23 @@ h3 {
     align-items: center;
     justify-content: center;
     background-color: #1e1e1e;
-    z-index: 1;
+    z-index: 2;
+}
+
+.config {
+    display: none;
 }
 
 .text > * {
     margin: 0;
+}
+
+#KahootGPT {
+    position: relative;
+    cursor: pointer;
+    color: #b7b7b7;
+    text-decoration: none;
+    z-index: 1;
 }
 
 .subtitle {
@@ -50,8 +62,6 @@ h3 {
     position: fixed;
     left: 0px;
     top: 10px;
-    cursor: pointer;
-    z-index: 2;
     width: 100%;
     display: flex;
     align-items: center;
@@ -60,11 +70,13 @@ h3 {
 
 .info {
     margin-left: 10px;
+    cursor: pointer;
 }
 
 .settings {
     margin-right: 10px;
     fill: white;
+    cursor: pointer;
 }
 
 .container {

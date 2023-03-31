@@ -1,5 +1,7 @@
 const injection = document.getElementById("injection");
 
+const settings = document.getElementById("settings");
+
 const checkbox = document.getElementById("checkbox");
 const toggle = document.getElementById("toggle");
 const powericon = document.getElementById("power-icon");
