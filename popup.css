@@ -235,8 +235,7 @@ h3 {
 }
 
 .clear {
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
-    font-weight: bold;
+    font-family: monospace, Geneva, Tahoma, sans-serif;
     cursor: pointer;
     font-size: medium;
     background: #9d86c3;
