@@ -30,6 +30,14 @@ var kahootId;
 var openAIKey = "ohnononono";
 
 checkbox.addEventListener("click", function () {
+    toggleAutoTap();
+
+    chrome.tabs.sendMessage(kahootId, { type: "autotap", value: toggled.toString() }, function (response) {
+        console.log("Auto-tap toggled");
+    });
+});
+
+function toggleAutoTap() {
     if (toggled) {
         checkbox.style.boxShadow = "0 4px 4px -2px #000";
         toggle.style.background = "#525252";
@@ -45,11 +53,7 @@ checkbox.addEventListener("click", function () {
     }
     toggled = !toggled;
     console.log("Toggled: " + toggled);
-
-    chrome.tabs.sendMessage(kahootId, { type: "autotap", value: toggled.toString() }, function (response) {
-        console.log("Auto-tap toggled");
-    });
-});
+}
 
 clear.addEventListener("click", clearAll());
 function clearAll() {
@@ -125,7 +129,15 @@ async function getAnswerOnly(question) {
             console.log(data.choices[0].text);
             var GPTReply = JSON.parse(data.choices[0].text);
 
+            var one = GPTReply.one || {};
+            var two = GPTReply.two || {};
+            var three = GPTReply.three || {};
+            var four = GPTReply.four || {};
 
+            triangle.value = one;
+            rhombus.value = two;
+            circle.value = three;
+            square.value = four;
         })
         .catch(error => {
             console.log("KahootGPT error: " + error);
@@ -159,6 +171,13 @@ getCurrentTab().then((tab) => {
     chrome.tabs.sendMessage(id, { type: "ping" }, function (response) {
         if (!chrome.runtime.lastError) {
             console.log("Already injected");
+
+            var val = response.value || {};
+
+            if (val.toString() == "true") {
+                toggleAutoTap();
+            }
+
             var fadeEffect = setInterval(function () {
                 if (!injection.style.opacity) {
                     injection.style.opacity = 1;
