@@ -104,10 +104,10 @@ h3 {
     margin-top: 7px;
     display: block;
     cursor: pointer;
-    width: 15px;
-    height: 15px;
-    border: 3px solid white;
-    border-radius: 5px;
+    width: 25px;
+    height: 25px;
+    border: 3px solid #ffffff00;
+    border-radius: 10px;
     overflow: hidden;
     box-shadow: 0px 0px 0px 2px #fff;
 }
