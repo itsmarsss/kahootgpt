@@ -20,6 +20,8 @@ var toggled = false;
 
 var kahootId;
 
+var openAIKey = "ohnononono";
+
 checkbox.addEventListener("click", function () {
     if (toggled) {
         checkbox.style.boxShadow = "0 4px 4px -2px #000";
@@ -82,6 +84,55 @@ async function getCurrentTab() {
     return tab;
 }
 
+
+async function getAnswerOnly(question) {
+    console.log("Calling GPT3")
+    var url = "https://api.openai.com/v1/completions";
+    var bearer = 'Bearer ' + openAIKey;
+    fetch(url, {
+        method: 'POST',
+        headers: {
+            'Authorization': bearer,
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            "model": "text-davinci-003",
+            "prompt": `Act as a professional; only respond with 4 concise answers (if there is a definite answer, only reply with one) in json format with "one", "two", "three", "four" or "one" as the key if only one answer to the following question: ` + question,
+            "temperature": 0.7,
+            "max_tokens": 256,
+            "top_p": 1,
+            "frequency_penalty": 0,
+            "presence_penalty": 0
+        })
+    }).then(response => response.json())
+        .then(data => console.log(data.choices[0].text))
+        .catch(error => {
+            console.log("KahootGPT error: " + error);
+            alert("KahootGPT error: " + error);
+        });
+
+}
+
+async function getAnswerWithAnswer(question, circle, rhombus, triangle, square) {
+
+}
+
+const sleep = (milliseconds) => {
+    return new Promise(resolve => setTimeout(resolve, milliseconds))
+}
+
+function setAPIKey(value) {
+    chrome.storage.sync.set({ key: value }).then(() => {
+        console.log("Value is set to " + value);
+    });
+}
+
+function syncAPIKey() {
+    chrome.storage.sync.get(["key"]).then((result) => {
+        console.log("Value currently is " + result.key);
+    });
+}
+
 getCurrentTab().then((tab) => {
     const { id, url } = tab;
     chrome.tabs.sendMessage(id, { type: "ping" }, function (response) {
@@ -106,16 +157,3 @@ getCurrentTab().then((tab) => {
         }
     });
 });
-
-
-function getAnswerOnly(question) {
-
-}
-
-function getAnswerWithAnswer(question, circle, rhombus, triangle, square) {
-
-}
-
-const sleep = (milliseconds) => {
-    return new Promise(resolve => setTimeout(resolve, milliseconds))
-}
