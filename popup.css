@@ -45,6 +45,12 @@ h3 {
     color: #8871ad;
 }
 
+.header {
+    position: fixed;
+    cursor: pointer;
+    z-index: 1;
+}
+
 .container {
     width: 300px;
     margin: none;
