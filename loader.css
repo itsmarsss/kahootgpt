@@ -60,12 +60,3 @@
         transform: scale(1) rotate(360deg);
     }
 }
-
-@keyframes fadeOut {
-    from {
-        opacity: 1;
-    }
-    to {
-        opacity: 0;
-    }
-}
