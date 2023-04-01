@@ -265,7 +265,7 @@ async function getAnswerOnly(query) {
         },
         body: JSON.stringify({
             "model": "text-davinci-003",
-            "prompt": `Act as a professional; only respond with 4 concise answers (if there is a definite answer, only reply with one) in json format with "one", "two", "three", "four" or "one" as the key if only one answer to the following question: ` + query,
+            "prompt": `Act as a professional; only respond with 4 concise answers (if there is a definite answer, only reply with one) in json format with "one", "two", "three", "four" or "one" as the key if only one answer to the following question: ` + query + "\n",
             "temperature": 0.7,
             "max_tokens": 256,
             "top_p": 1,
@@ -313,7 +313,7 @@ async function getAnswerWithAnswer(query, triangle, rhombus, circle, square) {
         },
         body: JSON.stringify({
             "model": "text-davinci-003",
-            "prompt": `Act as a professional;  the question will be after "question:" and there are 4 possible answers "a", "b", "c", or "d", reply with a SINGLE letter ONLY:\nquestion: ` + query + "\n" + "a: " + triangle + "\n" + "b: " + rhombus + "\n" + "c: " + circle + "\n" + "d: " + square,
+            "prompt": `Act as a professional;  the question will be after "question:" and there are 4 possible answers "a", "b", "c", or "d", reply with a SINGLE letter ONLY:\nquestion: ` + query + "\n" + "a: " + triangle + "\n" + "b: " + rhombus + "\n" + "c: " + circle + "\n" + "d: " + square + "\n",
             "temperature": 0.7,
             "max_tokens": 256,
             "top_p": 1,
@@ -325,10 +325,10 @@ async function getAnswerWithAnswer(query, triangle, rhombus, circle, square) {
             console.log(data.choices[0].text);
 
             var lines = (data.choices[0].text).split('\n');
-            lines.splice(0, 2);
+            lines.splice(0, 1);
             var replyLines = lines.join('\n');
 
-            var GPTReply = replyLines.replace(/\s/g, '').toLowerCase();
+            var GPTReply = replyLines.replace(/\s/g, '').toLowerCase().charAt(0);
 
             console.log(GPTReply);
 
