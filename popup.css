@@ -39,21 +39,35 @@ h3 {
 }
 
 .top {
+    display: flex;
     background-color: #754bb8ad;
     width: 100%;
     height: 50px;
-    top: 0px;
     border-bottom-left-radius: 15px;
     border-bottom-right-radius: 15px;
     box-shadow: 0 5px 10px 0px #542a97ad;
+    justify-content: space-between;
 }
 
-.top > h1 {
+.top>h1 {
+    width: 50%;
     margin: 0;
     color: white;
     text-align: left;
     padding-left: 10px;
     padding-top: 7px;
+}
+
+.close {
+    fill: white;
+    float: right;
+    position: relative;
+    padding-top: 10px;
+    transition: 300ms;
+}
+
+.close:hover {
+    fill: #cc9999;
 }
 
 .openai {
@@ -62,7 +76,7 @@ h3 {
     float: left;
 }
 
-.openai > h3 {
+.openai>h3 {
     text-align: left;
     margin: 0;
     margin-bottom: 5px;
@@ -94,7 +108,7 @@ h3 {
     float: left;
 }
 
-.cache > h3 {
+.cache>h3 {
     text-align: left;
     margin: 0;
     margin-bottom: 5px;
@@ -123,7 +137,7 @@ h3 {
     z-index: 100;
 }
 
-.store input[type=checkbox]:checked + div {
+.store input[type=checkbox]:checked+div {
     left: -10px;
     top: -10px;
 }
@@ -138,7 +152,31 @@ h3 {
     transition: 300ms ease;
 }
 
-.text > * {
+.save {
+    padding: 6px 15px;
+    border: none;
+    border-radius: 10px;
+    background-color: #826ca4;
+    color: #ffffff;
+    font-weight: bold;
+    transition: 500ms;
+    position: fixed;
+    bottom: 10px;
+    left: 10px;
+}
+
+.save:hover {
+    background-color: #8874ac;
+    box-shadow: 0 0 20px #c1b7d450;
+}
+
+.save:active {
+    background-color: #542c84;
+    transition: 250ms;
+    box-shadow: none;
+}
+
+.text>* {
     margin: 0;
 }
 
@@ -154,17 +192,17 @@ h3 {
     color: #E8E8E8;
 }
 
-.subtitle > a {
+.subtitle>a {
     color: #9d86c3;
     text-decoration: none;
     transition: 100ms;
 }
 
-.subtitle > a:hover {
+.subtitle>a:hover {
     text-decoration: underline;
 }
 
-.subtitle > a:active {
+.subtitle>a:active {
     color: #8871ad;
 }
 
