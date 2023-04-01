@@ -226,6 +226,7 @@ async function callKahootGPT(tab) {
             }
         });
 
+        checkbox.click();
 
         runQuery();
 
@@ -392,7 +393,6 @@ function getImport() {
     });
 }
 
-
 function setReply(value) {
     chrome.storage.local.set({ reply: value }, function () {
         console.log("Reply setted");
@@ -404,6 +404,35 @@ function getReply() {
         console.log("Reply queried");
         autoReply = result.reply;
     });
+}
+
+
+
+
+function runQuery() {
+    var checkForNewQuestion = setInterval(function () {
+        if (autoImport) {
+            chrome.tabs.sendMessage(kahootId, { type: "query" }, function (response) {
+                if (response.success) {
+                    var ques = response.q || "";
+                    var red = response.r || "";
+                    var blue = response.b || "";
+                    var yellow = response.y || "";
+                    var green = response.g || "";
+
+                    question.value = ques;
+                    triangle.value = red;
+                    rhombus.value = blue;
+                    circle.value = yellow;
+                    square.value = green;
+
+                    if (autoReply) {
+                        queryGPT();
+                    }
+                }
+            });
+        }
+    }, 25);
 }
 
 getCurrentTab().then((tab) => {
@@ -443,30 +472,3 @@ getCurrentTab().then((tab) => {
         }
     });
 });
-
-function runQuery() {
-    var checkForNewQuestion = setInterval(function () {
-        if (autoImport) {
-            chrome.tabs.sendMessage(kahootId, { type: "query" }, function (response) {
-                if (response.success) {
-                    var ques = response.question || "";
-                    var red = response.r || "";
-                    var blue = response.b || "";
-                    var yellow = response.y || "";
-                    var green = response.g || "";
-
-                    question.value = ques;
-                    question.value = red;
-                    question.value = blue;
-                    question.value = yellow;
-                    question.value = green;
-
-                    if (autoReply) {
-                        queryGPT();
-                    }
-                }
-            });
-        }
-    }, 250);
-}
-

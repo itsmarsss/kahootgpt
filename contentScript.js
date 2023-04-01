@@ -8,11 +8,16 @@ green/square: sc-xyEjG cmcjVO sc-eUWgFQ ktBGGk
 
 let toggled = false;
 
+let ques = "";
+let red = "";
+let blue = "";
+let yellow = "";
+let green = "";
+let sent = false;
+
 chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
     var type = request.type || {};
     var val = request.value || {};
-
-    console.log(type)
 
     switch (type) {
         case "initialize":
@@ -29,6 +34,7 @@ chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
             sendResponse({ value: toggled.toString(), success: true });
             break;
         case "tap":
+            console.log("Ans:" + val);
             switch (val) {
                 case "a":
                     console.log("triangle");
@@ -58,7 +64,18 @@ chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
             sendResponse({ value: toggled.toString(), success: true });
             break;
         case "query":
-            console.log("queried");
+            console.log("Queried");
+
+            if (ques === "") {
+                sendResponse({ success: false });
+            } else {
+                if (!sent) {
+                    sent = true;
+                    sendResponse({ q: ques, r: red, b: blue, y: yellow, g: green, success: true });
+                } else {
+                    sendResponse({ success: false });
+                }
+            }
             break;
         case "error":
             console.log("Error sent");
@@ -67,3 +84,50 @@ chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
             break;
     }
 });
+
+
+var checkForNewQuestion = setInterval(function () {
+
+}, 100);
+
+var fadeEffect = setInterval(function () {
+    var question = "";
+
+    try {
+        question = document.querySelectorAll('[data-functional-selector="block-title"]')[0].innerHTML;
+    } catch (err) {
+        question = "";
+    }
+
+    if (question === ques) {
+        return;
+    }
+
+    ques = question;
+    try {
+        red = document.querySelectorAll('[data-functional-selector="question-choice-text-0"]')[0].querySelectorAll("span")[0].innerHTML;
+    } catch (err) {
+        red = "";
+    }
+    try {
+        blue = document.querySelectorAll('[data-functional-selector="question-choice-text-1"]')[0].querySelectorAll("span")[0].innerHTML;
+    } catch (err) {
+        blue = "";
+    }
+    try {
+        yellow = document.querySelectorAll('[data-functional-selector="question-choice-text-2"]')[0].querySelectorAll("span")[0].innerHTML;
+    } catch (err) {
+        yellow = "";
+    }
+    try {
+        green = document.querySelectorAll('[data-functional-selector="question-choice-text-3"]')[0].querySelectorAll("span")[0].innerHTML;
+    } catch (err) {
+        green = "";
+    }
+    console.log(ques);
+    console.log(red);
+    console.log(blue);
+    console.log(yellow);
+    console.log(green);
+    sent = false;
+}, 25);
