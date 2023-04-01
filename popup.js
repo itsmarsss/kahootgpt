@@ -166,10 +166,10 @@ function queryGPT() {
     } else {
         getAnswerWithAnswer(
             question.value,
-            triangle.value,
-            rhombus.value,
-            circle.value,
-            square.value
+            triangle.value || "n/a",
+            rhombus.value || "n/a",
+            circle.value || "n/a",
+            square.value || "n/a"
         );
     }
 }
@@ -282,6 +282,7 @@ async function getAnswerOnly(query) {
 }
 
 async function getAnswerWithAnswer(query, triangle, rhombus, circle, square) {
+    console.log(rhombus)
     console.log("Calling GPT3")
     var url = "https://api.openai.com/v1/completions";
     var bearer = 'Bearer ' + openAIKey;
