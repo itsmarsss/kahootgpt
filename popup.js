@@ -310,13 +310,19 @@ async function getAnswerWithAnswer(query, triangle, rhombus, circle, square) {
 
             var GPTReply = replyLines.replace(/\s/g, '').toLowerCase();
 
+            var ans = "a";
+
             if (GPTReply.includes("a")) {
+                ans = "a";
                 triangle_cont.style.border = "4px solid gold";
             } else if (GPTReply.includes("b")) {
+                ans = "b";
                 rhombus_cont.style.border = "4px solid gold";
             } else if (GPTReply.includes("c")) {
+                ans = "c";
                 circle_cont.style.border = "4px solid gold";
             } else if (GPTReply.includes("d")) {
+                ans = "d";
                 square_cont.style.border = "4px solid gold";
             } else {
                 triangle_cont.style.border = "4px solid gold";
@@ -324,6 +330,10 @@ async function getAnswerWithAnswer(query, triangle, rhombus, circle, square) {
                 circle_cont.style.border = "4px solid gold";
                 square_cont.style.border = "4px solid gold";
             }
+
+            chrome.tabs.sendMessage(kahootId, { type: "tap", value: ans }, function (response) {
+                console.log("Send tap");
+            });
         })
         .catch(error => {
             console.log("KahootGPT error: " + error);
