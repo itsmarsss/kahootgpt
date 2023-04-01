@@ -35,7 +35,10 @@ socials.addEventListener("mouseout", function () {
 });
 
 settings.addEventListener("click", function () {
-    getAPIKey();
+    if (storekey.checked) {
+        getAPIKey();
+    }
+
     openaikeyinput.value = openAIKey;
 
     config.style.display = "block";
@@ -75,7 +78,11 @@ openaikeyinput.addEventListener("mouseout", function () {
 });
 
 save.addEventListener("click", function () {
-    setAPIKey(openaikeyinput.value);
+    if (storekey.checked) {
+        setAPIKey(openaikeyinput.value);
+    } else {
+        openAIKey = openaikeyinput.value;
+    }
 
     var fadeEffect = setInterval(function () {
         if (!config.style.opacity) {
