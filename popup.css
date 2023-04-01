@@ -130,6 +130,53 @@ h3 {
 .import>h3>span {
     font-size: 10px;
     margin: 0;
+    color: #9d86c3;
+}
+
+.importtext {
+    position: relative;
+    display: inline-block;
+}
+
+.importtext .tooltiptext {
+    opacity: 0;
+    width: 200px;
+    background-color: black;
+    color: #fff;
+    text-align: center;
+    padding: 5px;
+    border-radius: 6px;
+    position: absolute;
+    z-index: 1;
+    transition: 100ms;
+    animation: fadeout 250ms;
+    left: 75px;
+    top: 25px;
+}
+
+.importtext:hover .tooltiptext {
+    animation: fadein 500ms;
+    opacity: 1;
+}
+
+@keyframes fadein {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes fadeout {
+    from {
+        opacity: 1;
+    }
+
+    to {
+        opacity: 0;
+    }
 }
 
 .reply {
