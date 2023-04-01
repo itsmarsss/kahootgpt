@@ -19,6 +19,11 @@ const rhombus = document.getElementById("answer-rhombus");
 const circle = document.getElementById("answer-circle");
 const square = document.getElementById("answer-square");
 
+const triangle_cont = document.getElementsByClassName("triangle")[0];
+const rhombus_cont = document.getElementsByClassName("rhombus")[0];
+const circle_cont = document.getElementsByClassName("circle")[0];
+const square_cont = document.getElementsByClassName("square")[0];
+
 const clear = document.getElementById("clear");
 
 const exit = document.getElementById("close");
@@ -148,10 +153,10 @@ function queryGPT() {
         return;
     }
 
-    triangle.style.border = "none";
-    rhombus.style.border = "none";
-    circle.style.border = "none";
-    square.style.border = "none";
+    triangle_cont.style.border = "none";
+    rhombus_cont.style.border = "none";
+    circle_cont.style.border = "none";
+    square_cont.style.border = "none";
 
     if (triangle.value === "" &&
         rhombus.value === "" &&
@@ -174,10 +179,10 @@ clear.addEventListener("click", function () {
     clearAll();
 });
 function clearAll() {
-    triangle.style.border = "none";
-    rhombus.style.border = "none";
-    circle.style.border = "none";
-    square.style.border = "none";
+    triangle_cont.style.border = "none";
+    rhombus_cont.style.border = "none";
+    circle_cont.style.border = "none";
+    square_cont.style.border = "none";
 
     question.value = "";
     triangle.value = "";
@@ -270,13 +275,13 @@ async function getAnswerOnly(query) {
         })
         .catch(error => {
             console.log("KahootGPT error: " + error);
-            chrome.tabs.sendMessage(id, { type: "error", value: error }, function (response) {
+            chrome.tabs.sendMessage(kahootId, { type: "error", value: error }, function (response) {
                 console.log("Error sent");
             });
         });
 }
 
-async function getAnswerWithAnswer(query, circle, rhombus, triangle, square) {
+async function getAnswerWithAnswer(query, triangle, rhombus, circle, square) {
     console.log("Calling GPT3")
     var url = "https://api.openai.com/v1/completions";
     var bearer = 'Bearer ' + openAIKey;
@@ -288,7 +293,7 @@ async function getAnswerWithAnswer(query, circle, rhombus, triangle, square) {
         },
         body: JSON.stringify({
             "model": "text-davinci-003",
-            "prompt": `Act as a professional; only respond with 4 concise answers (if there is a definite answer, only reply with one) in json format with "one", "two", "three", "four" or "one" as the key if only one answer to the following question: ` + query,
+            "prompt": `Act as a professional;  the question will be after "question:" and there are 4 possible answers "a", "b", "c", or "d", reply with a SINGLE letter ONLY:\nquestion: ` + query + "\n" + "a: " + triangle + "\n" + "b: " + rhombus + "\n" + "c: " + circle + "\n" + "d: " + square,
             "temperature": 0.7,
             "max_tokens": 256,
             "top_p": 1,
@@ -303,28 +308,26 @@ async function getAnswerWithAnswer(query, circle, rhombus, triangle, square) {
             lines.splice(0, 2);
             var replyLines = lines.join('\n');
 
-            var GPTReply = JSON.parse(replyLines);
+            var GPTReply = replyLines.replace(/\s/g, '').toLowerCase();
 
-            var answer = GPTReply.one;
-
-            switch (answer) {
-                case "a":
-                    triangle.style.border = "2px gold";
-                    break;
-                case "b":
-                    rhombus.style.border = "2px gold";
-                    break;
-                case "c":
-                    circle.style.border = "2px gold";
-                    break;
-                case "d":
-                    square.style.border = "2px gold";
-                    break;
+            if (GPTReply.includes("a")) {
+                triangle_cont.style.border = "4px solid gold";
+            } else if (GPTReply.includes("b")) {
+                rhombus_cont.style.border = "4px solid gold";
+            } else if (GPTReply.includes("c")) {
+                circle_cont.style.border = "4px solid gold";
+            } else if (GPTReply.includes("d")) {
+                square_cont.style.border = "4px solid gold";
+            } else {
+                triangle_cont.style.border = "4px solid gold";
+                rhombus_cont.style.border = "4px solid gold";
+                circle_cont.style.border = "4px solid gold";
+                square_cont.style.border = "4px solid gold";
             }
         })
         .catch(error => {
             console.log("KahootGPT error: " + error);
-            chrome.tabs.sendMessage(id, { type: "error", value: error }, function (response) {
+            chrome.tabs.sendMessage(kahootId, { type: "error", value: error }, function (response) {
                 console.log("Error sent");
             });
         });
