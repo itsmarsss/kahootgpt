@@ -433,3 +433,34 @@ getCurrentTab().then((tab) => {
         }
     });
 });
+
+async function runQuery() {
+
+    while (true) {
+        if (autoImport) {
+            chrome.tabs.sendMessage(id, { type: "query" }, function (response) {
+                var ques = response.question || "";
+                var red = response.r || "";
+                var blue = response.b || "";
+                var yellow = response.y || "";
+                var green = response.g || "";
+
+                question.value = ques;
+                question.value = red;
+                question.value = blue;
+                question.value = yellow;
+                question.value = green;
+
+                if (autoReply) {
+                    queryGPT();
+                }
+            });
+
+            await sleep(500);
+        }
+    }
+
+}
+
+runQuery();
+
