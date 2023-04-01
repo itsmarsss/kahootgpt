@@ -41,24 +41,28 @@ chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
                     if (toggled) {
                         document.querySelectorAll('[data-functional-selector="answer-0"]')[0].click();
                     }
+                    document.querySelectorAll('[data-functional-selector="answer-0"]')[0].style.border = "4px solid gold";
                     break;
                 case "b":
                     console.log("rhombus");
                     if (toggled) {
                         document.querySelectorAll('[data-functional-selector="answer-1"]')[0].click();
                     }
+                    document.querySelectorAll('[data-functional-selector="answer-1"]')[0].style.border = "4px solid gold";
                     break;
                 case "c":
                     console.log("circle");
                     if (toggled) {
                         document.querySelectorAll('[data-functional-selector="answer-2"]')[0].click();
                     }
+                    document.querySelectorAll('[data-functional-selector="answer-2"]')[0].style.border = "4px solid gold";
                     break;
                 case "d":
                     console.log("square");
                     if (toggled) {
                         document.querySelectorAll('[data-functional-selector="answer-3"]')[0].click();
                     }
+                    document.querySelectorAll('[data-functional-selector="answer-3"]')[0].style.border = "4px solid gold";
                     break;
             }
             sendResponse({ value: toggled.toString(), success: true });
