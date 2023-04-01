@@ -311,7 +311,7 @@ h3 {
 }
 
 .question {
-    transform: translateY(-25%);
+    transform: translateY(-29%);
     margin: 0;
     outline: none;
     border: none;
@@ -404,10 +404,10 @@ h3 {
     font-size: medium;
     background: #9d86c3;
     color: white;
-    border-radius: 15px;
+    border-radius: 7px;
     border: none;
     outline: none;
-    width: 150px;
+    width: 100px;
     margin: 15px;
     box-shadow: 0 4px 10px -2px #9d86c3;
     transition: 150ms;

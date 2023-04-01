@@ -34,10 +34,12 @@ socials.addEventListener("mouseout", function () {
     footer.style.background = "#525252";
 });
 
-settings.addEventListener("click", function () {
+settings.addEventListener("click", async function () {
     if (storekey.checked) {
         getAPIKey();
     }
+
+    await sleep(500);
 
     openaikeyinput.value = openAIKey;
 
@@ -77,12 +79,14 @@ openaikeyinput.addEventListener("mouseout", function () {
     openaikeyinput.type = "password";
 });
 
-save.addEventListener("click", function () {
+save.addEventListener("click", async function () {
     if (storekey.checked) {
         setAPIKey(openaikeyinput.value);
     } else {
         openAIKey = openaikeyinput.value;
     }
+
+    await sleep(500);
 
     var fadeEffect = setInterval(function () {
         if (!config.style.opacity) {
@@ -144,6 +148,12 @@ function queryGPT() {
         return;
     }
 
+    question.disabled = true;
+    triangle.disabled = true;
+    rhombus.disabled = true;
+    circle.disabled = true;
+    square.disabled = true;
+
     if (triangle.value === "" &&
         rhombus.value === "" &&
         circle.value === "" &&
@@ -158,6 +168,12 @@ function queryGPT() {
             square.value
         );
     }
+
+    question.disabled = false;
+    triangle.disabled = false;
+    rhombus.disabled = false;
+    circle.disabled = false;
+    square.disabled = false;
 }
 
 
