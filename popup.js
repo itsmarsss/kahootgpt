@@ -35,6 +35,7 @@ socials.addEventListener("mouseout", function () {
 });
 
 settings.addEventListener("click", function () {
+    getAPIKey();
     openaikeyinput.value = openAIKey;
 
     config.style.display = "block";
@@ -93,7 +94,7 @@ var toggled = false;
 
 var kahootId;
 
-var openAIKey = "SECRET";
+var openAIKey = "YOUR_KEY";
 
 checkbox.addEventListener("click", function () {
     toggleAutoTap();
@@ -261,16 +262,18 @@ const sleep = (milliseconds) => {
     return new Promise(resolve => setTimeout(resolve, milliseconds))
 }
 
+
+
 function setAPIKey(value) {
-    chrome.storage.sync.set({ key: value }).then(() => {
+    chrome.storage.local.set({ key: value }, function () {
         console.log("Key setted");
     });
 }
 
 function getAPIKey() {
-    chrome.storage.sync.get(["key"]).then((result) => {
+    chrome.storage.local.get(["key"], function (result) {
         console.log("Key queried");
-        return result.key;
+        openAIKey = result.key;
     });
 }
 
@@ -299,6 +302,8 @@ getCurrentTab().then((tab) => {
             }, 25);
 
             kahootId = id;
+
+            getAPIKey();
         } else {
             console.log("Not injected; preparing injection");
             callKahootGPT(tab);
