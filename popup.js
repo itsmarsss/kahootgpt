@@ -148,6 +148,11 @@ function queryGPT() {
         return;
     }
 
+    triangle.style.border = "none";
+    rhombus.style.border = "none";
+    circle.style.border = "none";
+    square.style.border = "none";
+
     if (triangle.value === "" &&
         rhombus.value === "" &&
         circle.value === "" &&
@@ -169,6 +174,11 @@ clear.addEventListener("click", function () {
     clearAll();
 });
 function clearAll() {
+    triangle.style.border = "none";
+    rhombus.style.border = "none";
+    circle.style.border = "none";
+    square.style.border = "none";
+
     question.value = "";
     triangle.value = "";
     rhombus.value = "";
@@ -295,15 +305,22 @@ async function getAnswerWithAnswer(query, circle, rhombus, triangle, square) {
 
             var GPTReply = JSON.parse(replyLines);
 
-            var one = GPTReply.one || GPTReply.answer || "";
-            var two = GPTReply.two || "";
-            var three = GPTReply.three || "";
-            var four = GPTReply.four || "";
+            var answer = GPTReply.one;
 
-            triangle.value = one;
-            rhombus.value = two;
-            circle.value = three;
-            square.value = four;
+            switch (answer) {
+                case "a":
+                    triangle.style.border = "2px gold";
+                    break;
+                case "b":
+                    rhombus.style.border = "2px gold";
+                    break;
+                case "c":
+                    circle.style.border = "2px gold";
+                    break;
+                case "d":
+                    square.style.border = "2px gold";
+                    break;
+            }
         })
         .catch(error => {
             console.log("KahootGPT error: " + error);
