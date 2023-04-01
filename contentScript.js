@@ -26,25 +26,34 @@ chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
             console.log("Got pinged");
             sendResponse({ value: toggled.toString(), success: true });
             break;
-        case "a":
-            if (toggled) {
-                document.querySelectorAll('data-functional-selector="answer-0"')[0].click();
+        case "tap":
+            switch (val) {
+                case "a":
+                    console.log("triangle");
+                    if (toggled) {
+                        document.querySelectorAll('[data-functional-selector="answer-0"]')[0].click();
+                    }
+                    break;
+                case "b":
+                    console.log("rhombus");
+                    if (toggled) {
+                        document.querySelectorAll('[data-functional-selector="answer-1"]')[0].click();
+                    }
+                    break;
+                case "c":
+                    console.log("circle");
+                    if (toggled) {
+                        document.querySelectorAll('[data-functional-selector="answer-2"]')[0].click();
+                    }
+                    break;
+                case "d":
+                    console.log("square");
+                    if (toggled) {
+                        document.querySelectorAll('[data-functional-selector="answer-3"]')[0].click();
+                    }
+                    break;
             }
-            break;
-        case "b":
-            if (toggled) {
-                document.querySelectorAll('data-functional-selector="answer-1"')[0].click();
-            }
-            break;
-        case "c":
-            if (toggled) {
-                document.querySelectorAll('data-functional-selector="answer-2"')[0].click();
-            }
-            break;
-        case "d":
-            if (toggled) {
-                document.querySelectorAll('data-functional-selector="answer-3"')[0].click();
-            }
+            sendResponse({ value: toggled.toString(), success: true });
             break;
         case "error":
             console.log("Error sent");
