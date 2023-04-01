@@ -29,6 +29,8 @@ const clear = document.getElementById("clear");
 const exit = document.getElementById("close");
 const openaikeyinput = document.getElementById("openaikeyinput");
 const storekey = document.getElementById("storekey");
+const autoin = document.getElementById("autoimport");
+const autoanswer = document.getElementById("autoanswer");
 const save = document.getElementById("save");
 
 socials.addEventListener("mouseover", function () {
@@ -44,9 +46,15 @@ settings.addEventListener("click", async function () {
         getAPIKey();
     }
 
+    getImport();
+    getReply();
+
     await sleep(500);
 
     openaikeyinput.value = openAIKey;
+
+    autoin.checked = autoImport;
+    autoanswer.checked = autoReply;
 
     config.style.display = "block";
 
@@ -91,6 +99,9 @@ save.addEventListener("click", async function () {
         openAIKey = openaikeyinput.value;
     }
 
+    setImport(autoin.checked);
+    setReply(autoanswer.checked);
+
     await sleep(500);
 
     var fadeEffect = setInterval(function () {
@@ -111,6 +122,8 @@ var toggled = false;
 var kahootId;
 
 var openAIKey = "YOUR_KEY";
+var autoImport = false;
+var autoReply = false;
 
 checkbox.addEventListener("click", function () {
     toggleAutoTap();
@@ -356,6 +369,34 @@ function getAPIKey() {
     chrome.storage.local.get(["key"], function (result) {
         console.log("Key queried");
         openAIKey = result.key;
+    });
+}
+
+
+function setImport(value) {
+    chrome.storage.local.set({ import: value }, function () {
+        console.log("Import setted");
+    });
+}
+
+function getImport() {
+    chrome.storage.local.get(["import"], function (result) {
+        console.log("Import queried");
+        autoImport = result.import;
+    });
+}
+
+
+function setReply(value) {
+    chrome.storage.local.set({ reply: value }, function () {
+        console.log("Reply setted");
+    });
+}
+
+function getReply() {
+    chrome.storage.local.get(["reply"], function (result) {
+        console.log("Reply queried");
+        autoReply = result.reply;
     });
 }
 
