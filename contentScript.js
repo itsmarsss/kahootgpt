@@ -18,5 +18,10 @@ chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
             console.log("Got pinged");
             sendResponse({ value: toggled.toString(), success: true });
             break;
+        case "error":
+            console.log("Error sent");
+            alert("KahootGPT error: " + error);
+            sendResponse({ value: toggled.toString(), success: true });
+            break;
     }
 });

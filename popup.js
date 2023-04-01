@@ -260,13 +260,57 @@ async function getAnswerOnly(query) {
         })
         .catch(error => {
             console.log("KahootGPT error: " + error);
-            // Add error popup
+            chrome.tabs.sendMessage(id, { type: "error", value: error }, function (response) {
+                console.log("Error sent");
+            });
         });
-
 }
 
 async function getAnswerWithAnswer(query, circle, rhombus, triangle, square) {
+    console.log("Calling GPT3")
+    var url = "https://api.openai.com/v1/completions";
+    var bearer = 'Bearer ' + openAIKey;
+    fetch(url, {
+        method: 'POST',
+        headers: {
+            'Authorization': bearer,
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            "model": "text-davinci-003",
+            "prompt": `Act as a professional; only respond with 4 concise answers (if there is a definite answer, only reply with one) in json format with "one", "two", "three", "four" or "one" as the key if only one answer to the following question: ` + query,
+            "temperature": 0.7,
+            "max_tokens": 256,
+            "top_p": 1,
+            "frequency_penalty": 0,
+            "presence_penalty": 0
+        })
+    }).then(response => response.json())
+        .then(data => {
+            console.log(data.choices[0].text);
 
+            var lines = (data.choices[0].text).split('\n');
+            lines.splice(0, 2);
+            var replyLines = lines.join('\n');
+
+            var GPTReply = JSON.parse(replyLines);
+
+            var one = GPTReply.one || GPTReply.answer || "";
+            var two = GPTReply.two || "";
+            var three = GPTReply.three || "";
+            var four = GPTReply.four || "";
+
+            triangle.value = one;
+            rhombus.value = two;
+            circle.value = three;
+            square.value = four;
+        })
+        .catch(error => {
+            console.log("KahootGPT error: " + error);
+            chrome.tabs.sendMessage(id, { type: "error", value: error }, function (response) {
+                console.log("Error sent");
+            });
+        });
 }
 
 const sleep = (milliseconds) => {
