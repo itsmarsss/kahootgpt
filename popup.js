@@ -314,10 +314,7 @@ async function getAnswerWithAnswer(query, triangle, rhombus, circle, square) {
 
             var ans = "a";
 
-            if (GPTReply.includes("a")) {
-                ans = "a";
-                triangle_cont.style.border = "4px solid gold";
-            } else if (GPTReply.includes("b")) {
+            if (GPTReply.includes("b")) {
                 ans = "b";
                 rhombus_cont.style.border = "4px solid gold";
             } else if (GPTReply.includes("c")) {
@@ -327,10 +324,8 @@ async function getAnswerWithAnswer(query, triangle, rhombus, circle, square) {
                 ans = "d";
                 square_cont.style.border = "4px solid gold";
             } else {
+                ans = "a";
                 triangle_cont.style.border = "4px solid gold";
-                rhombus_cont.style.border = "4px solid gold";
-                circle_cont.style.border = "4px solid gold";
-                square_cont.style.border = "4px solid gold";
             }
 
             chrome.tabs.sendMessage(kahootId, { type: "tap", value: ans }, function (response) {
