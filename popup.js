@@ -21,6 +21,11 @@ const square = document.getElementById("answer-square");
 
 const clear = document.getElementById("clear");
 
+const close = document.getElementById("close");
+const openaikeyinput = document.getElementById("openaikeyinput");
+const storekey = document.getElementById("storekey");
+const save = document.getElementById("save");
+
 socials.addEventListener("mouseover", function () {
     footer.style.background = "#9d86c3";
 });

@@ -218,13 +218,24 @@ h3 {
 
 .info {
     margin-left: 10px;
+    fill: white;
     cursor: pointer;
+    transition: 200ms;
+}
+
+.info:hover {
+    fill: lightgray;
 }
 
 .settings {
     margin-right: 10px;
     fill: white;
     cursor: pointer;
+    transition: 200ms;
+}
+
+.settings:hover {
+    fill: lightgray;
 }
 
 .container {
@@ -318,6 +329,11 @@ h3 {
     fill: #9d86c3;
     padding-top: 2px;
     cursor: pointer;
+    transition: 200ms;
+}
+
+.search-icon:hover {
+    scale: 1.15;
 }
 
 .options {
