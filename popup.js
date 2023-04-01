@@ -174,7 +174,6 @@ function queryGPT() {
     }
 }
 
-
 clear.addEventListener("click", function () {
     clearAll();
 });
@@ -310,6 +309,8 @@ async function getAnswerWithAnswer(query, triangle, rhombus, circle, square) {
             var replyLines = lines.join('\n');
 
             var GPTReply = replyLines.replace(/\s/g, '').toLowerCase();
+
+            console.log(GPTReply);
 
             var ans = "a";
 
