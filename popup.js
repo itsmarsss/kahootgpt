@@ -213,6 +213,9 @@ async function callKahootGPT(tab) {
             });
         console.log(`Loading: ${url}`);
 
+        getImport();
+        getReply();
+
         await sleep(4000)
 
         kahootId = id;
@@ -222,6 +225,9 @@ async function callKahootGPT(tab) {
                 console.log("Connected to injected script");
             }
         });
+
+
+        runQuery();
 
         var fadeEffect = setInterval(function () {
             if (!injection.style.opacity) {
@@ -427,6 +433,10 @@ getCurrentTab().then((tab) => {
             kahootId = id;
 
             getAPIKey();
+            getImport();
+            getReply();
+
+            runQuery();
         } else {
             console.log("Not injected; preparing injection");
             callKahootGPT(tab);
@@ -434,33 +444,29 @@ getCurrentTab().then((tab) => {
     });
 });
 
-async function runQuery() {
-
-    while (true) {
+function runQuery() {
+    var checkForNewQuestion = setInterval(function () {
         if (autoImport) {
-            chrome.tabs.sendMessage(id, { type: "query" }, function (response) {
-                var ques = response.question || "";
-                var red = response.r || "";
-                var blue = response.b || "";
-                var yellow = response.y || "";
-                var green = response.g || "";
+            chrome.tabs.sendMessage(kahootId, { type: "query" }, function (response) {
+                if (response.success) {
+                    var ques = response.question || "";
+                    var red = response.r || "";
+                    var blue = response.b || "";
+                    var yellow = response.y || "";
+                    var green = response.g || "";
 
-                question.value = ques;
-                question.value = red;
-                question.value = blue;
-                question.value = yellow;
-                question.value = green;
+                    question.value = ques;
+                    question.value = red;
+                    question.value = blue;
+                    question.value = yellow;
+                    question.value = green;
 
-                if (autoReply) {
-                    queryGPT();
+                    if (autoReply) {
+                        queryGPT();
+                    }
                 }
             });
-
-            await sleep(500);
         }
-    }
-
+    }, 250);
 }
-
-runQuery();
 

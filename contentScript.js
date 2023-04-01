@@ -12,6 +12,8 @@ chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
     var type = request.type || {};
     var val = request.value || {};
 
+    console.log(type)
+
     switch (type) {
         case "initialize":
             console.log("Connected to popup script");
@@ -54,6 +56,9 @@ chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
                     break;
             }
             sendResponse({ value: toggled.toString(), success: true });
+            break;
+        case "query":
+            console.log("queried");
             break;
         case "error":
             console.log("Error sent");
