@@ -148,12 +148,6 @@ function queryGPT() {
         return;
     }
 
-    question.disabled = true;
-    triangle.disabled = true;
-    rhombus.disabled = true;
-    circle.disabled = true;
-    square.disabled = true;
-
     if (triangle.value === "" &&
         rhombus.value === "" &&
         circle.value === "" &&
@@ -168,12 +162,6 @@ function queryGPT() {
             square.value
         );
     }
-
-    question.disabled = false;
-    triangle.disabled = false;
-    rhombus.disabled = false;
-    circle.disabled = false;
-    square.disabled = false;
 }
 
 
