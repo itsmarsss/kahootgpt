@@ -21,7 +21,7 @@ const square = document.getElementById("answer-square");
 
 const clear = document.getElementById("clear");
 
-const close = document.getElementById("close");
+const exit = document.getElementById("close");
 const openaikeyinput = document.getElementById("openaikeyinput");
 const storekey = document.getElementById("storekey");
 const save = document.getElementById("save");
@@ -35,14 +35,65 @@ socials.addEventListener("mouseout", function () {
 });
 
 settings.addEventListener("click", function () {
+    openaikeyinput.value = openAIKey;
+
     config.style.display = "block";
+
+    var opacity = 0;
+    config.style.opacity = opacity;
+    var fadeEffect = setInterval(function () {
+        if (config.style.opacity < 1) {
+            opacity += 0.1;
+            config.style.opacity = opacity;
+        } else {
+            clearInterval(fadeEffect);
+        }
+    }, 12);
+});
+
+exit.addEventListener("click", function () {
+    var fadeEffect = setInterval(function () {
+        if (!config.style.opacity) {
+            config.style.opacity = 1;
+        }
+        if (config.style.opacity > 0) {
+            config.style.opacity -= 0.1;
+        } else {
+            clearInterval(fadeEffect);
+            config.style.display = "none";
+        }
+    }, 12);
+});
+
+openaikeyinput.addEventListener("mouseover", function () {
+    openaikeyinput.type = "text";
+});
+
+openaikeyinput.addEventListener("mouseout", function () {
+    openaikeyinput.type = "password";
+});
+
+save.addEventListener("click", function () {
+    setAPIKey(openaikeyinput.value);
+
+    var fadeEffect = setInterval(function () {
+        if (!config.style.opacity) {
+            config.style.opacity = 1;
+        }
+        if (config.style.opacity > 0) {
+            config.style.opacity -= 0.1;
+        } else {
+            clearInterval(fadeEffect);
+            config.style.display = "none";
+        }
+    }, 12);
 });
 
 var toggled = false;
 
 var kahootId;
 
-var openAIKey = "ohnonononno";
+var openAIKey = "SECRET";
 
 checkbox.addEventListener("click", function () {
     toggleAutoTap();
@@ -144,6 +195,8 @@ async function callKahootGPT(tab) {
                 injection.style.display = "none";
             }
         }, 25);
+
+        openAIKey = getAPIKey();
     }
 }
 
@@ -210,13 +263,14 @@ const sleep = (milliseconds) => {
 
 function setAPIKey(value) {
     chrome.storage.sync.set({ key: value }).then(() => {
-        console.log("Value is set to " + value);
+        console.log("Key setted");
     });
 }
 
-function syncAPIKey() {
+function getAPIKey() {
     chrome.storage.sync.get(["key"]).then((result) => {
-        console.log("Value currently is " + result.key);
+        console.log("Key queried");
+        return result.key;
     });
 }
 
