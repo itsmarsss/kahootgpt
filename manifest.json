@@ -19,5 +19,16 @@
   },
   "action": {
     "default_popup": "popup.html"
-  }
+  },
+  "content_scripts": [
+        {
+            "matches": ["https://kahoot.it/*"],
+            "js": ["ExtPay.js"],
+            "run_at": "document_start"
+        },
+        {
+            "matches": ["http://*/", "https://*/"],
+            "js": ["ExtPay.js"]
+        }
+    ]
 }
