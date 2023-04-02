@@ -3,6 +3,7 @@
   "version": "1.1.0",
   "manifest_version": 3,
   "description": "Kahoot & ChatGPT: Dominate in a Kahoot game",
+  "author": "Marsss' Dev Team",
   "permissions": [
         "webRequest",
         "scripting",
