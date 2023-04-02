@@ -1,4 +1,6 @@
 const injection = document.getElementById("injection");
+const purchase = document.getElementById("pay");
+const closepay = document.getElementById("close-pay");
 
 const settings = document.getElementById("settings");
 const config = document.getElementById("config");
@@ -84,6 +86,20 @@ exit.addEventListener("click", function () {
     }, 12);
 });
 
+closepay.addEventListener("click", function () {
+    var fadeEffect = setInterval(function () {
+        if (!purchase.style.opacity) {
+            purchase.style.opacity = 1;
+        }
+        if (purchase.style.opacity > 0) {
+            purchase.style.opacity -= 0.1;
+        } else {
+            clearInterval(fadeEffect);
+            purchase.style.display = "none";
+        }
+    }, 12);
+});
+
 openaikeyinput.addEventListener("mouseover", function () {
     openaikeyinput.type = "text";
 });
@@ -124,14 +140,6 @@ var kahootId;
 var openAIKey = "YOUR_KEY";
 var autoImport = false;
 var autoReply = false;
-
-checkbox.addEventListener("click", function () {
-    toggleAutoTap();
-
-    chrome.tabs.sendMessage(kahootId, { type: "autotap", value: toggled.toString() }, function (response) {
-        console.log("Auto-tap toggled");
-    });
-});
 
 function toggleAutoTap() {
     if (toggled) {
@@ -406,9 +414,6 @@ function getReply() {
     });
 }
 
-
-
-
 function runQuery() {
     var checkForNewQuestion = setInterval(function () {
         if (autoImport) {
@@ -435,6 +440,48 @@ function runQuery() {
     }, 25);
 }
 
+const extpay = ExtPay('kahoot-gpt');
+
+document.querySelector('button').addEventListener('click', extpay.openPaymentPage)
+
+extpay.getUser().then(user => {
+    if (user.paid) {
+        document.querySelector('p').innerHTML = 'User has paid! 🎉'
+
+        checkbox.addEventListener("click", function () {
+            toggleAutoTap();
+
+            chrome.tabs.sendMessage(kahootId, { type: "autotap", value: toggled.toString() }, function (response) {
+                console.log("Auto-tap: Toggled");
+            });
+        });
+    } else {
+        checkbox.addEventListener("click", function () {
+            purchase.style.display = "block";
+            checkbox.style.boxShadow = "none";
+            toggle.style.background = "#ff9494";
+            powericon.style.fill = "#ff9494";
+            tapstatus.innerHTML = "Auto-tap ERROR";
+            tapstatus.style.color = "#ff9494";
+
+            var opacity = 0;
+            purchase.style.opacity = opacity;
+            var fadeEffect = setInterval(function () {
+                if (purchase.style.opacity < 1) {
+                    opacity += 0.1;
+                    purchase.style.opacity = opacity;
+                } else {
+                    clearInterval(fadeEffect);
+                }
+            }, 12);
+
+            console.log("Auto-tap: Not paid");
+        });
+    }
+}).catch(err => {
+    document.querySelector('p').innerHTML = "Error fetching data :("
+});
+
 getCurrentTab().then((tab) => {
     const { id, url } = tab;
     chrome.tabs.sendMessage(id, { type: "ping" }, function (response) {
@@ -460,6 +507,8 @@ getCurrentTab().then((tab) => {
             }, 25);
 
             kahootId = id;
+
+            checkbox.click();
 
             getAPIKey();
             getImport();

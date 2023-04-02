@@ -1,8 +1,33 @@
 <link href="popup.css" rel="stylesheet" type="text/css" />
 <link href="loader.css" rel="stylesheet" type="text/css" />
 <script type="module" src="popup.js"></script>
+<script src="ExtPay.js"></script>
 
-<div class="container">
+<div class="pay" id="pay">
+    <div class="square-pay"></div>
+    <div class="circle-pay"></div>
+    <close title="No, thanks">
+        <svg width="40" height="40" class="close" id="close-pay">
+            <path d="M 18.4797 14.935 L 29.5733 3.842 c 0.3939 -0.3939 0.3939 -1.0314 0 -1.4252 L 27.4532 0.2959 c -0.1888 -0.1887 -0.4451
+                        -0.2949 -0.7125 -0.2949 c -0.2675 0 -0.5238 0.1062 -0.7126 0.2949 l -11.0936 11.0938 L 3.8408 0.2959 c -0.1888 -0.1887
+                        -0.4451 -0.2949 -0.7126 -0.2949 c -0.2675 0 -0.5238 0.1062 -0.7125 0.2949 L 0.2955 2.4169 c -0.3939 0.3938 -0.3939
+                        1.0313 0 1.4252 l 11.0936 11.093 L 0.2966 26.0267 c -0.3937 0.3939 -0.3937 1.0314 0 1.4252 l 2.1203 2.1209 c 0.1887
+                        0.1887 0.445 0.2949 0.7125 0.2949 c 0.2675 0 0.5238 -0.1062 0.7127 -0.2949 l 11.0923 -11.0925 l 11.0924 11.0925 c 0.1888
+                        0.1887 0.4451 0.2949 0.7126 0.2949 c 0.2676 0 0.5238 -0.1062 0.7125 -0.2949 l 2.1203 -2.1209 c 0.3937 -0.3938 0.3937
+                        -1.0313 0 -1.4252 L 18.4797 14.935 z">
+            </path>
+        </svg>
+    </close>
+    <h1 class="pay-title"><b>One time purchase to access <u>Auto-Tap</u></b></h1>
+    <p class="pay-subtitle">User hasn't paid :(</p>
+    <button title="Purchase Auto-tap" class="pay-now">Pay only $0.69 now</button>
+    <h4>Auto-tap allows KahootGPT to automatically click the best answer; the best answer will be selected immediately.
+    </h4>
+    <a target="_blank" title="Join Discord Server for price negotiation" href="https://discord.gg/K8hgFHWeJQ">Negotiate
+        Prices</a>
+</div>
+
+<div class=" container">
     <div>
         <div class="header">
             <a target="_blank" title="README" href="https://github.com/itsmarsss/KahootGPT/blob/main/README.md">
@@ -81,7 +106,8 @@
             <div class="import" id="import">
                 <h3 class="importtext">Auto Import Questions <span><i>(if available)</i></span>:
                     <span class="tooltiptext">
-                        KahootGPT will import questions if Kahoot host allows players to view the question and choices
+                        KahootGPT will import questions if Kahoot host allows players to view the question and
+                        choices
                         on
                         local device.
                     </span>
