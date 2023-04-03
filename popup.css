@@ -29,7 +29,7 @@ h3 {
 }
 
 .pay-title {
-    margin-top: 165px;
+    margin-top: 175px;
     color: #fff;
     width: 100%;
     font-size: 20px;
@@ -104,6 +104,7 @@ h3 {
     height: 200px;
     top: -80px;
     left: -25px;
+    box-shadow: 0 0px 50px 0px #170334;
 }
 
 .circle-pay {
@@ -114,6 +115,7 @@ h3 {
     border-radius: 50%;
     top: 400px;
     left: 100px;
+    box-shadow: 0 0px 50px 0px #170334;
 }
 
 .injection {
@@ -585,14 +587,14 @@ h3 {
     font-family: monospace, Geneva, Tahoma, sans-serif;
     cursor: pointer;
     font-size: medium;
-    background: #9d86c3;
+    background: #5b29a7;
     color: white;
     border-radius: 7px;
     border: none;
     outline: none;
     width: 100px;
     margin: 15px;
-    box-shadow: 0 4px 10px -2px #9d86c3;
+    box-shadow: 0 4px 10px -2px #5b29a7;
     transition: 150ms;
 }
 
@@ -601,7 +603,7 @@ h3 {
 }
 
 .clear:active {
-    background: #846ea7;
+    background: #3c1675;
 }
 
 .footer {
