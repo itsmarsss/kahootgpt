@@ -29,10 +29,15 @@ h3 {
 }
 
 .pay-title {
-    margin-top: 175px;
+    margin-top: 170px;
+    margin-bottom: 0;
     color: #fff;
     width: 100%;
     font-size: 20px;
+}
+
+.pay-subtitle {
+    margin: 5px;
 }
 
 .pay-title>b>u {
@@ -50,7 +55,7 @@ h3 {
     background-size: 100% auto;
     font-family: inherit;
     font-size: 15px;
-    padding: 10px 20px;
+    padding: 10px 15px;
     transition: 300ms;
 }
 
