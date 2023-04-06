@@ -50,8 +50,31 @@ h3 {
     background-size: 100% auto;
     font-family: inherit;
     font-size: 15px;
-    padding: 10px 25px;
+    padding: 10px 20px;
     transition: 300ms;
+}
+
+.pay-now>span {
+    background: #492185c1;
+    padding: 5px;
+    border-radius: 10px;
+    margin-left: 5px;
+    transition: 300ms;
+    animation: pulse-chip 1.5s infinite;
+}
+
+@keyframes pulse-chip {
+    0% {
+        box-shadow: 0 0 0 0 #6f41b5ad;
+    }
+
+    70% {
+        box-shadow: 0 0 0 5px #da674400;
+    }
+
+    100% {
+        box-shadow: 0 0 0 0 #da674400;
+    }
 }
 
 .pay-now:hover {
