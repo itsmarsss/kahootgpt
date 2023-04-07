@@ -440,13 +440,13 @@ function runQuery() {
     }, 25);
 }
 
-const extpay = ExtPay('kahoot-gpt');
+const extpay_life = ExtPay('kahoot-gpt');
 
-document.querySelector('button').addEventListener('click', extpay.openPaymentPage)
+document.getElementsByClassName('life')[0].addEventListener('click', extpay_life.openPaymentPage);
 
-extpay.getUser().then(user => {
-    if (user.paid) {
-        document.querySelector('p').innerHTML = 'User has paid! 🎉'
+extpay_life.getUser().then(user_life => {
+    if (user_life.paid) {
+        document.querySelector('p').innerHTML = 'User has paid! 🎉';
 
         checkbox.addEventListener("click", function () {
             toggleAutoTap();
