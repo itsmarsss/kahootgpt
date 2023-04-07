@@ -662,8 +662,27 @@ h3 {
     box-shadow: none;
 }
 
+.socials>a:hover {
+    animation: rotate 250ms;
+    transform: rotateZ(15deg) scale(1.25);
+}
+
 .social {
     cursor: pointer;
+}
+
+.social:not(:hover) {
+    animation: rotate 250ms reverse;
+}
+
+@keyframes rotate {
+    from {
+        transform: rotateZ(0deg);
+    }
+
+    to {
+        transform: rotateZ(15deg) scale(1.25);
+    }
 }
 
 .feeter {
