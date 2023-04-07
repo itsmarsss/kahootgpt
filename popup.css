@@ -665,3 +665,25 @@ h3 {
 .social {
     cursor: pointer;
 }
+
+.feeter {
+    padding-top: 5px;
+    bottom: 0px;
+    font-size: 15px;
+    transition: 500ms;
+}
+
+.feeter:hover {
+    transform: scaleX(1.15);
+}
+
+.feeter>a {
+    padding: 5px;
+    text-decoration: none;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #fff;
+}
+
+.feeter>a:hover {
+    text-decoration: underline;
+}
