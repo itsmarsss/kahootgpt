@@ -494,13 +494,18 @@ h3 {
     cursor: pointer;
 }
 
+.checkbox:hover .power-icon {
+    fill: #8871ad;
+    filter: drop-shadow(0px 0px 3px #8871ade7);
+}
+
 .power-icon {
     width: 19px;
     height: 19px;
     align-items: center;
     margin: auto;
     fill: #b7b7b7;
-    transition: 300ms;
+    transition: 200ms;
 }
 
 #autoclick-status {
