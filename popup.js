@@ -35,6 +35,29 @@ const autoin = document.getElementById("autoimport");
 const autoanswer = document.getElementById("autoanswer");
 const save = document.getElementById("save");
 
+autoanswer.addEventListener("click", function () {
+    autoanswer.checked = false;
+    purchase.style.display = "block";
+    checkbox.style.boxShadow = "none";
+    toggle.style.background = "#ff9494";
+    powericon.style.fill = "#ff9494";
+    tapstatus.innerHTML = "Auto-tap ERROR";
+    tapstatus.style.color = "#ff9494";
+
+    var opacity = 0;
+    purchase.style.opacity = opacity;
+    var fadeEffect = setInterval(function () {
+        if (purchase.style.opacity < 1) {
+            opacity += 0.1;
+            purchase.style.opacity = opacity;
+        } else {
+            clearInterval(fadeEffect);
+        }
+    }, 12);
+
+    console.log("Auto-tap: Not paid");
+});
+
 socials.addEventListener("mouseover", function () {
     footer.style.background = "#9d86c3";
 });
