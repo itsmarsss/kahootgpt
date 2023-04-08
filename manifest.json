@@ -10,7 +10,6 @@
         "storage",
         "tabs"
   ],
-  "host_permissions": ["https://kahoot.it/*"],
   "icons": {
     "16": "assets/icon-16.png",
     "32": "assets/icon-32.png",
