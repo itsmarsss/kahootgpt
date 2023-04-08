@@ -5,7 +5,6 @@
   "description": "Kahoot & ChatGPT: Dominate in a Kahoot game",
   "author": "Marsss' Dev Team",
   "permissions": [
-        "webRequest",
         "scripting",
         "activeTab",
         "storage",
