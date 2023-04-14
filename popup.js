@@ -471,6 +471,10 @@ function runQuery() {
     }, 25);
 }
 
+document.getElementById("privacy").addEventListener("click", function () {
+    window.open(`chrome-extension://${chrome.runtime.id}/documents/PRIVACY.html`, "_blank");
+});
+
 
 document.getElementsByClassName('life')[0].addEventListener('click', extpay_life.openPaymentPage);
 

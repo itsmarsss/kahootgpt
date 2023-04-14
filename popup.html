@@ -1,7 +1,7 @@
 <link href="popup.css" rel="stylesheet" type="text/css" />
 <link href="loader.css" rel="stylesheet" type="text/css" />
 <script type="module" src="popup.js"></script>
-<script src="ExtPay.js"></script>
+<script src="libraries/ExtPay.js"></script>
 <meta charset="UTF-8">
 
 <div class="pay" id="pay">
@@ -246,12 +246,7 @@
             </div>
         </div>
         <div class="feeter" id="feeter">
-            <a target="_blank" title="Terms of Service"
-                href="https://github.com/itsmarsss/KahootGPT/blob/main/TERMSOFSERVICE.md">
-                Terms</a>
-            <b>|</b>
-            <a target="_blank" title="Privacy Policy"
-                href="https://github.com/itsmarsss/KahootGPT/blob/main/PRIVACY.md">
+            <a style="cursor: pointer;" id="privacy" target="_blank" title="Privacy Policy" onclick="PRIVACY()">
                 Privacy</a>
         </div>
     </div>
