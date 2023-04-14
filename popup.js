@@ -35,27 +35,35 @@ const autoin = document.getElementById("autoimport");
 const autoanswer = document.getElementById("autoanswer");
 const save = document.getElementById("save");
 
+const extpay_life = ExtPay('kahoot-gpt');
+
 autoanswer.addEventListener("click", function () {
-    autoanswer.checked = false;
-    purchase.style.display = "block";
-    checkbox.style.boxShadow = "none";
-    toggle.style.background = "#ff9494";
-    powericon.style.fill = "#ff9494";
-    tapstatus.innerHTML = "Auto-tap ERROR";
-    tapstatus.style.color = "#ff9494";
-
-    var opacity = 0;
-    purchase.style.opacity = opacity;
-    var fadeEffect = setInterval(function () {
-        if (purchase.style.opacity < 1) {
-            opacity += 0.1;
-            purchase.style.opacity = opacity;
+    extpay_life.getUser().then(user_life => {
+        if (user_life.paid) {
+            console.log("Auto-tap: Paid");
         } else {
-            clearInterval(fadeEffect);
-        }
-    }, 12);
+            autoanswer.checked = false;
+            purchase.style.display = "block";
+            checkbox.style.boxShadow = "none";
+            toggle.style.background = "#ff9494";
+            powericon.style.fill = "#ff9494";
+            tapstatus.innerHTML = "Auto-tap ERROR";
+            tapstatus.style.color = "#ff9494";
 
-    console.log("Auto-tap: Not paid");
+            var opacity = 0;
+            purchase.style.opacity = opacity;
+            var fadeEffect = setInterval(function () {
+                if (purchase.style.opacity < 1) {
+                    opacity += 0.1;
+                    purchase.style.opacity = opacity;
+                } else {
+                    clearInterval(fadeEffect);
+                }
+            }, 12);
+
+            console.log("Auto-tap: Not paid");
+        }
+    });
 });
 
 socials.addEventListener("mouseover", function () {
@@ -463,7 +471,6 @@ function runQuery() {
     }, 25);
 }
 
-const extpay_life = ExtPay('kahoot-gpt');
 
 document.getElementsByClassName('life')[0].addEventListener('click', extpay_life.openPaymentPage);
 
