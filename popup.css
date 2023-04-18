@@ -102,6 +102,48 @@ h3 {
     }
 }
 
+.nopay {
+    z-index: 69;
+    left: 98px;
+    align-items: center;
+    background-image: linear-gradient(144deg, #Af40ff, #5b42f3 50%, #00ddeb);
+    margin: auto;
+    border: 0;
+    border-radius: 8px;
+    box-shadow: rgba(151, 65, 252, 0.2) 0 15px 30px -5px;
+    color: #FFFFFF;
+    display: flex;
+    font-size: 18px;
+    width: 120px;
+    padding: 2px;
+    cursor: pointer;
+    transition: 300ms;
+    position: fixed;
+    justify-content: center;
+}
+
+.nopay:active,
+.nopay:hover {
+    outline: 0;
+}
+
+.nopay span {
+    background: #05062d;
+    padding: 4px 6px;
+    border-radius: 6px;
+    width: 100%;
+    height: 100%;
+    transition: 300ms;
+}
+
+.nopay:hover span {
+    background: none;
+}
+
+.nopay:active {
+    transform: scale(0.9);
+}
+
 .pay>h4 {
     color: #fff;
     padding-left: 15px;

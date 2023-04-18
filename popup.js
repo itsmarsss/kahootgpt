@@ -1,6 +1,7 @@
 const injection = document.getElementById("injection");
 const purchase = document.getElementById("pay");
 const closepay = document.getElementById("close-pay");
+const nopay = document.getElementById("nopay");
 
 const settings = document.getElementById("settings");
 const config = document.getElementById("config");
@@ -117,7 +118,7 @@ exit.addEventListener("click", function () {
     }, 12);
 });
 
-closepay.addEventListener("click", function () {
+function closepaypage() {
     var fadeEffect = setInterval(function () {
         if (!purchase.style.opacity) {
             purchase.style.opacity = 1;
@@ -129,6 +130,14 @@ closepay.addEventListener("click", function () {
             purchase.style.display = "none";
         }
     }, 12);
+}
+
+nopay.addEventListener("click", function () {
+    closepaypage();
+});
+
+closepay.addEventListener("click", function () {
+    closepaypage();
 });
 
 openaikeyinput.addEventListener("mouseover", function () {
