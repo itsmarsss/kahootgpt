@@ -396,9 +396,11 @@ async function getAnswerWithAnswer(query, triangle, rhombus, circle, square) {
                 triangle_cont.style.border = "4px solid gold";
             }
 
-            chrome.tabs.sendMessage(kahootId, { type: "tap", value: ans }, function (response) {
-                console.log("Send tap");
-            });
+            if (autoReply) {
+                chrome.tabs.sendMessage(kahootId, { type: "tap", value: ans }, function (response) {
+                    console.log("Send tap");
+                });
+            }
         })
         .catch(error => {
             console.log("KahootGPT error: " + error);
@@ -471,9 +473,7 @@ function runQuery() {
                     circle.value = yellow;
                     square.value = green;
 
-                    if (autoReply) {
-                        queryGPT();
-                    }
+                    queryGPT();
                 }
             });
         }
@@ -481,7 +481,7 @@ function runQuery() {
 }
 
 document.getElementById("privacy").addEventListener("click", function () {
-    window.open(`chrome-extension://${chrome.runtime.id}/documents/PRIVACY.html`, "_blank");
+    window.open(`/documents/PRIVACY.html`, "_blank");
 });
 
 

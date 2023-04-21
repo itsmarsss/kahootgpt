@@ -83,7 +83,7 @@ chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
             break;
         case "error":
             console.log("Error sent");
-            alert("KahootGPT error: " + error);
+            alert("KahootGPT error: " + val);
             sendResponse({ value: toggled.toString(), success: true });
             break;
     }
