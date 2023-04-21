@@ -9,10 +9,28 @@ html::-webkit-scrollbar {
     width: 0;
 }
 
+body {
+    font-family: "Segoe UI", Tahoma, sans-serif;
+    font-size: 75%;
+}
+
+h1 {
+    font-size: 2em;
+    margin-block-start: 0.67em;
+    margin-block-end: 0.67em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    font-weight: bold;
+}
+
 h3 {
     margin-top: 5px;
     margin-bottom: 15px;
     text-align: center;
+}
+
+h4 {
+    font-size: 12px;
 }
 
 .pay {
@@ -128,6 +146,8 @@ h3 {
 }
 
 .nopay span {
+    font-family: "Segoe UI", Tahoma, sans-serif;
+    font-weight: bold;
     background: #05062d;
     padding: 4px 6px;
     border-radius: 6px;
@@ -656,6 +676,7 @@ h3 {
     font-weight: bold;
     padding: 10px;
     transition: 200ms;
+    scrollbar-width: none;
 }
 
 .answer::-webkit-scrollbar {
@@ -663,7 +684,7 @@ h3 {
 }
 
 .answer::placeholder {
-    color: whitesmoke;
+    color: #dbdbdb;
 }
 
 .answer:active {
