@@ -341,8 +341,8 @@ async function getAnswerOnly(query) {
             square.value = four;
         })
         .catch(error => {
-            console.log("KahootGPT error: " + error);
-            chrome.tabs.sendMessage(kahootId, { type: "error", value: error }, function (response) {
+            console.log("KahootGPT error: " + error.message.toString());
+            chrome.tabs.sendMessage(kahootId, { type: "error", value: error.message.toString() }, function (response) {
                 console.log("Error sent");
             });
         });
@@ -403,8 +403,8 @@ async function getAnswerWithAnswer(query, triangle, rhombus, circle, square) {
             }
         })
         .catch(error => {
-            console.log("KahootGPT error: " + error);
-            chrome.tabs.sendMessage(kahootId, { type: "error", value: error }, function (response) {
+            console.log("KahootGPT error: " + error.message.toString());
+            chrome.tabs.sendMessage(kahootId, { type: "error", value: error.message.toString() }, function (response) {
                 console.log("Error sent");
             });
         });
