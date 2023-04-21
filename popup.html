@@ -105,8 +105,21 @@
                 </label>
             </div>
 
-            <div class="import" id="import">
-                <h3 class="importtext">Auto Import Questions <span><i>(if available)</i></span>:
+            <div class="togglechoice highlight" id="highlight">
+                <h3 class="toggletext highlighttext">Auto Highlight Answer <span><i>(if possible)</i></span>:
+                    <span class="tooltiptext">
+                        KahootGPT will highlight the best answer on the Kahoot page.
+                    </span>
+                </h3>
+
+                <label class="chkbox">
+                    <input id="autohighlight" type="checkbox" checked>
+                    <div class="transition"></div>
+                </label>
+            </div>
+
+            <div class="togglechoice import" id="import">
+                <h3 class="toggletext importtext">Auto Import Questions <span><i>(if available)</i></span>:
                     <span class="tooltiptext">
                         KahootGPT will import questions if Kahoot host allows players to view the question and
                         choices
@@ -121,8 +134,8 @@
                 </label>
             </div>
 
-            <div class="reply" id="reply">
-                <h3 class="answertext">Auto Answer Upon Import <span><i>(if purchased)</i></span>:
+            <div class="togglechoice reply" id="reply">
+                <h3 class="toggletext answertext">Auto Answer Upon Import <span><i>(if purchased)</i></span>:
                     <span class="tooltiptext">
                         KahootGPT will immediately answer questions if user has purchased <u><b>Auto-Tap</b></u>
                     </span>

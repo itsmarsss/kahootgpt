@@ -311,28 +311,51 @@ h4 {
     margin-bottom: 5px;
 }
 
-.import {
-    margin-top: 20px;
-    margin-left: 20px;
-    float: left;
-}
-
-.import>h3 {
-    width: 100%;
-    text-align: left;
-    margin: 0;
-    margin-bottom: 5px;
-}
-
 .config>div>h3>span {
     font-size: 10px;
     margin: 0;
     color: #9d86c3;
 }
 
-.importtext {
+.togglechoice {
+    margin-top: 20px;
+    margin-left: 20px;
+    float: left;
+}
+
+.togglechoice>h3 {
+    width: 100%;
+    text-align: left;
+    margin: 0;
+    margin-bottom: 5px;
+}
+
+.togglechoice:hover .tooltiptext {
+    animation: fadein 500ms;
+    opacity: 1;
+}
+
+
+.togglechoice:hover .tooltiptext {
+    animation: fadein 500ms;
+    opacity: 1;
+}
+
+.toggletext {
     position: relative;
     display: inline-block;
+}
+
+.highlighttext .tooltiptext {
+    top: 175px;
+}
+
+.importtext .tooltiptext {
+    top: 255px;
+}
+
+.answertext .tooltiptext {
+    top: 335px;
 }
 
 .tooltiptext {
@@ -348,24 +371,6 @@ h4 {
     animation: fadeout 250ms;
     left: 75px;
     top: 25px;
-}
-
-.importtext .tooltiptext {
-    top: 175px;
-}
-
-.answertext .tooltiptext {
-    top: 255px;
-}
-
-.importtext:hover .tooltiptext {
-    animation: fadein 500ms;
-    opacity: 1;
-}
-
-.answertext:hover .tooltiptext {
-    animation: fadein 500ms;
-    opacity: 1;
 }
 
 @keyframes fadein {
@@ -388,21 +393,8 @@ h4 {
     }
 }
 
-.reply {
-    margin-top: 20px;
-    margin-left: 20px;
-    float: left;
-}
-
-.reply>h3 {
-    width: 100%;
-    text-align: left;
-    margin: 0;
-    margin-bottom: 5px;
-}
-
 .chkbox {
-    margin-top: 7px;
+    margin-top: 5px;
     display: block;
     cursor: pointer;
     width: 25px;
@@ -448,7 +440,7 @@ h4 {
     font-weight: bold;
     transition: 500ms;
     position: fixed;
-    top: 315px;
+    top: 400px;
     left: 20px;
 }
 

@@ -32,6 +32,7 @@ const clear = document.getElementById("clear");
 const exit = document.getElementById("close");
 const openaikeyinput = document.getElementById("openaikeyinput");
 const storekey = document.getElementById("storekey");
+const autohi = document.getElementById("autohighlight");
 const autoin = document.getElementById("autoimport");
 const autoanswer = document.getElementById("autoanswer");
 const save = document.getElementById("save");
@@ -80,6 +81,7 @@ settings.addEventListener("click", async function () {
         getAPIKey();
     }
 
+    getHighlight();
     getImport();
     getReply();
 
@@ -87,6 +89,7 @@ settings.addEventListener("click", async function () {
 
     openaikeyinput.value = openAIKey;
 
+    autohi.checked = autoHighlight;
     autoin.checked = autoImport;
     autoanswer.checked = autoReply;
 
@@ -155,6 +158,8 @@ save.addEventListener("click", async function () {
         openAIKey = openaikeyinput.value;
     }
 
+    console.log(autohi.checked)
+    setHighlight(autohi.checked);
     setImport(autoin.checked);
     setReply(autoanswer.checked);
 
@@ -178,6 +183,7 @@ var toggled = false;
 var kahootId;
 
 var openAIKey = "YOUR_KEY";
+var autoHighlight = false;
 var autoImport = false;
 var autoReply = false;
 
@@ -429,6 +435,18 @@ function getAPIKey() {
     });
 }
 
+function setHighlight(value) {
+    chrome.storage.local.set({ highlight: value }, function () {
+        console.log("Highlight setted");
+    });
+}
+
+function getHighlight() {
+    chrome.storage.local.get(["highlight"], function (result) {
+        console.log("Highlight queried");
+        autoHighlight = result.highlight;
+    });
+}
 
 function setImport(value) {
     chrome.storage.local.set({ import: value }, function () {
