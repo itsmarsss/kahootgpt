@@ -67,6 +67,28 @@ chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
             }
             sendResponse({ value: toggled.toString(), success: true });
             break;
+        case "highlight":
+            console.log("Ans:" + val);
+            switch (val) {
+                case "a":
+                    console.log("triangle");
+                    document.querySelectorAll('[data-functional-selector="answer-0"]')[0].style.border = "4px solid gold";
+                    break;
+                case "b":
+                    console.log("rhombus");
+                    document.querySelectorAll('[data-functional-selector="answer-1"]')[0].style.border = "4px solid gold";
+                    break;
+                case "c":
+                    console.log("circle");
+                    document.querySelectorAll('[data-functional-selector="answer-2"]')[0].style.border = "4px solid gold";
+                    break;
+                case "d":
+                    console.log("square");
+                    document.querySelectorAll('[data-functional-selector="answer-3"]')[0].style.border = "4px solid gold";
+                    break;
+            }
+            sendResponse({ value: toggled.toString(), success: true });
+            break;
         case "query":
             console.log("Queried");
 

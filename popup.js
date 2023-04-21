@@ -158,7 +158,6 @@ save.addEventListener("click", async function () {
         openAIKey = openaikeyinput.value;
     }
 
-    console.log(autohi.checked)
     setHighlight(autohi.checked);
     setImport(autoin.checked);
     setReply(autoanswer.checked);
@@ -405,6 +404,12 @@ async function getAnswerWithAnswer(query, triangle, rhombus, circle, square) {
             if (autoReply) {
                 chrome.tabs.sendMessage(kahootId, { type: "tap", value: ans }, function (response) {
                     console.log("Send tap");
+                });
+            }
+
+            if (autoHighlight) {
+                chrome.tabs.sendMessage(kahootId, { type: "highlight", value: ans }, function (response) {
+                    console.log("Send highlight");
                 });
             }
         })
