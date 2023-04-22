@@ -446,6 +446,7 @@ function getAPIKey() {
 function setHighlight(value) {
     chrome.storage.local.set({ highlight: value }, function () {
         console.log("Highlight setted");
+        autoHighlight = value;
     });
 }
 
@@ -459,6 +460,7 @@ function getHighlight() {
 function setImport(value) {
     chrome.storage.local.set({ import: value }, function () {
         console.log("Import setted");
+        autoImport = value;
     });
 }
 
@@ -472,6 +474,7 @@ function getImport() {
 function setReply(value) {
     chrome.storage.local.set({ reply: value }, function () {
         console.log("Reply setted");
+        autoReply = value;
     });
 }
 
@@ -484,8 +487,8 @@ function getReply() {
 
 function runQuery() {
     var checkForNewQuestion = setInterval(function () {
-        if (autoImport) {
-            chrome.tabs.sendMessage(kahootId, { type: "query" }, function (response) {
+        chrome.tabs.sendMessage(kahootId, { type: "query" }, function (response) {
+            if (autoImport) {
                 if (response.success) {
                     var ques = response.q || "";
                     var red = response.r || "";
@@ -501,8 +504,8 @@ function runQuery() {
 
                     queryGPT();
                 }
-            });
-        }
+            }
+        });
     }, 25);
 }
 
