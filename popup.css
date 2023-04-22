@@ -690,7 +690,7 @@ h4 {
     font-family: monospace, Geneva, Tahoma, sans-serif;
     cursor: pointer;
     font-size: medium;
-    background: #5b29a7;
+    background: #381272;
     color: white;
     border-radius: 7px;
     border: none;
@@ -706,7 +706,7 @@ h4 {
 }
 
 .clear:active {
-    background: #3c1675;
+    background: #321066;
 }
 
 .footer {
