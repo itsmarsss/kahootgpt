@@ -6,7 +6,11 @@ yellow/circle: sc-xyEjG DFakQ sc-eUWgFQ ktBGGk
 green/square: sc-xyEjG cmcjVO sc-eUWgFQ ktBGGk
 */
 
-let toggled = false;
+var toggled = false;
+var disalerted = false;
+var init = false;
+var querycount = 0;
+var querycounttemp = 0;
 
 let ques = "";
 let red = "";
@@ -23,18 +27,23 @@ chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
         case "initialize":
             console.log("Connected to popup script");
             sendResponse({ value: "initialized", success: true });
-            createAlert("<strong>KahootGPT Initialized!</strong> ContentScript initialized connection to PopupScript", "#2eb886");
+            createAlert("<strong>KahootGPT Initialized!</strong> ContentScript initialized connection to PopupScript.", "#2eb886");
+            querycounttemp = querycount;
             break;
         case "autotap":
             console.log("Auto-tap-" + val.toString());
             sendResponse({ value: "autotap-" + val.toString(), success: true });
             toggled = val.toString() === 'true';
-            createAlert("<strong>KahootGPT Info!</strong> Auto-tap set to <i>" + toggled.toString() + "</i>", "#46a8f5");
+            if (init) {
+                createAlert("<strong>KahootGPT Info!</strong> Auto-tap set to <i>" + toggled.toString() + "</i>", "#46a8f5");
+            }
+            init = true;
             break;
         case "ping":
             console.log("Got pinged");
             sendResponse({ value: toggled.toString(), success: true });
-            createAlert("<strong>KahootGPT Connected!</strong> ContentScript connected to PopupScript", "#2eb886");
+            createAlert("<strong>KahootGPT Connected!</strong> ContentScript connected to PopupScript.", "#2eb886");
+            querycounttemp = querycount;
             break;
         case "tap":
             console.log("Ans:" + val);
@@ -69,7 +78,7 @@ chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
                     break;
             }
             sendResponse({ value: toggled.toString(), success: true });
-            createAlert("<strong>KahootGPT Info!</strong> Clicked best answer according to OpenAI", "#46a8f5");
+            createAlert("<strong>KahootGPT Info!</strong> Clicked best answer according to OpenAI.", "#46a8f5");
             break;
         case "highlight":
             console.log("Ans:" + val);
@@ -107,12 +116,13 @@ chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
                     sendResponse({ success: false });
                 }
             }
+            querycount++;
             break;
         case "error":
             console.log("Error sent: " + val.toString());
             //alert("KahootGPT error: " + val.toString());
             sendResponse({ value: toggled.toString(), success: true });
-            createAlert("<strong>KahootGPT Error!</strong> " + val.toString(), "#2eb886");
+            createAlert("<strong>KahootGPT Error!</strong> " + val.toString() + ".", "#2eb886");
             break;
     }
 });
@@ -141,6 +151,8 @@ kgpt-alert-${id} {
   background-color: ${color};
   color: white;
   transition: 300ms;
+  border: solid 1px #fff;
+  box-shadow: #959da52e 0px 8px 24px;
 }
 
 @keyframes fadeinout {
@@ -166,6 +178,16 @@ kgpt-alert-${id} {
 }
 
 var checkForNewQuestion = setInterval(function () {
+    if (querycounttemp > querycount + 10) {
+        if (!disalerted) {
+            createAlert("<strong>KahootGPT Warn!</strong> Popup terminated connection.", "#ffa92b");
+        }
+        disalerted = true;
+    } else {
+        querycounttemp++;
+        disalerted = false;
+    }
+
     var question = "";
 
     try {

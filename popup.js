@@ -38,6 +38,7 @@ const autoanswer = document.getElementById("autoanswer");
 const save = document.getElementById("save");
 
 const extpay_life = ExtPay('kahoot-gpt');
+const extpay_month = ExtPay('kahoot-gpt-month');
 
 autoanswer.addEventListener("click", function () {
     extpay_life.getUser().then(user_life => {
@@ -269,7 +270,7 @@ async function callKahootGPT(tab) {
         getImport();
         getReply();
 
-        await sleep(4000)
+        await sleep(4000);
 
         kahootId = id;
 
@@ -278,6 +279,8 @@ async function callKahootGPT(tab) {
                 console.log("Connected to injected script");
             }
         });
+
+        await sleep(100);
 
         checkbox.click();
 
