@@ -23,15 +23,18 @@ chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
         case "initialize":
             console.log("Connected to popup script");
             sendResponse({ value: "initialized", success: true });
+            createAlert("<strong>KahootGPT Initialized!</strong> ContentScript initialized connection to PopupScript", "#2eb886");
             break;
         case "autotap":
             console.log("Auto-tap-" + val.toString());
             sendResponse({ value: "autotap-" + val.toString(), success: true });
             toggled = val.toString() === 'true';
+            createAlert("<strong>KahootGPT Info!</strong> Auto-tap set to <i>" + toggled.toString() + "</i>", "#46a8f5");
             break;
         case "ping":
             console.log("Got pinged");
             sendResponse({ value: toggled.toString(), success: true });
+            createAlert("<strong>KahootGPT Connected!</strong> ContentScript connected to PopupScript", "#2eb886");
             break;
         case "tap":
             console.log("Ans:" + val);
@@ -66,6 +69,7 @@ chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
                     break;
             }
             sendResponse({ value: toggled.toString(), success: true });
+            createAlert("<strong>KahootGPT Info!</strong> Clicked best answer according to OpenAI", "#46a8f5");
             break;
         case "highlight":
             console.log("Ans:" + val);
@@ -88,6 +92,7 @@ chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
                     break;
             }
             sendResponse({ value: toggled.toString(), success: true });
+            createAlert("<strong>KahootGPT Warn!</strong> Highlighted best answer according to OpenAI: Buy Auto-tap in popup!", "#ffa92b");
             break;
         case "query":
             console.log("Queried");
@@ -105,18 +110,62 @@ chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
             break;
         case "error":
             console.log("Error sent: " + val.toString());
-            alert("KahootGPT error: " + val.toString());
+            //alert("KahootGPT error: " + val.toString());
             sendResponse({ value: toggled.toString(), success: true });
+            createAlert("<strong>KahootGPT Error!</strong> " + val.toString(), "#2eb886");
             break;
     }
 });
 
+async function createAlert(text, color) {
+    var id = Date.now().toString();
+    var alert = document.createElement('kgpt-alert-' + id);
+
+    alert.innerHTML = `
+<div id="alert-${id}">
+    ${text}
+</div>
+<style>
+kgpt-alert-${id} {
+  position: absolute;
+  left: 10px;
+  bottom: 10px;
+  z-index: 100;
+  animation: fadeinout 3s;
+  opacity: 0;
+}
+
+#alert-${id} {
+  border-radius: 15px;
+  padding: 10px 20px;
+  background-color: ${color};
+  color: white;
+  transition: 300ms;
+}
+
+@keyframes fadeinout {
+    0% {
+        opacity: 0;
+    }
+    10% {
+        opacity: 1;
+    }
+    90% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+    }
+}
+</style>
+`
+    document.body.appendChild(alert);
+    await sleep(3000);
+
+    document.body.removeChild(alert);
+}
 
 var checkForNewQuestion = setInterval(function () {
-
-}, 100);
-
-var fadeEffect = setInterval(function () {
     var question = "";
 
     try {
@@ -157,3 +206,7 @@ var fadeEffect = setInterval(function () {
     console.log(green);
     sent = false;
 }, 25);
+
+const sleep = (milliseconds) => {
+    return new Promise(resolve => setTimeout(resolve, milliseconds))
+}
