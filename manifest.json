@@ -1,11 +1,11 @@
 {
   "browser_specific_settings": {
     "gecko": {
-      "id": "aaitsmarzzzzzz@protonmail.com"
+      "id": "itsmarzzzzzz@protonmail.com"
     }
   },
-  "name": "KahootGPT Test",
-  "version": "2.0.0",
+  "name": "KahootGPT | Kahoot + ChatGPT",
+  "version": "2.1.0",
   "manifest_version": 3,
   "description": "Kahoot & ChatGPT: Dominate in a Kahoot game",
   "author": "Marsss' Dev Team",
