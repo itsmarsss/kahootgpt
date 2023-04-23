@@ -554,6 +554,10 @@ extpay_life.getUser().then(user_life => {
     document.querySelector('p').innerHTML = "Error fetching data :("
 });
 
+const manifest = chrome.runtime.getManifest();
+console.log("Version: v" + manifest.version);
+document.getElementById("KahootGPT").innerHTML = `KahootGPT v${manifest.version}`;
+
 getCurrentTab().then((tab) => {
     const { id, url } = tab;
     chrome.tabs.sendMessage(id, { type: "ping" }, function (response) {

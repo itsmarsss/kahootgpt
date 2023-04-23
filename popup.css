@@ -224,12 +224,10 @@ h4 {
 .config {
     position: absolute;
     display: none;
-    left: 0;
-    top: 0;
-    width: 302px;
-    height: 550px;
     left: 5px;
-    top: 5px;
+    top: 35px;
+    width: 302px;
+    height: 515px;
     z-index: 2;
     background: #0000007e;
     backdrop-filter: blur(5px);
@@ -467,7 +465,7 @@ h4 {
     cursor: pointer;
     color: #b7b7b7;
     text-decoration: none;
-    z-index: 1;
+    z-index: 2;
 }
 
 .subtitle {
