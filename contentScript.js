@@ -7,8 +7,9 @@ green/square: sc-xyEjG cmcjVO sc-eUWgFQ ktBGGk
 */
 
 var toggled = false;
-var disalerted = false;
+var done = false;
 var init = false;
+var disalerted = false;
 var querycount = 0;
 var querycounttemp = 0;
 
@@ -172,6 +173,7 @@ kgpt-alert-${id} {
 </style>
 `
     document.body.appendChild(alert);
+
     await sleep(3000);
 
     document.body.removeChild(alert);
@@ -180,7 +182,10 @@ kgpt-alert-${id} {
 var checkForNewQuestion = setInterval(function () {
     if (querycounttemp > querycount + 10) {
         if (!disalerted) {
-            createAlert("<strong>KahootGPT Warn!</strong> Popup terminated connection.", "#ffa92b");
+            if (done) {
+                createAlert("<strong>KahootGPT Warn!</strong> Popup terminated connection.", "#ffa92b");
+            }
+            done = true;
         }
         disalerted = true;
     } else {
