@@ -407,7 +407,6 @@ kgptmini.innerHTML =
             border: solid 2px white;
             border-radius: 20px;
             padding: 5px;
-            cursor: move;
             background: #1e1e1e;
             width: 300px;
             margin: none;
@@ -417,6 +416,7 @@ kgptmini.innerHTML =
         }
 
         .title {
+            cursor: move;
             font-weight: bold;
             font-size: large;
             margin-bottom: 10px;
@@ -633,11 +633,9 @@ kgptmini.innerHTML =
     </style>
 
     <meta charset="UTF-8">
-
     <div class="container" id="container">
         <div>
-            <div class="title"><a id="KahootGPT" target="_blank" title="KahootGPT"
-                    href="https://github.com/itsmarsss/KahootGPT">KahootGPT Mini In-Site Version</a>
+            <div class="title" id="containerheader"><a id="KahootGPT" "title=" KahootGPT">(Drag me)</a>
             </div>
 
             <div class="kahootinfo">
@@ -991,7 +989,7 @@ async function autotapsetup() {
 
 const manifest = chrome.runtime.getManifest();
 console.log("Version: v" + manifest.version);
-document.getElementById("KahootGPT").innerHTML = "KahootGPT v" + manifest.version;
+document.getElementById("KahootGPT").innerHTML = "KahootGPT v" + manifest.version + " (drag me)";
 
 autotapsetup();
 runQuery();
