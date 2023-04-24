@@ -1,5 +1,5 @@
 <kahoot-gpt-in-site>
-    <style id="popupcss">
+    <style id="insitecss">
         html {
             background: #1e1e1e;
             font-family: Verdana, Geneva, Tahoma, sans-serif;
@@ -107,26 +107,8 @@
             color: #b7b7b7;
             text-decoration: none;
             z-index: 2;
+            font-size: 15px;
         }
-
-        .subtitle {
-            color: #E8E8E8;
-        }
-
-        .subtitle>a {
-            color: #9d86c3;
-            text-decoration: none;
-            transition: 100ms;
-        }
-
-        .subtitle>a:hover {
-            text-decoration: underline;
-        }
-
-        .subtitle>a:active {
-            color: #8871ad;
-        }
-
 
         .container {
             width: 300px;
@@ -142,9 +124,14 @@
             margin-bottom: 10px;
         }
 
+        .main {
+            display: block;
+        }
+
         .autoclick {
             float: left;
             margin-right: 20px;
+            margin-top: 5px;
         }
 
         .toggle {
@@ -191,11 +178,13 @@
         }
 
         .question-cont {
-            border-radius: 20px;
-            width: 250px;
+            float: left;
+            border-top-left-radius: 20px;
+            border-bottom-left-radius: 20px;
+            width: 200px;
             height: 35px;
             background-color: white;
-            margin: auto;
+            margin: 0;
             box-shadow: 0 2px 10px -2px #fff;
             transition: 500ms;
             margin-bottom: 15px;
@@ -214,6 +203,7 @@
             width: 75%;
             height: 100%;
             background: transparent;
+            font-size: 12px;
         }
 
         .question::-webkit-scrollbar {
@@ -233,6 +223,7 @@
 
         .options {
             margin-top: 10px;
+            width: 102px;
             display: grid;
             grid-template-columns: 100px 100px;
             grid-template-rows: 50px 50;
@@ -272,7 +263,7 @@
 
         .answer {
             width: 100%;
-            height: 100%;
+            height: 51px;
             background-color: transparent;
             outline: none;
             border: none;
@@ -282,6 +273,7 @@
             padding: 10px;
             transition: 200ms;
             scrollbar-width: none;
+            font-size: 9px;
         }
 
         .answer::-webkit-scrollbar {
@@ -297,18 +289,21 @@
         }
 
         .clear {
+            float: right;
             font-family: monospace, Geneva, Tahoma, sans-serif;
             cursor: pointer;
             font-size: medium;
             background: #381272;
             color: white;
-            border-radius: 7px;
+            border-top-right-radius: 20px;
+            border-bottom-right-radius: 20px;
             border: none;
             outline: none;
-            width: 100px;
-            margin: 15px;
-            box-shadow: 0 4px 10px -2px #5b29a7;
+            height: 35px;
+            width: 94px;
+            box-shadow: 0 2px 10px -2px #5b29a7;
             transition: 150ms;
+            font-size: 12px;
         }
 
         .clear:hover {
@@ -331,6 +326,7 @@
             text-decoration: none;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             color: #fff;
+            padding-right: 4px;
             transition: 200ms;
         }
 
@@ -353,7 +349,7 @@
     <div class=" container">
         <div>
             <div class="title"><a id="KahootGPT" target="_blank" title="KahootGPT"
-                    href="https://github.com/itsmarsss/KahootGPT">KahootGPT-v0.0.0</a>
+                    href="https://github.com/itsmarsss/KahootGPT">KahootGPT Mini In-Site Version</a>
             </div>
 
             <div class="kahootinfo">
@@ -370,13 +366,14 @@
                             </path>
                         </svg>
                     </search>
-                    <button class="clear" id="clear" title="Clear">CLEAR ALL</button>
                 </div>
-                <div class="autoclick">
-                    <div class="toggle" id="toggle">
-                        <button class="checkbox" id="checkbox" title="Toggle Auto-tap">
-                            <svg class="power-icon" id="power-icon">
-                                <path d="M 16.8886 5.1769 c -0.7324 -1.1361 -1.7323 -2.1051 -2.8909 -2.8023 c -0.2167 -0.1304
+                <button class="clear" id="clear" title="Clear">CLEAR ALL</button>
+                <div class="main">
+                    <div class="autoclick">
+                        <div class="toggle" id="toggle">
+                            <button class="checkbox" id="checkbox" title="Toggle Auto-tap">
+                                <svg class="power-icon" id="power-icon">
+                                    <path d="M 16.8886 5.1769 c -0.7324 -1.1361 -1.7323 -2.1051 -2.8909 -2.8023 c -0.2167 -0.1304
                                             -0.4868 -0.1341 -0.7071 -0.0096 c -0.2201 0.1245 -0.3564 0.3579 -0.3564 0.6108 v 1.4516 c 0
                                             0.2189 0.1023 0.4254 0.2765 0.5581 c 1.5547 1.1843 2.4827 3.051 2.4827 4.9933 c 0 3.4558
                                             -2.8115 6.2673 -6.2673 6.2673 c -3.4558 0 -6.2673 -2.8115 -6.2673 -6.2673 c 0 -1.9424 0.9281
@@ -388,29 +385,30 @@
                                             16.8886 5.1769 z M 8.6065 10.7767 h 1.6395 c 0.3629 0 0.658 -0.2953 0.658 -0.6581 V 0.6581 c
                                             0 -0.3629 -0.2951 -0.6581 -0.658 -0.6581 h -1.6395 c -0.3629 0 -0.6581 0.2952 -0.6581 0.6581
                                             v 9.4606 C 7.9484 10.4815 8.2437 10.7767 8.6065 10.7767 z">
-                                </path>
-                            </svg>
-                        </button>
-                    </div>
+                                    </path>
+                                </svg>
+                            </button>
+                        </div>
 
-                    <h3 id="autoclick-status">Auto-tap is OFF</h3>
-                </div>
-                <div class="options">
-                    <div class="option triangle">
-                        <textarea class="answer" id="answer-triangle" type="text" placeholder="Type answer here..."
-                            title="Answer"></textarea>
+                        <h3 id="autoclick-status">Auto-tap is OFF</h3>
                     </div>
-                    <div class="option rhombus">
-                        <textarea class="answer" id="answer-rhombus" type="text" placeholder="Type answer here..."
-                            title="Answer"></textarea>
-                    </div>
-                    <div class="option circle">
-                        <textarea put class="answer" id="answer-circle" type="text" placeholder="Type answer here..."
-                            title="Answer"></textarea>
-                    </div>
-                    <div class="option square">
-                        <textarea class="answer" id="answer-square" type="text" placeholder="Type answer here..."
-                            title="Answer"></textarea>
+                    <div class="options">
+                        <div class="option triangle">
+                            <textarea class="answer" id="answer-triangle" type="text" placeholder="Type answer here..."
+                                title="Answer"></textarea>
+                        </div>
+                        <div class="option rhombus">
+                            <textarea class="answer" id="answer-rhombus" type="text" placeholder="Type answer here..."
+                                title="Answer"></textarea>
+                        </div>
+                        <div class="option circle">
+                            <textarea put class="answer" id="answer-circle" type="text"
+                                placeholder="Type answer here..." title="Answer"></textarea>
+                        </div>
+                        <div class="option square">
+                            <textarea class="answer" id="answer-square" type="text" placeholder="Type answer here..."
+                                title="Answer"></textarea>
+                        </div>
                     </div>
                 </div>
             </div>
