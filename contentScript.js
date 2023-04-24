@@ -7,7 +7,7 @@ green/square: sc-xyEjG cmcjVO sc-eUWgFQ ktBGGk
 */
 
 var kgptmini = false;
-var paid = true;
+var paid = false;
 var toggled = false;
 var done = false;
 var init = false;
@@ -28,6 +28,8 @@ chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
 
     switch (type) {
         case "initialize":
+            console.log("Auto-tap-paid-" + paid.toString());
+            paid = val.toString() === 'true';
             initialize();
             sendResponse({ value: "initialized", success: true });
             break;
@@ -39,6 +41,23 @@ chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
                 createAlert("<strong>KahootGPT Info!</strong> Auto-tap set to <i>" + toggled.toString() + "</i>", "#46a8f5");
             }
             init = true;
+            if (toggled) {
+                checkbox.addEventListener("click", function () {
+                    toggleAutoTap();
+
+                    console.log("Auto-tap: Toggled");
+                });
+            } else {
+                checkbox.addEventListener("click", function () {
+                    checkbox.style.boxShadow = "none";
+                    toggle.style.background = "#ff9494";
+                    powericon.style.fill = "#ff9494";
+                    tapstatus.innerHTML = "Auto-tap ERROR";
+                    tapstatus.style.color = "#ff9494";
+
+                    console.log("Auto-tap: Not paid");
+                });
+            }
             break;
         case "ping":
             ping();
@@ -411,7 +430,7 @@ kgptmini.innerHTML =
             float: left;
             margin-right: 15px;
             margin-left: 5px;
-            margin-top: 5px;
+            margin-top: 10px;
         }
 
         .toggle {
@@ -603,18 +622,6 @@ kgptmini.innerHTML =
             align-items: center;
             justify-content: center;
         }
-
-        .feeter>a {
-            text-decoration: none;
-            color: #fff;
-            padding-right: 4px;
-            transition: 200ms;
-        }
-
-        .feeter>a:hover {
-            text-decoration: underline;
-            transform: scaleX(1.15);
-        }
     </style>
     <style id="insitecss">
         kahoot-gpt-in-site {
@@ -693,9 +700,7 @@ kgptmini.innerHTML =
                     </div>
                 </div>
             </div>
-            <div class="feeter" id="feeter">
-                <a style="cursor: pointer;" id="privacy" target="_blank" title="Privacy Policy">
-                    Privacy</a> | Edit settings in PopUp
+            <div class="feeter" id="feeter">Edit settings in PopUp
             </div>
         </div>
     </div>
@@ -754,6 +759,7 @@ function toggleAutoTap() {
     minitoggled = !minitoggled;
     toggled = minitoggled;
     console.log("Toggled: " + minitoggled);
+    createAlert("<strong>KahootGPT Info!</strong> Auto-tap set to <i>" + toggled.toString() + "</i>", "#46a8f5");
 }
 
 question.addEventListener('keypress', function (e) {
@@ -917,21 +923,18 @@ async function getAnswerWithAnswer(query, triangle, rhombus, circle, square) {
 
 function getAPIKey() {
     chrome.storage.local.get(["key"], function (result) {
-        console.log("Key queried");
         openAIKey = result.key;
     });
 }
 
 function getHighlight() {
     chrome.storage.local.get(["highlight"], function (result) {
-        console.log("Highlight queried");
         autoHighlight = result.highlight;
     });
 }
 
 function getImport() {
     chrome.storage.local.get(["import"], function (result) {
-        console.log("Import queried");
         autoImport = result.import;
     });
 }
@@ -963,28 +966,32 @@ function runQuery() {
     }, 25);
 }
 
-if (paid) {
-    checkbox.addEventListener("click", function () {
-        toggleAutoTap();
+async function autotapsetup() {
+    await sleep(3000);
 
-        console.log("Auto-tap: Toggled");
-    });
-} else {
-    checkbox.addEventListener("click", function () {
-        checkbox.style.boxShadow = "none";
-        toggle.style.background = "#ff9494";
-        powericon.style.fill = "#ff9494";
-        tapstatus.innerHTML = "Auto-tap ERROR";
-        tapstatus.style.color = "#ff9494";
+    if (paid) {
+        checkbox.addEventListener("click", function () {
+            toggleAutoTap();
 
-        console.log("Auto-tap: Not paid");
-    });
+            console.log("Auto-tap: Toggled");
+        });
+    } else {
+        checkbox.addEventListener("click", function () {
+            checkbox.style.boxShadow = "none";
+            toggle.style.background = "#ff9494";
+            powericon.style.fill = "#ff9494";
+            tapstatus.innerHTML = "Auto-tap ERROR";
+            tapstatus.style.color = "#ff9494";
+
+            console.log("Auto-tap: Not paid");
+        });
+    }
+    checkbox.click();
 }
 
 const manifest = chrome.runtime.getManifest();
 console.log("Version: v" + manifest.version);
 document.getElementById("KahootGPT").innerHTML = "KahootGPT v" + manifest.version;
 
-checkbox.click();
-
+autotapsetup();
 runQuery();

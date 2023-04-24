@@ -37,7 +37,6 @@ const autoin = document.getElementById("autoimport");
 const save = document.getElementById("save");
 
 const extpay_life = ExtPay('kahoot-gpt');
-const extpay_month = ExtPay('kahoot-gpt-month');
 
 socials.addEventListener("mouseover", function () {
     footer.style.background = "#9d86c3";
@@ -149,6 +148,7 @@ var toggled = false;
 
 var kahootId;
 
+var paid = false;
 var openAIKey = "YOUR_KEY";
 var autoHighlight = false;
 var autoImport = false;
@@ -239,7 +239,7 @@ async function callKahootGPT(tab) {
 
         kahootId = id;
 
-        chrome.tabs.sendMessage(id, { type: "initialize" }, function (response) {
+        chrome.tabs.sendMessage(id, { type: "initialize", value: paid.toString }, function (response) {
             if (response.data === "initialized") {
                 console.log("Connected to injected script");
             }
@@ -468,6 +468,7 @@ document.getElementsByClassName('life')[0].addEventListener('click', extpay_life
 
 extpay_life.getUser().then(user_life => {
     if (user_life.paid) {
+        paid = true;
         document.querySelector('p').innerHTML = 'User has paid! 🎉';
 
         checkbox.addEventListener("click", function () {
