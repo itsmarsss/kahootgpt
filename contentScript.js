@@ -237,17 +237,3 @@ var checkForNewQuestion = setInterval(function () {
 const sleep = (milliseconds) => {
     return new Promise(resolve => setTimeout(resolve, milliseconds))
 }
-
-
-// var kahootgpt = document.createElement("kahootgpt-stuff");
-
-// kahootgpt.outerHTML = "/popup.html";
-// kahootgpt.outerHTML += `
-// <style>
-// kahoot-gpt-in-site {
-//     position: fixed;
-//     z-index: 100;
-// }
-// </style>`
-
-// document.body.appendChild(kahootgpt);
