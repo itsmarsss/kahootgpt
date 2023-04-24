@@ -413,6 +413,17 @@ kgptmini.innerHTML =
             padding: none;
             display: none;
             justify-content: center;
+            animation: fadein 500ms;
+        }
+
+        @keyframes fadein {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
         }
 
         .title {
