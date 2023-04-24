@@ -14,59 +14,13 @@ const tapstatus = document.getElementById("autoclick-status");
 const footer = document.getElementById("footer");
 const socials = document.getElementById("socials");
 
-const question = document.getElementById("question");
-const search = document.getElementById("search-icon");
-
-const triangle = document.getElementById("answer-triangle");
-const rhombus = document.getElementById("answer-rhombus");
-const circle = document.getElementById("answer-circle");
-const square = document.getElementById("answer-square");
-
-const triangle_cont = document.getElementsByClassName("triangle")[0];
-const rhombus_cont = document.getElementsByClassName("rhombus")[0];
-const circle_cont = document.getElementsByClassName("circle")[0];
-const square_cont = document.getElementsByClassName("square")[0];
-
-const clear = document.getElementById("clear");
-
-const exit = document.getElementById("close");
 const openaikeyinput = document.getElementById("openaikeyinput");
 const storekey = document.getElementById("storekey");
 const autohi = document.getElementById("autohighlight");
 const autoin = document.getElementById("autoimport");
-const autoanswer = document.getElementById("autoanswer");
 const save = document.getElementById("save");
 
 const extpay_life = ExtPay('kahoot-gpt');
-
-autoanswer.addEventListener("click", function () {
-    extpay_life.getUser().then(user_life => {
-        if (user_life.paid) {
-            console.log("Auto-tap: Paid");
-        } else {
-            autoanswer.checked = false;
-            purchase.style.display = "block";
-            checkbox.style.boxShadow = "none";
-            toggle.style.background = "#ff9494";
-            powericon.style.fill = "#ff9494";
-            tapstatus.innerHTML = "Auto-tap ERROR";
-            tapstatus.style.color = "#ff9494";
-
-            var opacity = 0;
-            purchase.style.opacity = opacity;
-            var fadeEffect = setInterval(function () {
-                if (purchase.style.opacity < 1) {
-                    opacity += 0.1;
-                    purchase.style.opacity = opacity;
-                } else {
-                    clearInterval(fadeEffect);
-                }
-            }, 12);
-
-            console.log("Auto-tap: Not paid");
-        }
-    });
-});
 
 socials.addEventListener("mouseover", function () {
     footer.style.background = "#9d86c3";
@@ -83,7 +37,6 @@ settings.addEventListener("click", async function () {
 
     getHighlight();
     getImport();
-    getReply();
 
     await sleep(500);
 
@@ -91,7 +44,6 @@ settings.addEventListener("click", async function () {
 
     autohi.checked = autoHighlight;
     autoin.checked = autoImport;
-    autoanswer.checked = autoReply;
 
     config.style.display = "block";
 
@@ -103,20 +55,6 @@ settings.addEventListener("click", async function () {
             config.style.opacity = opacity;
         } else {
             clearInterval(fadeEffect);
-        }
-    }, 12);
-});
-
-exit.addEventListener("click", function () {
-    var fadeEffect = setInterval(function () {
-        if (!config.style.opacity) {
-            config.style.opacity = 1;
-        }
-        if (config.style.opacity > 0) {
-            config.style.opacity -= 0.1;
-        } else {
-            clearInterval(fadeEffect);
-            config.style.display = "none";
         }
     }, 12);
 });
@@ -160,7 +98,6 @@ save.addEventListener("click", async function () {
 
     setHighlight(autohi.checked);
     setImport(autoin.checked);
-    setReply(autoanswer.checked);
 
     await sleep(500);
 
@@ -181,10 +118,10 @@ var toggled = false;
 
 var kahootId;
 
+var paid = false;
 var openAIKey = "YOUR_KEY";
 var autoHighlight = false;
 var autoImport = false;
-var autoReply = false;
 
 function toggleAutoTap() {
     if (toggled) {
@@ -204,58 +141,6 @@ function toggleAutoTap() {
     console.log("Toggled: " + toggled);
 }
 
-question.addEventListener('keypress', function (e) {
-    if (e.key === 'Enter') {
-        queryGPT();
-    }
-});
-
-search.addEventListener("click", function () {
-    queryGPT();
-});
-
-function queryGPT() {
-    if (question.value === "") {
-        return;
-    }
-
-    triangle_cont.style.border = "none";
-    rhombus_cont.style.border = "none";
-    circle_cont.style.border = "none";
-    square_cont.style.border = "none";
-
-    if (triangle.value === "" &&
-        rhombus.value === "" &&
-        circle.value === "" &&
-        square.value === "") {
-        getAnswerOnly(question.value);
-    } else {
-        getAnswerWithAnswer(
-            question.value,
-            triangle.value || "n/a",
-            rhombus.value || "n/a",
-            circle.value || "n/a",
-            square.value || "n/a"
-        );
-    }
-}
-
-clear.addEventListener("click", function () {
-    clearAll();
-});
-function clearAll() {
-    triangle_cont.style.border = "none";
-    rhombus_cont.style.border = "none";
-    circle_cont.style.border = "none";
-    square_cont.style.border = "none";
-
-    question.value = "";
-    triangle.value = "";
-    rhombus.value = "";
-    circle.value = "";
-    square.value = "";
-}
-
 async function callKahootGPT(tab) {
     const { id, url } = tab;
     if (url.indexOf("https://kahoot.it/") > -1) {
@@ -267,21 +152,20 @@ async function callKahootGPT(tab) {
         console.log(`Loading: ${url}`);
 
         getImport();
-        getReply();
 
-        await sleep(4000)
+        await sleep(4000);
 
         kahootId = id;
 
-        chrome.tabs.sendMessage(id, { type: "initialize" }, function (response) {
+        chrome.tabs.sendMessage(id, { type: "initialize", value: paid.toString }, function (response) {
             if (response.data === "initialized") {
                 console.log("Connected to injected script");
             }
         });
 
-        checkbox.click();
+        await sleep(100);
 
-        runQuery();
+        checkbox.click();
 
         var fadeEffect = setInterval(function () {
             if (!injection.style.opacity) {
@@ -305,127 +189,9 @@ async function getCurrentTab() {
     return tab;
 }
 
-
-async function getAnswerOnly(query) {
-    console.log("Calling GPT3")
-    var url = "https://api.openai.com/v1/completions";
-    var bearer = 'Bearer ' + openAIKey;
-    fetch(url, {
-        method: 'POST',
-        headers: {
-            'Authorization': bearer,
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-            "model": "text-davinci-003",
-            "prompt": `Act as a professional; only respond with 4 concise answers (if there is a definite answer, only reply with one) in json format with "one", "two", "three", "four" or "one" as the key if only one answer to the following question: ` + query + "\n",
-            "temperature": 0.7,
-            "max_tokens": 256,
-            "top_p": 1,
-            "frequency_penalty": 0,
-            "presence_penalty": 0
-        })
-    }).then(response => response.json())
-        .then(data => {
-            console.log(data.choices[0].text);
-
-            var lines = (data.choices[0].text).split('\n');
-            lines.splice(0, 2);
-            var replyLines = lines.join('\n');
-
-            var GPTReply = JSON.parse(replyLines);
-
-            var one = GPTReply.one || GPTReply.answer || "";
-            var two = GPTReply.two || "";
-            var three = GPTReply.three || "";
-            var four = GPTReply.four || "";
-
-            triangle.value = one;
-            rhombus.value = two;
-            circle.value = three;
-            square.value = four;
-        })
-        .catch(error => {
-            console.log("KahootGPT error: " + error.message.toString());
-            chrome.tabs.sendMessage(kahootId, { type: "error", value: error.message.toString() }, function (response) {
-                console.log("Error sent");
-            });
-        });
-}
-
-async function getAnswerWithAnswer(query, triangle, rhombus, circle, square) {
-    console.log(rhombus)
-    console.log("Calling GPT3")
-    var url = "https://api.openai.com/v1/completions";
-    var bearer = 'Bearer ' + openAIKey;
-    fetch(url, {
-        method: 'POST',
-        headers: {
-            'Authorization': bearer,
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-            "model": "text-davinci-003",
-            "prompt": `Act as a professional;  the question will be after "question:" and there are 4 possible answers "a", "b", "c", or "d", reply with a SINGLE letter ONLY:\nquestion: ` + query + "\n" + "a: " + triangle + "\n" + "b: " + rhombus + "\n" + "c: " + circle + "\n" + "d: " + square + "\n",
-            "temperature": 0.7,
-            "max_tokens": 256,
-            "top_p": 1,
-            "frequency_penalty": 0,
-            "presence_penalty": 0
-        })
-    }).then(response => response.json())
-        .then(data => {
-            console.log(data.choices[0].text);
-
-            var lines = (data.choices[0].text).split('\n');
-            lines.splice(0, 1);
-            var replyLines = lines.join('\n');
-
-            var GPTReply = replyLines.replace(/\s/g, '').toLowerCase().charAt(0);
-
-            console.log(GPTReply);
-
-            var ans = "a";
-
-            if (GPTReply.includes("b")) {
-                ans = "b";
-                rhombus_cont.style.border = "4px solid gold";
-            } else if (GPTReply.includes("c")) {
-                ans = "c";
-                circle_cont.style.border = "4px solid gold";
-            } else if (GPTReply.includes("d")) {
-                ans = "d";
-                square_cont.style.border = "4px solid gold";
-            } else {
-                ans = "a";
-                triangle_cont.style.border = "4px solid gold";
-            }
-
-            if (autoReply) {
-                chrome.tabs.sendMessage(kahootId, { type: "tap", value: ans }, function (response) {
-                    console.log("Send tap");
-                });
-            }
-
-            if (autoHighlight) {
-                chrome.tabs.sendMessage(kahootId, { type: "highlight", value: ans }, function (response) {
-                    console.log("Send highlight");
-                });
-            }
-        })
-        .catch(error => {
-            console.log("KahootGPT error: " + error.message.toString());
-            chrome.tabs.sendMessage(kahootId, { type: "error", value: error.message.toString() }, function (response) {
-                console.log("Error sent");
-            });
-        });
-}
-
 const sleep = (milliseconds) => {
     return new Promise(resolve => setTimeout(resolve, milliseconds))
 }
-
-
 
 function setAPIKey(value) {
     chrome.storage.local.set({ key: value }, function () {
@@ -443,6 +209,7 @@ function getAPIKey() {
 function setHighlight(value) {
     chrome.storage.local.set({ highlight: value }, function () {
         console.log("Highlight setted");
+        autoHighlight = value;
     });
 }
 
@@ -456,6 +223,7 @@ function getHighlight() {
 function setImport(value) {
     chrome.storage.local.set({ import: value }, function () {
         console.log("Import setted");
+        autoImport = value;
     });
 }
 
@@ -464,43 +232,6 @@ function getImport() {
         console.log("Import queried");
         autoImport = result.import;
     });
-}
-
-function setReply(value) {
-    chrome.storage.local.set({ reply: value }, function () {
-        console.log("Reply setted");
-    });
-}
-
-function getReply() {
-    chrome.storage.local.get(["reply"], function (result) {
-        console.log("Reply queried");
-        autoReply = result.reply;
-    });
-}
-
-function runQuery() {
-    var checkForNewQuestion = setInterval(function () {
-        if (autoImport) {
-            chrome.tabs.sendMessage(kahootId, { type: "query" }, function (response) {
-                if (response.success) {
-                    var ques = response.q || "";
-                    var red = response.r || "";
-                    var blue = response.b || "";
-                    var yellow = response.y || "";
-                    var green = response.g || "";
-
-                    question.value = ques;
-                    triangle.value = red;
-                    rhombus.value = blue;
-                    circle.value = yellow;
-                    square.value = green;
-
-                    queryGPT();
-                }
-            });
-        }
-    }, 25);
 }
 
 document.getElementById("privacy").addEventListener("click", function () {
@@ -512,6 +243,7 @@ document.getElementsByClassName('life')[0].addEventListener('click', extpay_life
 
 extpay_life.getUser().then(user_life => {
     if (user_life.paid) {
+        paid = true;
         document.querySelector('p').innerHTML = 'User has paid! 🎉';
 
         checkbox.addEventListener("click", function () {
@@ -548,6 +280,10 @@ extpay_life.getUser().then(user_life => {
     document.querySelector('p').innerHTML = "Error fetching data :("
 });
 
+const manifest = chrome.runtime.getManifest();
+console.log("Version: v" + manifest.version);
+document.getElementById("KahootGPT").innerHTML = `KahootGPT v${manifest.version}`;
+
 getCurrentTab().then((tab) => {
     const { id, url } = tab;
     chrome.tabs.sendMessage(id, { type: "ping" }, function (response) {
@@ -578,9 +314,6 @@ getCurrentTab().then((tab) => {
 
             getAPIKey();
             getImport();
-            getReply();
-
-            runQuery();
         } else {
             console.log("Not injected; preparing injection");
             callKahootGPT(tab);

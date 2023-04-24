@@ -1,0 +1,419 @@
+<kahoot-gpt-in-site>
+    <style id="insitecss">
+        html {
+            background: #1e1e1e;
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+            color: #b7b7b7;
+            text-align: center;
+        }
+
+        body {
+            font-family: "Segoe UI", Tahoma, sans-serif;
+            font-size: 75%;
+        }
+
+        h1 {
+            font-size: 2em;
+            margin-block-start: 0.67em;
+            margin-block-end: 0.67em;
+            margin-inline-start: 0px;
+            margin-inline-end: 0px;
+            font-weight: bold;
+        }
+
+        h3 {
+            margin-top: 5px;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        h4 {
+            font-size: 12px;
+        }
+
+        .chkbox {
+            margin-top: 5px;
+            display: block;
+            cursor: pointer;
+            width: 25px;
+            height: 25px;
+            border: 3px solid #ffffff00;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0px 0px 0px 2px #fff;
+        }
+
+        .chkbox div {
+            width: 60px;
+            height: 60px;
+            background-color: #fff;
+            top: -52px;
+            left: -52px;
+            position: relative;
+            transform: rotateZ(45deg);
+            z-index: 100;
+        }
+
+        .chkbox input[type=checkbox]:checked+div {
+            left: -10px;
+            top: -10px;
+        }
+
+        .chkbox input[type=checkbox] {
+            position: absolute;
+            left: 50px;
+            visibility: hidden;
+        }
+
+        .transition {
+            transition: 300ms ease;
+        }
+
+        .save {
+            padding: 6px 15px;
+            border: none;
+            border-radius: 10px;
+            background-color: #826ca4;
+            color: #ffffff;
+            font-weight: bold;
+            transition: 500ms;
+            position: fixed;
+            top: 400px;
+            left: 20px;
+        }
+
+        .save:hover {
+            background-color: #8874ac;
+            box-shadow: 0 0 20px #c1b7d450;
+        }
+
+        .save:active {
+            background-color: #542c84;
+            transition: 250ms;
+            box-shadow: none;
+        }
+
+        .text>* {
+            margin: 0;
+        }
+
+        #KahootGPT {
+            position: relative;
+            color: #b7b7b7;
+            text-decoration: none;
+            z-index: 2;
+            font-size: 15px;
+        }
+
+        .container {
+            position: fixed;
+            border: solid 2px white;
+            border-radius: 20px;
+            padding: 5px;
+            background: #1e1e1e;
+            width: 300px;
+            margin: none;
+            padding: none;
+            display: none;
+            justify-content: center;
+            animation: fadein 500ms;
+        }
+
+        @keyframes fadein {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        .title {
+            cursor: move;
+            font-weight: bold;
+            font-size: large;
+            margin-bottom: 10px;
+        }
+
+        .main {
+            display: block;
+        }
+
+        .autoclick {
+            float: left;
+            margin-right: 15px;
+            margin-left: 5px;
+            margin-top: 10px;
+        }
+
+        .toggle {
+            display: grid;
+            align-items: center;
+            background-color: #525252;
+            width: 75px;
+            height: 75px;
+            border-radius: 50%;
+            transition: 300ms;
+        }
+
+        .checkbox {
+            display: grid;
+            align-items: center;
+            border: none;
+            margin: auto;
+            padding: none;
+            background-color: #525252;
+            box-shadow: 0 4px 4px -2px #000;
+            width: 90%;
+            height: 90%;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+
+        .checkbox:hover .power-icon {
+            fill: #8871ad;
+            filter: drop-shadow(0px 0px 3px #8871ade7);
+        }
+
+        .power-icon {
+            width: 19px;
+            height: 19px;
+            align-items: center;
+            margin: auto;
+            fill: #b7b7b7;
+            transition: 200ms;
+        }
+
+        #autoclick-status {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-size: x-small;
+        }
+
+        .question-cont {
+            float: left;
+            border-top-left-radius: 20px;
+            border-bottom-left-radius: 20px;
+            width: 200px;
+            height: 35px;
+            background-color: white;
+            margin: 0;
+            box-shadow: 0 2px 10px -2px #fff;
+            transition: 500ms;
+            margin-bottom: 15px;
+        }
+
+        .question-cont:hover {
+            box-shadow: none;
+        }
+
+        .question-kgpt {
+            transform: translateY(-29%) !important;
+            margin: 0 !important;
+            outline: none !important;
+            border: none !important;
+            padding: 10px !important;
+            width: 130px !important;
+            height: 15px !important;
+            background: transparent !important;
+            font-size: 12px !important;
+        }
+
+        .question-kgpt::-webkit-scrollbar {
+            width: 0px;
+        }
+
+        .search-icon {
+            fill: #9d86c3;
+            padding-top: 2px;
+            cursor: pointer;
+            transition: 200ms;
+        }
+
+        .search-icon:hover {
+            scale: 1.15;
+        }
+
+        .options {
+            margin-top: 10px;
+            width: 102px;
+            display: grid;
+            grid-template-columns: 100px 100px;
+            grid-template-rows: 50px 50;
+        }
+
+        .option {
+            transition: 450ms;
+        }
+
+        .option:hover {
+            box-shadow: none;
+        }
+
+        .triangle {
+            border-top-left-radius: 10px;
+            background-color: #ff3355;
+            box-shadow: 0 -3px 10px 0px #ff3355;
+        }
+
+        .rhombus {
+            border-top-right-radius: 10px;
+            background-color: #45a3e5;
+            box-shadow: 0 -3px 10px 0px #45a3e5;
+        }
+
+        .circle {
+            border-bottom-left-radius: 10px;
+            background-color: #eb670f;
+            box-shadow: 0 3px 10px 0px #eb670f;
+        }
+
+        .square {
+            border-bottom-right-radius: 10px;
+            background-color: #66bf39;
+            box-shadow: 0 3px 10px 0px #66bf39;
+        }
+
+        .answer {
+            width: 80px !important;
+            height: 31px !important;
+            background-color: transparent !important;
+            outline: none !important;
+            border: none !important;
+            resize: none !important;
+            color: white !important;
+            font-weight: bold !important;
+            padding: 10px !important;
+            transition: 200ms !important;
+            scrollbar-width: none !important;
+            font-size: 9px !important;
+        }
+
+        .answer::-webkit-scrollbar {
+            width: 0px;
+        }
+
+        .answer::placeholder {
+            color: #dbdbdb;
+        }
+
+        .answer:active {
+            border: 5px white;
+        }
+
+        .clear {
+            float: right;
+            font-family: monospace, Geneva, Tahoma, sans-serif;
+            cursor: pointer;
+            font-size: medium;
+            background: #381272;
+            color: white;
+            border-top-right-radius: 20px;
+            border-bottom-right-radius: 20px;
+            border: none;
+            outline: none;
+            height: 35px;
+            width: 94px;
+            box-shadow: 0 2px 10px -2px #5b29a7;
+            transition: 150ms;
+            font-size: 12px;
+        }
+
+        .clear:hover {
+            box-shadow: none;
+        }
+
+        .clear:active {
+            background: #321066;
+        }
+
+        .feeter {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-size: 12px;
+            width: 100%;
+            left: 0px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+    </style>
+    <style id="insitecss">
+        kahoot-gpt-in-site {
+            z-index: 100;
+            top: 0px;
+            left: 0px;
+            position: fixed;
+        }
+    </style>
+
+    <meta charset="UTF-8">
+    <div class="container" id="container">
+        <div>
+            <div class="title" id="containerheader"><span id="KahootGPT" "title=" KahootGPT">(Drag me)</span>
+            </div>
+
+            <div class="kahootinfo">
+                <div class="question-cont">
+                    <input class="question-kgpt" id="question-kgpt" type="text" placeholder="Type question here..."
+                        title="Question">
+                    <search title="Search">
+                        <svg class="search-icon" id="search-icon" width="30" height="30" viewBox="0 0 30 30">
+                            <path d="M 13 3 C 7.4889971 3 3 7.4889971 3 13 C 3 18.511003 7.4889971 23 13 23 C 15.396508 23
+                        17.597385 22.148986 19.322266 20.736328 L 25.292969 26.707031 A 1.0001 1.0001 0 1 0 26.707031
+                        25.292969 L 20.736328 19.322266 C 22.148986 17.597385 23 15.396508 23 13 C 23 7.4889971
+                        18.511003 3 13 3 z M 13 5 C 17.430123 5 21 8.5698774 21 13 C 21 17.430123 17.430123 21 13 21 C
+                        8.5698774 21 5 17.430123 5 13 C 5 8.5698774 8.5698774 5 13 5 z">
+                            </path>
+                        </svg>
+                    </search>
+                </div>
+                <button class="clear" id="clear" title="Clear">CLEAR ALL</button>
+                <div class="main">
+                    <div class="autoclick">
+                        <div class="toggle" id="toggle">
+                            <button class="checkbox" id="checkbox" title="Toggle Auto-tap">
+                                <svg class="power-icon" id="power-icon">
+                                    <path d="M 16.8886 5.1769 c -0.7324 -1.1361 -1.7323 -2.1051 -2.8909 -2.8023 c -0.2167 -0.1304
+                                            -0.4868 -0.1341 -0.7071 -0.0096 c -0.2201 0.1245 -0.3564 0.3579 -0.3564 0.6108 v 1.4516 c 0
+                                            0.2189 0.1023 0.4254 0.2765 0.5581 c 1.5547 1.1843 2.4827 3.051 2.4827 4.9933 c 0 3.4558
+                                            -2.8115 6.2673 -6.2673 6.2673 c -3.4558 0 -6.2673 -2.8115 -6.2673 -6.2673 c 0 -1.9424 0.9281
+                                            -3.8091 2.4827 -4.9933 c 0.1742 -0.1327 0.2765 -0.3392 0.2765 -0.5581 V 2.9759 c 0 -0.253
+                                            -0.1362 -0.4863 -0.3563 -0.6108 c -0.2203 -0.1245 -0.4904 -0.1208 -0.7071 0.0096 c -1.1588
+                                            0.6972 -2.1584 1.6662 -2.891 2.8023 c -0.923 1.4315 -1.4109 3.0919 -1.4109 4.8019 c 0 2.3701
+                                            0.923 4.5984 2.599 6.2744 c 1.6761 1.676 3.9043 2.599 6.2744 2.599 c 2.3701 0 4.5984 -0.923
+                                            6.2744 -2.599 c 1.6759 -1.676 2.599 -3.9043 2.599 -6.2744 C 18.2995 8.2688 17.8116 6.6084
+                                            16.8886 5.1769 z M 8.6065 10.7767 h 1.6395 c 0.3629 0 0.658 -0.2953 0.658 -0.6581 V 0.6581 c
+                                            0 -0.3629 -0.2951 -0.6581 -0.658 -0.6581 h -1.6395 c -0.3629 0 -0.6581 0.2952 -0.6581 0.6581
+                                            v 9.4606 C 7.9484 10.4815 8.2437 10.7767 8.6065 10.7767 z">
+                                    </path>
+                                </svg>
+                            </button>
+                        </div>
+
+                        <h3 id="autoclick-status">Auto-tap is OFF</h3>
+                    </div>
+                    <div class="options">
+                        <div class="option triangle">
+                            <textarea class="answer" id="answer-triangle" type="text" placeholder="Type answer here..."
+                                title="Answer"></textarea>
+                        </div>
+                        <div class="option rhombus">
+                            <textarea class="answer" id="answer-rhombus" type="text" placeholder="Type answer here..."
+                                title="Answer"></textarea>
+                        </div>
+                        <div class="option circle">
+                            <textarea put class="answer" id="answer-circle" type="text"
+                                placeholder="Type answer here..." title="Answer"></textarea>
+                        </div>
+                        <div class="option square">
+                            <textarea class="answer" id="answer-square" type="text" placeholder="Type answer here..."
+                                title="Answer"></textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="feeter" id="feeter">Edit settings in PopUp
+            </div>
+        </div>
+    </div>
+</kahoot-gpt-in-site>

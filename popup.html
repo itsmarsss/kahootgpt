@@ -76,21 +76,6 @@
         </div>
 
         <div class="config" id="config">
-            <div class="top" id="top">
-                <h1>Settings</h1>
-                <close title="Close">
-                    <svg width="40" height="40" class="close" id="close">
-                        <path d="M 18.4797 14.935 L 29.5733 3.842 c 0.3939 -0.3939 0.3939 -1.0314 0 -1.4252 L 27.4532 0.2959 c -0.1888 -0.1887 -0.4451
-                    -0.2949 -0.7125 -0.2949 c -0.2675 0 -0.5238 0.1062 -0.7126 0.2949 l -11.0936 11.0938 L 3.8408 0.2959 c -0.1888 -0.1887
-                    -0.4451 -0.2949 -0.7126 -0.2949 c -0.2675 0 -0.5238 0.1062 -0.7125 0.2949 L 0.2955 2.4169 c -0.3939 0.3938 -0.3939
-                    1.0313 0 1.4252 l 11.0936 11.093 L 0.2966 26.0267 c -0.3937 0.3939 -0.3937 1.0314 0 1.4252 l 2.1203 2.1209 c 0.1887
-                    0.1887 0.445 0.2949 0.7125 0.2949 c 0.2675 0 0.5238 -0.1062 0.7127 -0.2949 l 11.0923 -11.0925 l 11.0924 11.0925 c 0.1888
-                    0.1887 0.4451 0.2949 0.7126 0.2949 c 0.2676 0 0.5238 -0.1062 0.7125 -0.2949 l 2.1203 -2.1209 c 0.3937 -0.3938 0.3937
-                    -1.0313 0 -1.4252 L 18.4797 14.935 z">
-                        </path>
-                    </svg>
-                </close>
-            </div>
             <div class="openai" id="openai">
                 <h3>
                     OpenAI API Key:
@@ -133,23 +118,11 @@
                     <div class="transition"></div>
                 </label>
             </div>
-
-            <div class="togglechoice reply" id="reply">
-                <h3 class="toggletext answertext">Auto Answer Upon Import <span><i>(if purchased)</i></span>:
-                    <span class="tooltiptext">
-                        KahootGPT will immediately answer questions if user has purchased <u><b>Auto-Tap</b></u>
-                    </span>
-                </h3>
-                <label class="chkbox">
-                    <input id="autoanswer" type="checkbox" checked>
-                    <div class="transition"></div>
-                </label>
-            </div>
             <button class="save" id="save">Save Changes</button>
         </div>
 
         <div class="title"><a id="KahootGPT" target="_blank" title="KahootGPT"
-                href="https://github.com/itsmarsss/KahootGPT">KahootGPT</a>
+                href="https://github.com/itsmarsss/KahootGPT">KahootGPT-v0.0.0</a>
         </div>
 
         <div class="autoclick">
@@ -174,41 +147,6 @@
             </div>
 
             <h3 id="autoclick-status">Auto-tap is OFF</h3>
-        </div>
-
-        <div class="kahootinfo">
-            <div class="question-cont">
-                <input class="question" id="question" type="text" placeholder="Type question here..." title="Question">
-                <search title="Search">
-                    <svg class="search-icon" id="search-icon" width="30" height="30" viewBox="0 0 30 30">
-                        <path d="M 13 3 C 7.4889971 3 3 7.4889971 3 13 C 3 18.511003 7.4889971 23 13 23 C 15.396508 23
-                        17.597385 22.148986 19.322266 20.736328 L 25.292969 26.707031 A 1.0001 1.0001 0 1 0 26.707031
-                        25.292969 L 20.736328 19.322266 C 22.148986 17.597385 23 15.396508 23 13 C 23 7.4889971
-                        18.511003 3 13 3 z M 13 5 C 17.430123 5 21 8.5698774 21 13 C 21 17.430123 17.430123 21 13 21 C
-                        8.5698774 21 5 17.430123 5 13 C 5 8.5698774 8.5698774 5 13 5 z">
-                        </path>
-                    </svg>
-                </search>
-            </div>
-            <div class="options">
-                <div class="option triangle">
-                    <textarea class="answer" id="answer-triangle" type="text" placeholder="Type answer here..."
-                        title="Answer"></textarea>
-                </div>
-                <div class="option rhombus">
-                    <textarea class="answer" id="answer-rhombus" type="text" placeholder="Type answer here..."
-                        title="Answer"></textarea>
-                </div>
-                <div class="option circle">
-                    <textarea put class="answer" id="answer-circle" type="text" placeholder="Type answer here..."
-                        title="Answer"></textarea>
-                </div>
-                <div class="option square">
-                    <textarea class="answer" id="answer-square" type="text" placeholder="Type answer here..."
-                        title="Answer"></textarea>
-                </div>
-            </div>
-            <button class="clear" id="clear" title="Clear">CLEAR ALL</button>
         </div>
 
         <div class="footer" id="footer">

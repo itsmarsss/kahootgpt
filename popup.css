@@ -5,10 +5,6 @@ html {
     text-align: center;
 }
 
-html::-webkit-scrollbar {
-    width: 0;
-}
-
 body {
     font-family: "Segoe UI", Tahoma, sans-serif;
     font-size: 75%;
@@ -224,54 +220,22 @@ h4 {
 .config {
     position: absolute;
     display: none;
-    left: 0;
-    top: 0;
-    width: 302px;
-    height: 550px;
     left: 5px;
     top: 5px;
-    z-index: 2;
+    width: 300px;
+    height: 240px;
+    z-index: 3;
     background: #0000007e;
     backdrop-filter: blur(5px);
     align-items: center;
     justify-content: center;
     border-radius: 15px;
     border: solid #fff 2px;
-}
-
-.top {
-    display: flex;
-    background-color: #754bb8ad;
-    width: 100%;
-    height: 50px;
-    border-radius: 15px;
-    box-shadow: 0 5px 10px 0px #542a97ad;
-    justify-content: space-between;
-}
-
-.top>h1 {
-    width: 50%;
-    margin: 0;
-    color: white;
-    text-align: left;
-    padding-left: 10px;
-    padding-top: 7px;
-}
-
-.close {
-    fill: white;
-    float: right;
-    position: relative;
-    padding-top: 10px;
-    transition: 300ms;
-}
-
-.close:hover {
-    fill: #cc9999;
+    overflow: hidden;
 }
 
 .openai {
-    margin-top: 20px;
+    margin-top: 5px;
     margin-left: 20px;
     float: left;
 }
@@ -303,7 +267,7 @@ h4 {
 }
 
 .cache {
-    margin-top: 20px;
+    margin-top: 5px;
     margin-left: 20px;
     float: left;
 }
@@ -321,7 +285,7 @@ h4 {
 }
 
 .togglechoice {
-    margin-top: 20px;
+    margin-top: 10px;
     margin-left: 20px;
     float: left;
 }
@@ -350,15 +314,11 @@ h4 {
 }
 
 .highlighttext .tooltiptext {
-    top: 175px;
+    top: 100px;
 }
 
 .importtext .tooltiptext {
-    top: 255px;
-}
-
-.answertext .tooltiptext {
-    top: 335px;
+    top: 200px;
 }
 
 .tooltiptext {
@@ -397,7 +357,6 @@ h4 {
 }
 
 .chkbox {
-    margin-top: 5px;
     display: block;
     cursor: pointer;
     width: 25px;
@@ -443,7 +402,7 @@ h4 {
     font-weight: bold;
     transition: 500ms;
     position: fixed;
-    top: 400px;
+    top: 205px;
     left: 20px;
 }
 
@@ -467,7 +426,7 @@ h4 {
     cursor: pointer;
     color: #b7b7b7;
     text-decoration: none;
-    z-index: 1;
+    z-index: 2;
 }
 
 .subtitle {
@@ -582,136 +541,9 @@ h4 {
     font-size: x-small;
 }
 
-.question-cont {
-    border-radius: 20px;
-    width: 250px;
-    height: 35px;
-    background-color: white;
-    margin: auto;
-    box-shadow: 0 2px 10px -2px #fff;
-    transition: 500ms;
-    margin-bottom: 15px;
-}
-
-.question-cont:hover {
-    box-shadow: none;
-}
-
-.question {
-    transform: translateY(-29%);
-    margin: 0;
-    outline: none;
-    border: none;
-    padding: 10px;
-    width: 75%;
-    height: 100%;
-    background: transparent;
-}
-
-.question::-webkit-scrollbar {
-    width: 0px;
-}
-
-.search-icon {
-    fill: #9d86c3;
-    padding-top: 2px;
-    cursor: pointer;
-    transition: 200ms;
-}
-
-.search-icon:hover {
-    scale: 1.15;
-}
-
-.options {
-    margin-top: 10px;
-    display: grid;
-    grid-template-columns: 145px 145px;
-    grid-template-rows: 100px 100px;
-    grid-gap: 10px;
-}
-
-.option {
-    border-radius: 15px;
-    transition: 450ms;
-}
-
-.option:hover {
-    box-shadow: none;
-}
-
-.triangle {
-    background-color: #ff3355;
-    box-shadow: 0 5px 10px 0px #ff3355;
-}
-
-.rhombus {
-    background-color: #45a3e5;
-    box-shadow: 0 5px 10px 0px #45a3e5;
-}
-
-.circle {
-    background-color: #eb670f;
-    box-shadow: 0 5px 10px 0px #eb670f;
-}
-
-.square {
-    background-color: #66bf39;
-    box-shadow: 0 5px 10px 0px #66bf39;
-}
-
-.answer {
-    width: 100%;
-    height: 100%;
-    background-color: transparent;
-    outline: none;
-    border: none;
-    resize: none;
-    color: white;
-    font-weight: bold;
-    padding: 10px;
-    transition: 200ms;
-    scrollbar-width: none;
-}
-
-.answer::-webkit-scrollbar {
-    width: 0px;
-}
-
-.answer::placeholder {
-    color: #dbdbdb;
-}
-
-.answer:active {
-    border: 5px white;
-}
-
-.clear {
-    font-family: monospace, Geneva, Tahoma, sans-serif;
-    cursor: pointer;
-    font-size: medium;
-    background: #5b29a7;
-    color: white;
-    border-radius: 7px;
-    border: none;
-    outline: none;
-    width: 100px;
-    margin: 15px;
-    box-shadow: 0 4px 10px -2px #5b29a7;
-    transition: 150ms;
-}
-
-.clear:hover {
-    box-shadow: none;
-}
-
-.clear:active {
-    background: #3c1675;
-}
-
 .footer {
     height: 45px;
-    width: 100%;
+    width: 300px;
     background: #525252;
     border-radius: 20px;
     display: flex;
