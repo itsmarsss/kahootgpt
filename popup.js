@@ -34,40 +34,10 @@ const openaikeyinput = document.getElementById("openaikeyinput");
 const storekey = document.getElementById("storekey");
 const autohi = document.getElementById("autohighlight");
 const autoin = document.getElementById("autoimport");
-const autoanswer = document.getElementById("autoanswer");
 const save = document.getElementById("save");
 
 const extpay_life = ExtPay('kahoot-gpt');
 const extpay_month = ExtPay('kahoot-gpt-month');
-
-autoanswer.addEventListener("click", function () {
-    extpay_life.getUser().then(user_life => {
-        if (user_life.paid) {
-            console.log("Auto-tap: Paid");
-        } else {
-            autoanswer.checked = false;
-            purchase.style.display = "block";
-            checkbox.style.boxShadow = "none";
-            toggle.style.background = "#ff9494";
-            powericon.style.fill = "#ff9494";
-            tapstatus.innerHTML = "Auto-tap ERROR";
-            tapstatus.style.color = "#ff9494";
-
-            var opacity = 0;
-            purchase.style.opacity = opacity;
-            var fadeEffect = setInterval(function () {
-                if (purchase.style.opacity < 1) {
-                    opacity += 0.1;
-                    purchase.style.opacity = opacity;
-                } else {
-                    clearInterval(fadeEffect);
-                }
-            }, 12);
-
-            console.log("Auto-tap: Not paid");
-        }
-    });
-});
 
 socials.addEventListener("mouseover", function () {
     footer.style.background = "#9d86c3";
@@ -84,7 +54,6 @@ settings.addEventListener("click", async function () {
 
     getHighlight();
     getImport();
-    getReply();
 
     await sleep(500);
 
@@ -92,7 +61,6 @@ settings.addEventListener("click", async function () {
 
     autohi.checked = autoHighlight;
     autoin.checked = autoImport;
-    autoanswer.checked = autoReply;
 
     config.style.display = "block";
 
@@ -161,7 +129,6 @@ save.addEventListener("click", async function () {
 
     setHighlight(autohi.checked);
     setImport(autoin.checked);
-    setReply(autoanswer.checked);
 
     await sleep(500);
 
@@ -185,7 +152,6 @@ var kahootId;
 var openAIKey = "YOUR_KEY";
 var autoHighlight = false;
 var autoImport = false;
-var autoReply = false;
 
 function toggleAutoTap() {
     if (toggled) {
@@ -268,7 +234,6 @@ async function callKahootGPT(tab) {
         console.log(`Loading: ${url}`);
 
         getImport();
-        getReply();
 
         await sleep(4000);
 
@@ -404,11 +369,9 @@ async function getAnswerWithAnswer(query, triangle, rhombus, circle, square) {
                 triangle_cont.style.border = "4px solid gold";
             }
 
-            if (autoReply) {
-                chrome.tabs.sendMessage(kahootId, { type: "tap", value: ans }, function (response) {
-                    console.log("Send tap");
-                });
-            }
+            chrome.tabs.sendMessage(kahootId, { type: "tap", value: ans }, function (response) {
+                console.log("Send tap");
+            });
 
             if (autoHighlight) {
                 chrome.tabs.sendMessage(kahootId, { type: "highlight", value: ans }, function (response) {
@@ -471,19 +434,6 @@ function getImport() {
     });
 }
 
-function setReply(value) {
-    chrome.storage.local.set({ reply: value }, function () {
-        console.log("Reply setted");
-        autoReply = value;
-    });
-}
-
-function getReply() {
-    chrome.storage.local.get(["reply"], function (result) {
-        console.log("Reply queried");
-        autoReply = result.reply;
-    });
-}
 
 function runQuery() {
     var checkForNewQuestion = setInterval(function () {
@@ -588,7 +538,6 @@ getCurrentTab().then((tab) => {
 
             getAPIKey();
             getImport();
-            getReply();
 
             runQuery();
         } else {

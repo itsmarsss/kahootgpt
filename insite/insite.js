@@ -1,15 +1,9 @@
-const settings = document.getElementById("settings");
-const config = document.getElementById("config");
-
 const checkbox = document.getElementById("checkbox");
 const toggle = document.getElementById("toggle");
 const powericon = document.getElementById("power-icon");
 const tapstatus = document.getElementById("autoclick-status");
 
-const footer = document.getElementById("footer");
-const socials = document.getElementById("socials");
-
-const question = document.getElementById("question");
+const question = document.getElementById("question-kgpt");
 const search = document.getElementById("search-icon");
 
 const triangle = document.getElementById("answer-triangle");
@@ -24,16 +18,8 @@ const square_cont = document.getElementsByClassName("square")[0];
 
 const clear = document.getElementById("clear");
 
-const exit = document.getElementById("close");
-const openaikeyinput = document.getElementById("openaikeyinput");
-const storekey = document.getElementById("storekey");
-const autohi = document.getElementById("autohighlight");
-const autoin = document.getElementById("autoimport");
-const autoanswer = document.getElementById("autoanswer");
-const save = document.getElementById("save");
 
 getImport();
-getReply();
 
 checkbox.click();
 
@@ -41,131 +27,14 @@ runQuery();
 
 openAIKey = getAPIKey();
 
-autoanswer.addEventListener("click", function () {
-    extpay_life.getUser().then(user_life => {
-        if (user_life.paid) {
-            console.log("Auto-tap: Paid");
-        } else {
-            autoanswer.checked = false;
-            purchase.style.display = "block";
-            checkbox.style.boxShadow = "none";
-            toggle.style.background = "#ff9494";
-            powericon.style.fill = "#ff9494";
-            tapstatus.innerHTML = "Auto-tap ERROR";
-            tapstatus.style.color = "#ff9494";
-
-            var opacity = 0;
-            purchase.style.opacity = opacity;
-            var fadeEffect = setInterval(function () {
-                if (purchase.style.opacity < 1) {
-                    opacity += 0.1;
-                    purchase.style.opacity = opacity;
-                } else {
-                    clearInterval(fadeEffect);
-                }
-            }, 12);
-
-            console.log("Auto-tap: Not paid");
-        }
-    });
-});
-
-socials.addEventListener("mouseover", function () {
-    footer.style.background = "#9d86c3";
-});
-
-socials.addEventListener("mouseout", function () {
-    footer.style.background = "#525252";
-});
-
-settings.addEventListener("click", async function () {
-    if (storekey.checked) {
-        getAPIKey();
-    }
-
-    getHighlight();
-    getImport();
-    getReply();
-
-    await sleep(500);
-
-    openaikeyinput.value = openAIKey;
-
-    autohi.checked = autoHighlight;
-    autoin.checked = autoImport;
-    autoanswer.checked = autoReply;
-
-    config.style.display = "block";
-
-    var opacity = 0;
-    config.style.opacity = opacity;
-    var fadeEffect = setInterval(function () {
-        if (config.style.opacity < 1) {
-            opacity += 0.1;
-            config.style.opacity = opacity;
-        } else {
-            clearInterval(fadeEffect);
-        }
-    }, 12);
-});
-
-exit.addEventListener("click", function () {
-    var fadeEffect = setInterval(function () {
-        if (!config.style.opacity) {
-            config.style.opacity = 1;
-        }
-        if (config.style.opacity > 0) {
-            config.style.opacity -= 0.1;
-        } else {
-            clearInterval(fadeEffect);
-            config.style.display = "none";
-        }
-    }, 12);
-});
-
-openaikeyinput.addEventListener("mouseover", function () {
-    openaikeyinput.type = "text";
-});
-
-openaikeyinput.addEventListener("mouseout", function () {
-    openaikeyinput.type = "password";
-});
-
-save.addEventListener("click", async function () {
-    if (storekey.checked) {
-        setAPIKey(openaikeyinput.value);
-    } else {
-        openAIKey = openaikeyinput.value;
-    }
-
-    setHighlight(autohi.checked);
-    setImport(autoin.checked);
-    setReply(autoanswer.checked);
-
-    await sleep(500);
-
-    var fadeEffect = setInterval(function () {
-        if (!config.style.opacity) {
-            config.style.opacity = 1;
-        }
-        if (config.style.opacity > 0) {
-            config.style.opacity -= 0.1;
-        } else {
-            clearInterval(fadeEffect);
-            config.style.display = "none";
-        }
-    }, 12);
-});
-
-var toggled = false;
+var minitoggled = false;
 
 var openAIKey = "YOUR_KEY";
 var autoHighlight = false;
 var autoImport = false;
-var autoReply = false;
 
 function toggleAutoTap() {
-    if (toggled) {
+    if (minitoggled) {
         checkbox.style.boxShadow = "0 4px 4px -2px #000";
         toggle.style.background = "#525252";
         powericon.style.fill = "#b7b7b7";
@@ -178,8 +47,8 @@ function toggleAutoTap() {
         tapstatus.innerHTML = "Auto-tap is ON";
         tapstatus.style.color = "#864cbf";
     }
-    toggled = !toggled;
-    console.log("Toggled: " + toggled);
+    minitoggled = !minitoggled;
+    console.log("Toggled: " + minitoggled);
 }
 
 question.addEventListener('keypress', function (e) {
@@ -327,10 +196,8 @@ async function getAnswerWithAnswer(query, triangle, rhombus, circle, square) {
                 triangle_cont.style.border = "4px solid gold";
             }
 
-            if (autoReply) {
-                tap(ans);
-                console.log("Send tap");
-            }
+            tap(ans);
+            console.log("Send tap");
 
             if (autoHighlight) {
                 highlight(ans);
@@ -347,25 +214,10 @@ const sleep = (milliseconds) => {
     return new Promise(resolve => setTimeout(resolve, milliseconds))
 }
 
-
-
-function setAPIKey(value) {
-    chrome.storage.local.set({ key: value }, function () {
-        console.log("Key setted");
-    });
-}
-
 function getAPIKey() {
     chrome.storage.local.get(["key"], function (result) {
         console.log("Key queried");
         openAIKey = result.key;
-    });
-}
-
-function setHighlight(value) {
-    chrome.storage.local.set({ highlight: value }, function () {
-        console.log("Highlight setted");
-        autoHighlight = value;
     });
 }
 
@@ -376,13 +228,6 @@ function getHighlight() {
     });
 }
 
-function setImport(value) {
-    chrome.storage.local.set({ import: value }, function () {
-        console.log("Import setted");
-        autoImport = value;
-    });
-}
-
 function getImport() {
     chrome.storage.local.get(["import"], function (result) {
         console.log("Import queried");
@@ -390,51 +235,45 @@ function getImport() {
     });
 }
 
-function setReply(value) {
-    chrome.storage.local.set({ reply: value }, function () {
-        console.log("Reply setted");
-        autoReply = value;
-    });
-}
-
-function getReply() {
-    chrome.storage.local.get(["reply"], function (result) {
-        console.log("Reply queried");
-        autoReply = result.reply;
-    });
-}
-
 function runQuery() {
-    if (autoImport) {
-        if (response.success) {
-            var ques = response.q || "";
-            var red = response.r || "";
-            var blue = response.b || "";
-            var yellow = response.y || "";
-            var green = response.g || "";
+    var checkForNewQuestion = setInterval(function () {
+        getAPIKey();
+        getHighlight();
+        getImport();
 
-            question.value = ques;
-            triangle.value = red;
-            rhombus.value = blue;
-            circle.value = yellow;
-            square.value = green;
-
-            queryGPT();
+        if (toggled != minitoggled) {
+            toggleAutoTap();
         }
-    }
+
+        if (autoImport) {
+            var response = query();
+            if (response.success) {
+                var ques = response.q || "";
+                var red = response.r || "";
+                var blue = response.b || "";
+                var yellow = response.y || "";
+                var green = response.g || "";
+
+                question.value = ques;
+                triangle.value = red;
+                rhombus.value = blue;
+                circle.value = yellow;
+                square.value = green;
+
+                queryGPT();
+            }
+        }
+    }, 25);
 }
 
 document.getElementById("privacy").addEventListener("click", function () {
     window.open("/documents/PRIVACY.html", "_blank");
 });
 
-
-document.getElementsByClassName('life')[0].addEventListener('click', extpay_life.openPaymentPage);
-
-
 if (paid) {
     checkbox.addEventListener("click", function () {
         toggleAutoTap();
+
         console.log("Auto-tap: Toggled");
     });
 } else {

@@ -355,10 +355,6 @@ h4 {
     top: 255px;
 }
 
-.answertext .tooltiptext {
-    top: 335px;
-}
-
 .tooltiptext {
     opacity: 0;
     width: 200px;
