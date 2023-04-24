@@ -171,58 +171,6 @@ function toggleAutoTap() {
     console.log("Toggled: " + toggled);
 }
 
-question.addEventListener('keypress', function (e) {
-    if (e.key === 'Enter') {
-        queryGPT();
-    }
-});
-
-search.addEventListener("click", function () {
-    queryGPT();
-});
-
-function queryGPT() {
-    if (question.value === "") {
-        return;
-    }
-
-    triangle_cont.style.border = "none";
-    rhombus_cont.style.border = "none";
-    circle_cont.style.border = "none";
-    square_cont.style.border = "none";
-
-    if (triangle.value === "" &&
-        rhombus.value === "" &&
-        circle.value === "" &&
-        square.value === "") {
-        getAnswerOnly(question.value);
-    } else {
-        getAnswerWithAnswer(
-            question.value,
-            triangle.value || "n/a",
-            rhombus.value || "n/a",
-            circle.value || "n/a",
-            square.value || "n/a"
-        );
-    }
-}
-
-clear.addEventListener("click", function () {
-    clearAll();
-});
-function clearAll() {
-    triangle_cont.style.border = "none";
-    rhombus_cont.style.border = "none";
-    circle_cont.style.border = "none";
-    square_cont.style.border = "none";
-
-    question.value = "";
-    triangle.value = "";
-    rhombus.value = "";
-    circle.value = "";
-    square.value = "";
-}
-
 async function callKahootGPT(tab) {
     const { id, url } = tab;
     if (url.indexOf("https://kahoot.it/") > -1) {
@@ -248,8 +196,6 @@ async function callKahootGPT(tab) {
         await sleep(100);
 
         checkbox.click();
-
-        runQuery();
 
         var fadeEffect = setInterval(function () {
             if (!injection.style.opacity) {
