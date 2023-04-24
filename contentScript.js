@@ -73,8 +73,6 @@ chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
             sendResponse({ value: toggled.toString(), success: true });
             break;
         case "query":
-            console.log("Queried");
-
             if (ques === "") {
                 sendResponse({ success: false });
             } else {
@@ -162,8 +160,6 @@ function highlight(val) {
 
 }
 function query() {
-    console.log("Queried");
-
     querycount++;
 
     if (ques === "") {
