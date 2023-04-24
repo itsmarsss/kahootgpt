@@ -14,22 +14,6 @@ const tapstatus = document.getElementById("autoclick-status");
 const footer = document.getElementById("footer");
 const socials = document.getElementById("socials");
 
-const question = document.getElementById("question");
-const search = document.getElementById("search-icon");
-
-const triangle = document.getElementById("answer-triangle");
-const rhombus = document.getElementById("answer-rhombus");
-const circle = document.getElementById("answer-circle");
-const square = document.getElementById("answer-square");
-
-const triangle_cont = document.getElementsByClassName("triangle")[0];
-const rhombus_cont = document.getElementsByClassName("rhombus")[0];
-const circle_cont = document.getElementsByClassName("circle")[0];
-const square_cont = document.getElementsByClassName("square")[0];
-
-const clear = document.getElementById("clear");
-
-const exit = document.getElementById("close");
 const openaikeyinput = document.getElementById("openaikeyinput");
 const storekey = document.getElementById("storekey");
 const autohi = document.getElementById("autohighlight");
@@ -71,20 +55,6 @@ settings.addEventListener("click", async function () {
             config.style.opacity = opacity;
         } else {
             clearInterval(fadeEffect);
-        }
-    }, 12);
-});
-
-exit.addEventListener("click", function () {
-    var fadeEffect = setInterval(function () {
-        if (!config.style.opacity) {
-            config.style.opacity = 1;
-        }
-        if (config.style.opacity > 0) {
-            config.style.opacity -= 0.1;
-        } else {
-            clearInterval(fadeEffect);
-            config.style.display = "none";
         }
     }, 12);
 });
@@ -344,8 +314,6 @@ getCurrentTab().then((tab) => {
 
             getAPIKey();
             getImport();
-
-            runQuery();
         } else {
             console.log("Not injected; preparing injection");
             callKahootGPT(tab);

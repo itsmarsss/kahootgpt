@@ -5,10 +5,6 @@ html {
     text-align: center;
 }
 
-html::-webkit-scrollbar {
-    width: 0;
-}
-
 body {
     font-family: "Segoe UI", Tahoma, sans-serif;
     font-size: 75%;
@@ -225,51 +221,21 @@ h4 {
     position: absolute;
     display: none;
     left: 5px;
-    top: 35px;
-    width: 302px;
-    height: 515px;
-    z-index: 2;
+    top: 5px;
+    width: 300px;
+    height: 240px;
+    z-index: 3;
     background: #0000007e;
     backdrop-filter: blur(5px);
     align-items: center;
     justify-content: center;
     border-radius: 15px;
     border: solid #fff 2px;
-}
-
-.top {
-    display: flex;
-    background-color: #754bb8ad;
-    width: 100%;
-    height: 50px;
-    border-radius: 15px;
-    box-shadow: 0 5px 10px 0px #542a97ad;
-    justify-content: space-between;
-}
-
-.top>h1 {
-    width: 50%;
-    margin: 0;
-    color: white;
-    text-align: left;
-    padding-left: 10px;
-    padding-top: 7px;
-}
-
-.close {
-    fill: white;
-    float: right;
-    position: relative;
-    padding-top: 10px;
-    transition: 300ms;
-}
-
-.close:hover {
-    fill: #cc9999;
+    overflow: hidden;
 }
 
 .openai {
-    margin-top: 20px;
+    margin-top: 5px;
     margin-left: 20px;
     float: left;
 }
@@ -301,7 +267,7 @@ h4 {
 }
 
 .cache {
-    margin-top: 20px;
+    margin-top: 5px;
     margin-left: 20px;
     float: left;
 }
@@ -319,7 +285,7 @@ h4 {
 }
 
 .togglechoice {
-    margin-top: 20px;
+    margin-top: 10px;
     margin-left: 20px;
     float: left;
 }
@@ -348,11 +314,11 @@ h4 {
 }
 
 .highlighttext .tooltiptext {
-    top: 175px;
+    top: 100px;
 }
 
 .importtext .tooltiptext {
-    top: 255px;
+    top: 200px;
 }
 
 .tooltiptext {
@@ -391,7 +357,6 @@ h4 {
 }
 
 .chkbox {
-    margin-top: 5px;
     display: block;
     cursor: pointer;
     width: 25px;
@@ -437,7 +402,7 @@ h4 {
     font-weight: bold;
     transition: 500ms;
     position: fixed;
-    top: 400px;
+    top: 205px;
     left: 20px;
 }
 
@@ -578,7 +543,7 @@ h4 {
 
 .footer {
     height: 45px;
-    width: 100%;
+    width: 300px;
     background: #525252;
     border-radius: 20px;
     display: flex;
