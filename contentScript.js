@@ -31,6 +31,7 @@ chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
             console.log("Auto-tap-paid-" + paid.toString());
             paid = val.toString() === 'true';
             initialize();
+            container.style.display = "flex";
             sendResponse({ value: "initialized", success: true });
             break;
         case "autotap":
@@ -395,7 +396,6 @@ kgptmini.innerHTML =
 
         #KahootGPT {
             position: relative;
-            cursor: pointer;
             color: #b7b7b7;
             text-decoration: none;
             z-index: 2;
@@ -411,7 +411,7 @@ kgptmini.innerHTML =
             width: 300px;
             margin: none;
             padding: none;
-            display: flex;
+            display: none;
             justify-content: center;
         }
 
@@ -635,7 +635,7 @@ kgptmini.innerHTML =
     <meta charset="UTF-8">
     <div class="container" id="container">
         <div>
-            <div class="title" id="containerheader"><a id="KahootGPT" "title=" KahootGPT">(Drag me)</a>
+            <div class="title" id="containerheader"><span id="KahootGPT" "title=" KahootGPT">(Drag me)</span>
             </div>
 
             <div class="kahootinfo">
@@ -707,6 +707,7 @@ kgptmini.innerHTML =
 
 document.documentElement.appendChild(kgptmini);
 
+const container = document.getElementById("container");
 const checkbox = document.getElementById("checkbox");
 const toggle = document.getElementById("toggle");
 const powericon = document.getElementById("power-icon");
