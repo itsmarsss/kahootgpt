@@ -708,6 +708,7 @@ const tapstatus = document.getElementById("autoclick-status");
 
 const question = document.getElementById("question-kgpt");
 const search = document.getElementById("search-icon");
+const clear = document.getElementById("clear");
 
 const triangle = document.getElementById("answer-triangle");
 const rhombus = document.getElementById("answer-rhombus");
@@ -719,7 +720,12 @@ const rhombus_cont = document.getElementsByClassName("rhombus")[0];
 const circle_cont = document.getElementsByClassName("circle")[0];
 const square_cont = document.getElementsByClassName("square")[0];
 
-const clear = document.getElementById("clear");
+
+var minitoggled = false;
+
+var openAIKey = "YOUR_KEY";
+var autoHighlight = false;
+var autoImport = false;
 
 var getters = setInterval(function () {
     getAPIKey();
@@ -727,12 +733,6 @@ var getters = setInterval(function () {
     getImport();
 }, 500);
 
-
-var minitoggled = false;
-
-var openAIKey = "YOUR_KEY";
-var autoHighlight = false;
-var autoImport = false;
 
 function toggleAutoTap() {
     if (minitoggled) {
@@ -976,7 +976,6 @@ function autotapsetup() {
             console.log("Auto-tap: Not paid");
         });
     }
-    checkbox.click();
 }
 
 const manifest = chrome.runtime.getManifest();
