@@ -297,13 +297,7 @@ h4 {
     margin-bottom: 5px;
 }
 
-.togglechoice:hover .tooltiptext {
-    animation: fadein 500ms;
-    opacity: 1;
-}
-
-
-.togglechoice:hover .tooltiptext {
+.minitext:hover+.tooltiptext {
     animation: fadein 500ms;
     opacity: 1;
 }
@@ -314,26 +308,27 @@ h4 {
 }
 
 .highlighttext .tooltiptext {
-    top: 100px;
+    top: 95px;
 }
 
 .importtext .tooltiptext {
-    top: 200px;
+    top: 160px;
 }
 
 .tooltiptext {
     opacity: 0;
-    width: 200px;
+    width: 275px;
     background-color: black;
     text-align: center;
-    padding: 5px;
-    border-radius: 6px;
+    padding: 4px;
+    padding-bottom: 5px;
+    border-radius: 10px;
     position: fixed;
-    z-index: 1;
+    z-index: 5;
     transition: 100ms;
     animation: fadeout 250ms;
-    left: 75px;
-    top: 25px;
+    left: 7px;
+    border: 1.5px solid #937db3;
 }
 
 @keyframes fadein {
@@ -375,7 +370,7 @@ h4 {
     left: -52px;
     position: relative;
     transform: rotateZ(45deg);
-    z-index: 100;
+    z-index: 4;
 }
 
 .chkbox input[type=checkbox]:checked+div {
