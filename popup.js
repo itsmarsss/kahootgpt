@@ -32,20 +32,6 @@ var openAIKey = "YOUR_KEY";
 var autoHighlight = false;
 var autoImport = false;
 
-function closepaypage() {
-    var fadeEffect = setInterval(function () {
-        if (!purchase.style.opacity) {
-            purchase.style.opacity = 1;
-        }
-        if (purchase.style.opacity > 0) {
-            purchase.style.opacity -= 0.1;
-        } else {
-            clearInterval(fadeEffect);
-            purchase.style.display = "none";
-        }
-    }, 12);
-}
-
 async function callKahootGPT(tab) {
     const { id, url } = tab;
     if (url.indexOf("https://kahoot.it/") > -1) {
@@ -109,6 +95,20 @@ function toggleAutoTap() {
     }
     toggled = !toggled;
     console.log("Toggled: " + toggled);
+}
+
+function closepaypage() {
+    var fadeEffect = setInterval(function () {
+        if (!purchase.style.opacity) {
+            purchase.style.opacity = 1;
+        }
+        if (purchase.style.opacity > 0) {
+            purchase.style.opacity -= 0.1;
+        } else {
+            clearInterval(fadeEffect);
+            purchase.style.display = "none";
+        }
+    }, 12);
 }
 
 async function getCurrentTab() {
