@@ -300,6 +300,7 @@ h4 {
 .minitext:hover+.tooltiptext {
     animation: fadein 500ms;
     opacity: 1;
+    z-index: 101;
 }
 
 .toggletext {
@@ -324,7 +325,7 @@ h4 {
     padding-bottom: 5px;
     border-radius: 10px;
     position: fixed;
-    z-index: 5;
+    z-index: 1;
     transition: 100ms;
     animation: fadeout 250ms;
     left: 7px;
@@ -365,22 +366,16 @@ h4 {
 .chkbox div {
     width: 60px;
     height: 60px;
-    background-color: #fff;
-    top: -52px;
-    left: -52px;
+    top: -25;
     position: relative;
-    transform: rotateZ(45deg);
-    z-index: 4;
+    z-index: 100;
 }
 
 .chkbox input[type=checkbox]:checked+div {
-    left: -10px;
-    top: -10px;
+    background-color: #fff;
 }
 
 .chkbox input[type=checkbox] {
-    position: absolute;
-    left: 50px;
     visibility: hidden;
 }
 
