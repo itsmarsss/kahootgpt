@@ -28,10 +28,9 @@ chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
 
     switch (type) {
         case "initialize":
-            console.log("Auto-tap-paid-" + paid.toString());
+            console.log("Auto-tap-paid-" + val.toString());
             paid = val.toString() === 'true';
             initialize();
-            container.style.display = "flex";
             sendResponse({ value: "initialized", success: true });
             break;
         case "autotap":
@@ -42,23 +41,6 @@ chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
                 createAlert("<strong>KahootGPT Info!</strong> Auto-tap set to <i>" + toggled.toString() + "</i>", "#46a8f5");
             }
             init = true;
-            if (toggled) {
-                checkbox.addEventListener("click", function () {
-                    toggleAutoTap();
-
-                    console.log("Auto-tap: Toggled");
-                });
-            } else {
-                checkbox.addEventListener("click", function () {
-                    checkbox.style.boxShadow = "none";
-                    toggle.style.background = "#ff9494";
-                    powericon.style.fill = "#ff9494";
-                    tapstatus.innerHTML = "Auto-tap ERROR";
-                    tapstatus.style.color = "#ff9494";
-
-                    console.log("Auto-tap: Not paid");
-                });
-            }
             break;
         case "ping":
             ping();
@@ -93,9 +75,12 @@ chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
 });
 
 function initialize() {
+    container.style.display = "flex";
     console.log("Connected to popup script");
     createAlert("<strong>KahootGPT Initialized!</strong> ContentScript initialized connection to PopupScript.", "#2eb886");
     querycounttemp = querycount;
+
+    autotapsetup();
 }
 function ping() {
     console.log("Got pinged");
@@ -973,9 +958,7 @@ function runQuery() {
     }, 25);
 }
 
-async function autotapsetup() {
-    await sleep(3000);
-
+function autotapsetup() {
     if (paid) {
         checkbox.addEventListener("click", function () {
             toggleAutoTap();
@@ -1000,7 +983,6 @@ const manifest = chrome.runtime.getManifest();
 console.log("Version: v" + manifest.version);
 document.getElementById("KahootGPT").innerHTML = "KahootGPT v" + manifest.version + " (drag me)";
 
-autotapsetup();
 runQuery();
 
 dragElement(document.getElementById("container"));

@@ -20,7 +20,81 @@ const autohi = document.getElementById("autohighlight");
 const autoin = document.getElementById("autoimport");
 const save = document.getElementById("save");
 
+const attach = document.getElementById("attach");
+const detach = document.getElementById("detach");
+const reload = document.getElementById("reload");
+
 const extpay_life = ExtPay('kahoot-gpt');
+
+attach.addEventListener("click", function () {
+    injection.style.display = "flex";
+    var opacity = 0;
+    injection.style.opacity = opacity;
+    var fadeEffect = setInterval(function () {
+        if (injection.style.opacity < 1) {
+            opacity += 0.1;
+            injection.style.opacity = opacity;
+        } else {
+            clearInterval(fadeEffect);
+        }
+    }, 12);
+    getCurrentTab().then((tab) => {
+        const { id, url } = tab;
+        chrome.tabs.sendMessage(id, { type: "ping" }, function (response) {
+            if (!chrome.runtime.lastError) {
+                console.log("Already injected");
+
+                var val = response.value || {};
+
+                if (val.toString() == "true") {
+                    toggleAutoTap();
+                }
+
+                var fadeEffect = setInterval(function () {
+                    if (!injection.style.opacity) {
+                        injection.style.opacity = 1;
+                    }
+                    if (injection.style.opacity > 0) {
+                        injection.style.opacity -= 0.1;
+                    } else {
+                        clearInterval(fadeEffect);
+                        injection.style.display = "none";
+                    }
+                }, 25);
+
+                kahootId = id;
+
+                checkbox.click();
+
+                getAPIKey();
+                getImport();
+            } else {
+                console.log("Not injected; preparing injection");
+
+                if (systest) {
+                    callKahootGPT(tab);
+                } else {
+                    var fadeEffect = setInterval(function () {
+                        if (!injection.style.opacity) {
+                            injection.style.opacity = 1;
+                        }
+                        if (injection.style.opacity > 0) {
+                            injection.style.opacity -= 0.1;
+                        } else {
+                            clearInterval(fadeEffect);
+                            injection.style.display = "none";
+                        }
+                    }, 25);
+                }
+                systest = true;
+            }
+        });
+    });
+});
+
+reload.addEventListener("click", function () {
+    chrome.tabs.reload(kahootId);
+});
 
 socials.addEventListener("mouseover", function () {
     footer.style.background = "#9d86c3";
@@ -114,6 +188,8 @@ save.addEventListener("click", async function () {
     }, 12);
 });
 
+var systest = false;
+
 var toggled = false;
 
 var kahootId;
@@ -153,19 +229,24 @@ async function callKahootGPT(tab) {
 
         getImport();
 
+        toggled = true;
+        checkbox.style.boxShadow = "none";
+        toggle.style.background = "#9d86c3";
+        powericon.style.fill = "#9d86c3";
+        tapstatus.innerHTML = "Auto-tap ON";
+        tapstatus.style.color = "#864cbf";
+
         await sleep(4000);
 
         kahootId = id;
-
-        chrome.tabs.sendMessage(id, { type: "initialize", value: paid.toString }, function (response) {
+        console.log(paid.toString());
+        chrome.tabs.sendMessage(id, { type: "initialize", value: paid.toString() }, function (response) {
             if (response.data === "initialized") {
                 console.log("Connected to injected script");
             }
         });
 
         await sleep(100);
-
-        checkbox.click();
 
         var fadeEffect = setInterval(function () {
             if (!injection.style.opacity) {
@@ -284,39 +365,4 @@ const manifest = chrome.runtime.getManifest();
 console.log("Version: v" + manifest.version);
 document.getElementById("KahootGPT").innerHTML = `KahootGPT v${manifest.version}`;
 
-getCurrentTab().then((tab) => {
-    const { id, url } = tab;
-    chrome.tabs.sendMessage(id, { type: "ping" }, function (response) {
-        if (!chrome.runtime.lastError) {
-            console.log("Already injected");
-
-            var val = response.value || {};
-
-            if (val.toString() == "true") {
-                toggleAutoTap();
-            }
-
-            var fadeEffect = setInterval(function () {
-                if (!injection.style.opacity) {
-                    injection.style.opacity = 1;
-                }
-                if (injection.style.opacity > 0) {
-                    injection.style.opacity -= 0.1;
-                } else {
-                    clearInterval(fadeEffect);
-                    injection.style.display = "none";
-                }
-            }, 25);
-
-            kahootId = id;
-
-            checkbox.click();
-
-            getAPIKey();
-            getImport();
-        } else {
-            console.log("Not injected; preparing injection");
-            callKahootGPT(tab);
-        }
-    });
-});
+attach.click();
