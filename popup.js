@@ -162,12 +162,7 @@ const sleep = (milliseconds) => {
     return new Promise(resolve => setTimeout(resolve, milliseconds))
 }
 
-document.getElementById("privacy").addEventListener("click", function () {
-    window.open(`/documents/PRIVACY.html`, "_blank");
-});
-
-
-document.getElementsByClassName('life')[0].addEventListener('click', extpay_life.openPaymentPage);
+document.getElementsByClassName('life')[0].addEventListener('click', extpay_life.openPaymentPage());
 
 extpay_life.getUser().then(user_life => {
     if (user_life.paid) {
@@ -255,6 +250,10 @@ attach.addEventListener("click", function () {
             }
         });
     });
+});
+
+detach.addEventListener("click", function () {
+    chrome.tabs.reload(kahootId);
 });
 
 reload.addEventListener("click", function () {
