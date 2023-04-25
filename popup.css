@@ -597,6 +597,14 @@ h4 {
     transition: 200ms;
 }
 
+.footer:hover {
+    background: #9d86c3;
+}
+
+.footer:hover .socials {
+    box-shadow: none;
+}
+
 .socials {
     background: #525252;
     box-shadow: 0 4px 4px -2px #000;
@@ -608,10 +616,6 @@ h4 {
     height: 35px;
     width: 290px;
     transition: 200ms;
-}
-
-.socials:hover {
-    box-shadow: none;
 }
 
 .socials>a:hover {

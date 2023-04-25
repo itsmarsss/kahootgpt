@@ -11,9 +11,6 @@ const toggle = document.getElementById("toggle");
 const powericon = document.getElementById("power-icon");
 const tapstatus = document.getElementById("autoclick-status");
 
-const footer = document.getElementById("footer");
-const socials = document.getElementById("socials");
-
 const openaikeyinput = document.getElementById("openaikeyinput");
 const storekey = document.getElementById("storekey");
 const autohi = document.getElementById("autohighlight");
@@ -26,112 +23,14 @@ const reload = document.getElementById("reload");
 
 const extpay_life = ExtPay('kahoot-gpt');
 
-attach.addEventListener("click", function () {
-    injection.style.display = "flex";
-    var opacity = 0;
-    injection.style.opacity = opacity;
-    var fadeEffect = setInterval(function () {
-        if (injection.style.opacity < 1) {
-            opacity += 0.1;
-            injection.style.opacity = opacity;
-        } else {
-            clearInterval(fadeEffect);
-        }
-    }, 12);
-    getCurrentTab().then((tab) => {
-        const { id, url } = tab;
-        chrome.tabs.sendMessage(id, { type: "ping" }, function (response) {
-            if (!chrome.runtime.lastError) {
-                console.log("Already injected");
+var toggled = false;
 
-                var val = response.value || {};
+var kahootId;
 
-                if (val.toString() == "true") {
-                    toggleAutoTap();
-                }
-
-                var fadeEffect = setInterval(function () {
-                    if (!injection.style.opacity) {
-                        injection.style.opacity = 1;
-                    }
-                    if (injection.style.opacity > 0) {
-                        injection.style.opacity -= 0.1;
-                    } else {
-                        clearInterval(fadeEffect);
-                        injection.style.display = "none";
-                    }
-                }, 25);
-
-                kahootId = id;
-
-                checkbox.click();
-
-                getAPIKey();
-                getImport();
-            } else {
-                console.log("Not injected; preparing injection");
-
-                if (systest) {
-                    callKahootGPT(tab);
-                } else {
-                    var fadeEffect = setInterval(function () {
-                        if (!injection.style.opacity) {
-                            injection.style.opacity = 1;
-                        }
-                        if (injection.style.opacity > 0) {
-                            injection.style.opacity -= 0.1;
-                        } else {
-                            clearInterval(fadeEffect);
-                            injection.style.display = "none";
-                        }
-                    }, 25);
-                }
-                systest = true;
-            }
-        });
-    });
-});
-
-reload.addEventListener("click", function () {
-    chrome.tabs.reload(kahootId);
-});
-
-socials.addEventListener("mouseover", function () {
-    footer.style.background = "#9d86c3";
-});
-
-socials.addEventListener("mouseout", function () {
-    footer.style.background = "#525252";
-});
-
-settings.addEventListener("click", async function () {
-    if (storekey.checked) {
-        getAPIKey();
-    }
-
-    getHighlight();
-    getImport();
-
-    await sleep(500);
-
-    openaikeyinput.value = openAIKey;
-
-    autohi.checked = autoHighlight;
-    autoin.checked = autoImport;
-
-    config.style.display = "block";
-
-    var opacity = 0;
-    config.style.opacity = opacity;
-    var fadeEffect = setInterval(function () {
-        if (config.style.opacity < 1) {
-            opacity += 0.1;
-            config.style.opacity = opacity;
-        } else {
-            clearInterval(fadeEffect);
-        }
-    }, 12);
-});
+var paid = false;
+var openAIKey = "YOUR_KEY";
+var autoHighlight = false;
+var autoImport = false;
 
 function closepaypage() {
     var fadeEffect = setInterval(function () {
@@ -145,76 +44,6 @@ function closepaypage() {
             purchase.style.display = "none";
         }
     }, 12);
-}
-
-nopay.addEventListener("click", function () {
-    closepaypage();
-});
-
-closepay.addEventListener("click", function () {
-    closepaypage();
-});
-
-openaikeyinput.addEventListener("mouseover", function () {
-    openaikeyinput.type = "text";
-});
-
-openaikeyinput.addEventListener("mouseout", function () {
-    openaikeyinput.type = "password";
-});
-
-save.addEventListener("click", async function () {
-    if (storekey.checked) {
-        setAPIKey(openaikeyinput.value);
-    } else {
-        openAIKey = openaikeyinput.value;
-    }
-
-    setHighlight(autohi.checked);
-    setImport(autoin.checked);
-
-    await sleep(500);
-
-    var fadeEffect = setInterval(function () {
-        if (!config.style.opacity) {
-            config.style.opacity = 1;
-        }
-        if (config.style.opacity > 0) {
-            config.style.opacity -= 0.1;
-        } else {
-            clearInterval(fadeEffect);
-            config.style.display = "none";
-        }
-    }, 12);
-});
-
-var systest = false;
-
-var toggled = false;
-
-var kahootId;
-
-var paid = false;
-var openAIKey = "YOUR_KEY";
-var autoHighlight = false;
-var autoImport = false;
-
-function toggleAutoTap() {
-    if (toggled) {
-        checkbox.style.boxShadow = "0 4px 4px -2px #000";
-        toggle.style.background = "#525252";
-        powericon.style.fill = "#b7b7b7";
-        tapstatus.innerHTML = "Auto-tap OFF";
-        tapstatus.style.color = "#b7b7b7";
-    } else {
-        checkbox.style.boxShadow = "none";
-        toggle.style.background = "#9d86c3";
-        powericon.style.fill = "#9d86c3";
-        tapstatus.innerHTML = "Auto-tap ON";
-        tapstatus.style.color = "#864cbf";
-    }
-    toggled = !toggled;
-    console.log("Toggled: " + toggled);
 }
 
 async function callKahootGPT(tab) {
@@ -239,7 +68,7 @@ async function callKahootGPT(tab) {
         await sleep(4000);
 
         kahootId = id;
-        console.log(paid.toString());
+
         chrome.tabs.sendMessage(id, { type: "initialize", value: paid.toString() }, function (response) {
             if (response.data === "initialized") {
                 console.log("Connected to injected script");
@@ -264,14 +93,28 @@ async function callKahootGPT(tab) {
     }
 }
 
+function toggleAutoTap() {
+    if (toggled) {
+        checkbox.style.boxShadow = "0 4px 4px -2px #000";
+        toggle.style.background = "#525252";
+        powericon.style.fill = "#b7b7b7";
+        tapstatus.innerHTML = "Auto-tap OFF";
+        tapstatus.style.color = "#b7b7b7";
+    } else {
+        checkbox.style.boxShadow = "none";
+        toggle.style.background = "#9d86c3";
+        powericon.style.fill = "#9d86c3";
+        tapstatus.innerHTML = "Auto-tap ON";
+        tapstatus.style.color = "#864cbf";
+    }
+    toggled = !toggled;
+    console.log("Toggled: " + toggled);
+}
+
 async function getCurrentTab() {
     let queryOptions = { active: true, lastFocusedWindow: true };
     let [tab] = await chrome.tabs.query(queryOptions);
     return tab;
-}
-
-const sleep = (milliseconds) => {
-    return new Promise(resolve => setTimeout(resolve, milliseconds))
 }
 
 function setAPIKey(value) {
@@ -313,6 +156,10 @@ function getImport() {
         console.log("Import queried");
         autoImport = result.import;
     });
+}
+
+const sleep = (milliseconds) => {
+    return new Promise(resolve => setTimeout(resolve, milliseconds))
 }
 
 document.getElementById("privacy").addEventListener("click", function () {
@@ -361,8 +208,96 @@ extpay_life.getUser().then(user_life => {
     document.querySelector('p').innerHTML = "Error fetching data :("
 });
 
+
+attach.addEventListener("click", function () {
+    injection.style.display = "flex";
+    var opacity = 0;
+    injection.style.opacity = opacity;
+    var fadeEffect = setInterval(function () {
+        if (injection.style.opacity < 1) {
+            opacity += 0.1;
+            injection.style.opacity = opacity;
+        } else {
+            clearInterval(fadeEffect);
+        }
+    }, 12);
+    getCurrentTab().then((tab) => {
+        const { id, url } = tab;
+        chrome.tabs.sendMessage(id, { type: "ping" }, function (response) {
+            if (!chrome.runtime.lastError) {
+                console.log("Already injected");
+
+                var val = response.value || {};
+
+                if (val.toString() == "true") {
+                    toggleAutoTap();
+                }
+
+                var fadeEffect = setInterval(function () {
+                    if (!injection.style.opacity) {
+                        injection.style.opacity = 1;
+                    }
+                    if (injection.style.opacity > 0) {
+                        injection.style.opacity -= 0.1;
+                    } else {
+                        clearInterval(fadeEffect);
+                        injection.style.display = "none";
+                    }
+                }, 25);
+
+                kahootId = id;
+
+                getAPIKey();
+                getImport();
+            } else {
+                console.log("Not injected; preparing injection");
+                callKahootGPT(tab);
+            }
+        });
+    });
+});
+
+reload.addEventListener("click", function () {
+    chrome.tabs.reload(kahootId);
+});
+
+settings.addEventListener("click", async function () {
+    if (storekey.checked) {
+        getAPIKey();
+    }
+
+    getHighlight();
+    getImport();
+
+    await sleep(500);
+
+    openaikeyinput.value = openAIKey;
+
+    autohi.checked = autoHighlight;
+    autoin.checked = autoImport;
+
+    config.style.display = "block";
+
+    var opacity = 0;
+    config.style.opacity = opacity;
+    var fadeEffect = setInterval(function () {
+        if (config.style.opacity < 1) {
+            opacity += 0.1;
+            config.style.opacity = opacity;
+        } else {
+            clearInterval(fadeEffect);
+        }
+    }, 12);
+});
+
+nopay.addEventListener("click", function () {
+    closepaypage();
+});
+
+closepay.addEventListener("click", function () {
+    closepaypage();
+});
+
 const manifest = chrome.runtime.getManifest();
 console.log("Version: v" + manifest.version);
 document.getElementById("KahootGPT").innerHTML = `KahootGPT v${manifest.version}`;
-
-attach.click();
