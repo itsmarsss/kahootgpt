@@ -484,8 +484,10 @@ h4 {
 }
 
 .autoclick {
+    float: left;
     width: 100px;
     margin: auto;
+    margin-left: 20px;
 }
 
 .toggle {
@@ -529,6 +531,58 @@ h4 {
 #autoclick-status {
     font-weight: 50rem;
     font-size: x-small;
+}
+
+.control {
+    margin-top: 5px;
+    float: right;
+    width: 175px;
+}
+
+.btn {
+    width: 125px;
+    height: 30px;
+    margin-bottom: 10px;
+    margin-left: 25px;
+    border-radius: 5px;
+    border: none;
+    font-size: 15px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #525252;
+    color: #fff;
+    transition: 200ms;
+}
+
+.btn:active {
+    background: #404040;
+}
+
+.btn .icon {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: 500ms;
+    transform: translateX(-55px);
+    opacity: 0;
+}
+
+.btn:hover .icon {
+    transform: translateY(0px);
+    opacity: 1;
+}
+
+.btn:hover .text {
+    transition: 300ms;
+    opacity: 0;
+}
+
+.btn:active .icon {
+    transform: scale(0.85);
 }
 
 .footer {
