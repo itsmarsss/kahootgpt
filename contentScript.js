@@ -80,7 +80,6 @@ function autotap(val) {
 function ping() {
     console.log("Got pinged");
     createAlert("<strong>KahootGPT Connected!</strong> ContentScript connected to PopupScript.", "#2eb886");
-    querycounttemp = querycount;
 }
 function tap(val) {
     console.log("Click-ans:" + val);
@@ -434,7 +433,7 @@ kgptmini.innerHTML =
         }
 
         .checkbox:hover .power-icon {
-            fill: #8871ad;
+            fill: #8871ad !important;
             filter: drop-shadow(0px 0px 3px #8871ade7);
         }
 
@@ -599,8 +598,7 @@ kgptmini.innerHTML =
             align-items: center;
             justify-content: center;
         }
-    </style>
-    <style id="insitecss">
+
         kahoot-gpt-in-site {
             z-index: 100;
             top: 0px;
