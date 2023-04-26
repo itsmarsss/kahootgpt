@@ -68,7 +68,6 @@ function initialize(val) {
     paid = val.toString() === "true";
 
     container.style.display = "flex";
-    querycounttemp = querycount;
 
     autotapsetup();
     createAlert("<strong>KahootGPT Initialized!</strong> ContentScript initialized connection to PopupScript.", "#2eb886");
@@ -705,6 +704,8 @@ const rhombus_cont = document.getElementsByClassName("rhombus")[0];
 const circle_cont = document.getElementsByClassName("circle")[0];
 const square_cont = document.getElementsByClassName("square")[0];
 
+var minikgpttoggled = false;
+
 var openAIKey = "YOUR_KEY";
 var autoHighlight = false;
 var autoImport = false;
@@ -716,7 +717,7 @@ var getters = setInterval(function () {
 }, 500);
 
 function toggleAutoTap() {
-    if (toggled) {
+    if (minikgpttoggled) {
         checkbox.style.boxShadow = "0 4px 4px -2px #000";
         toggle.style.background = "#525252";
         powericon.style.fill = "#b7b7b7";
@@ -729,7 +730,8 @@ function toggleAutoTap() {
         tapstatus.innerHTML = "Auto-tap ON";
         tapstatus.style.color = "#864cbf";
     }
-    toggled = !toggled;
+    minikgpttoggled = !minikgpttoggled;
+    toggled = minikgpttoggled;
     console.log("Auto-tap: " + toggled);
     createAlert("<strong>KahootGPT Info!</strong> Auto-tap set to <u><i>" + toggled.toString() + "</i></u>", "#46a8f5");
 }
@@ -886,7 +888,7 @@ function getImport() {
 
 function runQuery() {
     var checkForNewQuestion = setInterval(function () {
-        if (toggled != minitoggled) {
+        if (toggled != minikgpttoggled) {
             toggleAutoTap();
         }
 
@@ -915,8 +917,6 @@ function autotapsetup() {
     if (paid) {
         checkbox.addEventListener("click", function () {
             toggleAutoTap();
-
-            console.log("Auto-tap: " + toggled);
         });
     } else {
         checkbox.addEventListener("click", function () {

@@ -44,13 +44,6 @@ async function callKahootGPT(tab) {
 
         getImport();
 
-        toggled = true;
-        checkbox.style.boxShadow = "none";
-        toggle.style.background = "#9d86c3";
-        powericon.style.fill = "#9d86c3";
-        tapstatus.innerHTML = "Auto-tap ON";
-        tapstatus.style.color = "#864cbf";
-
         await sleep(4000);
 
         kahootId = id;
@@ -74,6 +67,10 @@ async function callKahootGPT(tab) {
                 injection.style.display = "none";
             }
         }, 25);
+
+        if (!toggled) {
+            checkbox.click();
+        }
 
         openAIKey = getAPIKey();
     }
