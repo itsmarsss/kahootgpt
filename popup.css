@@ -535,19 +535,18 @@ h4 {
 }
 
 .control {
-    margin-top: 5px;
     float: right;
     width: 175px;
 }
 
 .btn {
     width: 125px;
-    height: 30px;
-    margin-bottom: 10px;
+    height: 25px;
+    margin-bottom: 5px;
     margin-left: 25px;
     border-radius: 5px;
     border: none;
-    font-size: 15px;
+    font-size: 12px;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     font-weight: bold;
     display: flex;
@@ -568,13 +567,15 @@ h4 {
     justify-content: center;
     align-items: center;
     transition: 500ms;
-    transform: translateX(-55px);
-    opacity: 0;
+    transform: translateX(-32px);
 }
 
 .btn:hover .icon {
     transform: translateY(0px);
-    opacity: 1;
+}
+
+.btn .text {
+    padding-left: 13px;
 }
 
 .btn:hover .text {

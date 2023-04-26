@@ -19,7 +19,6 @@ const save = document.getElementById("save");
 
 const attach = document.getElementById("attach");
 const detach = document.getElementById("detach");
-const reload = document.getElementById("reload");
 
 const extpay_life = ExtPay('kahoot-gpt');
 
@@ -250,10 +249,6 @@ attach.addEventListener("click", function () {
 });
 
 detach.addEventListener("click", function () {
-    chrome.tabs.reload(kahootId);
-});
-
-reload.addEventListener("click", function () {
     chrome.tabs.reload(kahootId);
 });
 
