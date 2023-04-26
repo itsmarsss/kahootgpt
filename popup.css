@@ -587,6 +587,62 @@ h4 {
     transform: scale(0.85);
 }
 
+.logs {
+    height: 56px;
+    width: 160px;
+    margin-left: 5px;
+    border: 1px solid #2b2d31;
+    border-radius: 5px;
+    background: #313338;
+}
+
+.console {
+    margin-left: 5px;
+    display: flex;
+    flex-direction: column;
+    height: 56px;
+    width: 153px;
+    border: none;
+    outline: none;
+    resize: none;
+    background: transparent;
+    font-family: Consolas, Liberation Mono, Menlo, Courier, monospace;
+    overflow-y: scroll;
+}
+
+.console::-webkit-scrollbar {
+    width: 4px;
+}
+
+.console::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.console::-webkit-scrollbar-thumb {
+    background: #1a1b1e;
+    border-radius: 2px;
+}
+
+.console span {
+    text-align: left;
+}
+
+.error {
+    color: #f04747;
+}
+
+.log {
+    color: #00b0f4;
+}
+
+.debug {
+    color: #dbdee1;
+}
+
+.verb {
+    color: #72767d;
+}
+
 .footer {
     height: 45px;
     width: 300px;
