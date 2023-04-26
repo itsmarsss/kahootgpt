@@ -162,7 +162,7 @@ const sleep = (milliseconds) => {
     return new Promise(resolve => setTimeout(resolve, milliseconds))
 }
 
-document.getElementsByClassName('life')[0].addEventListener('click', extpay_life.openPaymentPage());
+document.getElementsByClassName('life')[0].addEventListener('click', extpay_life.openPaymentPage);
 
 extpay_life.getUser().then(user_life => {
     if (user_life.paid) {
