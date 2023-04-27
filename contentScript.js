@@ -135,8 +135,9 @@ function highlight(val) {
             document.querySelectorAll('[data-functional-selector="answer-3"]')[0].style.border = "4px solid gold";
             break;
     }
-    createAlert("<strong>KahootGPT Warn!</strong> Highlighted best answer according to OpenAI: Buy Auto-tap in popup!", "#ffa92b");
-
+    if (!paid) {
+        createAlert("<strong>KahootGPT Warn!</strong> Highlighted best answer according to OpenAI: Buy Auto-tap in popup!", "#ffa92b");
+    }
 }
 function query() {
     if (ques === "") {
@@ -207,6 +208,10 @@ kgpt-alert-${id} {
 }
 
 var checkForNewQuestion = setInterval(function () {
+    if (toggled != minikgpttoggled) {
+        toggleAutoTap();
+    }
+
     var question = "";
 
     try {
@@ -250,6 +255,8 @@ var checkForNewQuestion = setInterval(function () {
         "Yellow: " + yellow + "\n" +
         "Green: " + green
     );
+
+    runQuery();
 }, 25);
 
 const sleep = (milliseconds) => {
@@ -885,30 +892,24 @@ function getImport() {
 }
 
 function runQuery() {
-    var checkForNewQuestion = setInterval(function () {
-        if (toggled != minikgpttoggled) {
-            toggleAutoTap();
+    if (autoImport) {
+        var response = query();
+        if (response.success) {
+            var ques = response.q || "";
+            var red = response.r || "";
+            var blue = response.b || "";
+            var yellow = response.y || "";
+            var green = response.g || "";
+
+            question.value = ques;
+            triangle.value = red;
+            rhombus.value = blue;
+            circle.value = yellow;
+            square.value = green;
+
+            queryGPT();
         }
-
-        if (autoImport) {
-            var response = query();
-            if (response.success) {
-                var ques = response.q || "";
-                var red = response.r || "";
-                var blue = response.b || "";
-                var yellow = response.y || "";
-                var green = response.g || "";
-
-                question.value = ques;
-                triangle.value = red;
-                rhombus.value = blue;
-                circle.value = yellow;
-                square.value = green;
-
-                queryGPT();
-            }
-        }
-    }, 25);
+    }
 }
 
 function autotapsetup() {
