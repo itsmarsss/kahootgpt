@@ -53,12 +53,18 @@ chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
             break;
         case "setapikey":
             setAPIKey(val);
+            sendResponse({ value: toggled.toString(), success: true });
             break;
         case "sethighlight":
             setHighlight(val);
+            sendResponse({ value: toggled.toString(), success: true });
             break;
         case "setimport":
             setImport(val);
+            sendResponse({ value: toggled.toString(), success: true });
+            break;
+        case "checkup":
+            sendResponse({ value: toggled.toString(), success: true });
             break;
     }
 });
@@ -71,6 +77,11 @@ function initialize(val) {
     container.style.display = "flex";
 
     autotapsetup();
+
+    getAPIKey();
+    getHighlight();
+    getImport();
+
     createAlert("<strong>KahootGPT Initialized!</strong> ContentScript initialized connection to PopupScript.", "#2eb886");
 }
 function autotap(val) {
@@ -170,6 +181,24 @@ function setImport(val) {
     console.log("Import: " + val.toString());
     autoImport = val.toString() === "true";
     createAlert("<strong>KahootGPT Settings!</strong> Import answer set to <u><i>" + val.toString() + "</i></u>.", "#46a8f5");
+}
+
+function getAPIKey() {
+    chrome.storage.local.get(["key"], function (result) {
+        openAIKey = result.key;
+    });
+}
+
+function getHighlight() {
+    chrome.storage.local.get(["highlight"], function (result) {
+        autoHighlight = result.highlight;
+    });
+}
+
+function getImport() {
+    chrome.storage.local.get(["import"], function (result) {
+        autoImport = result.import;
+    });
 }
 
 async function createAlert(text, color) {

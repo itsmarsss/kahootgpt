@@ -24,7 +24,9 @@ const extpay_life = ExtPay('kahoot-gpt');
 
 var toggled = false;
 
-var kahootId;
+var kahootId = 0;
+
+var attached = false;
 
 var paid = false;
 var openAIKey = "YOUR_KEY";
@@ -46,6 +48,7 @@ async function callKahootGPT(tab) {
         await sleep(4000);
 
         kahootId = id;
+        attached = true;
 
         chrome.tabs.sendMessage(id, { type: "initialize", value: paid.toString() }, function (response) {
             if (response.data === "initialized") {
@@ -200,7 +203,6 @@ extpay_life.getUser().then(user_life => {
     document.querySelector('p').innerHTML = "Error fetching data :("
 });
 
-
 attach.addEventListener("click", function () {
     injection.style.display = "flex";
     var opacity = 0;
@@ -238,6 +240,7 @@ attach.addEventListener("click", function () {
                 }, 25);
 
                 kahootId = id;
+                attached = true;
 
                 getAPIKey();
                 getImport();
@@ -324,6 +327,21 @@ save.addEventListener("click", async function () {
         }
     }, 12);
 });
+
+var checkAvailability = setInterval(function () {
+    chrome.tabs.sendMessage(
+        kahootId,
+        { type: "checkup", value: openAIKey },
+        (result) => {
+            if (!window.chrome.runtime.lastError) {
+                // message processing code goes here
+            } else {
+                console.log("Disconnected");
+                attached = false;
+                // Disable screen
+            }
+        });
+}, 100);
 
 nopay.addEventListener("click", function () {
     closepaypage();
