@@ -116,6 +116,7 @@ async function getCurrentTab() {
 function setAPIKey(value) {
     chrome.storage.local.set({ key: value }, function () {
         console.log("Key setted");
+        openAIKey = value;
     });
 }
 
@@ -283,20 +284,23 @@ settings.addEventListener("click", async function () {
 
 save.addEventListener("click", async function () {
     if (storekey.checked) {
-        setAPIKey(openaikeyinput.value);
+        if (openaikeyinput.value != openAIKey) {
+            setAPIKey(openaikeyinput.value);
+            chrome.tabs.sendMessage(kahootId, { type: "setapikey", value: openAIKey }, function (response) { });
+        }
+
     } else {
         openAIKey = openaikeyinput.value;
     }
 
-    chrome.tabs.sendMessage(id, { type: "apikey", value: openAIKey }, function (response) { });
 
     if (autohi.checked != autoHighlight) {
         setHighlight(autohi.checked);
-        chrome.tabs.sendMessage(id, { type: "highlight", value: autoHighlight }, function (response) { });
+        chrome.tabs.sendMessage(kahootId, { type: "sethighlight", value: autoHighlight }, function (response) { });
     }
     if (autoin.checked != autoImport) {
         setImport(autoin.checked);
-        chrome.tabs.sendMessage(id, { type: "import", value: autoImport }, function (response) { });
+        chrome.tabs.sendMessage(kahootId, { type: "setimport", value: autoImport }, function (response) { });
     }
 
     await sleep(500);

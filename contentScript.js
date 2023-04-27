@@ -35,14 +35,6 @@ chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
             ping();
             sendResponse({ value: toggled.toString(), success: true });
             break;
-        case "tap":
-            tap(val);
-            sendResponse({ value: toggled.toString(), success: true });
-            break;
-        case "highlight":
-            highlight(val)
-            sendResponse({ value: toggled.toString(), success: true });
-            break;
         case "query":
             if (ques === "") {
                 sendResponse({ success: false });
@@ -59,13 +51,13 @@ chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
             error(val.toString(), "KahootGPT");
             sendResponse({ value: toggled.toString(), success: true });
             break;
-        case "apikey":
+        case "setapikey":
             setAPIKey(val);
             break;
-        case "highlight":
+        case "sethighlight":
             setHighlight(val);
             break;
-        case "import":
+        case "setimport":
             setImport(val);
             break;
     }
