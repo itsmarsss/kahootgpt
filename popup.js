@@ -281,6 +281,39 @@ settings.addEventListener("click", async function () {
     }, 12);
 });
 
+save.addEventListener("click", async function () {
+    if (storekey.checked) {
+        setAPIKey(openaikeyinput.value);
+    } else {
+        openAIKey = openaikeyinput.value;
+    }
+
+    chrome.tabs.sendMessage(id, { type: "apikey", value: openAIKey }, function (response) { });
+
+    if (autohi.checked != autoHighlight) {
+        setHighlight(autohi.checked);
+        chrome.tabs.sendMessage(id, { type: "highlight", value: autoHighlight }, function (response) { });
+    }
+    if (autoin.checked != autoImport) {
+        setImport(autoin.checked);
+        chrome.tabs.sendMessage(id, { type: "import", value: autoImport }, function (response) { });
+    }
+
+    await sleep(500);
+
+    var fadeEffect = setInterval(function () {
+        if (!config.style.opacity) {
+            config.style.opacity = 1;
+        }
+        if (config.style.opacity > 0) {
+            config.style.opacity -= 0.1;
+        } else {
+            clearInterval(fadeEffect);
+            config.style.display = "none";
+        }
+    }, 12);
+});
+
 nopay.addEventListener("click", function () {
     closepaypage();
 });
