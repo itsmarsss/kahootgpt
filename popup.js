@@ -282,13 +282,20 @@ settings.addEventListener("click", async function () {
     }, 12);
 });
 
+openaikeyinput.addEventListener("mouseover", function () {
+    openaikeyinput.type = "text";
+});
+
+openaikeyinput.addEventListener("mouseout", function () {
+    openaikeyinput.type = "password";
+});
+
 save.addEventListener("click", async function () {
     if (storekey.checked) {
         if (openaikeyinput.value != openAIKey) {
             setAPIKey(openaikeyinput.value);
-            chrome.tabs.sendMessage(kahootId, { type: "setapikey", value: openAIKey }, function (response) { });
+            chrome.tabs.sendMessage(kahootId, { type: "setapikey", value: openaikeyinput.value }, function (response) { });
         }
-
     } else {
         openAIKey = openaikeyinput.value;
     }
@@ -296,11 +303,11 @@ save.addEventListener("click", async function () {
 
     if (autohi.checked != autoHighlight) {
         setHighlight(autohi.checked);
-        chrome.tabs.sendMessage(kahootId, { type: "sethighlight", value: autoHighlight }, function (response) { });
+        chrome.tabs.sendMessage(kahootId, { type: "sethighlight", value: autohi.checked.toString() }, function (response) { });
     }
     if (autoin.checked != autoImport) {
         setImport(autoin.checked);
-        chrome.tabs.sendMessage(kahootId, { type: "setimport", value: autoImport }, function (response) { });
+        chrome.tabs.sendMessage(kahootId, { type: "setimport", value: autoin.checked.toString() }, function (response) { });
     }
 
     await sleep(500);
