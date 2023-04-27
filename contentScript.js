@@ -59,6 +59,15 @@ chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
             error(val.toString(), "KahootGPT");
             sendResponse({ value: toggled.toString(), success: true });
             break;
+        case "apikey":
+            setAPIKey(val);
+            break;
+        case "highlight":
+            setHighlight(val);
+            break;
+        case "import":
+            setImport(val);
+            break;
     }
 });
 
@@ -75,7 +84,7 @@ function initialize(val) {
 function autotap(val) {
     console.log("Auto-tap: " + val.toString());
     toggled = val.toString() === "true";
-    createAlert("<strong>KahootGPT Info!</strong> Auto-tap set to <i>" + toggled.toString() + "</i>", "#46a8f5");
+    createAlert("<strong>KahootGPT Info!</strong> Auto-tap set to <u><i>" + toggled.toString() + "</i></u>", "#46a8f5");
 }
 function ping() {
     console.log("Got pinged");
@@ -154,6 +163,21 @@ function query() {
 function error(val, source) {
     console.log("Error thrown: " + val.toString());
     createAlert("<strong>" + source.toString() + " Error!</strong> " + val.toString() + ".", "#f66358");
+}
+function setAPIKey(val) {
+    console.log("OpenAI Key: [Redacted]");
+    openAIKey = val.toString();
+    createAlert("<strong>KahootGPT Settings!</strong> Your OpenAI key has been updated.", "#46a8f5");
+}
+function setHighlight(val) {
+    console.log("Highlight: " + val.toString());
+    autoHighlight = val.toString() === "true";
+    createAlert("<strong>KahootGPT Settings!</strong> Highlight answer set to <u><i>" + val.toString() + "</i></u>.", "#46a8f5");
+}
+function setImport(val) {
+    console.log("Import: " + val.toString());
+    autoImport = val.toString() === "true";
+    createAlert("<strong>KahootGPT Settings!</strong> Import answer set to <u><i>" + val.toString() + "</i></u>.", "#46a8f5");
 }
 
 async function createAlert(text, color) {
@@ -715,12 +739,6 @@ var openAIKey = "YOUR_KEY";
 var autoHighlight = false;
 var autoImport = false;
 
-var getters = setInterval(function () {
-    getAPIKey();
-    getHighlight();
-    getImport();
-}, 500);
-
 function toggleAutoTap() {
     if (minikgpttoggled) {
         checkbox.style.boxShadow = "0 4px 4px -2px #000";
@@ -871,24 +889,6 @@ async function getAnswerWithAnswer(query, triangle, rhombus, circle, square) {
             console.log("OpenAI Error: " + err.message.toString());
             error(err.message.toString(), "OpenAI");
         });
-}
-
-function getAPIKey() {
-    chrome.storage.local.get(["key"], function (result) {
-        openAIKey = result.key;
-    });
-}
-
-function getHighlight() {
-    chrome.storage.local.get(["highlight"], function (result) {
-        autoHighlight = result.highlight;
-    });
-}
-
-function getImport() {
-    chrome.storage.local.get(["import"], function (result) {
-        autoImport = result.import;
-    });
 }
 
 function runQuery() {
