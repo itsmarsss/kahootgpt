@@ -7,13 +7,9 @@ green/square: sc-xyEjG cmcjVO sc-eUWgFQ ktBGGk
 */
 
 var kgptmini = false;
+
 var paid = false;
 var toggled = false;
-var done = false;
-var init = false;
-var disalerted = false;
-var querycount = 0;
-var querycounttemp = 0;
 
 let ques = "";
 let red = "";
@@ -28,48 +24,15 @@ chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
 
     switch (type) {
         case "initialize":
-            console.log("Auto-tap-paid-" + paid.toString());
-            paid = val.toString() === 'true';
-            initialize();
-            container.style.display = "flex";
+            initialize(val);
             sendResponse({ value: "initialized", success: true });
             break;
         case "autotap":
-            console.log("Auto-tap-" + val.toString());
+            autotap(val);
             sendResponse({ value: "autotap-" + val.toString(), success: true });
-            toggled = val.toString() === 'true';
-            if (init) {
-                createAlert("<strong>KahootGPT Info!</strong> Auto-tap set to <i>" + toggled.toString() + "</i>", "#46a8f5");
-            }
-            init = true;
-            if (toggled) {
-                checkbox.addEventListener("click", function () {
-                    toggleAutoTap();
-
-                    console.log("Auto-tap: Toggled");
-                });
-            } else {
-                checkbox.addEventListener("click", function () {
-                    checkbox.style.boxShadow = "none";
-                    toggle.style.background = "#ff9494";
-                    powericon.style.fill = "#ff9494";
-                    tapstatus.innerHTML = "Auto-tap ERROR";
-                    tapstatus.style.color = "#ff9494";
-
-                    console.log("Auto-tap: Not paid");
-                });
-            }
             break;
         case "ping":
             ping();
-            sendResponse({ value: toggled.toString(), success: true });
-            break;
-        case "tap":
-            tap(val);
-            sendResponse({ value: toggled.toString(), success: true });
-            break;
-        case "highlight":
-            highlight(val)
             sendResponse({ value: toggled.toString(), success: true });
             break;
         case "query":
@@ -83,27 +46,55 @@ chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
                     sendResponse({ success: false });
                 }
             }
-            querycount++;
             break;
         case "error":
-            error(val);
+            error(val.toString(), "KahootGPT");
+            sendResponse({ value: toggled.toString(), success: true });
+            break;
+        case "setapikey":
+            setAPIKey(val);
+            sendResponse({ value: toggled.toString(), success: true });
+            break;
+        case "sethighlight":
+            setHighlight(val);
+            sendResponse({ value: toggled.toString(), success: true });
+            break;
+        case "setimport":
+            setImport(val);
+            sendResponse({ value: toggled.toString(), success: true });
+            break;
+        case "checkup":
             sendResponse({ value: toggled.toString(), success: true });
             break;
     }
 });
 
-function initialize() {
+function initialize(val) {
     console.log("Connected to popup script");
+    console.log("Paid-feature: " + val.toString());
+    paid = val.toString() === "true";
+
+    container.style.display = "flex";
+
+    autotapsetup();
+
+    getAPIKey();
+    getHighlight();
+    getImport();
+
     createAlert("<strong>KahootGPT Initialized!</strong> ContentScript initialized connection to PopupScript.", "#2eb886");
-    querycounttemp = querycount;
+}
+function autotap(val) {
+    console.log("Auto-tap: " + val.toString());
+    toggled = val.toString() === "true";
+    createAlert("<strong>KahootGPT Info!</strong> Auto-tap set to <u><i>" + toggled.toString() + "</i></u>", "#46a8f5");
 }
 function ping() {
     console.log("Got pinged");
     createAlert("<strong>KahootGPT Connected!</strong> ContentScript connected to PopupScript.", "#2eb886");
-    querycounttemp = querycount;
 }
-function tap() {
-    console.log("Ans:" + val);
+function tap(val) {
+    console.log("Click-ans:" + val);
     switch (val) {
         case "a":
             console.log("triangle");
@@ -137,7 +128,7 @@ function tap() {
     createAlert("<strong>KahootGPT Info!</strong> Clicked best answer according to OpenAI.", "#46a8f5");
 }
 function highlight(val) {
-    console.log("Ans:" + val);
+    console.log("Highlight-ans:" + val);
     switch (val) {
         case "a":
             console.log("triangle");
@@ -156,12 +147,11 @@ function highlight(val) {
             document.querySelectorAll('[data-functional-selector="answer-3"]')[0].style.border = "4px solid gold";
             break;
     }
-    createAlert("<strong>KahootGPT Warn!</strong> Highlighted best answer according to OpenAI: Buy Auto-tap in popup!", "#ffa92b");
-
+    if (!paid) {
+        createAlert("<strong>KahootGPT Warn!</strong> Highlighted best answer according to OpenAI: Buy Auto-tap in popup!", "#ffa92b");
+    }
 }
 function query() {
-    querycount++;
-
     if (ques === "") {
         return { success: false };
     } else {
@@ -173,14 +163,47 @@ function query() {
         }
     }
 }
-function error(val) {
-    console.log("Error sent: " + val.toString());
-    createAlert("<strong>KahootGPT Error!</strong> " + val.toString() + ".", "#f66358");
+function error(val, source) {
+    console.log("Error thrown: " + val.toString());
+    createAlert("<strong>" + source.toString() + " Error!</strong> " + val.toString() + ".", "#f66358");
+}
+function setAPIKey(val) {
+    console.log("OpenAI Key: [Redacted]");
+    openAIKey = val.toString();
+    createAlert("<strong>KahootGPT Settings!</strong> Your OpenAI key has been updated.", "#46a8f5");
+}
+function setHighlight(val) {
+    console.log("Highlight: " + val.toString());
+    autoHighlight = val.toString() === "true";
+    createAlert("<strong>KahootGPT Settings!</strong> Highlight answer set to <u><i>" + val.toString() + "</i></u>.", "#46a8f5");
+}
+function setImport(val) {
+    console.log("Import: " + val.toString());
+    autoImport = val.toString() === "true";
+    createAlert("<strong>KahootGPT Settings!</strong> Import answer set to <u><i>" + val.toString() + "</i></u>.", "#46a8f5");
+}
+
+function getAPIKey() {
+    chrome.storage.local.get(["key"], function (result) {
+        openAIKey = result.key;
+    });
+}
+
+function getHighlight() {
+    chrome.storage.local.get(["highlight"], function (result) {
+        autoHighlight = result.highlight;
+    });
+}
+
+function getImport() {
+    chrome.storage.local.get(["import"], function (result) {
+        autoImport = result.import;
+    });
 }
 
 async function createAlert(text, color) {
-    var id = Date.now().toString();
-    var alert = document.createElement('kgpt-alert-' + id);
+    const id = Date.now().toString();
+    var alert = document.createElement("kgpt-alert-" + id);
 
     alert.innerHTML = `
 <div id="alert-${id}">
@@ -230,17 +253,8 @@ kgpt-alert-${id} {
 }
 
 var checkForNewQuestion = setInterval(function () {
-    if (querycounttemp > querycount + 10) {
-        if (!disalerted) {
-            if (done) {
-                createAlert("<strong>KahootGPT Warn!</strong> Popup terminated connection.", "#ffa92b");
-            }
-            done = true;
-        }
-        disalerted = true;
-    } else {
-        querycounttemp++;
-        disalerted = false;
+    if (toggled != minikgpttoggled) {
+        toggleAutoTap();
     }
 
     var question = "";
@@ -276,19 +290,25 @@ var checkForNewQuestion = setInterval(function () {
     } catch (err) {
         green = "";
     }
-    console.log(ques);
-    console.log(red);
-    console.log(blue);
-    console.log(yellow);
-    console.log(green);
+
     sent = false;
+
+    console.log(
+        "Question: " + ques + "\n" +
+        "Red: " + red + "\n" +
+        "Blue: " + blue + "\n" +
+        "Yellow: " + yellow + "\n" +
+        "Green: " + green
+    );
+
+    runQuery();
 }, 25);
 
 const sleep = (milliseconds) => {
     return new Promise(resolve => setTimeout(resolve, milliseconds))
 }
 
-var kgptmini = document.createElement("asd");
+var kgptmini = document.createElement("kahoot-gpt");
 kgptmini.innerHTML =
     `
 <kahoot-gpt-in-site>
@@ -465,7 +485,7 @@ kgptmini.innerHTML =
         }
 
         .checkbox:hover .power-icon {
-            fill: #8871ad;
+            fill: #8871ad !important;
             filter: drop-shadow(0px 0px 3px #8871ade7);
         }
 
@@ -630,8 +650,7 @@ kgptmini.innerHTML =
             align-items: center;
             justify-content: center;
         }
-    </style>
-    <style id="insitecss">
+
         kahoot-gpt-in-site {
             z-index: 100;
             top: 0px;
@@ -723,6 +742,7 @@ const tapstatus = document.getElementById("autoclick-status");
 
 const question = document.getElementById("question-kgpt");
 const search = document.getElementById("search-icon");
+const clear = document.getElementById("clear");
 
 const triangle = document.getElementById("answer-triangle");
 const rhombus = document.getElementById("answer-rhombus");
@@ -734,23 +754,14 @@ const rhombus_cont = document.getElementsByClassName("rhombus")[0];
 const circle_cont = document.getElementsByClassName("circle")[0];
 const square_cont = document.getElementsByClassName("square")[0];
 
-const clear = document.getElementById("clear");
-
-var getters = setInterval(function () {
-    getAPIKey();
-    getHighlight();
-    getImport();
-}, 500);
-
-
-var minitoggled = false;
+var minikgpttoggled = false;
 
 var openAIKey = "YOUR_KEY";
 var autoHighlight = false;
 var autoImport = false;
 
 function toggleAutoTap() {
-    if (minitoggled) {
+    if (minikgpttoggled) {
         checkbox.style.boxShadow = "0 4px 4px -2px #000";
         toggle.style.background = "#525252";
         powericon.style.fill = "#b7b7b7";
@@ -763,21 +774,11 @@ function toggleAutoTap() {
         tapstatus.innerHTML = "Auto-tap ON";
         tapstatus.style.color = "#864cbf";
     }
-    minitoggled = !minitoggled;
-    toggled = minitoggled;
-    console.log("Toggled: " + minitoggled);
-    createAlert("<strong>KahootGPT Info!</strong> Auto-tap set to <i>" + toggled.toString() + "</i>", "#46a8f5");
+    minikgpttoggled = !minikgpttoggled;
+    toggled = minikgpttoggled;
+    console.log("Auto-tap: " + toggled);
+    createAlert("<strong>KahootGPT Info!</strong> Auto-tap set to <u><i>" + toggled.toString() + "</i></u>", "#46a8f5");
 }
-
-question.addEventListener('keypress', function (e) {
-    if (e.key === 'Enter') {
-        queryGPT();
-    }
-});
-
-search.addEventListener("click", function () {
-    queryGPT();
-});
 
 function queryGPT() {
     if (question.value === "") {
@@ -804,23 +805,6 @@ function queryGPT() {
         );
     }
 }
-
-clear.addEventListener("click", function () {
-    clearAll();
-});
-function clearAll() {
-    triangle_cont.style.border = "none";
-    rhombus_cont.style.border = "none";
-    circle_cont.style.border = "none";
-    square_cont.style.border = "none";
-
-    question.value = "";
-    triangle.value = "";
-    rhombus.value = "";
-    circle.value = "";
-    square.value = "";
-}
-
 
 async function getAnswerOnly(query) {
     console.log("Calling GPT3")
@@ -862,8 +846,8 @@ async function getAnswerOnly(query) {
             square.value = four;
         })
         .catch(err => {
-            console.log("KahootGPT error: " + err.message.toString());
-            error(err.message.toString());
+            console.log("OpenAI error: " + err.message.toString());
+            error(err.message.toString(), "OpenAI");
         });
 }
 
@@ -923,64 +907,36 @@ async function getAnswerWithAnswer(query, triangle, rhombus, circle, square) {
             }
         })
         .catch(err => {
-            console.log("KahootGPT error: " + err.message.toString());
-            error(err.message.toString());
+            console.log("OpenAI Error: " + err.message.toString());
+            error(err.message.toString(), "OpenAI");
         });
 }
 
-function getAPIKey() {
-    chrome.storage.local.get(["key"], function (result) {
-        openAIKey = result.key;
-    });
-}
-
-function getHighlight() {
-    chrome.storage.local.get(["highlight"], function (result) {
-        autoHighlight = result.highlight;
-    });
-}
-
-function getImport() {
-    chrome.storage.local.get(["import"], function (result) {
-        autoImport = result.import;
-    });
-}
-
 function runQuery() {
-    var checkForNewQuestion = setInterval(function () {
-        if (toggled != minitoggled) {
-            toggleAutoTap();
+    if (autoImport) {
+        var response = query();
+        if (response.success) {
+            var ques = response.q || "";
+            var red = response.r || "";
+            var blue = response.b || "";
+            var yellow = response.y || "";
+            var green = response.g || "";
+
+            question.value = ques;
+            triangle.value = red;
+            rhombus.value = blue;
+            circle.value = yellow;
+            square.value = green;
+
+            queryGPT();
         }
-
-        if (autoImport) {
-            var response = query();
-            if (response.success) {
-                var ques = response.q || "";
-                var red = response.r || "";
-                var blue = response.b || "";
-                var yellow = response.y || "";
-                var green = response.g || "";
-
-                question.value = ques;
-                triangle.value = red;
-                rhombus.value = blue;
-                circle.value = yellow;
-                square.value = green;
-
-                queryGPT();
-            }
-        }
-    }, 25);
+    }
 }
 
-async function autotapsetup() {
-    await sleep(3000);
-
+function autotapsetup() {
     if (paid) {
         checkbox.addEventListener("click", function () {
             toggleAutoTap();
-
-            console.log("Auto-tap: Toggled");
         });
     } else {
         checkbox.addEventListener("click", function () {
@@ -993,24 +949,44 @@ async function autotapsetup() {
             console.log("Auto-tap: Not paid");
         });
     }
-    checkbox.click();
 }
+
+question.addEventListener('keypress', function (e) {
+    if (e.key === 'Enter') {
+        queryGPT();
+    }
+});
+search.addEventListener("click", function () {
+    queryGPT();
+});
+
+clear.addEventListener("click", function () {
+    triangle_cont.style.border = "none";
+    rhombus_cont.style.border = "none";
+    circle_cont.style.border = "none";
+    square_cont.style.border = "none";
+
+    question.value = "";
+    triangle.value = "";
+    rhombus.value = "";
+    circle.value = "";
+    square.value = "";
+});
 
 const manifest = chrome.runtime.getManifest();
 console.log("Version: v" + manifest.version);
 document.getElementById("KahootGPT").innerHTML = "KahootGPT v" + manifest.version + " (drag me)";
 
-autotapsetup();
 runQuery();
 
 dragElement(document.getElementById("container"));
 
-function dragElement(elemnt) {
+function dragElement(element) {
     var pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
-    if (document.getElementById(elemnt.id + "header")) {
-        document.getElementById(elemnt.id + "header").onmousedown = dragMouseDown;
+    if (document.getElementById(element.id + "header")) {
+        document.getElementById(element.id + "header").onmousedown = dragMouseDown;
     } else {
-        elemnt.onmousedown = dragMouseDown;
+        element.onmousedown = dragMouseDown;
     }
 
     function dragMouseDown(e) {
@@ -1029,8 +1005,8 @@ function dragElement(elemnt) {
         pos2 = pos4 - e.clientY;
         pos3 = e.clientX;
         pos4 = e.clientY;
-        elemnt.style.top = (elemnt.offsetTop - pos2) + "px";
-        elemnt.style.left = (elemnt.offsetLeft - pos1) + "px";
+        element.style.top = (element.offsetTop - pos2) + "px";
+        element.style.left = (element.offsetLeft - pos1) + "px";
     }
 
     function closeDragElement() {

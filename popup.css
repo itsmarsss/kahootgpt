@@ -43,7 +43,9 @@ h4 {
 }
 
 .pay-title {
-    margin-top: 170px;
+    position: relative;
+    z-index: 69;
+    margin-top: 5px;
     margin-bottom: 0;
     color: #fff;
     width: 100%;
@@ -51,6 +53,8 @@ h4 {
 }
 
 .pay-subtitle {
+    position: relative;
+    z-index: 69;
     margin: 5px;
 }
 
@@ -62,6 +66,8 @@ h4 {
 }
 
 .pay-now {
+    position: relative;
+    z-index: 69;
     border: none;
     color: #fff;
     background-image: linear-gradient(30deg, #0400ff, #4ce3f7);
@@ -118,7 +124,7 @@ h4 {
 
 .nopay {
     z-index: 69;
-    left: 98px;
+    left: 108px;
     align-items: center;
     background-image: linear-gradient(144deg, #Af40ff, #5b42f3 50%, #00ddeb);
     margin: auto;
@@ -127,8 +133,8 @@ h4 {
     box-shadow: rgba(151, 65, 252, 0.2) 0 15px 30px -5px;
     color: #FFFFFF;
     display: flex;
-    font-size: 18px;
-    width: 120px;
+    font-size: 12px;
+    width: 100px;
     padding: 2px;
     cursor: pointer;
     transition: 300ms;
@@ -161,25 +167,13 @@ h4 {
 }
 
 .pay>h4 {
+    position: relative;
+    z-index: 69;
     color: #fff;
     padding-left: 15px;
     padding-right: 15px;
-    margin: 10px;
-}
-
-.pay>a {
-    color: #5fabe2;
-    transition: 200ms;
-    font-weight: bold;
-    display: none;
-}
-
-.pay>a:hover {
-    color: #45a3e5;
-}
-
-.pay>a:active {
-    color: #2d89ca;
+    font-size: 10px;
+    margin: 7px;
 }
 
 .square-pay {
@@ -188,8 +182,8 @@ h4 {
     rotate: 45deg;
     width: 200px;
     height: 200px;
-    top: -80px;
-    left: -25px;
+    top: -100px;
+    left: -45px;
     box-shadow: 0 0px 50px 0px #170334;
 }
 
@@ -199,8 +193,8 @@ h4 {
     width: 250px;
     height: 250px;
     border-radius: 50%;
-    top: 400px;
-    left: 100px;
+    top: 150px;
+    left: 150px;
     box-shadow: 0 0px 50px 0px #170334;
 }
 
@@ -210,11 +204,12 @@ h4 {
     position: absolute;
     width: 100%;
     height: 100%;
-    display: flex;
+    display: none;
     align-items: center;
     justify-content: center;
     background-color: #1e1e1e;
     z-index: 2;
+    opacity: 0;
 }
 
 .config {
@@ -484,8 +479,10 @@ h4 {
 }
 
 .autoclick {
+    float: left;
     width: 100px;
     margin: auto;
+    margin-left: 20px;
 }
 
 .toggle {
@@ -531,6 +528,115 @@ h4 {
     font-size: x-small;
 }
 
+.control {
+    float: right;
+    width: 175px;
+}
+
+.btn {
+    width: 125px;
+    height: 25px;
+    margin-bottom: 5px;
+    margin-left: 25px;
+    border-radius: 5px;
+    border: none;
+    font-size: 12px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #525252;
+    color: #fff;
+    transition: 200ms;
+}
+
+.btn:active {
+    background: #404040;
+}
+
+.btn .icon {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: 500ms;
+    transform: translateX(-32px);
+}
+
+.btn:hover .icon {
+    transform: translateY(0px);
+}
+
+.btn .text {
+    padding-left: 13px;
+}
+
+.btn:hover .text {
+    transition: 300ms;
+    opacity: 0;
+}
+
+.btn:active .icon {
+    transform: scale(0.85);
+}
+
+.logs {
+    height: 56px;
+    width: 160px;
+    margin-left: 5px;
+    border: 1px solid #2b2d31;
+    border-radius: 5px;
+    background: #313338;
+}
+
+.console {
+    margin-left: 5px;
+    display: flex;
+    flex-direction: column;
+    height: 56px;
+    width: 153px;
+    border: none;
+    outline: none;
+    resize: none;
+    background: transparent;
+    font-family: Consolas, Liberation Mono, Menlo, Courier, monospace;
+    overflow-y: scroll;
+}
+
+.console::-webkit-scrollbar {
+    width: 4px;
+}
+
+.console::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.console::-webkit-scrollbar-thumb {
+    background: #1a1b1e;
+    border-radius: 2px;
+}
+
+.console span {
+    text-align: left;
+}
+
+.error {
+    color: #f04747;
+}
+
+.log {
+    color: #00b0f4;
+}
+
+.debug {
+    color: #dbdee1;
+}
+
+.verb {
+    color: #72767d;
+}
+
 .footer {
     height: 45px;
     width: 300px;
@@ -540,6 +646,14 @@ h4 {
     align-items: center;
     justify-content: center;
     transition: 200ms;
+}
+
+.footer:hover {
+    background: #9d86c3;
+}
+
+.footer:hover .socials {
+    box-shadow: none;
 }
 
 .socials {
@@ -553,10 +667,6 @@ h4 {
     height: 35px;
     width: 290px;
     transition: 200ms;
-}
-
-.socials:hover {
-    box-shadow: none;
 }
 
 .socials>a:hover {
@@ -586,20 +696,78 @@ h4 {
     padding-top: 5px;
     bottom: 0px;
     font-size: 15px;
-    transition: 500ms;
 }
 
-.feeter:hover {
-    transform: scaleX(1.15);
-}
-
-.feeter>a {
+#privacy {
+    position: relative;
+    left: -68px;
     padding: 5px;
     text-decoration: none;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     color: #fff;
 }
 
-.feeter>a:hover {
+#privacy:hover {
+    text-decoration: underline;
+}
+
+.discord {
+    background: #f6f6f6;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    border-bottom-left-radius: 3px;
+    border-bottom-right-radius: 3px;
+    left: 98px;
+    text-align: center;
+    width: 120px;
+    position: fixed;
+    z-index: 69420;
+    color: #5865F2;
+    font-weight: bold;
+    text-decoration: none;
+    transition: 1s;
+}
+
+.discord:hover {
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    color: #6873f3;
+}
+
+.discord:active {
+    background: #99aab5;
+    color: #3f4ef4;
+}
+
+.discord:hover>* {
+    transform: scale(0.5, 0.5) translateY(0px);
+    opacity: 1;
+}
+
+.discord-widget {
+    border: solid 2px #fff;
+    border-radius: 20px;
+    z-index: 420;
+    transform: scale(0.1, 0.1) translateY(1600px);
+    opacity: 0;
+    position: fixed;
+    top: -104px;
+    left: -118px;
+    transition: 500ms ease-in-out;
+}
+
+#credit {
+    position: relative;
+    left: 79px;
+    padding: 5px;
+    text-decoration: none;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #fff;
+}
+
+#credit:hover {
+    transform: scaleX(1.15);
     text-decoration: underline;
 }
