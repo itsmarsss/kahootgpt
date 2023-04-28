@@ -43,7 +43,9 @@ h4 {
 }
 
 .pay-title {
-    margin-top: 170px;
+    position: relative;
+    z-index: 69;
+    margin-top: 5px;
     margin-bottom: 0;
     color: #fff;
     width: 100%;
@@ -51,6 +53,8 @@ h4 {
 }
 
 .pay-subtitle {
+    position: relative;
+    z-index: 69;
     margin: 5px;
 }
 
@@ -62,6 +66,8 @@ h4 {
 }
 
 .pay-now {
+    position: relative;
+    z-index: 69;
     border: none;
     color: #fff;
     background-image: linear-gradient(30deg, #0400ff, #4ce3f7);
@@ -161,25 +167,58 @@ h4 {
 }
 
 .pay>h4 {
+    position: relative;
+    z-index: 69;
     color: #fff;
     padding-left: 15px;
     padding-right: 15px;
-    margin: 10px;
+    font-size: 10px;
+    margin: 7px;
 }
 
 .pay>a {
+    background: #000;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    border-bottom-left-radius: 3px;
+    border-bottom-right-radius: 3px;
+    left: 98px;
+    text-align: center;
+    width: 120px;
+    margin-top: 40px;
+    position: fixed;
+    z-index: 69420;
     color: #5fabe2;
     transition: 200ms;
     font-weight: bold;
-    display: none;
+    text-decoration: none;
+    transition: 1s;
 }
 
 .pay>a:hover {
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
     color: #45a3e5;
 }
 
 .pay>a:active {
+    background: #333;
     color: #2d89ca;
+}
+
+.pay>a:hover>* {
+    transform: scale(0.5, 0.5) translateY(0px);
+}
+
+.discord-widget {
+    z-index: 420;
+    transform: scale(0.1, 0.1) translateY(1600px);
+    position: fixed;
+    top: -104px;
+    left: -116px;
+    transition: 500ms;
 }
 
 .square-pay {
@@ -188,8 +227,8 @@ h4 {
     rotate: 45deg;
     width: 200px;
     height: 200px;
-    top: -80px;
-    left: -25px;
+    top: -100px;
+    left: -45px;
     box-shadow: 0 0px 50px 0px #170334;
 }
 
@@ -199,8 +238,8 @@ h4 {
     width: 250px;
     height: 250px;
     border-radius: 50%;
-    top: 400px;
-    left: 100px;
+    top: 150px;
+    left: 150px;
     box-shadow: 0 0px 50px 0px #170334;
 }
 
