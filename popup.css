@@ -124,7 +124,7 @@ h4 {
 
 .nopay {
     z-index: 69;
-    left: 98px;
+    left: 108px;
     align-items: center;
     background-image: linear-gradient(144deg, #Af40ff, #5b42f3 50%, #00ddeb);
     margin: auto;
@@ -133,8 +133,8 @@ h4 {
     box-shadow: rgba(151, 65, 252, 0.2) 0 15px 30px -5px;
     color: #FFFFFF;
     display: flex;
-    font-size: 18px;
-    width: 120px;
+    font-size: 12px;
+    width: 100px;
     padding: 2px;
     cursor: pointer;
     transition: 300ms;
@@ -174,51 +174,6 @@ h4 {
     padding-right: 15px;
     font-size: 10px;
     margin: 7px;
-}
-
-.pay>a {
-    background: #000;
-    border-top-left-radius: 10px;
-    border-top-right-radius: 10px;
-    border-bottom-left-radius: 3px;
-    border-bottom-right-radius: 3px;
-    left: 98px;
-    text-align: center;
-    width: 120px;
-    margin-top: 40px;
-    position: fixed;
-    z-index: 69420;
-    color: #5fabe2;
-    transition: 200ms;
-    font-weight: bold;
-    text-decoration: none;
-    transition: 1s;
-}
-
-.pay>a:hover {
-    border-top-left-radius: 3px;
-    border-top-right-radius: 3px;
-    border-bottom-left-radius: 10px;
-    border-bottom-right-radius: 10px;
-    color: #45a3e5;
-}
-
-.pay>a:active {
-    background: #333;
-    color: #2d89ca;
-}
-
-.pay>a:hover>* {
-    transform: scale(0.5, 0.5) translateY(0px);
-}
-
-.discord-widget {
-    z-index: 420;
-    transform: scale(0.1, 0.1) translateY(1600px);
-    position: fixed;
-    top: -104px;
-    left: -116px;
-    transition: 500ms;
 }
 
 .square-pay {
@@ -741,20 +696,78 @@ h4 {
     padding-top: 5px;
     bottom: 0px;
     font-size: 15px;
-    transition: 500ms;
 }
 
-.feeter:hover {
-    transform: scaleX(1.15);
-}
-
-.feeter>a {
+#privacy {
+    position: relative;
+    left: -68px;
     padding: 5px;
     text-decoration: none;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     color: #fff;
 }
 
-.feeter>a:hover {
+#privacy:hover {
+    text-decoration: underline;
+}
+
+.discord {
+    background: #f6f6f6;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    border-bottom-left-radius: 3px;
+    border-bottom-right-radius: 3px;
+    left: 98px;
+    text-align: center;
+    width: 120px;
+    position: fixed;
+    z-index: 69420;
+    color: #5865F2;
+    font-weight: bold;
+    text-decoration: none;
+    transition: 1s;
+}
+
+.discord:hover {
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    color: #6873f3;
+}
+
+.discord:active {
+    background: #99aab5;
+    color: #3f4ef4;
+}
+
+.discord:hover>* {
+    transform: scale(0.5, 0.5) translateY(0px);
+    opacity: 1;
+}
+
+.discord-widget {
+    border: solid 2px #fff;
+    border-radius: 20px;
+    z-index: 420;
+    transform: scale(0.1, 0.1) translateY(1600px);
+    opacity: 0;
+    position: fixed;
+    top: -104px;
+    left: -118px;
+    transition: 500ms ease-in-out;
+}
+
+#credit {
+    position: relative;
+    left: 79px;
+    padding: 5px;
+    text-decoration: none;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #fff;
+}
+
+#credit:hover {
+    transform: scaleX(1.15);
     text-decoration: underline;
 }

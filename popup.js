@@ -1,6 +1,5 @@
 const injection = document.getElementById("injection");
 const purchase = document.getElementById("pay");
-const closepay = document.getElementById("close-pay");
 const nopay = document.getElementById("nopay");
 
 const settings = document.getElementById("settings");
@@ -344,10 +343,6 @@ var checkAvailability = setInterval(function () {
 }, 100);
 
 nopay.addEventListener("click", function () {
-    closepaypage();
-});
-
-closepay.addEventListener("click", function () {
     closepaypage();
 });
 
