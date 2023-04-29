@@ -14,12 +14,18 @@ header {
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
+.logo img {
+    border-radius: 50%;
+    height: 2.5rem;
+    float: left;
+    border: solid #fff 2px;
+}
+
 .header-container {
     display: flex;
     justify-content: space-between;
     align-items: center;
     width: 100%;
-    max-width: 960px;
 }
 
 header h1 {
