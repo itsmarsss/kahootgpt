@@ -43,7 +43,7 @@ In addition to generating the best answers, KahootGPT can also auto-tap the corr
 
 ### Manual ZIP File Upload
 
-1. Go to the [KahootGPT GitHub repository](https://github.com/itsmarsss/KahootGPT/releases/).
+1. Go to the [KahootGPT GitHub releases](https://github.com/itsmarsss/KahootGPT/releases/).
 2. Scroll down on the first release and click "KahootGPT.zip" to download.
 3. Extract the ZIP file to a folder on your computer.
 4. Open Google Chrome or Mozilla Firefox and go to the browser's extensions page.
