@@ -2,23 +2,26 @@
 <html>
 
 <head>
-    <title>My Project Readme</title>
+    <meta charset="UTF-8">
+    <title>KahootGPT</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap">
+    <link rel="shortcut icon" href="assets/icon-128.png" type="image/x-icon">
 </head>
 
 <div id="top"></div>
 
 <body>
-    <a href="#top"
-        style="position: fixed; bottom: 2rem; right: 2rem; width: 3.5rem; height: 3.5rem; border-radius: 50%; background: linear-gradient(to bottom, #7D43A1, #C6426E); display: flex; justify-content: center; align-items: center; box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.2);">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" style="width: 1.5rem; height: 1.5rem; fill: #fff;">
+    <a href="#top" id="totop">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
             <path d="M12 3l-9 9h6v9h6v-9h6l-9-9z" />
         </svg>
     </a>
     <header>
         <div class="header-container">
-            <h1>My Project</h1>
+            <h1><a href="https://chrome.google.com/webstore/detail/kahootgpt-kahoot-%20-chatgp/mmnbfkefbancfkmcbfeepiiniggfaobm"
+                    target="_blank">KahootGPT</a>
+            </h1>
             <nav>
                 <ul>
                     <li><a href="#about">About</a></li>
@@ -30,26 +33,68 @@
             </nav>
         </div>
     </header>
-    <section style="background-color: #FFF59D; padding: 1rem;">
-        <h2 style="margin-bottom: 0.5rem;">Please Read:</h2>
-        <p style="margin-bottom: 0;">KahootGPT is designed to assist players in achieving their best performance, but it
-            is
-            not intended to be used for cheating or other unethical practices. We strongly encourage users to play
-            Kahoot
-            games fairly and honestly. Please use KahootGPT responsibly and ethically. </p>
+    <section id="pleaseread">
+        <h2>Please Read:</h2>
+        <ul>
+            <li>
+                <h3>⚠️ API Key ⚠️</h3>
+                <p>KahootGPT does NOT provide an OpenAI API key. For this reason, you will need to get your own OpenAI
+                    API key (OpenAI
+                    provides a $5 free credit for new users, this is enough for plenty of Kahoot games!).</p>
+            </li>
+            <li>
+                <h3>⚠️ OPTIONAL Paid features ⚠️</h3>
+                <p>The only paid feature is Auto-tap, Auto-tap allows KahootGPT to automatically click the best fitting
+                    answer according to
+                    OpenAI's language models. The extension will run as normal without this purchase.</p>
+            </li>
+        </ul>
     </section>
     <main>
         <section id="about">
             <div class="section-container">
                 <h2>About</h2>
-                <p>Add a brief description of your project here.</p>
+                <p>Introducing KahootGPT, a powerful Chrome extension that uses OpenAI's cutting-edge natural language
+                    processing
+                    capabilities to assist Kahoot players in achieving their best performance.
+                    <br><br>
+                    KahootGPT is an excellent tool for anyone who wants to improve their Kahoot game performance.
+                    Whether you are a student
+                    looking to improve your grades, or just someone who enjoys playing Kahoot games, KahootGPT can help
+                    you achieve your
+                    goals.
+                    <br><br>
+                    Overall, KahootGPT is an essential tool for anyone who wants to take their Kahoot game to the next
+                    level. With its
+                    powerful features and easy-to-use interface, KahootGPT is a must-have for anyone who wants to
+                    achieve their best
+                    performance.
+                </p>
             </div>
         </section>
 
         <section id="usage">
             <div class="section-container">
                 <h2>Usage</h2>
-                <p>Explain how to use your project and provide some examples.</p>
+                <p>KahootGPT is designed to make playing Kahoot games easier and more enjoyable for everyone. The
+                    extension can generate
+                    the four best possible answers for each question, making it easier for players to choose the right
+                    answer.
+                    Alternatively, KahootGPT can highlight the best fitting answer, helping players focus on the most
+                    accurate choice.
+                    <br><br>
+                    Moreover, KahootGPT can import questions from Kahoot page itself (assuming the host allows players
+                    to view the questions
+                    and possible answers), allowing players to use the extension with any Kahoot game. KahootGPT will
+                    generate four best
+                    possible answers or highlight the most correct one according to OpenAI's language model.
+                    <br><br>
+                    In addition to generating the best answers, KahootGPT can also auto-tap the correct answer for
+                    players. This feature is
+                    particularly useful for players who want to take a more passive role in the game, or for those who
+                    are struggling to
+                    keep up with the pace of the questions.
+                </p>
             </div>
         </section>
 
@@ -57,6 +102,43 @@
             <div class="section-container">
                 <h2>Installation</h2>
                 <p>Provide installation instructions for your project.</p>
+            </div>
+        </section>
+
+        <section id="installation">
+            <div class="section-container">
+                <h2>Creating an Open AI account</h2>
+                <p>
+                <ol>
+                    <li>Go to the <a href="https://openai.com/" target="_blank">OpenAI</a> website and click on the
+                        "Sign up" button in the top right corner of the page.
+                    </li>
+
+                    <li>Enter your email address, create a password, and click on "Sign up".</li>
+
+                    <li>You will receive an email to verify your account. Click on the verification link in the email.
+                    </li>
+                </ol>
+                </p>
+            </div>
+            <div class="section-container">
+                <h2>Generating an API key</h2>
+                <p>
+                <ol>
+                    <li>Once you verify your account, you head over to the OpenAI dashboard.</li>
+
+                    <li>From the OpenAI dashboard, click on the "API keys" tab in the left-hand menu.</li>
+
+                    <li>Click on the "Create new API key" button.</li>
+
+                    <li>Enter a name for your API key and click on "Create".</li>
+
+                    <li>Your API key will be displayed on the screen. Make sure to copy it and keep it in a safe place.
+                        (It
+                        will only be shown
+                        to you once)</li>
+                </ol>
+                </p>
             </div>
         </section>
 
@@ -70,14 +152,47 @@
         <section id="license">
             <div class="section-container">
                 <h2>License</h2>
-                <p>Specify the license under which your project is released.</p>
+                <p>KahootGPT is licensed under the Apache 2.0 license. This means that the users are free to use,
+                    modify, and distribute
+                    KahootGPT, subject to the terms and conditions of the Apache 2.0 license. Some of the main points of
+                    this license
+                    include:
+
+                <ul>
+                    <li>The license grants the users a worldwide, non-exclusive, royalty-free, perpetual, and
+                        irrevocable
+                        license to use,
+                        reproduce, modify, and distribute KahootGPT.</li>
+                    <li>The users are required to provide attribution to the original author(s) of KahootGPT, and to
+                        include
+                        a copy of the
+                        Apache 2.0 license in any distribution of KahootGPT.</li>
+                    <li>The license includes warranties and limitations of liability provisions that limit the liability
+                        of
+                        the original
+                        author(s) of KahootGPT for any damages resulting from the use of KahootGPT.</li>
+                    <li>The license includes a patent license that grants the users a license to any patents held by the
+                        original author(s) of
+                        KahootGPT that cover the use or distribution of KahootGPT.</li>
+                </ul>
+                <i>* Please note that this is a summary of the Apache 2.0 license. For the full text of the license,
+                    please
+                    refer to <a href="documents/LICENSE" target="_blank">KahootGPT License</a>.
+                </i>
+                </p>
             </div>
         </section>
     </main>
-    <footer style="background-color: #F5F5F5; padding: 1rem; text-align: center;">
-        <p style="margin: 0;">This website was generated with the help of ChatGPT, an AI-powered language model
+    <footer>
+        <p>This website was generated with the help of
+            <a href="https://chat.openai.com/" target="_blank">
+                ChatGPT
+            </a>, an AI-powered language model
             developed by
-            OpenAI. </p>
+            <a href="https://openai.com/" target="_blank">
+                OpenAI
+            </a>.
+        </p>
     </footer>
 </body>
 

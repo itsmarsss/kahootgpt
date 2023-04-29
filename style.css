@@ -27,6 +27,11 @@ header h1 {
     font-size: 2.5rem;
 }
 
+header a {
+    text-decoration: none;
+    color: #fff;
+}
+
 nav ul {
     list-style: none;
     margin: 0;
@@ -50,6 +55,13 @@ main {
     padding: 2rem 0;
 }
 
+main h2 {
+    background: #e6e6fa;
+    padding: 0.5rem;
+    border-top-left-radius: 1rem;
+    border-bottom-right-radius: 1rem;
+}
+
 .section-container {
     width: 100%;
     max-width: 960px;
@@ -65,7 +77,8 @@ section h2 {
     margin-top: 0;
 }
 
-section p {
+section p,
+li {
     font-size: 1.1rem;
     line-height: 1.5;
 }
@@ -79,4 +92,54 @@ section p {
     nav ul li a {
         font-size: 1rem;
     }
+}
+
+/* Post ChatGPT additions */
+
+#totop {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    width: 3.5rem;
+    height: 3.5rem;
+    border-radius: 50%;
+    background: linear-gradient(to bottom, #7D43A1, #C6426E);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.2);
+    transition: 200ms;
+}
+
+#totop:hover {
+    box-shadow: none;
+}
+
+#totop svg {
+    width: 1.5rem;
+    height: 1.5rem;
+    fill: #fff;
+}
+
+#pleaseread {
+    background-color: #FFF59D;
+    padding: 1rem;
+}
+
+#pleaseread h2 {
+    margin-bottom: 0.5rem;
+}
+
+#pleaseread p {
+    margin-bottom: 0;
+}
+
+footer {
+    background-color: #F5F5F5;
+    padding: 1rem;
+    text-align: center;
+}
+
+footer p {
+    margin: 0;
 }
