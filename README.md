@@ -25,6 +25,32 @@ Moreover, KahootGPT can import questions from Kahoot page itself (assuming the h
 
 In addition to generating the best answers, KahootGPT can also auto-tap the correct answer for players. This feature is particularly useful for players who want to take a more passive role in the game, or for those who are struggling to keep up with the pace of the questions.
 
+## Installation
+
+### Chrome Web Store
+
+1. Open Google Chrome and go to the [KahootGPT extension page](https://chrome.google.com/webstore/detail/kahootgpt-kahoot-%20-chatgp/mmnbfkefbancfkmcbfeepiiniggfaobm).
+2. Click the "Add to Chrome" button.
+3. In the confirmation dialog, click "Add Extension".
+4. The KahootGPT extension should now be installed in your Chrome browser.
+
+### Firefox Add-on
+
+1. Open Mozilla Firefox and go to the [KahootGPT add-on page](https://addons.mozilla.org/firefox/addon/kahootgpt/).
+2. Click the "Add to Firefox" button.
+3. In the confirmation dialog, click "Add".
+4. The KahootGPT add-on should now be installed in your Firefox browser.
+
+### Manual ZIP File Upload
+
+1. Go to the [KahootGPT GitHub repository](https://github.com/KahootGPT/KahootGPT).
+2. Click the green "Code" button and select "Download ZIP".
+3. Extract the ZIP file to a folder on your computer.
+4. Open Google Chrome or Mozilla Firefox and go to the browser's extensions page.
+5. Enable "Developer mode" (if not already enabled).
+6. Click "Load unpacked" and select the folder where you extracted the ZIP file.
+7. The KahootGPT extension/add-on should now be installed in your browser.
+
 ## Creating an OpenAI account
 
 1. Go to the [OpenAI website](https://openai.com/) and click on the "Sign up" button in the top right corner of the page.

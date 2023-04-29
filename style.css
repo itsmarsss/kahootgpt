@@ -56,7 +56,8 @@ main {
 }
 
 main h2 {
-    background: #e6e6fa;
+    background: #0a2a4e;
+    color: #fff;
     padding: 0.5rem;
     border-top-left-radius: 1rem;
     border-bottom-right-radius: 1rem;
