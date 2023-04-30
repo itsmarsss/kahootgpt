@@ -57,7 +57,9 @@
     <main>
         <section id="about">
             <div class="section-container">
-                <h2>About</h2>
+                <h2>
+                    <button class="copy-link" onclick="copyLink('about')">#</button>About
+                </h2>
                 <p>Introducing KahootGPT, a powerful Chrome extension that uses OpenAI's cutting-edge natural language
                     processing
                     capabilities to assist Kahoot players in achieving their best performance.
@@ -79,7 +81,7 @@
 
         <section id="usage">
             <div class="section-container">
-                <h2>Usage</h2>
+                <h2><button class="copy-link" onclick="copyLink('usage')">#</button>Usage</h2>
                 <p>KahootGPT is designed to make playing Kahoot games easier and more enjoyable for everyone. The
                     extension can generate
                     the four best possible answers for each question, making it easier for players to choose the right
@@ -104,7 +106,7 @@
 
         <section id="installation">
             <div class="section-container">
-                <h2 id="installation">Installation</h2>
+                <h2><button class="copy-link" onclick="copyLink('installation')">#</button>Installation</h2>
                 <h3 id="chrome-web-store">Chrome Web Store</h3>
                 <ol>
                     <li>Open Google Chrome and go to the <a
@@ -139,9 +141,10 @@
             </div>
         </section>
 
-        <section id="openai">
+        <section id="createopenai">
             <div class="section-container">
-                <h2>Creating an OpenAI account</h2>
+                <h2><button class="copy-link" onclick="copyLink('createopenai')">#</button>Creating an OpenAI account
+                </h2>
                 <p>
                 <ol>
                     <li>Go to the <a href="https://openai.com/" target="_blank">OpenAI</a> website and click on the
@@ -155,8 +158,10 @@
                 </ol>
                 </p>
             </div>
+        </section>
+        <section id="generateopenai">
             <div class="section-container">
-                <h2>Generating an API key</h2>
+                <h2><button class="copy-link" onclick="copyLink('generateopenai')">#</button>Generating an API key</h2>
                 <p>
                 <ol>
                     <li>Once you verify your account, you head over to the OpenAI dashboard.</li>
@@ -174,8 +179,10 @@
                 </ol>
                 </p>
             </div>
+        </section>
+        <section id="useopenai">
             <div class="section-container">
-                <h2>Using your API key</h2>
+                <h2><button class="copy-link" onclick="copyLink('useopenai')">#</button>Using your API key</h2>
                 <ol>
                     <li>
                         <p>Make sure to copy the API key to your clipboard.</p>
@@ -186,7 +193,7 @@
                             extension and click the top right gear icon.</p>
                     </li>
                     <li>
-                        <p>Paste the API key into the text field and press &quot;Save Changes&quot;.</p>
+                        <p>Paste the API key into the text field and press "Save Changes".</p>
                     </li>
                 </ol>
             </div>
@@ -194,17 +201,42 @@
 
         <section id="contributing">
             <div class="section-container">
-                <h2>Contributing</h2>
-                <p>Explain how others can contribute to your project.</p>
+                <h2><button class="copy-link" onclick="copyLink('contributing')">#</button>Contributing</h2>
+                <p>We welcome contributions to KahootGPT! If you would like to contribute, please follow these
+                    guidelines:
+                </p>
+                <ol>
+                    <li>Fork the repository and create a new branch for your changes.</li>
+                    <li>Make your changes and commit them with clear and concise commit messages.</li>
+                    <li>Push your changes to your forked repository.</li>
+                    <li>Submit a pull request to the main KahootGPT repository.</li>
+                </ol>
+                <h3 id="code-guidelines">Code Guidelines</h3>
+                <ul>
+                    <li>Please follow the existing code style and structure.</li>
+                    <li>Write clear and concise code with appropriate comments and documentation.</li>
+                    <li>Ensure that your code is well-tested and does not break existing functionality.</li>
+                </ul>
+                <h3 id="issue-guidelines">Issue Guidelines</h3>
+                <ul>
+                    <li>Please check the existing issues before creating a new one.</li>
+                    <li>Provide clear and detailed information about the issue, including steps to reproduce it if
+                        possible.
+                    </li>
+                    <li>Be respectful and considerate in all issue discussions.</li>
+                </ul>
+                <p>Thank you for your contributions to KahootGPT!</p>
             </div>
         </section>
 
         <section id="license">
             <div class="section-container">
-                <h2>License</h2>
-                <p>KahootGPT is licensed under the Apache 2.0 license. This means that the users are free to use,
+                <h2><button class="copy-link" onclick="copyLink('license')">#</button>License</h2>
+                <p>KahootGPT is licensed under the Apache 2.0 license. This means that the users are free to
+                    use,
                     modify, and distribute
-                    KahootGPT, subject to the terms and conditions of the Apache 2.0 license. Some of the main points of
+                    KahootGPT, subject to the terms and conditions of the Apache 2.0 license. Some of the main
+                    points of
                     this license
                     include:
 
@@ -213,19 +245,23 @@
                         irrevocable
                         license to use,
                         reproduce, modify, and distribute KahootGPT.</li>
-                    <li>The users are required to provide attribution to the original author(s) of KahootGPT, and to
+                    <li>The users are required to provide attribution to the original author(s) of KahootGPT,
+                        and to
                         include
                         a copy of the
                         Apache 2.0 license in any distribution of KahootGPT.</li>
-                    <li>The license includes warranties and limitations of liability provisions that limit the liability
+                    <li>The license includes warranties and limitations of liability provisions that limit the
+                        liability
                         of
                         the original
                         author(s) of KahootGPT for any damages resulting from the use of KahootGPT.</li>
-                    <li>The license includes a patent license that grants the users a license to any patents held by the
+                    <li>The license includes a patent license that grants the users a license to any patents
+                        held by the
                         original author(s) of
                         KahootGPT that cover the use or distribution of KahootGPT.</li>
                 </ul>
-                <i>* Please note that this is a summary of the Apache 2.0 license. For the full text of the license,
+                <i>* Please note that this is a summary of the Apache 2.0 license. For the full text of the
+                    license,
                     please
                     refer to <a href="documents/LICENSE.html" target="_blank">KahootGPT License</a>.
                 </i>
@@ -245,5 +281,13 @@
         </p>
     </footer>
 </body>
+
+<script>
+    function copyLink(sectionId) {
+        const link = window.location.href.split('#')[0] + '#' + sectionId;
+        navigator.clipboard.writeText(link);
+        window.location.href = link;
+    }
+</script>
 
 </html>

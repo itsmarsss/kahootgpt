@@ -4,7 +4,6 @@ body {
     background-image: url("https://www.transparenttextures.com/patterns/cubes.png");
 }
 
-/* Header styles */
 header {
     background-color: #333;
     color: #fff;
@@ -57,7 +56,6 @@ nav ul li a {
     font-weight: 500;
 }
 
-/* Main styles */
 main {
     padding: 2rem 0;
 }
@@ -85,6 +83,21 @@ section h2 {
     margin-top: 0;
 }
 
+.copy-link {
+    border: none;
+    outline: none;
+    background: transparent;
+    color: #6c7993;
+    display: inline-block;
+    font-size: 1.5rem;
+    transition: 200ms;
+    cursor: pointer;
+}
+
+section h2:hover .copy-link {
+    color: gainsboro;
+}
+
 section p,
 li {
     font-size: 1.1rem;
@@ -101,8 +114,6 @@ li {
         font-size: 1rem;
     }
 }
-
-/* Post ChatGPT additions */
 
 #totop {
     position: fixed;
