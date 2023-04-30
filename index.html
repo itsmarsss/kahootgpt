@@ -45,7 +45,9 @@
                     target="_blank">KahootGPT</a>
             </h1>
 
-            <nav>
+            <button class="menu-toggle">☰</button>
+
+            <nav class="nav">
                 <ul>
                     <li><a href="#about">About</a></li>
                     <li><a href="#usage">Usage</a></li>
@@ -521,6 +523,14 @@
         const moveY = (e.clientY / body.clientHeight) * 15;
         body.style.backgroundPositionX = -moveX + 'px';
         body.style.backgroundPositionY = -moveY + 'px';
+    });
+
+    const menuToggle = document.querySelector('.menu-toggle');
+    const nav = document.querySelector('.nav');
+
+    menuToggle.addEventListener('click', function () {
+        nav.classList.toggle('show');
+        nav.classList.toggle('hide');
     });
 </script>
 

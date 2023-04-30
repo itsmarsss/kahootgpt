@@ -13,6 +13,8 @@ a {
 header {
     background-color: #333;
     color: #fff;
+    position: sticky;
+    top: 0;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -55,6 +57,10 @@ header h1:hover {
 header a {
     text-decoration: none;
     color: #fff;
+}
+
+.menu-toggle {
+    display: none;
 }
 
 nav ul {
@@ -270,5 +276,55 @@ footer p {
 
     nav ul li a {
         font-size: 1rem;
+    }
+
+    nav ul li {
+        height: 1.5rem;
+        width: 100%;
+        text-align: center;
+        padding-bottom: 0.1rem;
+    }
+
+    nav ul {
+        display: grid;
+        grid-column: 1;
+        background: #333;
+        place-items: center;
+        border-bottom-left-radius: 1rem;
+        box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+    }
+
+    nav {
+        display: none;
+    }
+
+    .show {
+        display: grid;
+        position: fixed;
+        right: 0px;
+        top: 76px;
+        width: 8rem;
+        height: 50vh;
+        animation: 300ms fade;
+    }
+
+    .menu-toggle {
+        display: block;
+        border: none;
+        outline: none;
+        color: #fff;
+        background: transparent;
+        font-size: 1.5rem;
+        cursor: pointer;
+    }
+}
+
+@keyframes fade {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
     }
 }
