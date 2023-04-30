@@ -1,7 +1,13 @@
 body {
     margin: 0;
+    background: #f4f4f4;
     font-family: 'Roboto', sans-serif;
     background-image: url("https://www.transparenttextures.com/patterns/cubes.png");
+    transition: color 500ms;
+}
+
+a {
+    color: #008ad3;
 }
 
 header {
@@ -12,6 +18,14 @@ header {
     align-items: center;
     padding: 1rem;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.logo {
+    transition: 200ms ease-out;
+}
+
+.logo:hover {
+    transform: scale(1.15);
 }
 
 .logo img {
@@ -31,6 +45,11 @@ header {
 header h1 {
     margin: 0;
     font-size: 2.5rem;
+    transition: 200ms ease-out;
+}
+
+header h1:hover {
+    transform: scaleX(1.01);
 }
 
 header a {
@@ -47,6 +66,7 @@ nav ul {
 
 nav ul li {
     margin: 0 0.5rem;
+    transition: 200ms ease-out;
 }
 
 nav ul li a {
@@ -54,6 +74,10 @@ nav ul li a {
     text-decoration: none;
     font-size: 1.2rem;
     font-weight: 500;
+}
+
+nav ul li:hover {
+    transform: translateY(-0.2rem) skewY(2deg);
 }
 
 main {
@@ -134,10 +158,44 @@ li {
     box-shadow: none;
 }
 
+#totop:hover svg {
+    transform: translateY(-0.25rem);
+}
+
 #totop svg {
     width: 1.5rem;
     height: 1.5rem;
     fill: #fff;
+    transition: 200ms ease-out;
+}
+
+#promo {
+    border-radius: 1rem;
+    position: fixed;
+    bottom: 2rem;
+    left: 2rem;
+    padding: 0.5rem;
+    background-color: #fff;
+    border: 0.1rem solid #000;
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.2);
+    transition: 200ms;
+}
+
+#promo:hover {
+    box-shadow: none;
+}
+
+#promo a {
+    text-decoration: none;
+    padding: 0.25rem;
+}
+
+.fab {
+    transition: 200ms ease-out;
+}
+
+.fab:hover {
+    transform: translateY(-0.5rem);
 }
 
 #pleaseread {
@@ -161,4 +219,13 @@ footer {
 
 footer p {
     margin: 0;
+}
+
+.dark {
+    background: #3c3c3c;
+    background-image: url("https://www.transparenttextures.com/patterns/cubes.png");
+}
+
+.dark main {
+    color: #fff;
 }

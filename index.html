@@ -5,8 +5,10 @@
     <meta charset="UTF-8">
     <title>KahootGPT</title>
     <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap">
     <link rel="shortcut icon" href="assets/icon-128.png" type="image/x-icon">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.13.0/css/all.css"
+        integrity="sha384-Bfad6CLCknfcloXFOyFnlgtENryhrpZCe29RTifKEixXQZ38WheV+i/6YWSzkz3V" crossorigin="anonymous" />
 </head>
 
 <div id="top"></div>
@@ -17,6 +19,17 @@
             <path d="M12 3l-9 9h6v9h6v-9h6l-9-9z" />
         </svg>
     </a>
+    <div id="promo">
+        <a href="https://www.youtube.com/@itsmarsss" target="_blank">
+            <i class="fab fa-youtube fa-2x" style="color: red;"></i>
+        </a>
+        <a href="https://www.instagram.com/itsmarsbar" target="_blank">
+            <i class="fab fa-instagram fa-2x" style="color: #9b4cca"></i>
+        </a>
+        <a href="https://github.com/itsmarsss" target="_blank">
+            <i class="fab fa-github fa-2x" style="color: #333;"></i>
+        </a>
+    </div>
     <header>
         <div class="header-container">
             <div class="logo">
@@ -291,6 +304,18 @@
         navigator.clipboard.writeText(link);
         window.location.href = link;
     }
+
+    document.addEventListener('mousemove', function (e) {
+        const body = document.querySelector('body');
+        const moveX = (e.clientX / body.clientWidth) * 15;
+        const moveY = (e.clientY / body.clientHeight) * 15;
+        body.style.backgroundPositionX = -moveX + 'px';
+        body.style.backgroundPositionY = -moveY + 'px';
+    });
+
+    document.body.addEventListener('click', function () {
+        document.body.classList.toggle('dark');
+    });
 </script>
 
 </html>
