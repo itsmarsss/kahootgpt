@@ -160,6 +160,55 @@ nav ul li:hover {
     margin-bottom: 0;
 }
 
+hr {
+    margin: 0px;
+}
+
+forward {
+    justify-content: space-evenly;
+    display: flex;
+    width: 100%;
+    background: #00000081;
+    padding: 15px;
+}
+
+/* ui verse start */
+
+.button {
+    display: inline-flex;
+    margin: 0;
+    max-width: 320px;
+    padding: 0.5rem 1.4rem;
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+    font-weight: 700;
+    text-align: center;
+    text-transform: uppercase;
+    vertical-align: middle;
+    align-items: center;
+    border-radius: 0.5rem;
+    border: 1px solid rgba(0, 0, 0, 0.25);
+    gap: 0.75rem;
+    color: rgb(65, 63, 63);
+    background-color: #fff;
+    cursor: pointer;
+    transition: all 300ms ease;
+}
+
+.button svg {
+    height: 24px;
+}
+
+.button:hover {
+    transform: scale(1.05);
+}
+
+.button:active {
+    transform: scale(0.95);
+}
+
+/* ui verse end */
+
 main {
     padding: 2rem 0;
 }
