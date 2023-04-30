@@ -1,7 +1,7 @@
 # KahootGPT Privacy Policy
 KahootGPT does not collect any information. However it will store information to your computer locally. You have the option to cache/store your OpenAI API Key, other settings options are stored without option.
 
-If you decide to purchase "Auto-tap", ExtensionPay will save your Email, while Stripe may keep your credit card information.
+If you decide to purchase "Auto-tap", ExtensionPay will save your Email, while Stripe may keep your card information.
 
 ---------------------------------------
 
