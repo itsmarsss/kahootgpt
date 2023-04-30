@@ -1,3 +1,7 @@
+html {
+    width: 100%;
+}
+
 body {
     margin: 0;
     background: #f4f4f4;
@@ -13,12 +17,11 @@ a {
 header {
     background-color: #333;
     color: #fff;
-    position: sticky;
-    top: 0;
     display: flex;
     justify-content: center;
     align-items: center;
     padding: 1rem;
+    width: 100%;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
@@ -87,6 +90,7 @@ nav ul li:hover {
 }
 
 #please-read {
+    width: 100%;
     background-color: #FFF59D;
     padding: 1rem;
     box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.2);
