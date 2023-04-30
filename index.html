@@ -45,37 +45,32 @@
                     target="_blank">KahootGPT</a>
             </h1>
 
-            <!-- ui verse start -->
-            <div class="toggle-switch">
-                <label class="switch-label">
-                    <input type="checkbox" class="checkbox" checked>
-                    <span class="slider" id="slider"></span>
-                </label>
-            </div>
-            <!-- ui verse end -->
-
             <nav>
                 <ul>
                     <li><a href="#about">About</a></li>
                     <li><a href="#usage">Usage</a></li>
                     <li><a href="#installation">Installation</a></li>
                     <li><a href="#contributing">Contributing</a></li>
+                    <li><a href="#privacy-policy">Privacy Policy</a></li>
                     <li><a href="#license">License</a></li>
+                    <li><a href="#howtouse">How To Use</a></li>
                 </ul>
             </nav>
         </div>
     </header>
-    <section id="pleaseread">
-        <h2>Please Read:</h2>
+    <section id="please-read">
+        <h2>
+            <button class="copy-link" onclick="copyLink('please-read')">#</button>Please Read:
+        </h2>
         <ul>
             <li>
-                <h3>⚠️ API Key ⚠️</h3>
+                <h3 id="api-key">⚠️ API Key ⚠️</h3>
                 <p>KahootGPT does NOT provide an OpenAI API key. For this reason, you will need to get your own OpenAI
                     API key (OpenAI
                     provides a $5 free credit for new users, this is enough for plenty of Kahoot games!).</p>
             </li>
             <li>
-                <h3>⚠️ OPTIONAL Paid features ⚠️</h3>
+                <h3 id="optional-paid-features">⚠️ OPTIONAL Paid features ⚠️</h3>
                 <p>The only paid feature is Auto-tap, Auto-tap allows KahootGPT to automatically click the best fitting
                     answer according to
                     OpenAI's language models. The extension will run as normal without this purchase.</p>
@@ -244,7 +239,9 @@
 
         <section id="usage">
             <div class="section-container">
-                <h2><button class="copy-link" onclick="copyLink('usage')">#</button>Usage</h2>
+                <h2>
+                    <button class="copy-link" onclick="copyLink('usage')">#</button>Usage
+                </h2>
                 <p>KahootGPT is designed to make playing Kahoot games easier and more enjoyable for everyone. The
                     extension can generate
                     the four best possible answers for each question, making it easier for players to choose the right
@@ -269,7 +266,9 @@
 
         <section id="installation">
             <div class="section-container">
-                <h2><button class="copy-link" onclick="copyLink('installation')">#</button>Installation</h2>
+                <h2>
+                    <button class="copy-link" onclick="copyLink('installation')">#</button>Installation
+                </h2>
                 <h3 id="chrome-web-store">Chrome Web Store</h3>
                 <ol>
                     <li>Open Google Chrome and go to the <a
@@ -306,7 +305,8 @@
 
         <section id="createopenai">
             <div class="section-container">
-                <h2><button class="copy-link" onclick="copyLink('createopenai')">#</button>Creating an OpenAI account
+                <h2>
+                    <button class="copy-link" onclick="copyLink('createopenai')">#</button>Creating an OpenAI account
                 </h2>
                 <p>
                 <ol>
@@ -322,9 +322,11 @@
                 </p>
             </div>
         </section>
-        <section id="generateopenai">
+        <section id="generate-openai-key">
             <div class="section-container">
-                <h2><button class="copy-link" onclick="copyLink('generateopenai')">#</button>Generating an API key</h2>
+                <h2>
+                    <button class="copy-link" onclick="copyLink('generate-openai-key')">#</button>Generating an API key
+                </h2>
                 <p>
                 <ol>
                     <li>Once you verify your account, you head over to the <a
@@ -345,9 +347,11 @@
                 </p>
             </div>
         </section>
-        <section id="useopenai">
+        <section id="use-openai-key">
             <div class="section-container">
-                <h2><button class="copy-link" onclick="copyLink('useopenai')">#</button>Using your API key</h2>
+                <h2>
+                    <button class="copy-link" onclick="copyLink('use-openai-key')">#</button>Using your API key
+                </h2>
                 <ol>
                     <li>
                         <p>Make sure to copy the API key to your clipboard.</p>
@@ -367,7 +371,9 @@
 
         <section id="contributing">
             <div class="section-container">
-                <h2><button class="copy-link" onclick="copyLink('contributing')">#</button>Contributing</h2>
+                <h2>
+                    <button class="copy-link" onclick="copyLink('contributing')">#</button>Contributing
+                </h2>
                 <p>We welcome contributions to KahootGPT! If you would like to contribute, please follow these
                     guidelines:
                 </p>
@@ -395,9 +401,63 @@
             </div>
         </section>
 
+        <section id="privacy-policy">
+            <div class="section-container">
+                <h2>
+                    <button class="copy-link" onclick="copyLink('privacy-policy')">#</button>Privacy Policy
+                </h2>
+                <p>At KahootGPT, we respect your privacy and are committed to protecting it. This Privacy Policy
+                    applies
+                    to our Chrome
+                    extension and describes how we collect, use, and disclose information when you use our
+                    extension.
+                </p>
+                <h3 id="data-collection-and-use">Data Collection and Use</h3>
+                <p>KahootGPT does not collect any personal data from users of the extension. We do not track your
+                    browsing activities or
+                    collect any personal information about you.</p>
+                <h3 id="third-party-services">Third-party Services</h3>
+                <p>KahootGPT uses third-party payment processing services like ExtensionPay and Stripe to process
+                    payment transactions
+                    for our paid plans. These services may collect and store data from you in accordance with their
+                    own
+                    privacy
+                    policies. We do not have access to, nor do we control, the information that these third-party
+                    services may collect
+                    from you.</p>
+                <h3 id="data-storage">Data Storage</h3>
+                <p>KahootGPT may store configuration choices made by users on their local computers to enhance
+                    their
+                    user experience.
+                    However, this information is only stored on the user's computer and is not shared with
+                    any
+                    third-party services
+                    or anyone outside of the user's device.</p>
+                <h3 id="changes-to-this-policy">Changes to this Policy</h3>
+                <p>We may update this Privacy Policy from time to time, and the latest version will be
+                    posted on our
+                    website. We
+                    encourage you to review this policy periodically to stay informed of any changes.</p>
+                <h3 id="contact-us">Contact Us</h3>
+                <p>If you have any questions or concerns about this Privacy Policy, please contact us at
+                    <a href="mailto:itsmarzzzzzz@protonmail.com">itsmarzzzzzz@protonmail.com</a>.
+                </p>
+                <h3 id="quick-access-to-third-party-resources">Quick access to third-party resources</h3>
+                <p>ExtensionPay Github: <a href="https://github.com/Glench/ExtPay">https://github.com/Glench/ExtPay</a>
+                </p>
+                <p>Stripe Privacy Policy: <a
+                        href="https://stripe.com/en-ca/legal/privacy-center">https://stripe.com/en-ca/legal/privacy-center</a><br>Stripe
+                    Terms of Service: <a
+                        href="https://stripe.com/en-ca/legal/end-users">https://stripe.com/en-ca/legal/end-users</a>
+                </p>
+            </div>
+        </section>
+
         <section id="license">
             <div class="section-container">
-                <h2><button class="copy-link" onclick="copyLink('license')">#</button>License</h2>
+                <h2>
+                    <button class="copy-link" onclick="copyLink('license')">#</button>License
+                </h2>
                 <p>KahootGPT is licensed under the Apache 2.0 license. This means that the users are free to
                     use,
                     modify, and distribute
@@ -461,10 +521,6 @@
         const moveY = (e.clientY / body.clientHeight) * 15;
         body.style.backgroundPositionX = -moveX + 'px';
         body.style.backgroundPositionY = -moveY + 'px';
-    });
-
-    document.getElementById('slider').addEventListener('click', function () {
-        document.body.classList.toggle('dark');
     });
 </script>
 
