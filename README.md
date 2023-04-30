@@ -61,7 +61,7 @@ In addition to generating the best answers, KahootGPT can also auto-tap the corr
 
 ## Generating an API key
 
-1. Once you verify your account, you head over to the [OpenAI dashboard](https://beta.openai.com/dashboard/).
+1. Once you verify your account, you head over to the [OpenAI dashboard](https://platform.openai.com/account/api-keys).
    
 2. From the OpenAI dashboard, click on the "API keys" tab in the left-hand menu.
 
