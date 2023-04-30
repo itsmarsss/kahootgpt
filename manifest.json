@@ -7,7 +7,7 @@
   "name": "KahootGPT | Kahoot + ChatGPT",
   "version": "3.2.2",
   "manifest_version": 3,
-  "description": "Kahoot & ChatGPT: Dominate in a Kahoot game",
+  "description": "Kahoot & ChatGPT: Dominate in Kahoot games",
   "author": "Marsss' Dev Team",
   "permissions": [
         "scripting",
