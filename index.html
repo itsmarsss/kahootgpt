@@ -525,12 +525,15 @@
         body.style.backgroundPositionY = -moveY + 'px';
     });
 
+    document.addEventListener("scroll", function (e) {
+        nav.classList.toggle('show');
+    });
+
     const menuToggle = document.querySelector('.menu-toggle');
     const nav = document.querySelector('.nav');
 
     menuToggle.addEventListener('click', function () {
         nav.classList.toggle('show');
-        nav.classList.toggle('hide');
     });
 </script>
 
