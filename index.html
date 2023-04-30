@@ -21,13 +21,13 @@
     </a>
     <div id="promo">
         <a href="https://www.youtube.com/@itsmarsss" target="_blank">
-            <i class="fab fa-youtube fa-2x" style="color: red;"></i>
+            <i class="fab fa-youtube fa-3x" style="color: red;"></i>
         </a>
         <a href="https://www.instagram.com/itsmarsbar" target="_blank">
-            <i class="fab fa-instagram fa-2x" style="color: #9b4cca"></i>
+            <i class="fab fa-instagram fa-3x" style="color: #9b4cca"></i>
         </a>
         <a href="https://github.com/itsmarsss" target="_blank">
-            <i class="fab fa-github fa-2x" style="color: #333;"></i>
+            <i class="fab fa-github fa-3x" style="color: #333;"></i>
         </a>
     </div>
     <header>
@@ -39,6 +39,16 @@
             <h1><a href="https://chrome.google.com/webstore/detail/kahootgpt-kahoot-%20-chatgp/mmnbfkefbancfkmcbfeepiiniggfaobm"
                     target="_blank">KahootGPT</a>
             </h1>
+
+            <!-- ui verse start -->
+            <div class="toggle-switch">
+                <label class="switch-label">
+                    <input type="checkbox" class="checkbox" checked>
+                    <span class="slider" id="slider"></span>
+                </label>
+            </div>
+            <!-- ui verse end -->
+
             <nav>
                 <ul>
                     <li><a href="#about">About</a></li>
@@ -313,7 +323,7 @@
         body.style.backgroundPositionY = -moveY + 'px';
     });
 
-    document.body.addEventListener('click', function () {
+    document.getElementById('slider').addEventListener('click', function () {
         document.body.classList.toggle('dark');
     });
 </script>
