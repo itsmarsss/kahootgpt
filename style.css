@@ -115,10 +115,9 @@ forward {
 .button {
     display: inline-flex;
     margin: 0;
-    max-width: 320px;
     height: 100%;
     padding: 0.5rem 1.4rem;
-    font-size: 0.875rem;
+    font-size: 1rem;
     line-height: 1.25rem;
     font-weight: 700;
     text-align: center;
@@ -263,7 +262,7 @@ footer {
 
 footer p {
     margin: auto;
-    width: 25%;
+    margin: 2rem;
 }
 
 @media screen and (max-width: 1080px) {
@@ -271,7 +270,17 @@ footer p {
         font-size: 3rem;
     }
 
-    p {
+    h2 {
+        font-size: 2.7rem;
+    }
+
+    h3 {
+        font-size: 2.3rem;
+    }
+
+    p,
+    li,
+    i {
         font-size: 2.1rem !important;
     }
 
@@ -332,7 +341,9 @@ footer p {
     }
 
     .button {
+        width: 100%;
         margin: 0.5rem;
+        font-size: 2rem;
     }
 }
 
