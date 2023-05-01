@@ -517,14 +517,6 @@
         window.location.href = link;
     }
 
-    document.addEventListener('mousemove', function (e) {
-        const body = document.querySelector('body');
-        const moveX = (e.clientX / body.clientWidth) * 15;
-        const moveY = (e.clientY / body.clientHeight) * 15;
-        body.style.backgroundPositionX = -moveX + 'px';
-        body.style.backgroundPositionY = -moveY + 'px';
-    });
-
     document.addEventListener("scroll", function (e) {
         nav.classList.remove('show');
     });

@@ -262,7 +262,7 @@ footer {
 
 footer p {
     margin: auto;
-    margin: 2rem;
+    margin-bottom: 10rem;
 }
 
 @media screen and (max-width: 1080px) {
