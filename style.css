@@ -267,15 +267,16 @@ footer p {
 
 @media screen and (max-width: 1080px) {
     header h1 {
-        font-size: 3rem;
+        font-size: 5rem;
     }
 
+    .copy-link,
     h2 {
-        font-size: 2.7rem;
+        font-size: 4rem;
     }
 
     h3 {
-        font-size: 2.3rem;
+        font-size: 3rem;
     }
 
     p,
@@ -284,8 +285,12 @@ footer p {
         font-size: 2.1rem !important;
     }
 
+    .logo img {
+        height: 4rem;
+    }
+
     nav ul li a {
-        font-size: 2rem;
+        font-size: 4rem;
     }
 
     nav ul li {
@@ -312,8 +317,8 @@ footer p {
         display: grid;
         position: fixed;
         right: 0px;
-        top: 76px;
-        width: 15rem;
+        top: 8rem;
+        width: 30rem;
         height: 50vh;
         animation: 300ms fade;
     }
@@ -324,7 +329,7 @@ footer p {
         outline: none;
         color: #fff;
         background: transparent;
-        font-size: 1.5rem;
+        font-size: 4rem;
         cursor: pointer;
     }
 
@@ -341,9 +346,33 @@ footer p {
     }
 
     .button {
+        height: 5rem;
         width: 100%;
         margin: 0.5rem;
-        font-size: 2rem;
+        font-size: 3rem;
+    }
+
+    .button svg {
+        transform: scale(2);
+        margin-right: 0.5rem;
+    }
+
+    #totop {
+        width: 8rem;
+        height: 8rem;
+    }
+
+    #totop svg {
+        width: 4rem;
+        height: 4rem;
+    }
+
+    #promo {
+        border-radius: 2rem;
+    }
+
+    .fab {
+        font-size: 6rem !important;
     }
 }
 
