@@ -268,15 +268,19 @@ footer p {
 
 @media screen and (max-width: 1080px) {
     header h1 {
-        font-size: 2rem;
+        font-size: 3rem;
+    }
+
+    p {
+        font-size: 2.1rem !important;
     }
 
     nav ul li a {
-        font-size: 1rem;
+        font-size: 2rem;
     }
 
     nav ul li {
-        height: 1.5rem;
+        height: 3.5rem;
         width: 100%;
         text-align: center;
         padding-bottom: 0.1rem;
@@ -300,7 +304,7 @@ footer p {
         position: fixed;
         right: 0px;
         top: 76px;
-        width: 8rem;
+        width: 15rem;
         height: 50vh;
         animation: 300ms fade;
     }
@@ -319,6 +323,16 @@ footer p {
     #please-read,
     forward {
         width: 100%;
+    }
+
+    forward {
+        display: grid;
+        columns: 1;
+        place-items: center;
+    }
+
+    .button {
+        margin: 0.5rem;
     }
 }
 
