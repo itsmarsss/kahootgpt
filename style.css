@@ -317,9 +317,9 @@ footer p {
         display: grid;
         position: fixed;
         right: 0px;
-        top: 8rem;
+        top: 7.9rem;
         width: 30rem;
-        height: 50vh;
+        height: 24.5rem;
         animation: 300ms fade;
     }
 
