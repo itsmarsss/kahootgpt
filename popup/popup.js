@@ -22,6 +22,8 @@ const attach = document.getElementById("attach");
 const fakeattach = document.getElementById("fake");
 const detach = document.getElementById("detach");
 
+const kgptconsole = document.getElementById("console");
+
 const extpay_life = ExtPay('kahoot-gpt');
 
 var toggled = false;
@@ -44,6 +46,7 @@ async function callKahootGPT(tab) {
                 files: ['/popup/contentScript.js']
             });
         console.log(`Loading: ${url}`);
+        logVerb(`Loading: ${url}`);
 
         getImport();
 
@@ -56,6 +59,7 @@ async function callKahootGPT(tab) {
             if (response.data === "initialized") {
                 console.log("Connected to injected script");
             }
+            logLog("Connected");
         });
 
         await sleep(100);
@@ -96,6 +100,7 @@ function toggleAutoTap() {
     }
     toggled = !toggled;
     console.log("Toggled: " + toggled);
+    logLog("Toggled: " + toggled);
 }
 
 function closepaypage() {
@@ -110,11 +115,13 @@ function closepaypage() {
             purchase.style.display = "none";
         }
     }, 12);
+    logDebug("Pay page closed");
 }
 
 async function getCurrentTab() {
     let queryOptions = { active: true, lastFocusedWindow: true };
     let [tab] = await chrome.tabs.query(queryOptions);
+    logDebug("Retrieved currect tab");
     return tab;
 }
 
@@ -122,6 +129,7 @@ function setAPIKey(value) {
     chrome.storage.local.set({ key: value }, function () {
         console.log("Key setted");
         openAIKey = value;
+        logVerb("API key set");
     });
 }
 
@@ -129,6 +137,7 @@ function getAPIKey() {
     chrome.storage.local.get(["key"], function (result) {
         console.log("Key queried");
         openAIKey = result.key;
+        logVerb("API key retrieved");
     });
 }
 
@@ -136,6 +145,7 @@ function setHighlight(value) {
     chrome.storage.local.set({ highlight: value }, function () {
         console.log("Highlight setted");
         autoHighlight = value;
+        logVerb("Highlight set");
     });
 }
 
@@ -143,6 +153,7 @@ function getHighlight() {
     chrome.storage.local.get(["highlight"], function (result) {
         console.log("Highlight queried");
         autoHighlight = result.highlight;
+        logVerb("Highlight retrieved");
     });
 }
 
@@ -150,6 +161,7 @@ function setImport(value) {
     chrome.storage.local.set({ import: value }, function () {
         console.log("Import setted");
         autoImport = value;
+        logVerb("Import set");
     });
 }
 
@@ -157,7 +169,31 @@ function getImport() {
     chrome.storage.local.get(["import"], function (result) {
         console.log("Import queried");
         autoImport = result.import;
+        logVerb("Import retrieved");
     });
+}
+
+/*
+<span class="error">Error</span>
+<span class="log">Log</span>
+<span class="debug">Debug</span>
+<span class="verb">Verb</span>
+*/
+function logError(msg) {
+    appendConsole(`<span class="error">${msg}</span>`);
+}
+function logLog(msg) {
+    appendConsole(`<span class="log">${msg}</span>`);
+}
+function logDebug(msg) {
+    appendConsole(`<span class="debug">${msg}</span>`);
+}
+function logVerb(msg) {
+    appendConsole(`<span class="verb">${msg}</span>`);
+}
+function appendConsole(log) {
+    kgptconsole.innerHTML += log;
+    kgptconsole.scrollTop = kgptconsole.scrollHeight;
 }
 
 const sleep = (milliseconds) => {
@@ -170,6 +206,7 @@ extpay_life.getUser().then(user_life => {
     if (user_life.paid) {
         paid = true;
         document.querySelector('p').innerHTML = 'User has paid! 🎉';
+        logDebug("User has paid");
 
         checkbox.addEventListener("click", function () {
             toggleAutoTap();
@@ -199,10 +236,12 @@ extpay_life.getUser().then(user_life => {
             }, 12);
 
             console.log("Auto-tap: Not paid");
+            logDebug("User has not paid");
         });
     }
 }).catch(err => {
-    document.querySelector('p').innerHTML = "Error fetching data :("
+    document.querySelector('p').innerHTML = "Error fetching data :(";
+    logError("Error fetching data");
 });
 
 attach.addEventListener("click", function () {
@@ -228,6 +267,8 @@ function attachScript() {
         chrome.tabs.sendMessage(id, { type: "ping" }, function (response) {
             if (!chrome.runtime.lastError) {
                 console.log("Already injected");
+                logVerb("Already injected");
+                logLog("Connected");
 
                 var val = response.value || {};
 
@@ -262,9 +303,12 @@ function attachScript() {
 
 detach.addEventListener("click", function () {
     chrome.tabs.reload(kahootId);
+    logLog("Detached (reloaded)");
 });
 
 settings.addEventListener("click", async function () {
+    logDebug("Open settings");
+
     if (storekey.checked) {
         getAPIKey();
     }
@@ -302,6 +346,8 @@ openaikeyinput.addEventListener("mouseout", function () {
 });
 
 save.addEventListener("click", async function () {
+    logDebug("Close settings");
+
     if (storekey.checked) {
         if (openaikeyinput.value != openAIKey) {
             setAPIKey(openaikeyinput.value);
@@ -344,6 +390,7 @@ var checkAvailability = setInterval(function () {
             if (!window.chrome.runtime.lastError) {
                 cover.style.display = "none";
                 checkbox.disabled = false;
+                //logVerb("Reconnected");
             } else {
                 console.log("Disconnected");
                 attached = false;
@@ -352,6 +399,7 @@ var checkAvailability = setInterval(function () {
                     checkbox.click();
                 }
                 checkbox.disabled = true;
+                //logVerb("Disconnected");
             }
         });
 }, 100);
@@ -363,3 +411,5 @@ nopay.addEventListener("click", function () {
 const manifest = chrome.runtime.getManifest();
 console.log("Version: v" + manifest.version);
 document.getElementById("KahootGPT").innerHTML = `KahootGPT v${manifest.version}`;
+
+logLog(`~~~ Welcome to KahootGPT v${manifest.version}~~~`);
