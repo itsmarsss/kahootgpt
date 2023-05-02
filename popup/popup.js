@@ -2,6 +2,8 @@ const injection = document.getElementById("injection");
 const purchase = document.getElementById("pay");
 const nopay = document.getElementById("nopay");
 
+const cover = document.getElementById("cover");
+
 const settings = document.getElementById("settings");
 const config = document.getElementById("config");
 
@@ -17,6 +19,7 @@ const autoin = document.getElementById("autoimport");
 const save = document.getElementById("save");
 
 const attach = document.getElementById("attach");
+const fakeattach = document.getElementById("fake");
 const detach = document.getElementById("detach");
 
 const extpay_life = ExtPay('kahoot-gpt');
@@ -38,7 +41,7 @@ async function callKahootGPT(tab) {
         chrome.scripting.executeScript(
             {
                 target: { tabId: id, allFrames: true },
-                files: ['contentScript.js']
+                files: ['/popup/contentScript.js']
             });
         console.log(`Loading: ${url}`);
 
@@ -203,6 +206,12 @@ extpay_life.getUser().then(user_life => {
 });
 
 attach.addEventListener("click", function () {
+    attachScript();
+});
+fakeattach.addEventListener("click", function () {
+    attachScript();
+});
+function attachScript() {
     injection.style.display = "flex";
     var opacity = 0;
     injection.style.opacity = opacity;
@@ -223,7 +232,7 @@ attach.addEventListener("click", function () {
                 var val = response.value || {};
 
                 if (val.toString() == "true") {
-                    toggleAutoTap();
+                    checkbox.click();
                 }
 
                 var fadeEffect = setInterval(function () {
@@ -249,7 +258,7 @@ attach.addEventListener("click", function () {
             }
         });
     });
-});
+}
 
 detach.addEventListener("click", function () {
     chrome.tabs.reload(kahootId);
@@ -333,11 +342,16 @@ var checkAvailability = setInterval(function () {
         { type: "checkup", value: openAIKey },
         (result) => {
             if (!window.chrome.runtime.lastError) {
-                // message processing code goes here
+                cover.style.display = "none";
+                checkbox.disabled = false;
             } else {
                 console.log("Disconnected");
                 attached = false;
-                // Disable screen
+                cover.style.display = "block";
+                if (toggled) {
+                    checkbox.click();
+                }
+                checkbox.disabled = true;
             }
         });
 }, 100);

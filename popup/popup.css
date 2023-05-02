@@ -478,6 +478,28 @@ h4 {
     margin-bottom: 10px;
 }
 
+.fake {
+    width: 85px !important;
+    position: relative !important;
+    margin-left: 12px !important;
+    margin-bottom: 5px !important;
+}
+
+.cover {
+    position: fixed;
+    top: 36px;
+    left: 23px;
+    width: 108px;
+    height: 93px;
+    background: #0000007a;
+    border-radius: 20px;
+    padding: 0px;
+    padding-top: 15px;
+    color: #fff;
+    border: solid 1px #fff;
+    font-weight: bold;
+}
+
 .autoclick {
     float: left;
     width: 100px;
