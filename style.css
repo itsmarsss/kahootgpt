@@ -294,17 +294,19 @@ footer p {
     }
 
     nav ul li a {
-        font-size: 4rem;
+        transform: translateY(-50%);
+        font-size: 1rem;
     }
 
     nav ul li {
-        height: 3.5rem;
+        height: 2rem;
         width: 100%;
         text-align: center;
         padding-bottom: 0.1rem;
     }
 
     nav ul {
+        height: 30rem;
         display: grid;
         grid-column: 1;
         background: #333;
