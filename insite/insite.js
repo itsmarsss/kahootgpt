@@ -207,7 +207,7 @@ function autotapsetup() {
             checkbox.style.boxShadow = "none";
             toggle.style.background = "#ff9494";
             powericon.style.fill = "#ff9494";
-            tapstatus.innerHTML = "Auto-tap ERROR";
+            tapstatus.innerHTML = "Auto-tap ERR";
             tapstatus.style.color = "#ff9494";
 
             console.log("Auto-tap: Not paid");
