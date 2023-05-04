@@ -746,7 +746,7 @@ h4 {
 
 #privacy {
     position: relative;
-    left: -68px;
+    left: -78px;
     padding: 5px;
     text-decoration: none;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -804,16 +804,16 @@ h4 {
     transition: 500ms ease-in-out;
 }
 
-#credit {
+#terms {
     position: relative;
-    left: 79px;
+    left: 78px;
     padding: 5px;
     text-decoration: none;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     color: #fff;
 }
 
-#credit:hover {
+#terms:hover {
     transform: scaleX(1.15);
     text-decoration: underline;
 }
