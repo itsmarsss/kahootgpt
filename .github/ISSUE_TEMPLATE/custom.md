@@ -1,7 +1,7 @@
 ---
 name: Other issue template
 about: General discussion issue.
-title: 'Discussion'
+title: 'Discussion: <Concise description>'
 labels: 'general'
 assignees: 'itsmarsss'
 
