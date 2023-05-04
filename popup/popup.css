@@ -402,6 +402,30 @@ h4 {
     box-shadow: none;
 }
 
+.cancel {
+    padding: 6px 15px;
+    border: none;
+    border-radius: 10px;
+    background-color: #a46c6c;
+    color: #ffffff;
+    font-weight: bold;
+    transition: 500ms;
+    position: fixed;
+    top: 200px;
+    right: 20px;
+}
+
+.cancel:hover {
+    background-color: #ac7474;
+    box-shadow: 0 0 20px #c1b7d450;
+}
+
+.cancel:active {
+    background-color: #842c2c;
+    transition: 250ms;
+    box-shadow: none;
+}
+
 .text>* {
     margin: 0;
 }

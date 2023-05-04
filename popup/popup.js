@@ -17,6 +17,7 @@ const storekey = document.getElementById("storekey");
 const autohi = document.getElementById("autohighlight");
 const autoin = document.getElementById("autoimport");
 const save = document.getElementById("save");
+const cancel = document.getElementById("cancel");
 
 const attach = document.getElementById("attach");
 const fakeattach = document.getElementById("fake");
@@ -346,7 +347,7 @@ openaikeyinput.addEventListener("mouseout", function () {
 });
 
 save.addEventListener("click", async function () {
-    logDebug("Close settings");
+    logDebug("Close settings - save changes");
 
     if (storekey.checked) {
         if (openaikeyinput.value != openAIKey) {
@@ -368,6 +369,22 @@ save.addEventListener("click", async function () {
     }
 
     await sleep(500);
+
+    var fadeEffect = setInterval(function () {
+        if (!config.style.opacity) {
+            config.style.opacity = 1;
+        }
+        if (config.style.opacity > 0) {
+            config.style.opacity -= 0.1;
+        } else {
+            clearInterval(fadeEffect);
+            config.style.display = "none";
+        }
+    }, 12);
+});
+
+cancel.addEventListener("click", async function() {
+    logDebug("Close settings - cancel changes");
 
     var fadeEffect = setInterval(function () {
         if (!config.style.opacity) {
