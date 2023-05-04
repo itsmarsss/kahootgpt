@@ -1,4 +1,4 @@
-# KahootGPT
+# KahootGPT - [Visit our site](https://itsmarsss.github.io/KahootGPT/)
 ## Kahoot & ChatGPT: Dominate in a Kahoot game
  
 ### PLEASE READ:
