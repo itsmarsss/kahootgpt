@@ -14,12 +14,12 @@ KahootGPT may store configuration choices made by users on their local computers
 ## Changes to this Policy
 We may update this Privacy Policy from time to time, and the latest version will be posted on our website. We encourage you to review this policy periodically to stay informed of any changes.
 
-## Contact Us
-If you have any questions or concerns about this Privacy Policy, please contact us at itsmarzzzzzz@protonmail.com.
-
 ## Quick access to third-party resources
 
 ExtensionPay Github: https://github.com/Glench/ExtPay
 
 Stripe Privacy Policy: https://stripe.com/en-ca/legal/privacy-center  
 Stripe Terms of Service: https://stripe.com/en-ca/legal/end-users
+
+## Contact Us
+If you have any questions or concerns about this Privacy Policy, please contact us at itsmarzzzzzz@protonmail.com.

@@ -17,4 +17,4 @@ By using KahootGPT, you agree to the following terms and conditions:
 7. By using KahootGPT, you agree to indemnify and hold us harmless from any claims, damages, or expenses arising out of your use of the extension.
 
 ## Contact Us
-If you have any questions or concerns about this Privacy Policy, please contact us at itsmarzzzzzz@protonmail.com.
+If you have any questions or concerns about this Terms of Service, please contact us at itsmarzzzzzz@protonmail.com.
