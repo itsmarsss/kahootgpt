@@ -270,29 +270,6 @@ footer p {
 }
 
 @media screen and (max-width: 1080px) {
-    header h1 {
-        font-size: 5rem;
-    }
-
-    .copy-link,
-    h2 {
-        font-size: 4rem;
-    }
-
-    h3 {
-        font-size: 3rem;
-    }
-
-    p,
-    li,
-    i {
-        font-size: 2.1rem !important;
-    }
-
-    .logo img {
-        height: 4rem;
-    }
-
     nav ul li a {
         transform: translateY(-50%);
         font-size: 1rem;
@@ -338,6 +315,32 @@ footer p {
         font-size: 4rem;
         cursor: pointer;
     }
+}
+
+@media screen and (max-width: 500px) {
+    header h1 {
+        font-size: 5rem;
+    }
+
+    .copy-link,
+    h2 {
+        font-size: 4rem;
+    }
+
+    h3 {
+        font-size: 3rem;
+    }
+
+    p,
+    li,
+    i {
+        font-size: 2.1rem !important;
+    }
+
+    .logo img {
+        height: 4rem;
+    }
+
 
     header,
     #please-read,
