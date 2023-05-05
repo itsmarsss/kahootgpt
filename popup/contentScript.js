@@ -430,6 +430,8 @@ kgptmini.innerHTML =
             display: none;
             justify-content: center;
             animation: fadein 500ms;
+            left: 10px;
+            top: 10px;
         }
 
         @keyframes fadein {
@@ -1001,16 +1003,41 @@ function dragElement(element) {
     function elementDrag(e) {
         e = e || window.event;
         e.preventDefault();
+
         pos1 = pos3 - e.clientX;
         pos2 = pos4 - e.clientY;
         pos3 = e.clientX;
         pos4 = e.clientY;
+
         element.style.top = (element.offsetTop - pos2) + "px";
         element.style.left = (element.offsetLeft - pos1) + "px";
+
+        checkborder();
     }
 
     function closeDragElement() {
         document.onmouseup = null;
         document.onmousemove = null;
     }
+}
+
+window.addEventListener('resize', function () {
+    checkborder();
+});
+
+function checkborder() {
+    const width = window.innerWidth;
+    const height = window.innerHeight;
+
+    const rect = container.getBoundingClientRect();
+    const divWidth = rect.width;
+    const divHeight = rect.height;
+    const divLeft = rect.left;
+    const divTop = rect.top;
+
+    const maxLeft = width - divWidth;
+    const maxTop = height - divHeight;
+
+    container.style.left = Math.max(Math.min(divLeft, maxLeft), 0) + "px";
+    container.style.top = Math.max(Math.min(divTop, maxTop), 0) + "px";
 }
