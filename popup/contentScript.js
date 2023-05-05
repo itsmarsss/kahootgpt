@@ -756,7 +756,7 @@ const square_cont = document.getElementsByClassName("square")[0];
 
 var minikgpttoggled = false;
 
-var openAIKey = "YOUR_KEY";
+var openAIKey;
 var autoHighlight = false;
 var autoImport = false;
 
