@@ -40,7 +40,7 @@ var autoImport = false;
 
 async function callKahootGPT(tab) {
     const { id, url } = tab;
-    if (url.indexOf("https://kahoot.it/") > -1) {
+    if (url.startsWith("https://kahoot.it/")) {
         chrome.scripting.executeScript(
             {
                 target: { tabId: id, allFrames: true },
@@ -383,7 +383,7 @@ save.addEventListener("click", async function () {
     }, 12);
 });
 
-cancel.addEventListener("click", async function() {
+cancel.addEventListener("click", async function () {
     logDebug("Close settings - cancel changes");
 
     var fadeEffect = setInterval(function () {
