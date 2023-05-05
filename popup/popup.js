@@ -34,7 +34,7 @@ var kahootId = 0;
 var attached = false;
 
 var paid = false;
-var openAIKey = "YOUR_KEY";
+var openAIKey;
 var autoHighlight = false;
 var autoImport = false;
 
