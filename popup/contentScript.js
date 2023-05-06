@@ -382,30 +382,6 @@ kgptmini.innerHTML =
             transition: 300ms ease;
         }
 
-        .save {
-            padding: 6px 15px;
-            border: none;
-            border-radius: 10px;
-            background-color: #826ca4;
-            color: #ffffff;
-            font-weight: bold;
-            transition: 500ms;
-            position: fixed;
-            top: 400px;
-            left: 20px;
-        }
-
-        .save:hover {
-            background-color: #8874ac;
-            box-shadow: 0 0 20px #c1b7d450;
-        }
-
-        .save:active {
-            background-color: #542c84;
-            transition: 250ms;
-            box-shadow: none;
-        }
-
         .text>* {
             margin: 0;
         }
@@ -457,9 +433,7 @@ kgptmini.innerHTML =
 
         .autoclick {
             float: left;
-            margin-right: 15px;
-            margin-left: 5px;
-            margin-top: 10px;
+            margin-top: 8px;
         }
 
         .toggle {
@@ -469,6 +443,7 @@ kgptmini.innerHTML =
             width: 75px;
             height: 75px;
             border-radius: 50%;
+            margin-left: 6px;
             transition: 300ms;
         }
 
@@ -504,6 +479,8 @@ kgptmini.innerHTML =
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             font-size: x-small;
             font-weight: bold;
+            width: 95px;
+            transform: translateX(-4px);
         }
 
         .question-cont {
@@ -945,7 +922,7 @@ function autotapsetup() {
             checkbox.style.boxShadow = "none";
             toggle.style.background = "#ff9494";
             powericon.style.fill = "#ff9494";
-            tapstatus.innerHTML = "Auto-tap ERR";
+            tapstatus.innerHTML = "Auto-tap ERROR";
             tapstatus.style.color = "#ff9494";
 
             console.log("Auto-tap: Not paid");
