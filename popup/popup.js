@@ -181,19 +181,26 @@ function getImport() {
 <span class="verb">Verb</span>
 */
 function logError(msg) {
-    appendConsole(`<span class="error">${msg}</span>`);
+    appendConsole(`<span data="entry" class="error">${msg}</span>`);
 }
 function logLog(msg) {
-    appendConsole(`<span class="log">${msg}</span>`);
+    appendConsole(`<span data="entry" class="log">${msg}</span>`);
 }
 function logDebug(msg) {
-    appendConsole(`<span class="debug">${msg}</span>`);
+    appendConsole(`<span data="entry" class="debug">${msg}</span>`);
 }
 function logVerb(msg) {
-    appendConsole(`<span class="verb">${msg}</span>`);
+    appendConsole(`<span data="entry" class="verb">${msg}</span>`);
 }
 function appendConsole(log) {
     kgptconsole.innerHTML += log;
+    
+    let entry_list = document.querySelectorAll('[data="entry"]');  
+    while(entry_list.length > 50) {
+        entry_list = document.querySelectorAll('[data="entry"]');
+        entry_list[0].outerHTML = "";
+    }
+
     kgptconsole.scrollTop = kgptconsole.scrollHeight;
 }
 
