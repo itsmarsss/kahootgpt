@@ -200,8 +200,11 @@ function appendConsole(log) {
         entry_list = document.querySelectorAll('[data="entry"]');
         entry_list[0].outerHTML = "";
     }
-
-    kgptconsole.scrollTop = kgptconsole.scrollHeight;
+    
+    kgptconsole.scroll({
+        top: kgptconsole.scrollHeight,
+        behavior: 'smooth'
+    });
 }
 
 const sleep = (milliseconds) => {
