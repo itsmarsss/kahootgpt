@@ -49,8 +49,6 @@ async function callKahootGPT(tab) {
         console.log(`Loading: ${url}`);
         logVerb(`Loading: ${url}`);
 
-        getImport();
-
         await sleep(4000);
 
         kahootId = id;
@@ -80,8 +78,6 @@ async function callKahootGPT(tab) {
         if (!toggled) {
             checkbox.click();
         }
-
-        openAIKey = getAPIKey();
     }
 }
 
@@ -277,7 +273,9 @@ function attachScript() {
         const { id, url } = tab;
         chrome.tabs.sendMessage(id, {
             type: "ping", value: "settings",
-            key: openAIKey, hl: autoHighlight, im: autoImport
+            key: openAIKey,
+            hl: autoHighlight.toString(),
+            im: autoImport.toString()
         }, function (response) {
             if (!chrome.runtime.lastError) {
                 console.log("Already injected");
@@ -437,6 +435,10 @@ var checkAvailability = setInterval(function () {
 nopay.addEventListener("click", function () {
     closepaypage();
 });
+
+getAPIKey();
+getHighlight();
+getImport();
 
 const manifest = chrome.runtime.getManifest();
 console.log("Version: v" + manifest.version);
