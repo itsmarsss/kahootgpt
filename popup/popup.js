@@ -318,6 +318,11 @@ detach.addEventListener("click", function () {
     getCurrentTab().then((tab) => {
         const { id, url } = tab;
         kahootId = id;
+
+        if (toggled) {
+            checkbox.click();
+        }
+
         chrome.tabs.reload(kahootId);
         logLog("Detached (reloaded)");
     });
