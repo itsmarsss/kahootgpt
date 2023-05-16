@@ -374,7 +374,11 @@ save.addEventListener("click", async function () {
     if (storekey.checked) {
         if (openaikeyinput.value != openAIKey) {
             setAPIKey(openaikeyinput.value);
-            chrome.tabs.sendMessage(kahootId, { type: "setapikey", value: openaikeyinput.value }, function (response) { });
+            chrome.tabs.sendMessage(kahootId, { type: "setapikey", value: openaikeyinput.value }, (result) => {
+                if (window.chrome.runtime.lastError) {
+                    logError("Error sending data");
+                }
+            });
         }
     } else {
         openAIKey = openaikeyinput.value;
@@ -383,11 +387,19 @@ save.addEventListener("click", async function () {
 
     if (autohi.checked != autoHighlight) {
         setHighlight(autohi.checked);
-        chrome.tabs.sendMessage(kahootId, { type: "sethighlight", value: autohi.checked.toString() }, function (response) { });
+        chrome.tabs.sendMessage(kahootId, { type: "sethighlight", value: autohi.checked.toString() }, (result) => {
+            if (window.chrome.runtime.lastError) {
+                logError("Error sending data");
+            }
+        });
     }
     if (autoin.checked != autoImport) {
         setImport(autoin.checked);
-        chrome.tabs.sendMessage(kahootId, { type: "setimport", value: autoin.checked.toString() }, function (response) { });
+        chrome.tabs.sendMessage(kahootId, { type: "setimport", value: autoin.checked.toString() }, (result) => {
+            if (window.chrome.runtime.lastError) {
+                logError("Error sending data");
+            }
+        });
     }
 
     await sleep(500);
