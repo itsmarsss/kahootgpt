@@ -194,13 +194,13 @@ function logVerb(msg) {
 }
 function appendConsole(log) {
     kgptconsole.innerHTML += log;
-    
-    let entry_list = document.querySelectorAll('[data="entry"]');  
-    while(entry_list.length > 50) {
+
+    let entry_list = document.querySelectorAll('[data="entry"]');
+    while (entry_list.length > 50) {
         entry_list = document.querySelectorAll('[data="entry"]');
         entry_list[0].outerHTML = "";
     }
-    
+
     kgptconsole.scroll({
         top: kgptconsole.scrollHeight,
         behavior: 'smooth'
@@ -275,7 +275,10 @@ function attachScript() {
     }, 12);
     getCurrentTab().then((tab) => {
         const { id, url } = tab;
-        chrome.tabs.sendMessage(id, { type: "ping" }, function (response) {
+        chrome.tabs.sendMessage(id, {
+            type: "ping", value: "settings",
+            key: openAIKey, hl: autoHighlight, im: autoImport
+        }, function (response) {
             if (!chrome.runtime.lastError) {
                 console.log("Already injected");
                 logVerb("Already injected");

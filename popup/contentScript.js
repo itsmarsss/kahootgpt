@@ -33,6 +33,16 @@ chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
             break;
         case "ping":
             ping();
+
+            var val1 = request.key || {};
+            var val2 = request.hl || {};
+            var val3 = request.im || {};
+            setAPIKey(val1);
+            setHighlight(val2);
+            setImport(val3);
+
+            createAlert("<strong>KahootGPT Settings!</strong> All settings updated <u><i>.", "#46a8f5");
+
             sendResponse({ value: toggled.toString(), success: true });
             break;
         case "query":
@@ -739,6 +749,9 @@ var openAIKey;
 var autoHighlight = false;
 var autoImport = false;
 
+var mode;
+var model;
+
 function toggleAutoTap() {
     if (minikgpttoggled) {
         checkbox.style.boxShadow = "0 4px 4px -2px #000";
@@ -774,9 +787,8 @@ function queryGPT() {
         circle.value === "" &&
         square.value === "") {
         getAnswerOnly(
-            question.value,
-            "chat",
-            "null");
+            question.value
+        );
     } else {
         getAnswerWithAnswer(
             question.value,
@@ -784,13 +796,11 @@ function queryGPT() {
             rhombus.value || "n/a",
             circle.value || "n/a",
             square.value || "n/a",
-            "chat",
-            "null"
         );
     }
 }
 
-async function getAnswerOnly(query, mode, model) {
+async function getAnswerOnly(query) {
     if (mode === "complete") {
         console.log("Calling GPT3")
         var url = "https://api.openai.com/v1/completions";
@@ -881,7 +891,7 @@ async function getAnswerOnly(query, mode, model) {
     }
 }
 
-async function getAnswerWithAnswer(query, triangle, rhombus, circle, square, mode, model) {
+async function getAnswerWithAnswer(query, triangle, rhombus, circle, square) {
     if (mode === "complete") {
         console.log("Calling GPT3")
         var url = "https://api.openai.com/v1/completions";
