@@ -284,7 +284,8 @@ function attachScript() {
 
                 var val = response.value || {};
 
-                if (val.toString() == "true") {
+                if (val.toString() === "true") {
+                    checkbox.disabled = false;
                     checkbox.click();
                 }
 
