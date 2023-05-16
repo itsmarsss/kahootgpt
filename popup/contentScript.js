@@ -773,122 +773,235 @@ function queryGPT() {
         rhombus.value === "" &&
         circle.value === "" &&
         square.value === "") {
-        getAnswerOnly(question.value);
+        getAnswerOnly(
+            question.value,
+            "chat",
+            "null");
     } else {
         getAnswerWithAnswer(
             question.value,
             triangle.value || "n/a",
             rhombus.value || "n/a",
             circle.value || "n/a",
-            square.value || "n/a"
+            square.value || "n/a",
+            "chat",
+            "null"
         );
     }
 }
 
-async function getAnswerOnly(query) {
-    console.log("Calling GPT3")
-    var url = "https://api.openai.com/v1/completions";
-    var bearer = 'Bearer ' + openAIKey;
-    fetch(url, {
-        method: 'POST',
-        headers: {
-            'Authorization': bearer,
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-            "model": "text-davinci-003",
-            "prompt": 'Act as a professional; only respond with 4 concise answers (if there is a definite answer, only reply with one) in json format with "one", "two", "three", "four" or "one" as the key if only one answer to the following question: ' + query + "\n",
-            "temperature": 0.7,
-            "max_tokens": 256,
-            "top_p": 1,
-            "frequency_penalty": 0,
-            "presence_penalty": 0
-        })
-    }).then(response => response.json())
-        .then(data => {
-            console.log(data.choices[0].text);
+async function getAnswerOnly(query, mode, model) {
+    if (mode === "complete") {
+        console.log("Calling GPT3")
+        var url = "https://api.openai.com/v1/completions";
+        var bearer = 'Bearer ' + openAIKey;
+        fetch(url, {
+            method: 'POST',
+            headers: {
+                'Authorization': bearer,
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                "model": "text-davinci-003",
+                "prompt": 'Act as a professional; only respond with 4 concise answers (if there is a definite answer, only reply with one) in json format with "one", "two", "three", "four" or "one" as the key if only one answer to the following question: ' + query + "\n",
+                "temperature": 0.7,
+                "max_tokens": 256,
+                "top_p": 1,
+                "frequency_penalty": 0,
+                "presence_penalty": 0
+            })
+        }).then(response => response.json())
+            .then(data => {
+                console.log(data.choices[0].text);
 
-            var lines = (data.choices[0].text).split('\n');
-            lines.splice(0, 2);
-            var replyLines = lines.join('\n');
+                var lines = (data.choices[0].text).split('\n');
+                lines.splice(0, 2);
+                var replyLines = lines.join('\n');
 
-            var GPTReply = JSON.parse(replyLines);
+                var GPTReply = JSON.parse(replyLines);
 
-            var one = GPTReply.one || GPTReply.answer || "";
-            var two = GPTReply.two || "";
-            var three = GPTReply.three || "";
-            var four = GPTReply.four || "";
+                var one = GPTReply.one || GPTReply.answer || "";
+                var two = GPTReply.two || "";
+                var three = GPTReply.three || "";
+                var four = GPTReply.four || "";
 
-            triangle.value = one;
-            rhombus.value = two;
-            circle.value = three;
-            square.value = four;
-        })
-        .catch(err => {
-            console.log("OpenAI error: " + err.message.toString());
-            error(err.message.toString(), "OpenAI");
-        });
+                triangle.value = one;
+                rhombus.value = two;
+                circle.value = three;
+                square.value = four;
+            })
+            .catch(err => {
+                console.log("OpenAI error: " + err.message.toString());
+                error(err.message.toString(), "OpenAI");
+            });
+    } else {
+        console.log("Calling ChatGPT")
+        var url = "https://api.openai.com/v1/chat/completions";
+        var bearer = 'Bearer ' + openAIKey;
+        fetch(url, {
+            method: 'POST',
+            headers: {
+                'Authorization': bearer,
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                "model": "gpt-3.5-turbo",
+                "messages": [
+                    { "role": "system", "content": 'Act as a professional; only respond with 4 concise answers (if there is a definite answer, only reply with one) in json format with "one", "two", "three", "four" or "one" as the key if only one answer to the following question, be concise:' },
+                    { "role": "user", "content": query }
+                ],
+                "temperature": 0.7,
+                "max_tokens": 256,
+                "top_p": 1,
+                "frequency_penalty": 0,
+                "presence_penalty": 0
+            })
+        }).then(response => response.json())
+            .then(data => {
+                console.log(data.choices[0].message.content);
+
+                var replyLines = data.choices[0].message.content;
+
+                var GPTReply = JSON.parse(replyLines);
+
+                var one = GPTReply.one || GPTReply.answer || "";
+                var two = GPTReply.two || "";
+                var three = GPTReply.three || "";
+                var four = GPTReply.four || "";
+
+                triangle.value = one;
+                rhombus.value = two;
+                circle.value = three;
+                square.value = four;
+            })
+            .catch(err => {
+                console.log("OpenAI error: " + err.message.toString());
+                error(err.message.toString(), "OpenAI");
+            });
+    }
 }
 
-async function getAnswerWithAnswer(query, triangle, rhombus, circle, square) {
-    console.log("Calling GPT3")
-    var url = "https://api.openai.com/v1/completions";
-    var bearer = 'Bearer ' + openAIKey;
-    fetch(url, {
-        method: 'POST',
-        headers: {
-            'Authorization': bearer,
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-            "model": "text-davinci-003",
-            "prompt": 'Act as a professional;  the question will be after "question: " and there are 4 possible answers "a", "b", "c", or "d", reply with a SINGLE letter ONLY:\nquestion: ' + query + "\n" + "a: " + triangle + "\n" + "b: " + rhombus + "\n" + "c: " + circle + "\n" + "d: " + square + "\n",
-            "temperature": 0.7,
-            "max_tokens": 256,
-            "top_p": 1,
-            "frequency_penalty": 0,
-            "presence_penalty": 0
-        })
-    }).then(response => response.json())
-        .then(data => {
-            console.log(data.choices[0].text);
+async function getAnswerWithAnswer(query, triangle, rhombus, circle, square, mode, model) {
+    if (mode === "complete") {
+        console.log("Calling GPT3")
+        var url = "https://api.openai.com/v1/completions";
+        var bearer = 'Bearer ' + openAIKey;
+        fetch(url, {
+            method: 'POST',
+            headers: {
+                'Authorization': bearer,
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                "model": "text-davinci-003",
+                "prompt": 'Act as a professional;  the question will be after "question: " and there are 4 possible answers "a", "b", "c", or "d", reply with a SINGLE letter ONLY:\nquestion: ' + query + "\n" + "a: " + triangle + "\n" + "b: " + rhombus + "\n" + "c: " + circle + "\n" + "d: " + square + "\n",
+                "temperature": 0.7,
+                "max_tokens": 256,
+                "top_p": 1,
+                "frequency_penalty": 0,
+                "presence_penalty": 0
+            })
+        }).then(response => response.json())
+            .then(data => {
+                console.log(data.choices[0].text);
 
-            var lines = (data.choices[0].text).split('\n');
-            lines.splice(0, 1);
-            var replyLines = lines.join('\n');
+                var lines = (data.choices[0].text).split('\n');
+                lines.splice(0, 1);
+                var replyLines = lines.join('\n');
 
-            var GPTReply = replyLines.replace(/\s/g, '').toLowerCase().charAt(0);
+                var GPTReply = replyLines.replace(/\s/g, '').toLowerCase().charAt(0);
 
-            console.log(GPTReply);
+                console.log(GPTReply);
 
-            var ans = "a";
+                var ans = "a";
 
-            if (GPTReply.includes("b")) {
-                ans = "b";
-                rhombus_cont.style.border = "4px solid gold";
-            } else if (GPTReply.includes("c")) {
-                ans = "c";
-                circle_cont.style.border = "4px solid gold";
-            } else if (GPTReply.includes("d")) {
-                ans = "d";
-                square_cont.style.border = "4px solid gold";
-            } else {
-                ans = "a";
-                triangle_cont.style.border = "4px solid gold";
-            }
+                if (GPTReply.includes("b")) {
+                    ans = "b";
+                    rhombus_cont.style.border = "4px solid gold";
+                } else if (GPTReply.includes("c")) {
+                    ans = "c";
+                    circle_cont.style.border = "4px solid gold";
+                } else if (GPTReply.includes("d")) {
+                    ans = "d";
+                    square_cont.style.border = "4px solid gold";
+                } else {
+                    ans = "a";
+                    triangle_cont.style.border = "4px solid gold";
+                }
 
-            tap(ans);
-            console.log("Send tap");
+                tap(ans);
+                console.log("Send tap");
 
-            if (autoHighlight) {
-                highlight(ans);
-                console.log("Send highlight");
-            }
-        })
-        .catch(err => {
-            console.log("OpenAI Error: " + err.message.toString());
-            error(err.message.toString(), "OpenAI");
-        });
+                if (autoHighlight) {
+                    highlight(ans);
+                    console.log("Send highlight");
+                }
+            })
+            .catch(err => {
+                console.log("OpenAI Error: " + err.message.toString());
+                error(err.message.toString(), "OpenAI");
+            });
+    } else {
+        console.log("Calling ChatGPT")
+        var url = "https://api.openai.com/v1/chat/completions";
+        var bearer = 'Bearer ' + openAIKey;
+        fetch(url, {
+            method: 'POST',
+            headers: {
+                'Authorization': bearer,
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                "model": "gpt-3.5-turbo",
+                "messages": [
+                    { "role": "system", "content": 'Act as a professional;  the question will be after "question: " and there are 4 possible answers "a", "b", "c", or "d", reply with a SINGLE letter ONLY, be concise:' },
+                    { "role": "user", "content": 'question: ' + query + "\n" + "a: " + triangle + "\n" + "b: " + rhombus + "\n" + "c: " + circle + "\n" + "d: " + square }
+                ],
+                "temperature": 0.7,
+                "max_tokens": 256,
+                "top_p": 1,
+                "frequency_penalty": 0,
+                "presence_penalty": 0
+            })
+        }).then(response => response.json())
+            .then(data => {
+                console.log(data.choices[0].message.content);
+
+                var replyLines = data.choices[0].message.content;
+
+                var GPTReply = replyLines.replace(/\s/g, '').toLowerCase().charAt(0);
+
+                console.log(GPTReply);
+
+                var ans = "a";
+
+                if (GPTReply.includes("b")) {
+                    ans = "b";
+                    rhombus_cont.style.border = "4px solid gold";
+                } else if (GPTReply.includes("c")) {
+                    ans = "c";
+                    circle_cont.style.border = "4px solid gold";
+                } else if (GPTReply.includes("d")) {
+                    ans = "d";
+                    square_cont.style.border = "4px solid gold";
+                } else {
+                    ans = "a";
+                    triangle_cont.style.border = "4px solid gold";
+                }
+
+                tap(ans);
+                console.log("Send tap");
+
+                if (autoHighlight) {
+                    highlight(ans);
+                    console.log("Send highlight");
+                }
+            })
+            .catch(err => {
+                console.log("OpenAI Error: " + err.message.toString());
+                error(err.message.toString(), "OpenAI");
+            });
+    }
 }
 
 function runQuery() {
