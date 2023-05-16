@@ -177,16 +177,16 @@ function getImport() {
 <span class="verb">Verb</span>
 */
 function logError(msg) {
-    appendConsole(`<span data="entry" class="error">${msg}</span>`);
+    appendConsole(`<span data="entry" class="entry error">${msg}</span>`);
 }
 function logLog(msg) {
-    appendConsole(`<span data="entry" class="log">${msg}</span>`);
+    appendConsole(`<span data="entry" class="entry log">${msg}</span>`);
 }
 function logDebug(msg) {
-    appendConsole(`<span data="entry" class="debug">${msg}</span>`);
+    appendConsole(`<span data="entry" class="entry debug">${msg}</span>`);
 }
 function logVerb(msg) {
-    appendConsole(`<span data="entry" class="verb">${msg}</span>`);
+    appendConsole(`<span data="entry" class="entry verb">${msg}</span>`);
 }
 function appendConsole(log) {
     kgptconsole.innerHTML += log;
@@ -376,7 +376,7 @@ save.addEventListener("click", async function () {
             setAPIKey(openaikeyinput.value);
             chrome.tabs.sendMessage(kahootId, { type: "setapikey", value: openaikeyinput.value }, (result) => {
                 if (window.chrome.runtime.lastError) {
-                    logError("Error sending data");
+                    logError("Error sending data - <i>you can ignore this</i>");
                 }
             });
         }
@@ -389,7 +389,7 @@ save.addEventListener("click", async function () {
         setHighlight(autohi.checked);
         chrome.tabs.sendMessage(kahootId, { type: "sethighlight", value: autohi.checked.toString() }, (result) => {
             if (window.chrome.runtime.lastError) {
-                logError("Error sending data");
+                logError("Error sending data - <i>you can ignore this</i>");
             }
         });
     }
@@ -397,7 +397,7 @@ save.addEventListener("click", async function () {
         setImport(autoin.checked);
         chrome.tabs.sendMessage(kahootId, { type: "setimport", value: autoin.checked.toString() }, (result) => {
             if (window.chrome.runtime.lastError) {
-                logError("Error sending data");
+                logError("Error sending data - <i>you can ignore this</i>");
             }
         });
     }

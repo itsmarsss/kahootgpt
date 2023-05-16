@@ -667,6 +667,12 @@ h4 {
     text-align: left;
 }
 
+.entry {
+    padding-top: 2px;
+    padding-bottom: 2px;
+    border-bottom: 2px solid #3b3d44;
+}
+
 .error {
     color: #f04747;
 }
