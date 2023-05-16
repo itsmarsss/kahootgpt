@@ -315,8 +315,12 @@ function attachScript() {
 }
 
 detach.addEventListener("click", function () {
-    chrome.tabs.reload(kahootId);
-    logLog("Detached (reloaded)");
+    getCurrentTab().then((tab) => {
+        const { id, url } = tab;
+        kahootId = id;
+        chrome.tabs.reload(kahootId);
+        logLog("Detached (reloaded)");
+    });
 });
 
 settings.addEventListener("click", async function () {
