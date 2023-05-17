@@ -24,6 +24,9 @@ const openaikeyinput = document.getElementById("openaikeyinput");
 const storekey = document.getElementById("storekey");
 const autohi = document.getElementById("autohighlight");
 const autoin = document.getElementById("autoimport");
+
+const models = document.getElementById("models");
+
 const save = document.getElementById("save");
 const cancel = document.getElementById("cancel");
 
@@ -41,7 +44,7 @@ var kahootId = 0;
 
 var attached = false;
 
-var inkgpt = true;
+var model = "gpt-turbo-3.5";
 
 var paid = false;
 var openAIKey;
@@ -177,6 +180,22 @@ function getImport() {
         console.log("Import queried");
         autoImport = result.import;
         logVerb("Import retrieved");
+    });
+}
+
+function setModel(value) {
+    chrome.storage.local.set({ model: value }, function () {
+        console.log("Model setted");
+        gptModel = value;
+        logVerb("Import set");
+    });
+}
+
+function getModel() {
+    chrome.storage.local.get(["model"], function (result) {
+        console.log("Model queried");
+        gptModel = result.model;
+        logVerb("Model retrieved");
     });
 }
 
@@ -388,6 +407,8 @@ settings.addEventListener("click", async function () {
             clearInterval(fadeEffect);
         }
     }, 12);
+
+    kgptconfigbutton.click();
 });
 
 openaikeyinput.addEventListener("mouseover", function () {
@@ -423,9 +444,19 @@ save.addEventListener("click", async function () {
             }
         });
     }
+
     if (autoin.checked != autoImport) {
         setImport(autoin.checked);
         chrome.tabs.sendMessage(kahootId, { type: "setimport", value: autoin.checked.toString() }, (result) => {
+            if (window.chrome.runtime.lastError) {
+                logError("Error sending data - <i>you can ignore this</i>");
+            }
+        });
+    }
+
+    if (models.options[models.selectedIndex].text != model) {
+        setModel(models.options[models.selectedIndex].text);
+        chrome.tabs.sendMessage(kahootId, { type: "setmodel", value: models.options[models.selectedIndex].text.toString() }, (result) => {
             if (window.chrome.runtime.lastError) {
                 logError("Error sending data - <i>you can ignore this</i>");
             }
@@ -492,6 +523,7 @@ nopay.addEventListener("click", function () {
 getAPIKey();
 getHighlight();
 getImport();
+getModel();
 
 const manifest = chrome.runtime.getManifest();
 console.log("Version: v" + manifest.version);
