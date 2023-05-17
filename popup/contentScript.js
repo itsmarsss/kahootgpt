@@ -37,9 +37,11 @@ chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
             var val1 = request.key || {};
             var val2 = request.hl || {};
             var val3 = request.im || {};
+            var val4 = request.md || {};
             setAPIKey(val1);
             setHighlight(val2);
             setImport(val3);
+            setModel(val4);
 
             createAlert("<strong>KahootGPT Settings!</strong> All settings updated <u><i>.", "#46a8f5");
 
@@ -91,6 +93,7 @@ function initialize(val) {
     getAPIKey();
     getHighlight();
     getImport();
+    getModel();
 
     createAlert("<strong>KahootGPT Initialized!</strong> ContentScript initialized connection to PopupScript.", "#2eb886");
 }
@@ -192,22 +195,30 @@ function setImport(val) {
     autoImport = val.toString() === "true";
     createAlert("<strong>KahootGPT Settings!</strong> Import answer set to <u><i>" + val.toString() + "</i></u>.", "#46a8f5");
 }
+function setModel(val) {
+    console.log("Model: " + val.toString());
+    model = val.toString();
+    createAlert("<strong>KahootGPT Settings!</strong> Model set to <u><i>" + val.toString() + "</i></u>.", "#46a8f5");
+}
 
 function getAPIKey() {
     chrome.storage.local.get(["key"], function (result) {
         openAIKey = result.key;
     });
 }
-
 function getHighlight() {
     chrome.storage.local.get(["highlight"], function (result) {
         autoHighlight = result.highlight;
     });
 }
-
 function getImport() {
     chrome.storage.local.get(["import"], function (result) {
         autoImport = result.import;
+    });
+}
+function getModel() {
+    chrome.storage.local.get(["model"], function (result) {
+        model = result.model;
     });
 }
 
@@ -748,9 +759,7 @@ var minikgpttoggled = false;
 var openAIKey;
 var autoHighlight = false;
 var autoImport = false;
-
-var mode;
-var model;
+var model = "gpt-turbo-3.5";
 
 function toggleAutoTap() {
     if (minikgpttoggled) {
@@ -801,7 +810,7 @@ function queryGPT() {
 }
 
 async function getAnswerOnly(query) {
-    if (mode === "complete") {
+    if (model === "text-davinci-003") {
         console.log("Calling GPT3")
         var url = "https://api.openai.com/v1/completions";
         var bearer = 'Bearer ' + openAIKey;
@@ -892,7 +901,7 @@ async function getAnswerOnly(query) {
 }
 
 async function getAnswerWithAnswer(query, triangle, rhombus, circle, square) {
-    if (mode === "complete") {
+    if (mode === "text-davinci-003") {
         console.log("Calling GPT3")
         var url = "https://api.openai.com/v1/completions";
         var bearer = 'Bearer ' + openAIKey;
