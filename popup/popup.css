@@ -477,6 +477,12 @@ h4 {
     fill: lightgray;
 }
 
+.invis {
+    border: none;
+    background: none;
+    width: 35px;
+}
+
 .settings {
     margin-right: 10px;
     fill: white;
