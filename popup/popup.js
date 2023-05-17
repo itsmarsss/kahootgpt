@@ -237,7 +237,6 @@ const sleep = (milliseconds) => {
 }
 
 kgptconfigbutton.addEventListener("click", function () {
-    //openaiconfig.style.display = "none";
     kgptconfig.style.display = "block";
     openaiconfig.style.transform = "translateX(500px)";
     kgptconfig.style.transform = "translateX(0px)";
@@ -247,7 +246,6 @@ kgptconfigbutton.addEventListener("click", function () {
 });
 
 openaiconfigbutton.addEventListener("click", function () {
-    //kgptconfig.style.display = "none";
     openaiconfig.style.display = "block";
     kgptconfig.style.transform = "translateX(-500px)";
     openaiconfig.style.transform = "translateX(0px)";
@@ -324,7 +322,8 @@ function attachScript() {
             type: "ping", value: "settings",
             key: openAIKey,
             hl: autoHighlight.toString(),
-            im: autoImport.toString()
+            im: autoImport.toString(),
+            md: model.toString()
         }, function (response) {
             if (!chrome.runtime.lastError) {
                 console.log("Already injected");
