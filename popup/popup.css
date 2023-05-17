@@ -247,11 +247,13 @@ h4 {
 }
 
 .kgpt-config-button {
+    background: linear-gradient(#525252, #52525200);
     float: left;
     border-bottom-left-radius: 15px;
 }
 
 .openai-config-button {
+    background: transparent;
     float: right;
     border-bottom-right-radius: 15px;
 }

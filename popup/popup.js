@@ -220,11 +220,15 @@ const sleep = (milliseconds) => {
 kgptconfigbutton.addEventListener("click", function () {
     openaiconfig.style.display = "none";
     kgptconfig.style.display = "block";
+    openaiconfigbutton.style.background = "linear-gradient(#525252, #52525200)";
+    kgptconfigbutton.style.background = "transparent";
 });
 
 openaiconfigbutton.addEventListener("click", function () {
     kgptconfig.style.display = "none";
     openaiconfig.style.display = "block";
+    kgptconfigbutton.style.background = "linear-gradient(#525252, #52525200)";
+    openaiconfigbutton.style.background = "transparent";
 });
 
 document.getElementsByClassName('life')[0].addEventListener('click', extpay_life.openPaymentPage);
