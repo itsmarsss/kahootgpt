@@ -229,24 +229,79 @@ h4 {
     overflow: hidden;
 }
 
+.config-button {
+    width: 150px;
+    height: 50px;
+    font-size: 15px;
+    font-weight: bold;
+    background-color: #525252;
+    border: none;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    background: #525252;
+    color: #fff;
+    transition: 200ms;
+    cursor: pointer;
+}
+
+.config-button:active {
+    background: #404040;
+}
+
+.config-area {
+    height: 80%;
+    width: 100%;
+    bottom: 0px;
+    position: absolute;
+    display: block;
+}
+
+.kgpt-config-button {
+    background: linear-gradient(#525252, #52525200);
+    float: left;
+    border-bottom-left-radius: 15px;
+}
+
+.kgpt-config {
+    transform: translateX(-500px);
+    transition: 200ms;
+}
+
+.openai-config-button {
+    background: transparent;
+    float: right;
+    border-bottom-right-radius: 15px;
+}
+
+.openai-config {
+    transform: translateX(500px);
+    transition: 200ms;
+}
+
 .openai {
     margin-top: 5px;
     margin-left: 20px;
     float: left;
+    width: 260px;
 }
 
-.openai>h3 {
+.apikey {
+    float: left;
+}
+
+.apikey>h3 {
     text-align: left;
     margin: 0;
     margin-bottom: 5px;
 }
 
 .openaikeyinput {
-    max-width: 190px;
+    position: relative;
+    display: inline-block;
+    height: 32px;
     background-color: #f5f5f5;
     color: #242424;
-    min-height: 35px;
     border-radius: 5px;
+    padding: 5px;
     outline: none;
     border: none;
     box-shadow: 0px 10px 20px -18px;
@@ -262,9 +317,7 @@ h4 {
 }
 
 .cache {
-    margin-top: 5px;
-    margin-left: 20px;
-    float: left;
+    float: right;
 }
 
 .cache>h3 {
@@ -273,7 +326,30 @@ h4 {
     margin-bottom: 5px;
 }
 
-.config>div>h3>span {
+.model {
+    margin-top: 5px;
+    margin-left: 20px;
+    float: left;
+}
+
+.model>h3 {
+    text-align: left;
+    margin: 0;
+    margin-bottom: 5px;
+}
+
+.models {
+    height: 32px;
+    width: 260px;
+    border-radius: 5px;
+    padding: 2px;
+}
+
+.options {
+    height: 32px;
+}
+
+.minitext {
     font-size: 10px;
     margin: 0;
     color: #9d86c3;
@@ -298,17 +374,12 @@ h4 {
     z-index: 101;
 }
 
-.toggletext {
-    position: relative;
-    display: inline-block;
-}
-
 .highlighttext .tooltiptext {
-    top: 92px;
+    top: 30px;
 }
 
 .importtext .tooltiptext {
-    top: 155px;
+    top: 95px;
 }
 
 .tooltiptext {
@@ -325,6 +396,7 @@ h4 {
     animation: fadeout 250ms;
     left: 7px;
     border: 1.5px solid #937db3;
+    font-size: 10px;
 }
 
 @keyframes fadein {
@@ -475,6 +547,12 @@ h4 {
 
 .info:hover {
     fill: lightgray;
+}
+
+.invis {
+    border: none;
+    background: none;
+    width: 35px;
 }
 
 .settings {
@@ -665,6 +743,12 @@ h4 {
 
 .console span {
     text-align: left;
+}
+
+.entry {
+    padding-top: 2px;
+    padding-bottom: 2px;
+    border-bottom: 2px solid #3b3d44;
 }
 
 .error {

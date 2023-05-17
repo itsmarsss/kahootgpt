@@ -27,8 +27,9 @@
                 </svg>
             </a>
             <div title="Settings">
-                <svg class="settings" id="settings" width="20" height="20" viewBox="0 0 20 20">
-                    <path d="M 15.8216 10.5654 c 0.0326 -0.2606 0.057 -0.5252 0.057 -0.7939 s -0.0244 -0.5334 -0.057 -0.7939
+                <button class="invis">
+                    <svg class="settings" id="settings" width="20" height="20" viewBox="0 0 20 20">
+                        <path d="M 15.8216 10.5654 c 0.0326 -0.2606 0.057 -0.5252 0.057 -0.7939 s -0.0244 -0.5334 -0.057 -0.7939
                     l 1.7222 -1.3476 c 0.1547 -0.1221 0.1995 -0.342 0.0977 -0.5211 l -1.6286 -2.8215 c -0.1018 -0.1751
                     -0.3135 -0.2484 -0.4967 -0.1751 l -2.0276 0.8184 c -0.4194 -0.3216 -0.8794 -0.5944 -1.3761 -0.8021 l
                     -0.3054 -2.1579 c -0.0366 -0.1914 -0.2036 -0.342 -0.4071 -0.342 h -3.2571 c -0.2036 0 -0.3705 0.1506
@@ -42,8 +43,9 @@
                     0.4967 -0.1751 l 1.6286 -2.8215 c 0.1018 -0.1751 0.057 -0.3949 -0.0977 -0.5211 l -1.7181 -1.3476 z m
                     -6.0501 2.0561 c -1.5756 0 -2.85 -1.2744 -2.85 -2.85 s 1.2744 -2.85 2.85 -2.85 s 2.85 1.2744 2.85
                     2.85 s -1.2744 2.85 -2.85 2.85 z">
-                    </path>
-                </svg>
+                        </path>
+                    </svg>
+                </button>
             </div>
         </div>
 
@@ -62,56 +64,72 @@
         </div>
 
         <div class="config" id="config">
-            <div class="openai" id="openai">
-                <h3>
-                    OpenAI API Key:
-                </h3>
-                <input class="openaikeyinput" id="openaikeyinput" placeholder="OpenAI API Key" type="password">
+            <button id="kgpt-config-button" class="kgpt-config-button config-button">KahootGPT</button>
+            <button id="openai-config-button" class="openai-config-button config-button">OpenAI</button>
+
+            <div id="kgpt-config" class="kgpt-config config-area">
+                <div class="togglechoice highlight" id="highlight">
+                    <h3 class="toggletext highlighttext">Auto Highlight Answer <span class="minitext"><i>(if
+                                possible)</i></span>:
+                        <span class="tooltiptext">
+                            KahootGPT will highlight the best answer on the Kahoot page.
+                        </span>
+                    </h3>
+
+                    <label class="chkbox">
+                        <input id="autohighlight" type="checkbox" checked>
+                        <div class="transition"></div>
+                    </label>
+                </div>
+
+                <div class="togglechoice import" id="import">
+                    <h3 class="toggletext importtext">Auto Import Questions <span class="minitext"><i>(if
+                                available)</i></span>:
+                        <span class="tooltiptext">
+                            KahootGPT will import questions if host allows players to view the question and
+                            choices
+                            on
+                            local device.
+                        </span>
+                    </h3>
+
+                    <label class="chkbox">
+                        <input id="autoimport" type="checkbox" checked>
+                        <div class="transition"></div>
+                    </label>
+                </div>
             </div>
-            <div class="cache" id="cache">
-                <h3>Cache Key:</h3>
-                <label class="chkbox">
-                    <input id="storekey" type="checkbox" checked>
-                    <div class="transition"></div>
-                </label>
-            </div>
 
-            <div class="togglechoice highlight" id="highlight">
-                <h3 class="toggletext highlighttext">Auto Highlight Answer <span class="minitext"><i>(if
-                            possible)</i></span>:
-                    <span class="tooltiptext">
-                        KahootGPT will highlight the best answer on the Kahoot page.
-                    </span>
-                </h3>
-
-                <label class="chkbox">
-                    <input id="autohighlight" type="checkbox" checked>
-                    <div class="transition"></div>
-                </label>
-            </div>
-
-            <div class="togglechoice import" id="import">
-                <h3 class="toggletext importtext">Auto Import Questions <span class="minitext"><i>(if
-                            available)</i></span>:
-                    <span class="tooltiptext">
-                        KahootGPT will import questions if host allows players to view the question and
-                        choices
-                        on
-                        local device.
-                    </span>
-                </h3>
-
-                <label class="chkbox">
-                    <input id="autoimport" type="checkbox" checked>
-                    <div class="transition"></div>
-                </label>
+            <div id="openai-config" class="openai-config config-area">
+                <div class="openai" id="openai">
+                    <div class="apikey" id="apikey">
+                        <h3>
+                            OpenAI API Key:
+                        </h3>
+                        <input class="openaikeyinput" id="openaikeyinput" placeholder="OpenAI API Key" type="password">
+                    </div>
+                    <div class="cache" id="cache">
+                        <h3>Cache Key:</h3>
+                        <label class="chkbox">
+                            <input id="storekey" type="checkbox" checked>
+                            <div class="transition"></div>
+                        </label>
+                    </div>
+                </div>
+                <div class="model" id="model">
+                    <h3>OpenAI Model:</h3>
+                    <select name="models" id="models" class="models">
+                        <option class="options" value="gpt3.5">gpt-3.5-turbo</option>
+                        <option class="options" value="gpt3">text-davinci-003</option>
+                    </select>
+                </div>
             </div>
             <button class="save" id="save">Save Changes</button>
             <button class="cancel" id="cancel">Cancel Changes</button>
         </div>
 
-        <div class="title"><a id="KahootGPT" target="_blank" title="KahootGPT"
-                href="https://itsmarsss.github.io/KahootGPT/">KahootGPT-v0.0.0</a>
+        <div class="title">
+            <a id="KahootGPT">KahootGPT-v0.0.0</a>
         </div>
 
         <div class="cover" id="cover">
@@ -234,7 +252,8 @@
                     width="550" height="435" allowtransparency="true" frameborder="0"
                     sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts"></iframe>
             </a>
-            <a id="terms" href="https://itsmarsss.github.io/KahootGPT/documents/TERMS.html" target="_blank" title="Terms of Servive">
+            <a id="terms" href="https://itsmarsss.github.io/KahootGPT/documents/TERMS.html" target="_blank"
+                title="Terms of Servive">
                 Terms
             </a>
         </div>

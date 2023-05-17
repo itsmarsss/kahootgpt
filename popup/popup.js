@@ -12,10 +12,21 @@ const toggle = document.getElementById("toggle");
 const powericon = document.getElementById("power-icon");
 const tapstatus = document.getElementById("autoclick-status");
 
+const kgptconfigbutton = document.getElementById("kgpt-config-button");
+const kgptconfig = document.getElementById("kgpt-config");
+
+
+const openaiconfigbutton = document.getElementById("openai-config-button");
+const openaiconfig = document.getElementById("openai-config");
+
+
 const openaikeyinput = document.getElementById("openaikeyinput");
 const storekey = document.getElementById("storekey");
 const autohi = document.getElementById("autohighlight");
 const autoin = document.getElementById("autoimport");
+
+const models = document.getElementById("models");
+
 const save = document.getElementById("save");
 const cancel = document.getElementById("cancel");
 
@@ -37,6 +48,7 @@ var paid = false;
 var openAIKey;
 var autoHighlight = false;
 var autoImport = false;
+var model = "gpt-3.5-turbo";
 
 async function callKahootGPT(tab) {
     const { id, url } = tab;
@@ -48,8 +60,6 @@ async function callKahootGPT(tab) {
             });
         console.log(`Loading: ${url}`);
         logVerb(`Loading: ${url}`);
-
-        getImport();
 
         await sleep(4000);
 
@@ -80,8 +90,6 @@ async function callKahootGPT(tab) {
         if (!toggled) {
             checkbox.click();
         }
-
-        openAIKey = getAPIKey();
     }
 }
 
@@ -174,6 +182,22 @@ function getImport() {
     });
 }
 
+function setModel(value) {
+    chrome.storage.local.set({ model: value }, function () {
+        console.log("Model setted");
+        model = value;
+        logVerb("Model set");
+    });
+}
+
+function getModel() {
+    chrome.storage.local.get(["model"], function (result) {
+        console.log("Model queried");
+        model = result.model;
+        logVerb("Model retrieved");
+    });
+}
+
 /*
 <span class="error">Error</span>
 <span class="log">Log</span>
@@ -181,26 +205,26 @@ function getImport() {
 <span class="verb">Verb</span>
 */
 function logError(msg) {
-    appendConsole(`<span data="entry" class="error">${msg}</span>`);
+    appendConsole(`<span data="entry" class="entry error">${msg}</span>`);
 }
 function logLog(msg) {
-    appendConsole(`<span data="entry" class="log">${msg}</span>`);
+    appendConsole(`<span data="entry" class="entry log">${msg}</span>`);
 }
 function logDebug(msg) {
-    appendConsole(`<span data="entry" class="debug">${msg}</span>`);
+    appendConsole(`<span data="entry" class="entry debug">${msg}</span>`);
 }
 function logVerb(msg) {
-    appendConsole(`<span data="entry" class="verb">${msg}</span>`);
+    appendConsole(`<span data="entry" class="entry verb">${msg}</span>`);
 }
 function appendConsole(log) {
     kgptconsole.innerHTML += log;
-    
-    let entry_list = document.querySelectorAll('[data="entry"]');  
-    while(entry_list.length > 50) {
+
+    let entry_list = document.querySelectorAll('[data="entry"]');
+    while (entry_list.length > 50) {
         entry_list = document.querySelectorAll('[data="entry"]');
         entry_list[0].outerHTML = "";
     }
-    
+
     kgptconsole.scroll({
         top: kgptconsole.scrollHeight,
         behavior: 'smooth'
@@ -210,6 +234,24 @@ function appendConsole(log) {
 const sleep = (milliseconds) => {
     return new Promise(resolve => setTimeout(resolve, milliseconds))
 }
+
+kgptconfigbutton.addEventListener("click", function () {
+    kgptconfig.style.display = "block";
+    openaiconfig.style.transform = "translateX(500px)";
+    kgptconfig.style.transform = "translateX(0px)";
+
+    kgptconfigbutton.style.background = "linear-gradient(#525252, #52525200)";
+    openaiconfigbutton.style.background = "transparent";
+});
+
+openaiconfigbutton.addEventListener("click", function () {
+    openaiconfig.style.display = "block";
+    kgptconfig.style.transform = "translateX(-500px)";
+    openaiconfig.style.transform = "translateX(0px)";
+
+    openaiconfigbutton.style.background = "linear-gradient(#525252, #52525200)";
+    kgptconfigbutton.style.background = "transparent";
+});
 
 document.getElementsByClassName('life')[0].addEventListener('click', extpay_life.openPaymentPage);
 
@@ -275,7 +317,13 @@ function attachScript() {
     }, 12);
     getCurrentTab().then((tab) => {
         const { id, url } = tab;
-        chrome.tabs.sendMessage(id, { type: "ping" }, function (response) {
+        chrome.tabs.sendMessage(id, {
+            type: "ping", value: "settings",
+            key: openAIKey,
+            hl: autoHighlight.toString(),
+            im: autoImport.toString(),
+            md: model.toString()
+        }, function (response) {
             if (!chrome.runtime.lastError) {
                 console.log("Already injected");
                 logVerb("Already injected");
@@ -283,7 +331,8 @@ function attachScript() {
 
                 var val = response.value || {};
 
-                if (val.toString() == "true") {
+                if (val.toString() === "true") {
+                    checkbox.disabled = false;
                     checkbox.click();
                 }
 
@@ -313,8 +362,18 @@ function attachScript() {
 }
 
 detach.addEventListener("click", function () {
-    chrome.tabs.reload(kahootId);
-    logLog("Detached (reloaded)");
+    getCurrentTab().then((tab) => {
+        const { id, url } = tab;
+        kahootId = id;
+
+        chrome.tabs.reload(kahootId);
+
+        if (toggled) {
+            checkbox.click();
+        }
+
+        logLog("Detached (reloaded)");
+    });
 });
 
 settings.addEventListener("click", async function () {
@@ -326,6 +385,7 @@ settings.addEventListener("click", async function () {
 
     getHighlight();
     getImport();
+    getModel();
 
     await sleep(500);
 
@@ -333,6 +393,12 @@ settings.addEventListener("click", async function () {
 
     autohi.checked = autoHighlight;
     autoin.checked = autoImport;
+
+    if (model === "gpt-3.5-turbo") {
+        models.selectedIndex = 0;
+    } else {
+        models.selectedIndex = 1;
+    }
 
     config.style.display = "block";
 
@@ -346,6 +412,8 @@ settings.addEventListener("click", async function () {
             clearInterval(fadeEffect);
         }
     }, 12);
+
+    kgptconfigbutton.click();
 });
 
 openaikeyinput.addEventListener("mouseover", function () {
@@ -362,7 +430,11 @@ save.addEventListener("click", async function () {
     if (storekey.checked) {
         if (openaikeyinput.value != openAIKey) {
             setAPIKey(openaikeyinput.value);
-            chrome.tabs.sendMessage(kahootId, { type: "setapikey", value: openaikeyinput.value }, function (response) { });
+            chrome.tabs.sendMessage(kahootId, { type: "setapikey", value: openaikeyinput.value }, (result) => {
+                if (window.chrome.runtime.lastError) {
+                    logError("Error sending data - <i>you can ignore this</i>");
+                }
+            });
         }
     } else {
         openAIKey = openaikeyinput.value;
@@ -371,11 +443,29 @@ save.addEventListener("click", async function () {
 
     if (autohi.checked != autoHighlight) {
         setHighlight(autohi.checked);
-        chrome.tabs.sendMessage(kahootId, { type: "sethighlight", value: autohi.checked.toString() }, function (response) { });
+        chrome.tabs.sendMessage(kahootId, { type: "sethighlight", value: autohi.checked.toString() }, (result) => {
+            if (window.chrome.runtime.lastError) {
+                logError("Error sending data - <i>you can ignore this</i>");
+            }
+        });
     }
+
     if (autoin.checked != autoImport) {
         setImport(autoin.checked);
-        chrome.tabs.sendMessage(kahootId, { type: "setimport", value: autoin.checked.toString() }, function (response) { });
+        chrome.tabs.sendMessage(kahootId, { type: "setimport", value: autoin.checked.toString() }, (result) => {
+            if (window.chrome.runtime.lastError) {
+                logError("Error sending data - <i>you can ignore this</i>");
+            }
+        });
+    }
+
+    if (models.options[models.selectedIndex].text != model) {
+        setModel(models.options[models.selectedIndex].text);
+        chrome.tabs.sendMessage(kahootId, { type: "setModel", value: models.options[models.selectedIndex].text.toString() }, (result) => {
+            if (window.chrome.runtime.lastError) {
+                logError("Error sending data - <i>you can ignore this</i>");
+            }
+        });
     }
 
     await sleep(500);
@@ -434,6 +524,11 @@ var checkAvailability = setInterval(function () {
 nopay.addEventListener("click", function () {
     closepaypage();
 });
+
+getAPIKey();
+getHighlight();
+getImport();
+getModel();
 
 const manifest = chrome.runtime.getManifest();
 console.log("Version: v" + manifest.version);
