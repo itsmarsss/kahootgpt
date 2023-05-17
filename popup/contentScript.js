@@ -826,7 +826,7 @@ async function getAnswerOnly(query) {
             },
             body: JSON.stringify({
                 "model": "text-davinci-003",
-                "prompt": 'Act as a professional; only respond with 4 concise answers (if there is a definite answer, only reply with one) in json format with "one", "two", "three", "four" or "one" as the key if only one answer to the following question: ' + query + "\n",
+                "prompt": 'Act as a professional; only respond with 4 concise answers (if there is a definite answer, only reply with one) in json format with "one", "two", "three", "four" or "one" as the key if only one answer (make sure the answers are in quotes) to the following question: ' + query + "\n",
                 "temperature": 0.7,
                 "max_tokens": 256,
                 "top_p": 1,
@@ -837,9 +837,7 @@ async function getAnswerOnly(query) {
             .then(data => {
                 console.log(data.choices[0].text);
 
-                var lines = (data.choices[0].text).split('\n');
-                lines.splice(0, 2);
-                var replyLines = lines.join('\n');
+                var replyLines = data.choices[0].text;
 
                 var GPTReply = JSON.parse(replyLines);
 
@@ -928,9 +926,7 @@ async function getAnswerWithAnswer(query, triangle, rhombus, circle, square) {
             .then(data => {
                 console.log(data.choices[0].text);
 
-                var lines = (data.choices[0].text).split('\n');
-                lines.splice(0, 2);
-                var replyLines = lines.join('\n');
+                var replyLines = data.choices[0].text;
 
                 var GPTReply = replyLines.replace(/\s/g, '').toLowerCase().charAt(0);
 
