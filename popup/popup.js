@@ -12,6 +12,14 @@ const toggle = document.getElementById("toggle");
 const powericon = document.getElementById("power-icon");
 const tapstatus = document.getElementById("autoclick-status");
 
+const kgptconfigbutton = document.getElementById("kgpt-config-button");
+const kgptconfig = document.getElementById("kgpt-config");
+
+
+const openaiconfigbutton = document.getElementById("openai-config-button");
+const openaiconfig = document.getElementById("openai-config");
+
+
 const openaikeyinput = document.getElementById("openaikeyinput");
 const storekey = document.getElementById("storekey");
 const autohi = document.getElementById("autohighlight");
@@ -32,6 +40,8 @@ var toggled = false;
 var kahootId = 0;
 
 var attached = false;
+
+var inkgpt = true;
 
 var paid = false;
 var openAIKey;
@@ -206,6 +216,16 @@ function appendConsole(log) {
 const sleep = (milliseconds) => {
     return new Promise(resolve => setTimeout(resolve, milliseconds))
 }
+
+kgptconfigbutton.addEventListener("click", function () {
+    openaiconfig.style.display = "none";
+    kgptconfig.style.display = "block";
+});
+
+openaiconfigbutton.addEventListener("click", function () {
+    kgptconfig.style.display = "none";
+    openaiconfig.style.display = "block";
+});
 
 document.getElementsByClassName('life')[0].addEventListener('click', extpay_life.openPaymentPage);
 

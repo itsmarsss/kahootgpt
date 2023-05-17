@@ -64,49 +64,59 @@
         </div>
 
         <div class="config" id="config">
-            <div class="openai" id="openai">
-                <h3>
-                    OpenAI API Key:
-                </h3>
-                <input class="openaikeyinput" id="openaikeyinput" placeholder="OpenAI API Key" type="password">
+            <button id="kgpt-config-button" class="kgpt-config-button config-button">KahootGPT</button>
+            <button id="openai-config-button" class="openai-config-button config-button">OpenAI</button>
+            <div id="kgpt-config" class="kgpt-config">
+                <div class="togglechoice highlight" id="highlight">
+                    <h3 class="toggletext highlighttext">Auto Highlight Answer <span class="minitext"><i>(if
+                                possible)</i></span>:
+                        <span class="tooltiptext">
+                            KahootGPT will highlight the best answer on the Kahoot page.
+                        </span>
+                    </h3>
+
+                    <label class="chkbox">
+                        <input id="autohighlight" type="checkbox" checked>
+                        <div class="transition"></div>
+                    </label>
+                </div>
+
+                <div class="togglechoice import" id="import">
+                    <h3 class="toggletext importtext">Auto Import Questions <span class="minitext"><i>(if
+                                available)</i></span>:
+                        <span class="tooltiptext">
+                            KahootGPT will import questions if host allows players to view the question and
+                            choices
+                            on
+                            local device.
+                        </span>
+                    </h3>
+
+                    <label class="chkbox">
+                        <input id="autoimport" type="checkbox" checked>
+                        <div class="transition"></div>
+                    </label>
+                </div>
             </div>
-            <div class="cache" id="cache">
-                <h3>Cache Key:</h3>
-                <label class="chkbox">
-                    <input id="storekey" type="checkbox" checked>
-                    <div class="transition"></div>
-                </label>
-            </div>
-
-            <div class="togglechoice highlight" id="highlight">
-                <h3 class="toggletext highlighttext">Auto Highlight Answer <span class="minitext"><i>(if
-                            possible)</i></span>:
-                    <span class="tooltiptext">
-                        KahootGPT will highlight the best answer on the Kahoot page.
-                    </span>
-                </h3>
-
-                <label class="chkbox">
-                    <input id="autohighlight" type="checkbox" checked>
-                    <div class="transition"></div>
-                </label>
-            </div>
-
-            <div class="togglechoice import" id="import">
-                <h3 class="toggletext importtext">Auto Import Questions <span class="minitext"><i>(if
-                            available)</i></span>:
-                    <span class="tooltiptext">
-                        KahootGPT will import questions if host allows players to view the question and
-                        choices
-                        on
-                        local device.
-                    </span>
-                </h3>
-
-                <label class="chkbox">
-                    <input id="autoimport" type="checkbox" checked>
-                    <div class="transition"></div>
-                </label>
+            <div id="openai-config" class="openai-config">
+                <div class="openai" id="openai">
+                    <h3>
+                        OpenAI API Key:
+                    </h3>
+                    <input class="openaikeyinput" id="openaikeyinput" placeholder="OpenAI API Key" type="password">
+                </div>
+                <div class="cache" id="cache">
+                    <h3>Cache Key:</h3>
+                    <label class="chkbox">
+                        <input id="storekey" type="checkbox" checked>
+                        <div class="transition"></div>
+                    </label>
+                </div>
+                <label>OpenAI Model:</label>
+                <select name="models" id="models">
+                    <option value="gpt3.5">gpt-3.5-turbo</option>
+                    <option value="gpt3">text-davinci-003</option>
+                </select>
             </div>
             <button class="save" id="save">Save Changes</button>
             <button class="cancel" id="cancel">Cancel Changes</button>

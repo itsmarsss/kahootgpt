@@ -229,6 +229,33 @@ h4 {
     overflow: hidden;
 }
 
+.config-button {
+    width: 150px;
+    height: 50px;
+    font-size: 15px;
+    font-weight: bold;
+    background-color: #525252;
+    border: none;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    background: #525252;
+    color: #fff;
+    transition: 200ms;
+}
+
+.config-button:active {
+    background: #404040;
+}
+
+.kgpt-config-button {
+    float: left;
+    border-bottom-left-radius: 15px;
+}
+
+.openai-config-button {
+    float: right;
+    border-bottom-right-radius: 15px;
+}
+
 .openai {
     margin-top: 5px;
     margin-left: 20px;
@@ -273,7 +300,7 @@ h4 {
     margin-bottom: 5px;
 }
 
-.config>div>h3>span {
+.minitext {
     font-size: 10px;
     margin: 0;
     color: #9d86c3;
