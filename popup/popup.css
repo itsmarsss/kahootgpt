@@ -240,6 +240,7 @@ h4 {
     background: #525252;
     color: #fff;
     transition: 200ms;
+    cursor: pointer;
 }
 
 .config-button:active {
@@ -247,7 +248,7 @@ h4 {
 }
 
 .config-area {
-    height: 75%;
+    height: 80%;
     width: 100%;
     bottom: 0px;
     position: absolute;
@@ -373,14 +374,12 @@ h4 {
     z-index: 101;
 }
 
-.toggletext {}
-
 .highlighttext .tooltiptext {
-    top: 92px;
+    top: 30px;
 }
 
 .importtext .tooltiptext {
-    top: 155px;
+    top: 95px;
 }
 
 .tooltiptext {
@@ -397,6 +396,7 @@ h4 {
     animation: fadeout 250ms;
     left: 7px;
     border: 1.5px solid #937db3;
+    font-size: 10px;
 }
 
 @keyframes fadein {

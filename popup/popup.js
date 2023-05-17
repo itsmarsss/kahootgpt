@@ -240,8 +240,8 @@ kgptconfigbutton.addEventListener("click", function () {
     openaiconfig.style.transform = "translateX(500px)";
     kgptconfig.style.transform = "translateX(0px)";
 
-    openaiconfigbutton.style.background = "linear-gradient(#525252, #52525200)";
-    kgptconfigbutton.style.background = "transparent";
+    kgptconfigbutton.style.background = "linear-gradient(#525252, #52525200)";
+    openaiconfigbutton.style.background = "transparent";
 });
 
 openaiconfigbutton.addEventListener("click", function () {
@@ -249,8 +249,8 @@ openaiconfigbutton.addEventListener("click", function () {
     kgptconfig.style.transform = "translateX(-500px)";
     openaiconfig.style.transform = "translateX(0px)";
 
-    kgptconfigbutton.style.background = "linear-gradient(#525252, #52525200)";
-    openaiconfigbutton.style.background = "transparent";
+    openaiconfigbutton.style.background = "linear-gradient(#525252, #52525200)";
+    kgptconfigbutton.style.background = "transparent";
 });
 
 document.getElementsByClassName('life')[0].addEventListener('click', extpay_life.openPaymentPage);
