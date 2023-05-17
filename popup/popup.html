@@ -66,7 +66,8 @@
         <div class="config" id="config">
             <button id="kgpt-config-button" class="kgpt-config-button config-button">KahootGPT</button>
             <button id="openai-config-button" class="openai-config-button config-button">OpenAI</button>
-            <div id="kgpt-config" class="kgpt-config">
+
+            <div id="kgpt-config" class="kgpt-config config-area">
                 <div class="togglechoice highlight" id="highlight">
                     <h3 class="toggletext highlighttext">Auto Highlight Answer <span class="minitext"><i>(if
                                 possible)</i></span>:
@@ -98,25 +99,30 @@
                     </label>
                 </div>
             </div>
-            <div id="openai-config" class="openai-config">
+
+            <div id="openai-config" class="openai-config config-area">
                 <div class="openai" id="openai">
-                    <h3>
-                        OpenAI API Key:
-                    </h3>
-                    <input class="openaikeyinput" id="openaikeyinput" placeholder="OpenAI API Key" type="password">
+                    <div class="apikey" id="apikey">
+                        <h3>
+                            OpenAI API Key:
+                        </h3>
+                        <input class="openaikeyinput" id="openaikeyinput" placeholder="OpenAI API Key" type="password">
+                    </div>
+                    <div class="cache" id="cache">
+                        <h3>Cache Key:</h3>
+                        <label class="chkbox">
+                            <input id="storekey" type="checkbox" checked>
+                            <div class="transition"></div>
+                        </label>
+                    </div>
                 </div>
-                <div class="cache" id="cache">
-                    <h3>Cache Key:</h3>
-                    <label class="chkbox">
-                        <input id="storekey" type="checkbox" checked>
-                        <div class="transition"></div>
-                    </label>
+                <div class="model" id="model">
+                    <h3>OpenAI Model:</h3>
+                    <select name="models" id="models" class="models">
+                        <option class="options" value="gpt3.5">gpt-3.5-turbo</option>
+                        <option class="options" value="gpt3">text-davinci-003</option>
+                    </select>
                 </div>
-                <label>OpenAI Model:</label>
-                <select name="models" id="models">
-                    <option value="gpt3.5">gpt-3.5-turbo</option>
-                    <option value="gpt3">text-davinci-003</option>
-                </select>
             </div>
             <button class="save" id="save">Save Changes</button>
             <button class="cancel" id="cancel">Cancel Changes</button>

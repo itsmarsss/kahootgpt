@@ -218,15 +218,21 @@ const sleep = (milliseconds) => {
 }
 
 kgptconfigbutton.addEventListener("click", function () {
-    openaiconfig.style.display = "none";
+    //openaiconfig.style.display = "none";
     kgptconfig.style.display = "block";
+    openaiconfig.style.transform = "translateX(500px)";
+    kgptconfig.style.transform = "translateX(0px)";
+
     openaiconfigbutton.style.background = "linear-gradient(#525252, #52525200)";
     kgptconfigbutton.style.background = "transparent";
 });
 
 openaiconfigbutton.addEventListener("click", function () {
-    kgptconfig.style.display = "none";
+    //kgptconfig.style.display = "none";
     openaiconfig.style.display = "block";
+    kgptconfig.style.transform = "translateX(-500px)";
+    openaiconfig.style.transform = "translateX(0px)";
+
     kgptconfigbutton.style.background = "linear-gradient(#525252, #52525200)";
     openaiconfigbutton.style.background = "transparent";
 });
