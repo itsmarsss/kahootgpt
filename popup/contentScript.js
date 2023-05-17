@@ -75,6 +75,10 @@ chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
             setImport(val);
             sendResponse({ value: toggled.toString(), success: true });
             break;
+        case "setModel":
+            setModel(val);
+            sendResponse({ value: toggled.toString(), success: true });
+            break;
         case "checkup":
             sendResponse({ value: toggled.toString(), success: true });
             break;
