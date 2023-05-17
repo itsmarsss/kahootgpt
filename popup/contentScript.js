@@ -763,7 +763,7 @@ var minikgpttoggled = false;
 var openAIKey;
 var autoHighlight = false;
 var autoImport = false;
-var model = "gpt-turbo-3.5";
+var model = "gpt-3.5-turbo";
 
 function toggleAutoTap() {
     if (minikgpttoggled) {
@@ -905,7 +905,7 @@ async function getAnswerOnly(query) {
 }
 
 async function getAnswerWithAnswer(query, triangle, rhombus, circle, square) {
-    if (mode === "text-davinci-003") {
+    if (model === "text-davinci-003") {
         console.log("Calling GPT3")
         var url = "https://api.openai.com/v1/completions";
         var bearer = 'Bearer ' + openAIKey;
@@ -929,7 +929,7 @@ async function getAnswerWithAnswer(query, triangle, rhombus, circle, square) {
                 console.log(data.choices[0].text);
 
                 var lines = (data.choices[0].text).split('\n');
-                lines.splice(0, 1);
+                lines.splice(0, 2);
                 var replyLines = lines.join('\n');
 
                 var GPTReply = replyLines.replace(/\s/g, '').toLowerCase().charAt(0);

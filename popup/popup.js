@@ -44,12 +44,11 @@ var kahootId = 0;
 
 var attached = false;
 
-var model = "gpt-turbo-3.5";
-
 var paid = false;
 var openAIKey;
 var autoHighlight = false;
 var autoImport = false;
+var model = "gpt-3.5-turbo";
 
 async function callKahootGPT(tab) {
     const { id, url } = tab;
@@ -186,15 +185,15 @@ function getImport() {
 function setModel(value) {
     chrome.storage.local.set({ model: value }, function () {
         console.log("Model setted");
-        gptModel = value;
-        logVerb("Import set");
+        model = value;
+        logVerb("Model set");
     });
 }
 
 function getModel() {
     chrome.storage.local.get(["model"], function (result) {
         console.log("Model queried");
-        gptModel = result.model;
+        model = result.model;
         logVerb("Model retrieved");
     });
 }
@@ -386,6 +385,7 @@ settings.addEventListener("click", async function () {
 
     getHighlight();
     getImport();
+    getModel();
 
     await sleep(500);
 
@@ -393,6 +393,12 @@ settings.addEventListener("click", async function () {
 
     autohi.checked = autoHighlight;
     autoin.checked = autoImport;
+
+    if (model === "gpt-3.5-turbo") {
+        models.selectedIndex = 0;
+    } else {
+        models.selectedIndex = 1;
+    }
 
     config.style.display = "block";
 
@@ -455,7 +461,7 @@ save.addEventListener("click", async function () {
 
     if (models.options[models.selectedIndex].text != model) {
         setModel(models.options[models.selectedIndex].text);
-        chrome.tabs.sendMessage(kahootId, { type: "setmodel", value: models.options[models.selectedIndex].text.toString() }, (result) => {
+        chrome.tabs.sendMessage(kahootId, { type: "setModel", value: models.options[models.selectedIndex].text.toString() }, (result) => {
             if (window.chrome.runtime.lastError) {
                 logError("Error sending data - <i>you can ignore this</i>");
             }
