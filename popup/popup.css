@@ -173,6 +173,7 @@ h4 {
 .trial {
     padding: 5px;
     right: 20px;
+    width: 150px;
     background-image: linear-gradient(144deg, #ff9040, #f38642 50%, #eb6200);
 }
 
