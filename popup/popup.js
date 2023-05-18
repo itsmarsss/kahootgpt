@@ -145,7 +145,7 @@ function setAPIKey(value) {
 function getAPIKey() {
     chrome.storage.local.get(["key"], function (result) {
         console.log("Key queried");
-        openAIKey = result.key;
+        openAIKey = result.key || openAIKey;
         logVerb("API key retrieved");
     });
 }
@@ -161,7 +161,7 @@ function setHighlight(value) {
 function getHighlight() {
     chrome.storage.local.get(["highlight"], function (result) {
         console.log("Highlight queried");
-        autoHighlight = result.highlight;
+        autoHighlight = result.highlight || autoHighlight;
         logVerb("Highlight retrieved");
     });
 }
@@ -177,7 +177,7 @@ function setImport(value) {
 function getImport() {
     chrome.storage.local.get(["import"], function (result) {
         console.log("Import queried");
-        autoImport = result.import;
+        autoImport = result.import || autoImport;
         logVerb("Import retrieved");
     });
 }
@@ -193,7 +193,7 @@ function setModel(value) {
 function getModel() {
     chrome.storage.local.get(["model"], function (result) {
         console.log("Model queried");
-        model = result.model;
+        model = result.model || model;
         logVerb("Model retrieved");
     });
 }
