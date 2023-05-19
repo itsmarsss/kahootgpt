@@ -142,7 +142,8 @@ h4 {
 
 .nopay {
     padding: 2px;
-    left: 20px;
+    left: 108px;
+    bottom: 20px;
     background-image: linear-gradient(144deg, #Af40ff, #5b42f3 50%, #00ddeb);
 }
 
@@ -170,18 +171,25 @@ h4 {
     transform: scale(0.9);
 }
 
+.login {
+    padding: 5px;
+    left: 50px;
+    background-image: linear-gradient(144deg, #2cd935, #1acb2c 50%, #099d10);
+}
+
 .trial {
     padding: 5px;
-    right: 20px;
-    width: 150px;
+    right: 50px;
     background-image: linear-gradient(144deg, #ff9040, #f38642 50%, #eb6200);
 }
 
-.trial:hover {
+.trial:hover,
+.login:hover {
     transform: scale(1.1);
 }
 
-.trial:active {
+.trial:active,
+.login:active {
     transform: scale(0.8);
 }
 
