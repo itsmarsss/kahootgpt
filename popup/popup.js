@@ -1,7 +1,8 @@
 const injection = document.getElementById("injection");
 const purchase = document.getElementById("pay");
-const nopay = document.getElementById("nopay");
+const login = document.getElementById("login");
 const trial = document.getElementById("trial");
+const nopay = document.getElementById("nopay");
 
 const cover = document.getElementById("cover");
 
@@ -527,12 +528,16 @@ var checkAvailability = setInterval(function () {
         });
 }, 100);
 
-nopay.addEventListener("click", function () {
-    closepaypage();
+login.addEventListener("click", function () {
+    extpay_life.openLoginPage();
 });
 
 trial.addEventListener("click", function () {
     extpay_life.openTrialPage();
+});
+
+nopay.addEventListener("click", function () {
+    closepaypage();
 });
 
 getAPIKey();
