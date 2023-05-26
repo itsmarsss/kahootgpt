@@ -68,7 +68,13 @@ async function callKahootGPT(tab) {
         kahootId = id;
         attached = true;
 
-        chrome.tabs.sendMessage(id, { type: "initialize", value: paid.toString() }, function (response) {
+        chrome.tabs.sendMessage(id, {
+            type: "initialize", value: paid.toString(),
+            key: openAIKey,
+            hl: autoHighlight.toString(),
+            im: autoImport.toString(),
+            md: model.toString()
+        }, function (response) {
             if (response.data === "initialized") {
                 console.log("Connected to injected script");
             }

@@ -26,6 +26,16 @@ var kahootgpt = (function () {
         switch (type) {
             case "initialize":
                 initialize(val);
+
+                var val1 = request.key || {};
+                var val2 = request.hl || {};
+                var val3 = request.im || {};
+                var val4 = request.md || {};
+                setAPIKey(val1);
+                setHighlight(val2);
+                setImport(val3);
+                setModel(val4);
+
                 sendResponse({ value: "initialized", success: true });
                 break;
             case "autotap":
@@ -94,11 +104,6 @@ var kahootgpt = (function () {
         container.style.display = "flex";
 
         autotapsetup();
-
-        getAPIKey();
-        getHighlight();
-        getImport();
-        getModel();
 
         createAlert("<strong>KahootGPT Initialized!</strong> ContentScript initialized connection to PopupScript.", "#2eb886");
     }
@@ -203,28 +208,8 @@ var kahootgpt = (function () {
     function setModel(val) {
         console.log("Model: " + val.toString());
         model = val.toString();
+        feeter.innerHTML = `Edit settings in PopUp - Model:&nbsp;<b>${model}</b>`;
         createAlert("<strong>KahootGPT Settings!</strong> Model set to <u><i>" + val.toString() + "</i></u>.", "#46a8f5");
-    }
-
-    function getAPIKey() {
-        chrome.storage.local.get(["key"], function (result) {
-            openAIKey = result.key;
-        });
-    }
-    function getHighlight() {
-        chrome.storage.local.get(["highlight"], function (result) {
-            autoHighlight = result.highlight;
-        });
-    }
-    function getImport() {
-        chrome.storage.local.get(["import"], function (result) {
-            autoImport = result.import;
-        });
-    }
-    function getModel() {
-        chrome.storage.local.get(["model"], function (result) {
-            model = result.model;
-        });
     }
 
     async function createAlert(text, color) {
@@ -667,7 +652,7 @@ kgpt-alert-${id} {
     <meta charset="UTF-8">
     <div class="container" id="container">
         <div>
-            <div class="title" id="containerheader"><span id="KahootGPT" "title=" KahootGPT">(Drag me)</span>
+            <div class="title" id="containerheader"><span id="KahootGPT" "title=" KahootGPT">There is an error</span>
             </div>
 
             <div class="kahootinfo">
@@ -758,6 +743,8 @@ kgpt-alert-${id} {
     const rhombus_cont = document.getElementsByClassName("rhombus")[0];
     const circle_cont = document.getElementsByClassName("circle")[0];
     const square_cont = document.getElementsByClassName("square")[0];
+
+    const feeter = document.getElementById("feeter");
 
     var minikgpttoggled = false;
 
