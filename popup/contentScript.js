@@ -6,231 +6,232 @@ yellow/circle: sc-xyEjG DFakQ sc-eUWgFQ ktBGGk
 green/square: sc-xyEjG cmcjVO sc-eUWgFQ ktBGGk
 */
 
-var kgptmini = false;
+var kahootgpt = (function () {
+    var kgptmini = false;
 
-var paid = false;
-var toggled = false;
+    var paid = false;
+    var toggled = false;
 
-let ques = "";
-let red = "";
-let blue = "";
-let yellow = "";
-let green = "";
-let sent = false;
+    let ques = "";
+    let red = "";
+    let blue = "";
+    let yellow = "";
+    let green = "";
+    let sent = false;
 
-chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
-    var type = request.type || {};
-    var val = request.value || {};
+    chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
+        var type = request.type || {};
+        var val = request.value || {};
 
-    switch (type) {
-        case "initialize":
-            initialize(val);
-            sendResponse({ value: "initialized", success: true });
-            break;
-        case "autotap":
-            autotap(val);
-            sendResponse({ value: "autotap-" + val.toString(), success: true });
-            break;
-        case "ping":
-            ping();
+        switch (type) {
+            case "initialize":
+                initialize(val);
+                sendResponse({ value: "initialized", success: true });
+                break;
+            case "autotap":
+                autotap(val);
+                sendResponse({ value: "autotap-" + val.toString(), success: true });
+                break;
+            case "ping":
+                ping();
 
-            var val1 = request.key || {};
-            var val2 = request.hl || {};
-            var val3 = request.im || {};
-            var val4 = request.md || {};
-            setAPIKey(val1);
-            setHighlight(val2);
-            setImport(val3);
-            setModel(val4);
+                var val1 = request.key || {};
+                var val2 = request.hl || {};
+                var val3 = request.im || {};
+                var val4 = request.md || {};
+                setAPIKey(val1);
+                setHighlight(val2);
+                setImport(val3);
+                setModel(val4);
 
-            createAlert("<strong>KahootGPT Settings!</strong> All settings updated <u><i>.", "#46a8f5");
+                createAlert("<strong>KahootGPT Settings!</strong> All settings updated <u><i>.", "#46a8f5");
 
-            sendResponse({ value: toggled.toString(), success: true });
-            break;
-        case "query":
-            if (ques === "") {
-                sendResponse({ success: false });
-            } else {
-                if (!sent) {
-                    sent = true;
-                    sendResponse({ q: ques, r: red, b: blue, y: yellow, g: green, success: true });
-                } else {
+                sendResponse({ value: toggled.toString(), success: true });
+                break;
+            case "query":
+                if (ques === "") {
                     sendResponse({ success: false });
+                } else {
+                    if (!sent) {
+                        sent = true;
+                        sendResponse({ q: ques, r: red, b: blue, y: yellow, g: green, success: true });
+                    } else {
+                        sendResponse({ success: false });
+                    }
                 }
-            }
-            break;
-        case "error":
-            error(val.toString(), "KahootGPT");
-            sendResponse({ value: toggled.toString(), success: true });
-            break;
-        case "setapikey":
-            setAPIKey(val);
-            sendResponse({ value: toggled.toString(), success: true });
-            break;
-        case "sethighlight":
-            setHighlight(val);
-            sendResponse({ value: toggled.toString(), success: true });
-            break;
-        case "setimport":
-            setImport(val);
-            sendResponse({ value: toggled.toString(), success: true });
-            break;
-        case "setModel":
-            setModel(val);
-            sendResponse({ value: toggled.toString(), success: true });
-            break;
-        case "checkup":
-            sendResponse({ value: toggled.toString(), success: true });
-            break;
+                break;
+            case "error":
+                error(val.toString(), "KahootGPT");
+                sendResponse({ value: toggled.toString(), success: true });
+                break;
+            case "setapikey":
+                setAPIKey(val);
+                sendResponse({ value: toggled.toString(), success: true });
+                break;
+            case "sethighlight":
+                setHighlight(val);
+                sendResponse({ value: toggled.toString(), success: true });
+                break;
+            case "setimport":
+                setImport(val);
+                sendResponse({ value: toggled.toString(), success: true });
+                break;
+            case "setModel":
+                setModel(val);
+                sendResponse({ value: toggled.toString(), success: true });
+                break;
+            case "checkup":
+                sendResponse({ value: toggled.toString(), success: true });
+                break;
+        }
+    });
+
+    function initialize(val) {
+        console.log("Connected to popup script");
+        console.log("Paid-feature: " + val.toString());
+        paid = val.toString() === "true";
+
+        container.style.display = "flex";
+
+        autotapsetup();
+
+        getAPIKey();
+        getHighlight();
+        getImport();
+        getModel();
+
+        createAlert("<strong>KahootGPT Initialized!</strong> ContentScript initialized connection to PopupScript.", "#2eb886");
     }
-});
-
-function initialize(val) {
-    console.log("Connected to popup script");
-    console.log("Paid-feature: " + val.toString());
-    paid = val.toString() === "true";
-
-    container.style.display = "flex";
-
-    autotapsetup();
-
-    getAPIKey();
-    getHighlight();
-    getImport();
-    getModel();
-
-    createAlert("<strong>KahootGPT Initialized!</strong> ContentScript initialized connection to PopupScript.", "#2eb886");
-}
-function autotap(val) {
-    console.log("Auto-tap: " + val.toString());
-    toggled = val.toString() === "true";
-    createAlert("<strong>KahootGPT Info!</strong> Auto-tap set to <u><i>" + toggled.toString() + "</i></u>", "#46a8f5");
-}
-function ping() {
-    console.log("Got pinged");
-    createAlert("<strong>KahootGPT Connected!</strong> ContentScript connected to PopupScript.", "#2eb886");
-}
-function tap(val) {
-    console.log("Click-ans:" + val);
-    switch (val) {
-        case "a":
-            console.log("triangle");
-            if (toggled) {
-                document.querySelectorAll('[data-functional-selector="answer-0"]')[0].click();
-            }
-            document.querySelectorAll('[data-functional-selector="answer-0"]')[0].style.border = "4px solid gold";
-            break;
-        case "b":
-            console.log("rhombus");
-            if (toggled) {
-                document.querySelectorAll('[data-functional-selector="answer-1"]')[0].click();
-            }
-            document.querySelectorAll('[data-functional-selector="answer-1"]')[0].style.border = "4px solid gold";
-            break;
-        case "c":
-            console.log("circle");
-            if (toggled) {
-                document.querySelectorAll('[data-functional-selector="answer-2"]')[0].click();
-            }
-            document.querySelectorAll('[data-functional-selector="answer-2"]')[0].style.border = "4px solid gold";
-            break;
-        case "d":
-            console.log("square");
-            if (toggled) {
-                document.querySelectorAll('[data-functional-selector="answer-3"]')[0].click();
-            }
-            document.querySelectorAll('[data-functional-selector="answer-3"]')[0].style.border = "4px solid gold";
-            break;
+    function autotap(val) {
+        console.log("Auto-tap: " + val.toString());
+        toggled = val.toString() === "true";
+        createAlert("<strong>KahootGPT Info!</strong> Auto-tap set to <u><i>" + toggled.toString() + "</i></u>", "#46a8f5");
     }
-    createAlert("<strong>KahootGPT Info!</strong> Clicked best answer according to OpenAI.", "#46a8f5");
-}
-function highlight(val) {
-    console.log("Highlight-ans:" + val);
-    switch (val) {
-        case "a":
-            console.log("triangle");
-            document.querySelectorAll('[data-functional-selector="answer-0"]')[0].style.border = "4px solid gold";
-            break;
-        case "b":
-            console.log("rhombus");
-            document.querySelectorAll('[data-functional-selector="answer-1"]')[0].style.border = "4px solid gold";
-            break;
-        case "c":
-            console.log("circle");
-            document.querySelectorAll('[data-functional-selector="answer-2"]')[0].style.border = "4px solid gold";
-            break;
-        case "d":
-            console.log("square");
-            document.querySelectorAll('[data-functional-selector="answer-3"]')[0].style.border = "4px solid gold";
-            break;
+    function ping() {
+        console.log("Got pinged");
+        createAlert("<strong>KahootGPT Connected!</strong> ContentScript connected to PopupScript.", "#2eb886");
     }
-    if (!paid) {
-        createAlert("<strong>KahootGPT Warn!</strong> Highlighted best answer according to OpenAI: Buy Auto-tap in popup!", "#ffa92b");
+    function tap(val) {
+        console.log("Click-ans:" + val);
+        switch (val) {
+            case "a":
+                console.log("triangle");
+                if (toggled) {
+                    document.querySelectorAll('[data-functional-selector="answer-0"]')[0].click();
+                }
+                document.querySelectorAll('[data-functional-selector="answer-0"]')[0].style.border = "4px solid gold";
+                break;
+            case "b":
+                console.log("rhombus");
+                if (toggled) {
+                    document.querySelectorAll('[data-functional-selector="answer-1"]')[0].click();
+                }
+                document.querySelectorAll('[data-functional-selector="answer-1"]')[0].style.border = "4px solid gold";
+                break;
+            case "c":
+                console.log("circle");
+                if (toggled) {
+                    document.querySelectorAll('[data-functional-selector="answer-2"]')[0].click();
+                }
+                document.querySelectorAll('[data-functional-selector="answer-2"]')[0].style.border = "4px solid gold";
+                break;
+            case "d":
+                console.log("square");
+                if (toggled) {
+                    document.querySelectorAll('[data-functional-selector="answer-3"]')[0].click();
+                }
+                document.querySelectorAll('[data-functional-selector="answer-3"]')[0].style.border = "4px solid gold";
+                break;
+        }
+        createAlert("<strong>KahootGPT Info!</strong> Clicked best answer according to OpenAI.", "#46a8f5");
     }
-}
-function query() {
-    if (ques === "") {
-        return { success: false };
-    } else {
-        if (!sent) {
-            sent = true;
-            return { q: ques, r: red, b: blue, y: yellow, g: green, success: true };
-        } else {
-            return { success: false };
+    function highlight(val) {
+        console.log("Highlight-ans:" + val);
+        switch (val) {
+            case "a":
+                console.log("triangle");
+                document.querySelectorAll('[data-functional-selector="answer-0"]')[0].style.border = "4px solid gold";
+                break;
+            case "b":
+                console.log("rhombus");
+                document.querySelectorAll('[data-functional-selector="answer-1"]')[0].style.border = "4px solid gold";
+                break;
+            case "c":
+                console.log("circle");
+                document.querySelectorAll('[data-functional-selector="answer-2"]')[0].style.border = "4px solid gold";
+                break;
+            case "d":
+                console.log("square");
+                document.querySelectorAll('[data-functional-selector="answer-3"]')[0].style.border = "4px solid gold";
+                break;
+        }
+        if (!paid) {
+            createAlert("<strong>KahootGPT Warn!</strong> Highlighted best answer according to OpenAI: Buy Auto-tap in popup!", "#ffa92b");
         }
     }
-}
-function error(val, source) {
-    console.log("Error thrown: " + val.toString());
-    createAlert("<strong>" + source.toString() + " Error!</strong> " + val.toString() + ".", "#f66358");
-}
-function setAPIKey(val) {
-    console.log("OpenAI Key: [Redacted]");
-    openAIKey = val.toString();
-    createAlert("<strong>KahootGPT Settings!</strong> Your OpenAI key has been updated.", "#46a8f5");
-}
-function setHighlight(val) {
-    console.log("Highlight: " + val.toString());
-    autoHighlight = val.toString() === "true";
-    createAlert("<strong>KahootGPT Settings!</strong> Highlight answer set to <u><i>" + val.toString() + "</i></u>.", "#46a8f5");
-}
-function setImport(val) {
-    console.log("Import: " + val.toString());
-    autoImport = val.toString() === "true";
-    createAlert("<strong>KahootGPT Settings!</strong> Import answer set to <u><i>" + val.toString() + "</i></u>.", "#46a8f5");
-}
-function setModel(val) {
-    console.log("Model: " + val.toString());
-    model = val.toString();
-    createAlert("<strong>KahootGPT Settings!</strong> Model set to <u><i>" + val.toString() + "</i></u>.", "#46a8f5");
-}
+    function query() {
+        if (ques === "") {
+            return { success: false };
+        } else {
+            if (!sent) {
+                sent = true;
+                return { q: ques, r: red, b: blue, y: yellow, g: green, success: true };
+            } else {
+                return { success: false };
+            }
+        }
+    }
+    function error(val, source) {
+        console.log("Error thrown: " + val.toString());
+        createAlert("<strong>" + source.toString() + " Error!</strong> " + val.toString() + ".", "#f66358");
+    }
+    function setAPIKey(val) {
+        console.log("OpenAI Key: [Redacted]");
+        openAIKey = val.toString();
+        createAlert("<strong>KahootGPT Settings!</strong> Your OpenAI key has been updated.", "#46a8f5");
+    }
+    function setHighlight(val) {
+        console.log("Highlight: " + val.toString());
+        autoHighlight = val.toString() === "true";
+        createAlert("<strong>KahootGPT Settings!</strong> Highlight answer set to <u><i>" + val.toString() + "</i></u>.", "#46a8f5");
+    }
+    function setImport(val) {
+        console.log("Import: " + val.toString());
+        autoImport = val.toString() === "true";
+        createAlert("<strong>KahootGPT Settings!</strong> Import answer set to <u><i>" + val.toString() + "</i></u>.", "#46a8f5");
+    }
+    function setModel(val) {
+        console.log("Model: " + val.toString());
+        model = val.toString();
+        createAlert("<strong>KahootGPT Settings!</strong> Model set to <u><i>" + val.toString() + "</i></u>.", "#46a8f5");
+    }
 
-function getAPIKey() {
-    chrome.storage.local.get(["key"], function (result) {
-        openAIKey = result.key;
-    });
-}
-function getHighlight() {
-    chrome.storage.local.get(["highlight"], function (result) {
-        autoHighlight = result.highlight;
-    });
-}
-function getImport() {
-    chrome.storage.local.get(["import"], function (result) {
-        autoImport = result.import;
-    });
-}
-function getModel() {
-    chrome.storage.local.get(["model"], function (result) {
-        model = result.model;
-    });
-}
+    function getAPIKey() {
+        chrome.storage.local.get(["key"], function (result) {
+            openAIKey = result.key;
+        });
+    }
+    function getHighlight() {
+        chrome.storage.local.get(["highlight"], function (result) {
+            autoHighlight = result.highlight;
+        });
+    }
+    function getImport() {
+        chrome.storage.local.get(["import"], function (result) {
+            autoImport = result.import;
+        });
+    }
+    function getModel() {
+        chrome.storage.local.get(["model"], function (result) {
+            model = result.model;
+        });
+    }
 
-async function createAlert(text, color) {
-    const id = Date.now().toString();
-    var alert = document.createElement("kgpt-alert-" + id);
+    async function createAlert(text, color) {
+        const id = Date.now().toString();
+        var alert = document.createElement("kgpt-alert-" + id);
 
-    alert.innerHTML = `
+        alert.innerHTML = `
 <div id="alert-${id}">
     ${text}
 </div>
@@ -270,72 +271,72 @@ kgpt-alert-${id} {
 }
 </style>
 `
-    document.body.appendChild(alert);
+        document.body.appendChild(alert);
 
-    await sleep(3000);
+        await sleep(3000);
 
-    document.body.removeChild(alert);
-}
-
-var checkForNewQuestion = setInterval(function () {
-    if (toggled != minikgpttoggled) {
-        toggleAutoTap();
+        document.body.removeChild(alert);
     }
 
-    var question = "";
+    var checkForNewQuestion = setInterval(function () {
+        if (toggled != minikgpttoggled) {
+            toggleAutoTap();
+        }
 
-    try {
-        question = document.querySelectorAll('[data-functional-selector="block-title"]')[0].innerHTML;
-    } catch (err) {
-        question = "";
+        var question = "";
+
+        try {
+            question = document.querySelectorAll('[data-functional-selector="block-title"]')[0].innerHTML;
+        } catch (err) {
+            question = "";
+        }
+
+        if (question === ques) {
+            return;
+        }
+
+        ques = question;
+        try {
+            red = document.querySelectorAll('[data-functional-selector="question-choice-text-0"]')[0].querySelectorAll("span")[0].innerHTML;
+        } catch (err) {
+            red = "";
+        }
+        try {
+            blue = document.querySelectorAll('[data-functional-selector="question-choice-text-1"]')[0].querySelectorAll("span")[0].innerHTML;
+        } catch (err) {
+            blue = "";
+        }
+        try {
+            yellow = document.querySelectorAll('[data-functional-selector="question-choice-text-2"]')[0].querySelectorAll("span")[0].innerHTML;
+        } catch (err) {
+            yellow = "";
+        }
+        try {
+            green = document.querySelectorAll('[data-functional-selector="question-choice-text-3"]')[0].querySelectorAll("span")[0].innerHTML;
+        } catch (err) {
+            green = "";
+        }
+
+        sent = false;
+
+        console.log(
+            "Question: " + ques + "\n" +
+            "Red: " + red + "\n" +
+            "Blue: " + blue + "\n" +
+            "Yellow: " + yellow + "\n" +
+            "Green: " + green
+        );
+
+        runQuery();
+    }, 25);
+
+    const sleep = (milliseconds) => {
+        return new Promise(resolve => setTimeout(resolve, milliseconds))
     }
 
-    if (question === ques) {
-        return;
-    }
-
-    ques = question;
-    try {
-        red = document.querySelectorAll('[data-functional-selector="question-choice-text-0"]')[0].querySelectorAll("span")[0].innerHTML;
-    } catch (err) {
-        red = "";
-    }
-    try {
-        blue = document.querySelectorAll('[data-functional-selector="question-choice-text-1"]')[0].querySelectorAll("span")[0].innerHTML;
-    } catch (err) {
-        blue = "";
-    }
-    try {
-        yellow = document.querySelectorAll('[data-functional-selector="question-choice-text-2"]')[0].querySelectorAll("span")[0].innerHTML;
-    } catch (err) {
-        yellow = "";
-    }
-    try {
-        green = document.querySelectorAll('[data-functional-selector="question-choice-text-3"]')[0].querySelectorAll("span")[0].innerHTML;
-    } catch (err) {
-        green = "";
-    }
-
-    sent = false;
-
-    console.log(
-        "Question: " + ques + "\n" +
-        "Red: " + red + "\n" +
-        "Blue: " + blue + "\n" +
-        "Yellow: " + yellow + "\n" +
-        "Green: " + green
-    );
-
-    runQuery();
-}, 25);
-
-const sleep = (milliseconds) => {
-    return new Promise(resolve => setTimeout(resolve, milliseconds))
-}
-
-var kgptmini = document.createElement("kahoot-gpt");
-kgptmini.innerHTML =
-    `
+    var kgptmini = document.createElement("kahoot-gpt");
+    kgptmini.innerHTML =
+        `
 <kahoot-gpt-in-site>
     <style id="insitecss">
         html {
@@ -736,417 +737,420 @@ kgptmini.innerHTML =
 </kahoot-gpt-in-site>
 `;
 
-document.documentElement.appendChild(kgptmini);
+    document.documentElement.appendChild(kgptmini);
 
-const container = document.getElementById("container");
-const checkbox = document.getElementById("checkbox");
-const toggle = document.getElementById("toggle");
-const powericon = document.getElementById("power-icon");
-const tapstatus = document.getElementById("autoclick-status");
+    const container = document.getElementById("container");
+    const checkbox = document.getElementById("checkbox");
+    const toggle = document.getElementById("toggle");
+    const powericon = document.getElementById("power-icon");
+    const tapstatus = document.getElementById("autoclick-status");
 
-const question = document.getElementById("question-kgpt");
-const search = document.getElementById("search-icon");
-const clear = document.getElementById("clear");
+    const question = document.getElementById("question-kgpt");
+    const search = document.getElementById("search-icon");
+    const clear = document.getElementById("clear");
 
-const triangle = document.getElementById("answer-triangle");
-const rhombus = document.getElementById("answer-rhombus");
-const circle = document.getElementById("answer-circle");
-const square = document.getElementById("answer-square");
+    const triangle = document.getElementById("answer-triangle");
+    const rhombus = document.getElementById("answer-rhombus");
+    const circle = document.getElementById("answer-circle");
+    const square = document.getElementById("answer-square");
 
-const triangle_cont = document.getElementsByClassName("triangle")[0];
-const rhombus_cont = document.getElementsByClassName("rhombus")[0];
-const circle_cont = document.getElementsByClassName("circle")[0];
-const square_cont = document.getElementsByClassName("square")[0];
+    const triangle_cont = document.getElementsByClassName("triangle")[0];
+    const rhombus_cont = document.getElementsByClassName("rhombus")[0];
+    const circle_cont = document.getElementsByClassName("circle")[0];
+    const square_cont = document.getElementsByClassName("square")[0];
 
-var minikgpttoggled = false;
+    var minikgpttoggled = false;
 
-var openAIKey;
-var autoHighlight = false;
-var autoImport = false;
-var model = "gpt-3.5-turbo";
+    var openAIKey;
+    var autoHighlight = false;
+    var autoImport = false;
+    var model = "gpt-3.5-turbo";
 
-function toggleAutoTap() {
-    if (minikgpttoggled) {
-        checkbox.style.boxShadow = "0 4px 4px -2px #000";
-        toggle.style.background = "#525252";
-        powericon.style.fill = "#b7b7b7";
-        tapstatus.innerHTML = "Auto-tap OFF";
-        tapstatus.style.color = "#b7b7b7";
-    } else {
-        checkbox.style.boxShadow = "none";
-        toggle.style.background = "#9d86c3";
-        powericon.style.fill = "#9d86c3";
-        tapstatus.innerHTML = "Auto-tap ON";
-        tapstatus.style.color = "#864cbf";
-    }
-    minikgpttoggled = !minikgpttoggled;
-    toggled = minikgpttoggled;
-    console.log("Auto-tap: " + toggled);
-    createAlert("<strong>KahootGPT Info!</strong> Auto-tap set to <u><i>" + toggled.toString() + "</i></u>", "#46a8f5");
-}
-
-function queryGPT() {
-    if (question.value === "") {
-        return;
+    function toggleAutoTap() {
+        if (minikgpttoggled) {
+            checkbox.style.boxShadow = "0 4px 4px -2px #000";
+            toggle.style.background = "#525252";
+            powericon.style.fill = "#b7b7b7";
+            tapstatus.innerHTML = "Auto-tap OFF";
+            tapstatus.style.color = "#b7b7b7";
+        } else {
+            checkbox.style.boxShadow = "none";
+            toggle.style.background = "#9d86c3";
+            powericon.style.fill = "#9d86c3";
+            tapstatus.innerHTML = "Auto-tap ON";
+            tapstatus.style.color = "#864cbf";
+        }
+        minikgpttoggled = !minikgpttoggled;
+        toggled = minikgpttoggled;
+        console.log("Auto-tap: " + toggled);
+        createAlert("<strong>KahootGPT Info!</strong> Auto-tap set to <u><i>" + toggled.toString() + "</i></u>", "#46a8f5");
     }
 
-    triangle_cont.style.border = "none";
-    rhombus_cont.style.border = "none";
-    circle_cont.style.border = "none";
-    square_cont.style.border = "none";
+    function queryGPT() {
+        if (question.value === "") {
+            return;
+        }
 
-    if (triangle.value === "" &&
-        rhombus.value === "" &&
-        circle.value === "" &&
-        square.value === "") {
-        getAnswerOnly(
-            question.value
-        );
-    } else {
-        getAnswerWithAnswer(
-            question.value,
-            triangle.value || "n/a",
-            rhombus.value || "n/a",
-            circle.value || "n/a",
-            square.value || "n/a",
-        );
-    }
-}
+        triangle_cont.style.border = "none";
+        rhombus_cont.style.border = "none";
+        circle_cont.style.border = "none";
+        square_cont.style.border = "none";
 
-async function getAnswerOnly(query) {
-    if (model === "text-davinci-003") {
-        console.log("Calling GPT3")
-        var url = "https://api.openai.com/v1/completions";
-        var bearer = 'Bearer ' + openAIKey;
-        fetch(url, {
-            method: 'POST',
-            headers: {
-                'Authorization': bearer,
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                "model": "text-davinci-003",
-                "prompt": 'Act as a professional; only respond with 4 concise answers (if there is a definite answer, only reply with one) in json format with "one", "two", "three", "four" or "one" as the key if only one answer (make sure the answers are in quotes) to the following question: ' + query + "\n",
-                "temperature": 0.7,
-                "max_tokens": 256,
-                "top_p": 1,
-                "frequency_penalty": 0,
-                "presence_penalty": 0
-            })
-        }).then(response => response.json())
-            .then(data => {
-                console.log(data.choices[0].text);
-
-                var replyLines = data.choices[0].text;
-
-                var GPTReply = JSON.parse(replyLines);
-
-                var one = GPTReply.one || GPTReply.answer || "";
-                var two = GPTReply.two || "";
-                var three = GPTReply.three || "";
-                var four = GPTReply.four || "";
-
-                triangle.value = one;
-                rhombus.value = two;
-                circle.value = three;
-                square.value = four;
-            })
-            .catch(err => {
-                console.log("OpenAI error: " + err.message.toString());
-                error(err.message.toString(), "OpenAI");
-            });
-    } else {
-        console.log("Calling ChatGPT")
-        var url = "https://api.openai.com/v1/chat/completions";
-        var bearer = 'Bearer ' + openAIKey;
-        fetch(url, {
-            method: 'POST',
-            headers: {
-                'Authorization': bearer,
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                "model": "gpt-3.5-turbo",
-                "messages": [
-                    { "role": "system", "content": 'Act as a professional; only respond with 4 concise answers (if there is a definite answer, only reply with one) in json format with "one", "two", "three", "four" or "one" as the key if only one answer to the following question, be concise:' },
-                    { "role": "user", "content": query }
-                ],
-                "temperature": 0.7,
-                "max_tokens": 256,
-                "top_p": 1,
-                "frequency_penalty": 0,
-                "presence_penalty": 0
-            })
-        }).then(response => response.json())
-            .then(data => {
-                console.log(data.choices[0].message.content);
-
-                var replyLines = data.choices[0].message.content;
-
-                var GPTReply = JSON.parse(replyLines);
-
-                var one = GPTReply.one || GPTReply.answer || "";
-                var two = GPTReply.two || "";
-                var three = GPTReply.three || "";
-                var four = GPTReply.four || "";
-
-                triangle.value = one;
-                rhombus.value = two;
-                circle.value = three;
-                square.value = four;
-            })
-            .catch(err => {
-                console.log("OpenAI error: " + err.message.toString());
-                error(err.message.toString(), "OpenAI");
-            });
-    }
-}
-
-async function getAnswerWithAnswer(query, triangle, rhombus, circle, square) {
-    if (model === "text-davinci-003") {
-        console.log("Calling GPT3")
-        var url = "https://api.openai.com/v1/completions";
-        var bearer = 'Bearer ' + openAIKey;
-        fetch(url, {
-            method: 'POST',
-            headers: {
-                'Authorization': bearer,
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                "model": "text-davinci-003",
-                "prompt": 'Act as a professional;  the question will be after "question: " and there are 4 possible answers "a", "b", "c", or "d", reply with a SINGLE letter ONLY:\nquestion: ' + query + "\n" + "a: " + triangle + "\n" + "b: " + rhombus + "\n" + "c: " + circle + "\n" + "d: " + square + "\n",
-                "temperature": 0.7,
-                "max_tokens": 256,
-                "top_p": 1,
-                "frequency_penalty": 0,
-                "presence_penalty": 0
-            })
-        }).then(response => response.json())
-            .then(data => {
-                console.log(data.choices[0].text);
-
-                var replyLines = data.choices[0].text;
-
-                var GPTReply = replyLines.replace(/\s/g, '').toLowerCase().charAt(0);
-
-                console.log(GPTReply);
-
-                var ans = "a";
-
-                if (GPTReply.includes("b")) {
-                    ans = "b";
-                    rhombus_cont.style.border = "4px solid gold";
-                } else if (GPTReply.includes("c")) {
-                    ans = "c";
-                    circle_cont.style.border = "4px solid gold";
-                } else if (GPTReply.includes("d")) {
-                    ans = "d";
-                    square_cont.style.border = "4px solid gold";
-                } else {
-                    ans = "a";
-                    triangle_cont.style.border = "4px solid gold";
-                }
-
-                tap(ans);
-                console.log("Send tap");
-
-                if (autoHighlight) {
-                    highlight(ans);
-                    console.log("Send highlight");
-                }
-            })
-            .catch(err => {
-                console.log("OpenAI Error: " + err.message.toString());
-                error(err.message.toString(), "OpenAI");
-            });
-    } else {
-        console.log("Calling ChatGPT")
-        var url = "https://api.openai.com/v1/chat/completions";
-        var bearer = 'Bearer ' + openAIKey;
-        fetch(url, {
-            method: 'POST',
-            headers: {
-                'Authorization': bearer,
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                "model": "gpt-3.5-turbo",
-                "messages": [
-                    { "role": "system", "content": 'Act as a professional;  the question will be after "question: " and there are 4 possible answers "a", "b", "c", or "d", reply with a SINGLE letter ONLY, be concise:' },
-                    { "role": "user", "content": 'question: ' + query + "\n" + "a: " + triangle + "\n" + "b: " + rhombus + "\n" + "c: " + circle + "\n" + "d: " + square }
-                ],
-                "temperature": 0.7,
-                "max_tokens": 256,
-                "top_p": 1,
-                "frequency_penalty": 0,
-                "presence_penalty": 0
-            })
-        }).then(response => response.json())
-            .then(data => {
-                console.log(data.choices[0].message.content);
-
-                var replyLines = data.choices[0].message.content;
-
-                var GPTReply = replyLines.replace(/\s/g, '').toLowerCase().charAt(0);
-
-                console.log(GPTReply);
-
-                var ans = "a";
-
-                if (GPTReply.includes("b")) {
-                    ans = "b";
-                    rhombus_cont.style.border = "4px solid gold";
-                } else if (GPTReply.includes("c")) {
-                    ans = "c";
-                    circle_cont.style.border = "4px solid gold";
-                } else if (GPTReply.includes("d")) {
-                    ans = "d";
-                    square_cont.style.border = "4px solid gold";
-                } else {
-                    ans = "a";
-                    triangle_cont.style.border = "4px solid gold";
-                }
-
-                tap(ans);
-                console.log("Send tap");
-
-                if (autoHighlight) {
-                    highlight(ans);
-                    console.log("Send highlight");
-                }
-            })
-            .catch(err => {
-                console.log("OpenAI Error: " + err.message.toString());
-                error(err.message.toString(), "OpenAI");
-            });
-    }
-}
-
-function runQuery() {
-    if (autoImport) {
-        var response = query();
-        if (response.success) {
-            var ques = response.q || "";
-            var red = response.r || "";
-            var blue = response.b || "";
-            var yellow = response.y || "";
-            var green = response.g || "";
-
-            question.value = ques;
-            triangle.value = red;
-            rhombus.value = blue;
-            circle.value = yellow;
-            square.value = green;
-
-            queryGPT();
+        if (triangle.value === "" &&
+            rhombus.value === "" &&
+            circle.value === "" &&
+            square.value === "") {
+            getAnswerOnly(
+                question.value
+            );
+        } else {
+            getAnswerWithAnswer(
+                question.value,
+                triangle.value || "n/a",
+                rhombus.value || "n/a",
+                circle.value || "n/a",
+                square.value || "n/a",
+            );
         }
     }
-}
 
-function autotapsetup() {
-    if (paid) {
-        checkbox.addEventListener("click", function () {
-            toggleAutoTap();
-        });
-    } else {
-        checkbox.addEventListener("click", function () {
-            checkbox.style.boxShadow = "none";
-            toggle.style.background = "#ff9494";
-            powericon.style.fill = "#ff9494";
-            tapstatus.innerHTML = "Auto-tap ERROR";
-            tapstatus.style.color = "#ff9494";
+    async function getAnswerOnly(query) {
+        if (model === "text-davinci-003") {
+            console.log("Calling GPT3")
+            var url = "https://api.openai.com/v1/completions";
+            var bearer = 'Bearer ' + openAIKey;
+            fetch(url, {
+                method: 'POST',
+                headers: {
+                    'Authorization': bearer,
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    "model": "text-davinci-003",
+                    "prompt": 'Act as a professional; only respond with 4 concise answers (if there is a definite answer, only reply with one) in json format with "one", "two", "three", "four" or "one" as the key if only one answer (make sure the answers are in quotes) to the following question: ' + query + "\n",
+                    "temperature": 0.7,
+                    "max_tokens": 256,
+                    "top_p": 1,
+                    "frequency_penalty": 0,
+                    "presence_penalty": 0
+                })
+            }).then(response => response.json())
+                .then(data => {
+                    console.log(data.choices[0].text);
 
-            console.log("Auto-tap: Not paid");
-        });
+                    var replyLines = data.choices[0].text;
+
+                    var GPTReply = JSON.parse(replyLines);
+
+                    var one = GPTReply.one || GPTReply.answer || "";
+                    var two = GPTReply.two || "";
+                    var three = GPTReply.three || "";
+                    var four = GPTReply.four || "";
+
+                    triangle.value = one;
+                    rhombus.value = two;
+                    circle.value = three;
+                    square.value = four;
+                })
+                .catch(err => {
+                    console.log("OpenAI error: " + err.message.toString());
+                    error(err.message.toString(), "OpenAI");
+                });
+        } else {
+            console.log("Calling ChatGPT")
+            var url = "https://api.openai.com/v1/chat/completions";
+            var bearer = 'Bearer ' + openAIKey;
+            fetch(url, {
+                method: 'POST',
+                headers: {
+                    'Authorization': bearer,
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    "model": "gpt-3.5-turbo",
+                    "messages": [
+                        { "role": "system", "content": 'Act as a professional; only respond with 4 concise answers (if there is a definite answer, only reply with one) in json format with "one", "two", "three", "four" or "one" as the key if only one answer to the following question, be concise:' },
+                        { "role": "user", "content": query }
+                    ],
+                    "temperature": 0.7,
+                    "max_tokens": 256,
+                    "top_p": 1,
+                    "frequency_penalty": 0,
+                    "presence_penalty": 0
+                })
+            }).then(response => response.json())
+                .then(data => {
+                    console.log(data.choices[0].message.content);
+
+                    var replyLines = data.choices[0].message.content;
+
+                    var GPTReply = JSON.parse(replyLines);
+
+                    var one = GPTReply.one || GPTReply.answer || "";
+                    var two = GPTReply.two || "";
+                    var three = GPTReply.three || "";
+                    var four = GPTReply.four || "";
+
+                    triangle.value = one;
+                    rhombus.value = two;
+                    circle.value = three;
+                    square.value = four;
+                })
+                .catch(err => {
+                    console.log("OpenAI error: " + err.message.toString());
+                    error(err.message.toString(), "OpenAI");
+                });
+        }
     }
-}
 
-question.addEventListener('keypress', function (e) {
-    if (e.key === 'Enter') {
+    async function getAnswerWithAnswer(query, triangle, rhombus, circle, square) {
+        if (model === "text-davinci-003") {
+            console.log("Calling GPT3")
+            var url = "https://api.openai.com/v1/completions";
+            var bearer = 'Bearer ' + openAIKey;
+            fetch(url, {
+                method: 'POST',
+                headers: {
+                    'Authorization': bearer,
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    "model": "text-davinci-003",
+                    "prompt": 'Act as a professional;  the question will be after "question: " and there are 4 possible answers "a", "b", "c", or "d", reply with a SINGLE letter ONLY:\nquestion: ' + query + "\n" + "a: " + triangle + "\n" + "b: " + rhombus + "\n" + "c: " + circle + "\n" + "d: " + square + "\n",
+                    "temperature": 0.7,
+                    "max_tokens": 256,
+                    "top_p": 1,
+                    "frequency_penalty": 0,
+                    "presence_penalty": 0
+                })
+            }).then(response => response.json())
+                .then(data => {
+                    console.log(data.choices[0].text);
+
+                    var replyLines = data.choices[0].text;
+
+                    var GPTReply = replyLines.replace(/\s/g, '').toLowerCase().charAt(0);
+
+                    console.log(GPTReply);
+
+                    var ans = "a";
+
+                    if (GPTReply.includes("b")) {
+                        ans = "b";
+                        rhombus_cont.style.border = "4px solid gold";
+                    } else if (GPTReply.includes("c")) {
+                        ans = "c";
+                        circle_cont.style.border = "4px solid gold";
+                    } else if (GPTReply.includes("d")) {
+                        ans = "d";
+                        square_cont.style.border = "4px solid gold";
+                    } else {
+                        ans = "a";
+                        triangle_cont.style.border = "4px solid gold";
+                    }
+
+                    tap(ans);
+                    console.log("Send tap");
+
+                    if (autoHighlight) {
+                        highlight(ans);
+                        console.log("Send highlight");
+                    }
+                })
+                .catch(err => {
+                    console.log("OpenAI Error: " + err.message.toString());
+                    error(err.message.toString(), "OpenAI");
+                });
+        } else {
+            console.log("Calling ChatGPT")
+            var url = "https://api.openai.com/v1/chat/completions";
+            var bearer = 'Bearer ' + openAIKey;
+            fetch(url, {
+                method: 'POST',
+                headers: {
+                    'Authorization': bearer,
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    "model": "gpt-3.5-turbo",
+                    "messages": [
+                        { "role": "system", "content": 'Act as a professional;  the question will be after "question: " and there are 4 possible answers "a", "b", "c", or "d", reply with a SINGLE letter ONLY, be concise:' },
+                        { "role": "user", "content": 'question: ' + query + "\n" + "a: " + triangle + "\n" + "b: " + rhombus + "\n" + "c: " + circle + "\n" + "d: " + square }
+                    ],
+                    "temperature": 0.7,
+                    "max_tokens": 256,
+                    "top_p": 1,
+                    "frequency_penalty": 0,
+                    "presence_penalty": 0
+                })
+            }).then(response => response.json())
+                .then(data => {
+                    console.log(data.choices[0].message.content);
+
+                    var replyLines = data.choices[0].message.content;
+
+                    var GPTReply = replyLines.replace(/\s/g, '').toLowerCase().charAt(0);
+
+                    console.log(GPTReply);
+
+                    var ans = "a";
+
+                    if (GPTReply.includes("b")) {
+                        ans = "b";
+                        rhombus_cont.style.border = "4px solid gold";
+                    } else if (GPTReply.includes("c")) {
+                        ans = "c";
+                        circle_cont.style.border = "4px solid gold";
+                    } else if (GPTReply.includes("d")) {
+                        ans = "d";
+                        square_cont.style.border = "4px solid gold";
+                    } else {
+                        ans = "a";
+                        triangle_cont.style.border = "4px solid gold";
+                    }
+
+                    tap(ans);
+                    console.log("Send tap");
+
+                    if (autoHighlight) {
+                        highlight(ans);
+                        console.log("Send highlight");
+                    }
+                })
+                .catch(err => {
+                    console.log("OpenAI Error: " + err.message.toString());
+                    error(err.message.toString(), "OpenAI");
+                });
+        }
+    }
+
+    function runQuery() {
+        if (autoImport) {
+            var response = query();
+            if (response.success) {
+                var ques = response.q || "";
+                var red = response.r || "";
+                var blue = response.b || "";
+                var yellow = response.y || "";
+                var green = response.g || "";
+
+                question.value = ques;
+                triangle.value = red;
+                rhombus.value = blue;
+                circle.value = yellow;
+                square.value = green;
+
+                queryGPT();
+            }
+        }
+    }
+
+    function autotapsetup() {
+        if (paid) {
+            checkbox.addEventListener("click", function () {
+                toggleAutoTap();
+            });
+        } else {
+            checkbox.addEventListener("click", function () {
+                checkbox.style.boxShadow = "none";
+                toggle.style.background = "#ff9494";
+                powericon.style.fill = "#ff9494";
+                tapstatus.innerHTML = "Auto-tap ERROR";
+                tapstatus.style.color = "#ff9494";
+
+                console.log("Auto-tap: Not paid");
+            });
+        }
+    }
+
+    question.addEventListener('keypress', function (e) {
+        if (e.key === 'Enter') {
+            queryGPT();
+        }
+    });
+    search.addEventListener("click", function () {
         queryGPT();
+    });
+
+    clear.addEventListener("click", function () {
+        triangle_cont.style.border = "none";
+        rhombus_cont.style.border = "none";
+        circle_cont.style.border = "none";
+        square_cont.style.border = "none";
+
+        question.value = "";
+        triangle.value = "";
+        rhombus.value = "";
+        circle.value = "";
+        square.value = "";
+    });
+
+    const manifest = chrome.runtime.getManifest();
+    console.log("Version: v" + manifest.version);
+    document.getElementById("KahootGPT").innerHTML = "KahootGPT v" + manifest.version + " (drag me)";
+
+    runQuery();
+
+    dragElement(document.getElementById("container"));
+
+    function dragElement(element) {
+        var pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
+        if (document.getElementById(element.id + "header")) {
+            document.getElementById(element.id + "header").onmousedown = dragMouseDown;
+        } else {
+            element.onmousedown = dragMouseDown;
+        }
+
+        function dragMouseDown(e) {
+            e = e || window.event;
+            e.preventDefault();
+            pos3 = e.clientX;
+            pos4 = e.clientY;
+            document.onmouseup = closeDragElement;
+            document.onmousemove = elementDrag;
+        }
+
+        function elementDrag(e) {
+            e = e || window.event;
+            e.preventDefault();
+
+            pos1 = pos3 - e.clientX;
+            pos2 = pos4 - e.clientY;
+            pos3 = e.clientX;
+            pos4 = e.clientY;
+
+            element.style.top = (element.offsetTop - pos2) + "px";
+            element.style.left = (element.offsetLeft - pos1) + "px";
+
+            checkborder();
+        }
+
+        function closeDragElement() {
+            document.onmouseup = null;
+            document.onmousemove = null;
+        }
     }
-});
-search.addEventListener("click", function () {
-    queryGPT();
-});
 
-clear.addEventListener("click", function () {
-    triangle_cont.style.border = "none";
-    rhombus_cont.style.border = "none";
-    circle_cont.style.border = "none";
-    square_cont.style.border = "none";
-
-    question.value = "";
-    triangle.value = "";
-    rhombus.value = "";
-    circle.value = "";
-    square.value = "";
-});
-
-const manifest = chrome.runtime.getManifest();
-console.log("Version: v" + manifest.version);
-document.getElementById("KahootGPT").innerHTML = "KahootGPT v" + manifest.version + " (drag me)";
-
-runQuery();
-
-dragElement(document.getElementById("container"));
-
-function dragElement(element) {
-    var pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
-    if (document.getElementById(element.id + "header")) {
-        document.getElementById(element.id + "header").onmousedown = dragMouseDown;
-    } else {
-        element.onmousedown = dragMouseDown;
-    }
-
-    function dragMouseDown(e) {
-        e = e || window.event;
-        e.preventDefault();
-        pos3 = e.clientX;
-        pos4 = e.clientY;
-        document.onmouseup = closeDragElement;
-        document.onmousemove = elementDrag;
-    }
-
-    function elementDrag(e) {
-        e = e || window.event;
-        e.preventDefault();
-
-        pos1 = pos3 - e.clientX;
-        pos2 = pos4 - e.clientY;
-        pos3 = e.clientX;
-        pos4 = e.clientY;
-
-        element.style.top = (element.offsetTop - pos2) + "px";
-        element.style.left = (element.offsetLeft - pos1) + "px";
-
+    window.addEventListener('resize', function () {
         checkborder();
-    }
+    });
 
-    function closeDragElement() {
-        document.onmouseup = null;
-        document.onmousemove = null;
-    }
-}
+    function checkborder() {
+        const width = window.innerWidth;
+        const height = window.innerHeight;
 
-window.addEventListener('resize', function () {
-    checkborder();
+        const rect = container.getBoundingClientRect();
+        const divWidth = rect.width;
+        const divHeight = rect.height;
+        const divLeft = rect.left;
+        const divTop = rect.top;
+
+        const maxLeft = width - divWidth;
+        const maxTop = height - divHeight;
+
+        container.style.left = Math.max(Math.min(divLeft, maxLeft), 0) + "px";
+        container.style.top = Math.max(Math.min(divTop, maxTop), 0) + "px";
+    }
 });
 
-function checkborder() {
-    const width = window.innerWidth;
-    const height = window.innerHeight;
-
-    const rect = container.getBoundingClientRect();
-    const divWidth = rect.width;
-    const divHeight = rect.height;
-    const divLeft = rect.left;
-    const divTop = rect.top;
-
-    const maxLeft = width - divWidth;
-    const maxTop = height - divHeight;
-
-    container.style.left = Math.max(Math.min(divLeft, maxLeft), 0) + "px";
-    container.style.top = Math.max(Math.min(divTop, maxTop), 0) + "px";
-}
+kahootgpt();
