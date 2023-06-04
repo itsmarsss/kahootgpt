@@ -1,7 +1,5 @@
 const injection = document.getElementById("injection");
 const purchase = document.getElementById("pay");
-const login = document.getElementById("login");
-const trial = document.getElementById("trial");
 const nopay = document.getElementById("nopay");
 
 const cover = document.getElementById("cover");
@@ -264,12 +262,7 @@ openaiconfigbutton.addEventListener("click", function () {
 document.getElementsByClassName('life')[0].addEventListener('click', extpay_life.openPaymentPage);
 
 extpay_life.getUser().then(user_life => {
-    const sevenDays = 1000 * 60 * 60 * 24 * 7;
-    const now = new Date();
-    if (
-        (user_life.paid) ||
-        (user_life.trialStartedAt && (now - user_life.trialStartedAt) < sevenDays)
-    ) {
+    if (user_life.paid) {
         paid = true;
         document.querySelector('p').innerHTML = 'User has paid! 🎉';
         logDebug("User has paid");
@@ -533,14 +526,6 @@ var checkAvailability = setInterval(function () {
             }
         });
 }, 100);
-
-login.addEventListener("click", function () {
-    extpay_life.openLoginPage();
-});
-
-trial.addEventListener("click", function () {
-    extpay_life.openTrialPage();
-});
 
 nopay.addEventListener("click", function () {
     closepaypage();

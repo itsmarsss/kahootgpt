@@ -65,6 +65,14 @@ h4 {
     -webkit-text-fill-color: transparent;
 }
 
+.payment-cont {
+    display: flex;
+    flex-direction: column;
+    padding-left: 80px;
+    padding-right: 80px;
+    gap: 5px;
+}
+
 .pay-now {
     position: relative;
     z-index: 69;
@@ -143,7 +151,7 @@ h4 {
 .nopay {
     padding: 2px;
     left: 108px;
-    bottom: 20px;
+    bottom: 10px;
     background-image: linear-gradient(144deg, #Af40ff, #5b42f3 50%, #00ddeb);
 }
 
@@ -177,18 +185,10 @@ h4 {
     background-image: linear-gradient(144deg, #13ca1c, #12ba23 50%, #09c413);
 }
 
-.trial {
-    padding: 5px;
-    right: 50px;
-    background-image: linear-gradient(144deg, #ff9040, #f38642 50%, #eb6200);
-}
-
-.trial:hover,
 .login:hover {
     transform: scale(1.1);
 }
 
-.trial:active,
 .login:active {
     transform: scale(0.8);
 }
