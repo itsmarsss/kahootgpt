@@ -1,6 +1,9 @@
 # KahootGPT - [Visit our site](https://itsmarsss.github.io/KahootGPT/)
 ## Kahoot & ChatGPT: Dominate in a Kahoot game
- 
+
+## NOTICE
+> :warning: :warning: :warning: **WARNING:** This project is an old version of KahootGPT. Please install the most recent KahootGPT version from a trusted source (e.g. Chrome Webstore/Firefox Addons) :warning: :warning: :warning:
+
 ### PLEASE READ:
 
 > ⚠ API Key ⚠:
@@ -40,16 +43,6 @@ In addition to generating the best answers, KahootGPT can also auto-tap the corr
 2. Click the "Add to Firefox" button.
 3. In the confirmation dialog, click "Add".
 4. The KahootGPT add-on should now be installed in your Firefox browser.
-
-### Manual ZIP File Upload
-
-1. Go to the [KahootGPT GitHub releases](https://github.com/itsmarsss/KahootGPT/releases/).
-2. Scroll down on the first release and click "KahootGPT.zip" to download.
-3. Extract the ZIP file to a folder on your computer.
-4. Open Google Chrome or Mozilla Firefox and go to the browser's extensions page.
-5. Enable "Developer mode" (if not already enabled).
-6. Click "Load unpacked" and select the folder where you extracted the ZIP file.
-7. The KahootGPT extension/add-on should now be installed in your browser.
 
 ## Creating an OpenAI account
 
