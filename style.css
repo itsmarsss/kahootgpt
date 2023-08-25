@@ -291,7 +291,6 @@ li {
 }
 
 @media only screen and (max-width: 1000px) {
-
     .forward {
         flex-direction: column;
         align-items: center;
@@ -305,5 +304,13 @@ li {
     .forward>a>button {
         width: 100%;
         justify-content: center;
+    }
+
+    .button:hover {
+        transform: scale(1.02);
+    }
+
+    .button:active {
+        transform: scale(0.98);
     }
 }
