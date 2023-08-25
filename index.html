@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
     <meta property="og:type" content="website">
@@ -8,6 +8,7 @@
     <meta property="og:description" content="Kahoot & ChatGPT: Dominate in Kahoot games">
     <meta property="og:image" content="https://itsmarsss.github.io/KahootGPT/assets/icon-128.png">
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>KahootGPT</title>
     <link rel="stylesheet" href="style.css">
     <link rel="shortcut icon" href="assets/icon-128.png" type="image/x-icon">
@@ -48,18 +49,16 @@
 
             <button class="menu-toggle">☰</button>
 
-            <nav class="nav">
-                <ul>
-                    <li><a href="#about">About</a></li>
-                    <li><a href="#usage">Usage</a></li>
-                    <li><a href="#installation">Installation</a></li>
-                    <li><a href="#contributing">Contributing</a></li>
-                    <li><a href="#privacy-policy">Privacy Policy</a></li>
-                    <li><a href="#terms-of-service">Terms of Service</a></li>
-                    <li><a href="#license">License</a></li>
-                    <li><a href="#howtouse">How To Use</a></li>
-                </ul>
-            </nav>
+            <div class="nav">
+                <a href="#about">About</a>
+                <a href="#usage">Usage</a>
+                <a href="#installation">Installation</a>
+                <a href="#contributing">Contributing</a>
+                <a href="#privacy-policy">Privacy Policy</a>
+                <a href="#terms-of-service">Terms of Service</a>
+                <a href="#license">License</a>
+                <a href="#howtouse">How To Use</a>
+            </div>
         </div>
     </header>
     <section id="please-read">
@@ -82,7 +81,7 @@
         </ul>
     </section>
     <hr>
-    <forward>
+    <div class="forward">
         <a href="https://chrome.google.com/webstore/detail/kahootgpt-kahoot-%20-chatgp/mmnbfkefbancfkmcbfeepiiniggfaobm"
             target="_blank">
             <button class="button">
@@ -224,7 +223,7 @@
                 </svg><span>Join Support Discord</span>
             </button>
         </a>
-    </forward>
+    </div>
     <hr>
     <main>
         <section id="about">
@@ -232,17 +231,20 @@
                 <h2>
                     <button class="copy-link" onclick="copyLink('about')">#</button>About
                 </h2>
-                <p>Introducing KahootGPT, a powerful Chrome extension that uses OpenAI's cutting-edge natural language
+                <p>Introducing KahootGPT, a powerful Chrome extension that uses OpenAI's cutting-edge natural
+                    language
                     processing
                     capabilities to assist Kahoot players in achieving their best performance.
                     <br><br>
                     KahootGPT is an excellent tool for anyone who wants to improve their Kahoot game performance.
                     Whether you are a student
-                    looking to improve your grades, or just someone who enjoys playing Kahoot games, KahootGPT can help
+                    looking to improve your grades, or just someone who enjoys playing Kahoot games, KahootGPT can
+                    help
                     you achieve your
                     goals.
                     <br><br>
-                    Overall, KahootGPT is an essential tool for anyone who wants to take their Kahoot game to the next
+                    Overall, KahootGPT is an essential tool for anyone who wants to take their Kahoot game to the
+                    next
                     level. With its
                     powerful features and easy-to-use interface, KahootGPT is a must-have for anyone who wants to
                     achieve their best
@@ -258,20 +260,25 @@
                 </h2>
                 <p>KahootGPT is designed to make playing Kahoot games easier and more enjoyable for everyone. The
                     extension can generate
-                    the four best possible answers for each question, making it easier for players to choose the right
+                    the four best possible answers for each question, making it easier for players to choose the
+                    right
                     answer.
-                    Alternatively, KahootGPT can highlight the best fitting answer, helping players focus on the most
+                    Alternatively, KahootGPT can highlight the best fitting answer, helping players focus on the
+                    most
                     accurate choice.
                     <br><br>
-                    Moreover, KahootGPT can import questions from Kahoot page itself (assuming the host allows players
+                    Moreover, KahootGPT can import questions from Kahoot page itself (assuming the host allows
+                    players
                     to view the questions
-                    and possible answers), allowing players to use the extension with any Kahoot game. KahootGPT will
+                    and possible answers), allowing players to use the extension with any Kahoot game. KahootGPT
+                    will
                     generate four best
                     possible answers or highlight the most correct one according to OpenAI's language model.
                     <br><br>
                     In addition to generating the best answers, KahootGPT can also auto-tap the correct answer for
                     players. This feature is
-                    particularly useful for players who want to take a more passive role in the game, or for those who
+                    particularly useful for players who want to take a more passive role in the game, or for those
+                    who
                     are struggling to
                     keep up with the pace of the questions.
                 </p>
@@ -308,7 +315,8 @@
         <section id="createopenai">
             <div class="section-container">
                 <h2>
-                    <button class="copy-link" onclick="copyLink('createopenai')">#</button>Creating an OpenAI account
+                    <button class="copy-link" onclick="copyLink('createopenai')">#</button>Creating an OpenAI
+                    account
                 </h2>
                 <p>
                 <ol>
@@ -318,7 +326,8 @@
 
                     <li>Enter your email address, create a password, and click on "Sign up".</li>
 
-                    <li>You will receive an email to verify your account. Click on the verification link in the email.
+                    <li>You will receive an email to verify your account. Click on the verification link in the
+                        email.
                     </li>
                 </ol>
                 </p>
@@ -327,7 +336,8 @@
         <section id="generate-openai-key">
             <div class="section-container">
                 <h2>
-                    <button class="copy-link" onclick="copyLink('generate-openai-key')">#</button>Generating an API key
+                    <button class="copy-link" onclick="copyLink('generate-openai-key')">#</button>Generating an API
+                    key
                 </h2>
                 <p>
                 <ol>
@@ -341,7 +351,8 @@
 
                     <li>Enter a name for your API key and click on "Create".</li>
 
-                    <li>Your API key will be displayed on the screen. Make sure to copy it and keep it in a safe place.
+                    <li>Your API key will be displayed on the screen. Make sure to copy it and keep it in a safe
+                        place.
                         (It
                         will only be shown
                         to you once)</li>
@@ -463,11 +474,13 @@
                 <p>By using KahootGPT, you agree to the following terms and conditions:</p>
                 <ol>
                     <li>
-                        <p>KahootGPT is provided "as is" without any warranty of any kind, express or implied. We are
+                        <p>KahootGPT is provided "as is" without any warranty of any kind, express or implied. We
+                            are
                             not responsible for any damages that may arise from the use of the extension.</p>
                     </li>
                     <li>
-                        <p>You are solely responsible for your use of KahootGPT and for any content that you generate or
+                        <p>You are solely responsible for your use of KahootGPT and for any content that you
+                            generate or
                             access through the extension.</p>
                     </li>
                     <li>
@@ -479,16 +492,20 @@
                     </li>
                     <li>
                         <p>We reserve the right to update these terms of service at any time, without notice. Your
-                            continued use of KahootGPT after any such changes will constitute your acceptance of the new
+                            continued use of KahootGPT after any such changes will constitute your acceptance of the
+                            new
                             terms.</p>
                     </li>
                     <li>
-                        <p>We do not collect or store any personal information through KahootGPT. However, third-party
-                            services used by KahootGPT, such as ExtensionPay and Stripe, may collect data. Please refer
+                        <p>We do not collect or store any personal information through KahootGPT. However,
+                            third-party
+                            services used by KahootGPT, such as ExtensionPay and Stripe, may collect data. Please
+                            refer
                             to their respective privacy policies for more information.</p>
                     </li>
                     <li>
-                        <p>By using KahootGPT, you agree to indemnify and hold us harmless from any claims, damages, or
+                        <p>By using KahootGPT, you agree to indemnify and hold us harmless from any claims, damages,
+                            or
                             expenses arising out of your use of the extension.</p>
                     </li>
                 </ol>
@@ -509,7 +526,8 @@
                     Key points of the license include:
 
                 <ul>
-                    <li>Granting users a worldwide, non-exclusive, royalty-free, perpetual, and irrevocable license to
+                    <li>Granting users a worldwide, non-exclusive, royalty-free, perpetual, and irrevocable license
+                        to
                         use, reproduce, modify,
                         and distribute KahootGPT.</li>
                     <li>Requiring users to provide proper attribution to the original author(s) of KahootGPT and to
@@ -522,7 +540,8 @@
                         author(s) that cover the use
                         or distribution of KahootGPT.</li>
                 </ul>
-                <i>* Please note that this is a summary of the GNU 3.0 license. For the complete license text, please
+                <i>* Please note that this is a summary of the GNU 3.0 license. For the complete license text,
+                    please
                     refer to <a href="https://github.com/itsmarsss/KahootGPT/blob/main/LICENSE"
                         target="_blank">KahootGPT License</a>.
                 </i>
@@ -536,23 +555,13 @@
                     <button class="copy-link" onclick="copyLink('howtouse')">#</button>How To Use
                 </h2>
                 <p>
-                    Unfortunately, we cannot fit the entire How To Use here on this site. However you can visit our wiki
+                    Unfortunately, we cannot fit the entire How To Use here on this site. However you can visit our
+                    wiki
                     <a target="_blank" href="https://github.com/itsmarsss/KahootGPT/wiki">here</a>.
                 </p>
             </div>
         </section>
     </main>
-    <footer>
-        <p>This website was generated with the help of
-            <a href="https://chat.openai.com/" target="_blank">
-                ChatGPT
-            </a>, an AI-powered language model
-            developed by
-            <a href="https://openai.com/" target="_blank">
-                OpenAI
-            </a>.
-        </p>
-    </footer>
 </body>
 
 <script>
@@ -570,7 +579,13 @@
     const nav = document.querySelector('.nav');
 
     menuToggle.addEventListener('click', function () {
-        nav.classList.toggle('show');
+        if (menuToggle.innerHTML == '✕') {
+            menuToggle.innerHTML = '☰';
+            nav.classList.remove('show');
+        } else {
+            menuToggle.innerHTML = '✕';
+            nav.classList.add('show');
+        }
     });
 </script>
 
