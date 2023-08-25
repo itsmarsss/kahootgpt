@@ -20,7 +20,7 @@ header {
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 1rem;
+    padding: 16px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
@@ -34,7 +34,7 @@ header {
 
 .logo img {
     border-radius: 50%;
-    height: 2.5rem;
+    height: 40px;
     float: left;
     border: solid #fff 2px;
 }
@@ -48,7 +48,7 @@ header {
 
 header h1 {
     margin: 0;
-    font-size: 2.5rem;
+    font-size: 40px;
     transition: 200ms ease-out;
 }
 
@@ -73,29 +73,29 @@ nav ul {
 }
 
 nav ul li {
-    margin: 0 0.5rem;
+    margin: 0 8px;
     transition: 200ms ease-out;
 }
 
 nav ul li a {
     color: #fff;
     text-decoration: none;
-    font-size: 1.2rem;
+    font-size: 19.2px;
     font-weight: 500;
 }
 
 nav ul li:hover {
-    transform: translateY(-0.2rem) skewY(2deg);
+    transform: translateY(-3.2px) skewY(2deg);
 }
 
 #please-read {
     background-color: #FFF59D;
-    padding: 1rem;
-    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.2);
+    padding: 16px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
 }
 
 #please-read h2 {
-    margin-bottom: 0.5rem;
+    margin-bottom: 8px;
 }
 
 #please-read p {
@@ -120,17 +120,17 @@ forward {
     display: inline-flex;
     margin: 0;
     height: 100%;
-    padding: 0.5rem 1.4rem;
-    font-size: 1rem;
-    line-height: 1.25rem;
+    padding: 8px 22.4px;
+    font-size: 16px;
+    line-height: 20px;
     font-weight: 700;
     text-align: center;
     text-transform: uppercase;
     vertical-align: middle;
     align-items: center;
-    border-radius: 0.5rem;
+    border-radius: 8px;
     border: 1px solid rgba(0, 0, 0, 0.25);
-    gap: 0.75rem;
+    gap: 12px;
     color: rgb(65, 63, 63);
     background-color: #fff;
     cursor: pointer;
@@ -152,26 +152,26 @@ forward {
 /* ui verse end */
 
 main {
-    padding: 2rem 0;
+    padding: 32px 0;
 }
 
 main h2 {
     background: #0a2a4e;
     color: #fff;
-    padding: 0.5rem;
-    border-top-left-radius: 1rem;
-    border-bottom-right-radius: 1rem;
+    padding: 8px;
+    border-top-left-radius: 16px;
+    border-bottom-right-radius: 16px;
 }
 
 .section-container {
     width: 100%;
     max-width: 960px;
     margin: 0 auto;
-    padding: 0 1rem;
+    padding: 0 16px;
 }
 
 section {
-    margin-bottom: 3rem;
+    margin-bottom: 48px;
 }
 
 section h2 {
@@ -184,7 +184,7 @@ section h2 {
     background: transparent;
     color: #6c7993;
     display: inline-block;
-    font-size: 1.5rem;
+    font-size: 24px;
     transition: 200ms;
     cursor: pointer;
 }
@@ -195,22 +195,22 @@ section h2:hover .copy-link {
 
 section p,
 li {
-    font-size: 1.1rem;
+    font-size: 17.6px;
     line-height: 1.5;
 }
 
 #totop {
     position: fixed;
-    bottom: 2rem;
-    right: 2rem;
-    width: 4rem;
-    height: 4rem;
+    bottom: 32px;
+    right: 32px;
+    width: 64px;
+    height: 64px;
     border-radius: 50%;
     background: linear-gradient(to bottom, #7D43A1, #C6426E);
     display: flex;
     justify-content: center;
     align-items: center;
-    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.2);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
     transition: 200ms;
 }
 
@@ -219,25 +219,25 @@ li {
 }
 
 #totop:hover svg {
-    transform: translateY(-0.25rem);
+    transform: translateY(-4px);
 }
 
 #totop svg {
-    width: 2rem;
-    height: 2rem;
+    width: 32px;
+    height: 32px;
     fill: #fff;
     transition: 200ms ease-out;
 }
 
 #promo {
-    border-radius: 1rem;
+    border-radius: 16px;
     position: fixed;
-    bottom: 2rem;
-    left: 2rem;
-    padding: 0.5rem;
+    bottom: 32px;
+    left: 32px;
+    padding: 8px;
     background-color: #fff;
-    border: 0.1rem solid #000;
-    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.2);
+    border: 1.6px solid #000;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
     transition: 200ms;
 }
 
@@ -247,7 +247,7 @@ li {
 
 #promo a {
     text-decoration: none;
-    padding: 0.25rem;
+    padding: 4px;
 }
 
 .fab {
@@ -255,40 +255,40 @@ li {
 }
 
 .fab:hover {
-    transform: translateY(-0.5rem);
+    transform: translateY(-8px);
 }
 
 footer {
     background-color: #F5F5F5;
-    padding: 1rem;
+    padding: 16px;
     text-align: center;
 }
 
 footer p {
     margin: auto;
-    margin-bottom: 10rem;
+    margin-bottom: 160px;
 }
 
 @media screen and (max-width: 1080px) {
     nav ul li a {
         transform: translateY(-50%);
-        font-size: 1rem;
+        /* font-size: 16px; */
     }
 
     nav ul li {
-        height: 2rem;
+        /* height: 32px; */
         width: 100%;
         text-align: center;
-        padding-bottom: 0.1rem;
+        padding-bottom: 1.6px;
     }
 
     nav ul {
-        height: 30rem;
+        /* height: 480px; */
         display: grid;
         grid-column: 1;
         background: #333;
         place-items: center;
-        border-bottom-left-radius: 4rem;
+        border-bottom-left-radius: 64px;
         box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
     }
 
@@ -300,9 +300,9 @@ footer p {
         display: grid;
         position: fixed;
         right: 0px;
-        top: 7.9rem;
-        width: 30rem;
-        height: calc(100vh - 7.9rem);
+        /* top: 126.4px; */
+        /* width: 480px; */
+        height: calc(100vh - 126.4px);
         animation: 300ms fade;
     }
 
@@ -312,33 +312,33 @@ footer p {
         outline: none;
         color: #fff;
         background: transparent;
-        font-size: 4rem;
+        /* font-size: 64px; */
         cursor: pointer;
     }
 }
 
 @media screen and (max-width: 500px) {
     header h1 {
-        font-size: 5rem;
+        /* font-size: 80px; */
     }
 
     .copy-link,
     h2 {
-        font-size: 4rem;
+        /* font-size: 64px; */
     }
 
     h3 {
-        font-size: 3rem;
+        /* font-size: 48px; */
     }
 
     p,
     li,
     i {
-        font-size: 2.1rem !important;
+        /* font-size: 33.6px !important; */
     }
 
     .logo img {
-        height: 4rem;
+        /* height: 64px; */
     }
 
 
@@ -355,33 +355,33 @@ footer p {
     }
 
     .button {
-        height: 5rem;
+        height: 80px;
         width: 100%;
-        margin: 0.5rem;
-        font-size: 3rem;
+        margin: 8px;
+        /* font-size: 48px; */
     }
 
     .button svg {
         transform: scale(2);
-        margin-right: 0.5rem;
+        margin-right: 8px;
     }
 
     #totop {
-        width: 8rem;
-        height: 8rem;
+        width: 128px;
+        height: 128px;
     }
 
     #totop svg {
-        width: 4rem;
-        height: 4rem;
+        width: 64px;
+        height: 64px;
     }
 
     #promo {
-        border-radius: 2rem;
+        border-radius: 32px;
     }
 
     .fab {
-        font-size: 6rem !important;
+        /* font-size: 96px !important; */
     }
 }
 
