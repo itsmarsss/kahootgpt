@@ -3,7 +3,7 @@
 Thank you for considering contributing to KahootGPT! 
 
 ### Code of Conduct
-Before contributing, please read our [Code of Conduct](https://github.com/itsmarsss/KahootGPT/blob/main/CODE_OF_CONDUCT.md) to understand our expectations for behavior within our community.
+Before contributing, please read our [Code of Conduct](https://github.com/itsmarsss/kahootgpt/blob/main/CODE_OF_CONDUCT.md) to understand our expectations for behavior within our community.
 
 ### Getting Started
 

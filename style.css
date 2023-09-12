@@ -87,17 +87,28 @@ header {
     transform: translateY(-3px) scale(1.1);
 }
 
-#please-read {
-    background-color: #FFF59D;
+#please-read,
+#disclaimer {
     padding: 16px;
     box-shadow: 0 8px 16px #00000033;
 }
 
-#please-read>h2 {
+#please-read>h2,
+#disclaimer>h2 {
     margin-bottom: 8px;
 }
 
-#please-read>p {
+#please-read>p,
+#disclaimer>p {
+    margin-bottom: 0;
+}
+
+#please-read {
+    background-color: #FFF59D
+}
+
+#disclaimer {
+    background-color: #ab78f8;
     margin-bottom: 0;
 }
 
