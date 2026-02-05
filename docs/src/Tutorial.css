@@ -1,0 +1,424 @@
+/* Tutorial Page Styles */
+
+.tutorial-page {
+  min-height: 100vh;
+  background: var(--color-bg-primary);
+}
+
+.tutorial-header {
+  padding: var(--spacing-3xl) var(--spacing-lg) var(--spacing-2xl);
+  text-align: center;
+  border-bottom: 1px solid var(--color-border);
+  background: linear-gradient(180deg, var(--color-bg-secondary) 0%, var(--color-bg-primary) 100%);
+  position: relative;
+}
+
+.back-link {
+  position: absolute;
+  top: var(--spacing-lg);
+  left: var(--spacing-lg);
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  padding: var(--spacing-sm) var(--spacing-md);
+  background: var(--color-bg-secondary);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  color: var(--color-text-secondary);
+  font-size: 0.9rem;
+  font-weight: 500;
+  transition: all var(--transition-base);
+}
+
+.back-link:hover {
+  background: var(--color-brand-bg-subtle);
+  border-color: var(--color-brand);
+  color: var(--color-brand);
+  transform: translateX(-2px);
+}
+
+.tutorial-header h1 {
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: var(--spacing-sm);
+  letter-spacing: -0.02em;
+}
+
+.tutorial-header p {
+  color: var(--color-text-secondary);
+  font-size: 1.1rem;
+}
+
+.tutorial-content {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: var(--spacing-3xl) var(--spacing-lg);
+}
+
+.tutorial-section {
+  margin-bottom: var(--spacing-4xl);
+}
+
+.tutorial-section > p:first-of-type {
+  margin-top: var(--spacing-lg);
+}
+
+.tutorial-section p {
+  margin-bottom: var(--spacing-md);
+}
+
+.tutorial-section h2 {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-md);
+  font-size: 1.875rem;
+  font-weight: 700;
+  margin-top: var(--spacing-3xl);
+  margin-bottom: var(--spacing-xl);
+  padding-bottom: var(--spacing-sm);
+  border-bottom: 1px solid var(--color-border);
+  color: var(--color-brand);
+}
+
+.tutorial-section h2 svg {
+  color: var(--color-brand);
+}
+
+/* Grid Layout */
+.tutorial-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: var(--spacing-lg);
+}
+
+.tutorial-card {
+  background: var(--color-bg-secondary);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: var(--spacing-xl);
+}
+
+.tutorial-card svg {
+  color: var(--color-brand);
+  margin-bottom: var(--spacing-md);
+}
+
+.tutorial-card h3 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: var(--spacing-md);
+}
+
+.tutorial-card ol,
+.tutorial-card ul {
+  margin-left: var(--spacing-lg);
+  color: var(--color-text-secondary);
+  line-height: 1.8;
+}
+
+.tutorial-card li {
+  margin: var(--spacing-sm) 0;
+}
+
+/* Info Box */
+.info-box {
+  display: flex;
+  gap: var(--spacing-md);
+  padding: var(--spacing-lg);
+  border-radius: var(--radius-lg);
+  margin-bottom: var(--spacing-xl);
+}
+
+.info-box.success {
+  background: var(--color-success-bg);
+  border: 1px solid var(--color-success);
+}
+
+.info-box svg {
+  color: var(--color-success);
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.info-box strong {
+  display: block;
+  margin-bottom: var(--spacing-xs);
+  font-size: 1.1rem;
+}
+
+.info-box p {
+  color: var(--color-text-secondary);
+  margin: 0;
+}
+
+/* Tutorial Steps */
+.tutorial-steps {
+  background: var(--color-bg-secondary);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: var(--spacing-xl);
+}
+
+.tutorial-steps h3 {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-bottom: var(--spacing-md);
+  margin-top: var(--spacing-lg);
+}
+
+.tutorial-steps h3:first-child {
+  margin-top: 0;
+}
+
+.tutorial-steps ul,
+.tutorial-steps ol {
+  margin-left: var(--spacing-lg);
+  color: var(--color-text-secondary);
+  line-height: 1.8;
+}
+
+.tutorial-steps li {
+  margin: var(--spacing-sm) 0;
+}
+
+/* Numbered Steps */
+.numbered-steps {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xl);
+}
+
+.numbered-step {
+  display: flex;
+  gap: var(--spacing-lg);
+  background: var(--color-bg-secondary);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: var(--spacing-xl);
+  position: relative;
+}
+
+.step-num {
+  width: 48px;
+  height: 48px;
+  background: var(--color-brand);
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 1.25rem;
+  flex-shrink: 0;
+}
+
+.step-content h3 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: var(--spacing-md);
+}
+
+.step-content p {
+  color: var(--color-text-secondary);
+  margin-bottom: var(--spacing-sm);
+}
+
+.step-content ul {
+  margin-left: var(--spacing-lg);
+  color: var(--color-text-secondary);
+  line-height: 1.8;
+}
+
+.step-content li {
+  margin: var(--spacing-sm) 0;
+}
+
+/* Feature List */
+.feature-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-lg);
+}
+
+.feature-item {
+  display: flex;
+  gap: var(--spacing-md);
+  background: var(--color-bg-secondary);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: var(--spacing-lg);
+  transition: border-color var(--transition-base);
+}
+
+.feature-item:hover {
+  border-color: var(--color-brand-border-soft);
+}
+
+.feature-item svg {
+  color: var(--color-brand);
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.feature-item h4 {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-bottom: var(--spacing-xs);
+}
+
+.feature-item p {
+  color: var(--color-text-secondary);
+  font-size: 0.9rem;
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* Troubleshooting */
+.troubleshooting {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+}
+
+.trouble-item {
+  background: var(--color-bg-secondary);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  transition: border-color var(--transition-base);
+}
+
+.trouble-item:hover {
+  border-color: var(--color-brand-border-soft);
+}
+
+.trouble-item summary {
+  padding: var(--spacing-md) var(--spacing-lg);
+  font-weight: 600;
+  cursor: pointer;
+  list-style: none;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: color var(--transition-base);
+}
+
+.trouble-item summary::-webkit-details-marker {
+  display: none;
+}
+
+.trouble-item summary::after {
+  content: '+';
+  font-size: 1.25rem;
+  color: var(--color-text-muted);
+  transition: transform var(--transition-base);
+}
+
+.trouble-item[open] summary::after {
+  transform: rotate(45deg);
+  color: var(--color-brand);
+}
+
+.trouble-item summary:hover {
+  color: var(--color-brand);
+}
+
+.trouble-content {
+  padding: 0 var(--spacing-lg) var(--spacing-lg);
+}
+
+.trouble-content p {
+  color: var(--color-text-secondary);
+  margin-bottom: var(--spacing-md);
+}
+
+.trouble-content strong {
+  color: var(--color-text-primary);
+}
+
+.trouble-content ul {
+  margin-left: var(--spacing-lg);
+  color: var(--color-text-secondary);
+  line-height: 1.8;
+}
+
+.trouble-content li {
+  margin: var(--spacing-xs) 0;
+}
+
+/* Support Section */
+.tutorial-section.support {
+  text-align: center;
+  padding: var(--spacing-2xl);
+  background: var(--color-bg-secondary);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+}
+
+.support-links {
+  display: flex;
+  gap: var(--spacing-md);
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-top: var(--spacing-lg);
+}
+
+.support-link {
+  display: inline-flex;
+  align-items: center;
+  padding: var(--spacing-md) var(--spacing-lg);
+  background: var(--color-bg-tertiary);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  color: var(--color-text-primary);
+  font-weight: 500;
+  transition: all var(--transition-base);
+}
+
+.support-link:hover {
+  background: var(--color-brand-bg-subtle);
+  border-color: var(--color-brand);
+  color: var(--color-brand);
+  transform: translateY(-2px);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .back-link {
+    position: static;
+    margin-bottom: var(--spacing-lg);
+  }
+
+  .tutorial-header {
+    padding: var(--spacing-2xl) var(--spacing-md) var(--spacing-xl);
+  }
+
+  .tutorial-header h1 {
+    font-size: 2rem;
+  }
+
+  .tutorial-content {
+    padding: var(--spacing-2xl) var(--spacing-md);
+  }
+
+  .tutorial-section {
+    margin-bottom: var(--spacing-3xl);
+  }
+
+  .tutorial-section h2 {
+    font-size: 1.5rem;
+  }
+
+  .tutorial-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .numbered-step {
+    flex-direction: column;
+  }
+
+  .support-links {
+    flex-direction: column;
+    align-items: stretch;
+  }
+}
