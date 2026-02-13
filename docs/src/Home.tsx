@@ -67,7 +67,7 @@ function Home() {
           transition={{ duration: 0.6, ease: "easeOut" }}
         >
           <motion.img
-            src="https://itsmarsss.github.io/kahootgpt/icon-128.png"
+            src="https://kahootgpt.itsmarsss.com/icon-128.png"
             alt="KahootGPT"
             className="hero-logo"
             initial={{ scale: 0.8, opacity: 0 }}
