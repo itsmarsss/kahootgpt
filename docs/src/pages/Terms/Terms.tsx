@@ -1,15 +1,11 @@
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { ArrowLeft, FileText } from 'lucide-react';
-import './Tutorial.css';
+import Footer from '../../components/Footer/Footer';
+import { handleContactClick } from '../../utils/contact';
+import '../Tutorial/Tutorial.css';
 
 function Terms() {
-  const handleContactClick = () => {
-    const email = 'itsmarzzzzzz@protonmail.com';
-    const encodedEmail = encodeURIComponent(email);
-    window.location.href = `mailto:${encodedEmail}`;
-  };
-
   return (
     <div className="tutorial-page">
       <div className="tutorial-header">
@@ -65,7 +61,7 @@ function Terms() {
               <p>We reserve the right to update these terms of service at any time, without notice. Your continued use of KahootGPT after any such changes will constitute your acceptance of the new terms.</p>
             </li>
             <li style={{ marginBottom: 'var(--spacing-md)' }}>
-              <p>We do not collect or store any personal information through KahootGPT. However, third-party services used by KahootGPT, such as Stripe, may collect data. Please refer to their respective privacy policies for more information.</p>
+              <p>By signing in, you consent to the collection of your email address and agree to receive transactional emails (such as sign-in links) and service-related communications. Third-party services used by KahootGPT, such as Stripe, may collect additional data. Please refer to our <Link to="/privacy">Privacy Policy</Link> and their respective privacy policies for more information.</p>
             </li>
             <li style={{ marginBottom: 'var(--spacing-md)' }}>
               <p>By using KahootGPT, you agree to indemnify and hold us harmless from any claims, damages, or expenses arising out of your use of the extension.</p>
@@ -90,6 +86,7 @@ function Terms() {
           </motion.p>
         </section>
       </main>
+      <Footer />
     </div>
   );
 }

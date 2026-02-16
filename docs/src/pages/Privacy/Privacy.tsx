@@ -1,15 +1,11 @@
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { ArrowLeft, Shield } from 'lucide-react';
-import './Tutorial.css';
+import Footer from '../../components/Footer/Footer';
+import { handleContactClick } from '../../utils/contact';
+import '../Tutorial/Tutorial.css';
 
 function Privacy() {
-  const handleContactClick = () => {
-    const email = 'itsmarzzzzzz@protonmail.com';
-    const encodedEmail = encodeURIComponent(email);
-    window.location.href = `mailto:${encodedEmail}`;
-  };
-
   return (
     <div className="tutorial-page">
       <div className="tutorial-header">
@@ -57,7 +53,24 @@ function Privacy() {
             viewport={{ once: true }}
             transition={{ duration: 0.4, delay: 0.1 }}
           >
-            KahootGPT does not collect any personal data from users of the extension. We do not track your browsing activities or collect any personal information about you.
+            When you sign in to KahootGPT, we collect your email address to create and manage your account. We do not track your browsing activities or collect any personal information beyond what is necessary for the service to function.
+          </motion.p>
+
+          <motion.h2
+            initial={{ opacity: 0, y: 10 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.4 }}
+          >
+            <Shield size={24} /> Email Communications
+          </motion.h2>
+          <motion.p
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.4, delay: 0.1 }}
+          >
+            We use your email address to send transactional emails necessary for the service, such as sign-in verification links. We may also send occasional service-related communications, such as important updates or changes to the extension. We will not send marketing or promotional emails without your explicit consent.
           </motion.p>
 
           <motion.h2
@@ -91,7 +104,7 @@ function Privacy() {
             viewport={{ once: true }}
             transition={{ duration: 0.4, delay: 0.1 }}
           >
-            KahootGPT may store configuration choices made by users on their local computers to enhance their user experience. However, this information is only stored on the user's computer and is not shared with any third-party services or anyone outside of the user's device.
+            Your email address and account information are stored securely on our servers. KahootGPT may also store configuration choices on your local computer to enhance your user experience. Local configuration data is not shared with any third-party services.
           </motion.p>
 
           <motion.h2
@@ -147,6 +160,7 @@ function Privacy() {
           </motion.p>
         </section>
       </main>
+      <Footer />
     </div>
   );
 }

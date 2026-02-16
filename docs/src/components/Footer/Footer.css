@@ -1,0 +1,13 @@
+footer {
+  text-align: center;
+  padding: var(--spacing-2xl) var(--spacing-lg);
+  border-top: 1px solid var(--color-border);
+  background: var(--color-bg-secondary);
+  color: var(--color-text-secondary);
+  margin-top: auto;
+}
+
+footer p {
+  margin: var(--spacing-xs) 0;
+  font-size: 0.875rem;
+}

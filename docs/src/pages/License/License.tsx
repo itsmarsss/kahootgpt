@@ -1,15 +1,11 @@
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { ArrowLeft, FileText } from 'lucide-react';
-import './Tutorial.css';
+import Footer from '../../components/Footer/Footer';
+import { handleContactClick } from '../../utils/contact';
+import '../Tutorial/Tutorial.css';
 
 function License() {
-  const handleContactClick = () => {
-    const email = 'itsmarzzzzzz@protonmail.com';
-    const encodedEmail = encodeURIComponent(email);
-    window.location.href = `mailto:${encodedEmail}`;
-  };
-
   return (
     <div className="tutorial-page">
       <div className="tutorial-header">
@@ -178,6 +174,7 @@ function License() {
           </motion.p>
         </section>
       </main>
+      <Footer />
     </div>
   );
 }

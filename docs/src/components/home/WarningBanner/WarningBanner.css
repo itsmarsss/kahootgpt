@@ -1,0 +1,22 @@
+/* Warning Banner */
+.warning-banner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-md);
+  padding: var(--spacing-md) var(--spacing-lg);
+  background: var(--color-warning-bg);
+  border-bottom: 1px solid var(--color-warning);
+  color: var(--color-text-primary);
+  font-size: 0.9rem;
+}
+
+.warning-banner svg {
+  color: var(--color-warning);
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.warning-banner > div {
+  text-align: center;
+}

@@ -1,0 +1,21 @@
+/* Legal */
+.legal {
+  text-align: center;
+  padding: var(--spacing-2xl);
+  margin-bottom: var(--spacing-3xl);
+  background: var(--color-bg-secondary);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+}
+
+.legal h3 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: var(--spacing-md);
+}
+
+.legal p {
+  color: var(--color-text-secondary);
+  margin: var(--spacing-sm) 0;
+  font-size: 0.9rem;
+}

@@ -1,12 +1,11 @@
 import { Routes, Route } from 'react-router-dom';
-import ScrollToTop from './ScrollToTop';
-import Home from './Home';
-import Tutorial from './Tutorial';
-import Privacy from './Privacy';
-import Terms from './Terms';
-import License from './License';
-import NotFound from './NotFound';
-import './App.css';
+import ScrollToTop from './components/ScrollToTop/ScrollToTop';
+import Home from './pages/Home/Home';
+import Tutorial from './pages/Tutorial/Tutorial';
+import Privacy from './pages/Privacy/Privacy';
+import Terms from './pages/Terms/Terms';
+import License from './pages/License/License';
+import NotFound from './pages/NotFound/NotFound';
 
 function App() {
   return (
