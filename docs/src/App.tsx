@@ -5,6 +5,7 @@ import Tutorial from './pages/Tutorial/Tutorial';
 import Privacy from './pages/Privacy/Privacy';
 import Terms from './pages/Terms/Terms';
 import License from './pages/License/License';
+import BillingReturn from './pages/BillingReturn/BillingReturn';
 import NotFound from './pages/NotFound/NotFound';
 
 function App() {
@@ -17,6 +18,7 @@ function App() {
         <Route path="/privacy" element={<Privacy />} />
         <Route path="/terms" element={<Terms />} />
         <Route path="/license" element={<License />} />
+        <Route path="/billing-return" element={<BillingReturn />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </>
