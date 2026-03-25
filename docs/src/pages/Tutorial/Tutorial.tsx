@@ -290,10 +290,10 @@ function Tutorial() {
                         <div className="feature-item">
                             <MousePointerClick size={20} />
                             <div>
-                                <h4>Auto-Hoist (Premium)</h4>
+                                <h4>Auto-Tap (Premium)</h4>
                                 <p>
-                                    Premium feature that automatically hoists
-                                    the correct answer for hands-free gameplay.
+                                    Premium feature that reads the question,
+                                    picks the best answer, and taps it for you.
                                     Available on Monthly and Yearly plans.
                                 </p>
                             </div>

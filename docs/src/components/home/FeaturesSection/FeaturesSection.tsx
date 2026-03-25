@@ -33,8 +33,8 @@ function FeaturesSection() {
                     },
                     {
                         icon: MousePointerClick,
-                        title: "Auto-Hoist",
-                        desc: "Premium feature: automatically hoists the correct answer",
+                        title: "Auto-Tap",
+                        desc: "Premium feature: hands-free answer tapping powered by AI",
                     },
                 ].map((feature, i) => (
                     <motion.div

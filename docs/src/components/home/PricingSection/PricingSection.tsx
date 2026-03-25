@@ -96,7 +96,7 @@ function PricingSection() {
                             <CheckCircle2 size={16} /> Unlimited queries
                         </li>
                         <li>
-                            <CheckCircle2 size={16} /> Auto-hoist
+                            <CheckCircle2 size={16} /> Auto-tap
                         </li>
                         <li>
                             <CheckCircle2 size={16} /> Priority support

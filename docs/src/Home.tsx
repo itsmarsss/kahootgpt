@@ -187,8 +187,8 @@ function Home() {
                             },
                             {
                                 icon: MousePointerClick,
-                                title: "Auto-Hoist",
-                                desc: "Premium feature: automatically hoists the correct answer",
+                                title: "Auto-Tap",
+                                desc: "Premium feature: hands-free answer tapping powered by AI",
                             },
                         ].map((feature, i) => (
                             <motion.div
@@ -304,7 +304,7 @@ function Home() {
                                     <CheckCircle2 size={16} /> Unlimited queries
                                 </li>
                                 <li>
-                                    <CheckCircle2 size={16} /> Auto-hoist
+                                    <CheckCircle2 size={16} /> Auto-tap
                                 </li>
                                 <li>
                                     <CheckCircle2 size={16} /> Priority support
@@ -430,8 +430,8 @@ function Home() {
                                 a: 'Yes, if the host enables "Show questions & answers".',
                             },
                             {
-                                q: "What's Auto-Hoist?",
-                                a: "Premium feature that automatically hoists the correct answer. Hands-free gameplay with an auto-clicker.",
+                                q: "What's Auto-Tap?",
+                                a: "Premium feature that reads the question, picks the best answer, and taps it for you.",
                             },
                             {
                                 q: "What happens if I run out of queries?",

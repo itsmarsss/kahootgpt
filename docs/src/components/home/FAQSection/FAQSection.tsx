@@ -39,8 +39,8 @@ function FAQSection() {
                         a: 'Yes, if the host enables "Show questions & answers".',
                     },
                     {
-                        q: "What's Auto-Hoist?",
-                        a: "Premium feature that automatically hoists the correct answer. Hands-free gameplay with an auto-clicker.",
+                        q: "What's Auto-Tap?",
+                        a: "Premium feature that reads the question, picks the best answer, and taps it for you.",
                     },
                     {
                         q: "What happens if I run out of queries?",
